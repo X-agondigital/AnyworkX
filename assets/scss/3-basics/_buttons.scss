@@ -1,0 +1,36 @@
+.btn{
+    font-family: inherit;
+    font-size: $bodyFontSize;
+    font-weight: 600;
+    border: 0px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: $secondaryColor;
+    padding: 8px 16px;
+    transition: $transitionDuration;
+    &:hover{
+        background-color: $primaryColor;
+        transition: $transitionDuration;
+    }
+}
+
+.btn--without-bg{
+    font-family: inherit;
+    font-size: $bodyFontSize;
+    font-weight: 600;
+    border: 0px;
+    border-radius: 6px;
+    color: $secondaryColor;
+    padding: 8px 16px;
+    transition: $transitionDuration;
+    display: flex;
+    align-items: center;
+    &:hover{
+        color: $primaryColor;
+        transition: $transitionDuration;
+    }
+}
+
+.link-text{
+    font-weight: 600;
+}

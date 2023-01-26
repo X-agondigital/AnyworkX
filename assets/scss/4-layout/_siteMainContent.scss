@@ -1,0 +1,35 @@
+.hero-section{
+    background-color: $backgroundColor;
+    padding: 24px;
+    display: flex;
+    width: 100%;
+    gap: 40px;
+    height: 80vh;
+    // align-items: center;
+    .text-description{
+        width: 50%;
+        transform: translateY(100px);
+        h1{
+            margin-bottom: 24px;
+        }
+        p{
+            margin-bottom: 48px;
+        }
+
+        .btn-group{
+            display: flex;
+            gap: 24px;
+        }
+        .icon{
+            font-size: 24px;
+            margin-left: 6px;
+        }
+    }
+
+    .image-container{
+        width: 50%;
+        img{
+            width: 100%;
+        }
+    }
+}
