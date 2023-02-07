@@ -33,4 +33,13 @@
 
 .link-text{
     font-weight: 600;
+    color: $secondaryColor;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    transition: $transitionDuration;
+    &:hover{
+        color: $primaryColor;
+        transition: $transitionDuration;
+    }
 }
