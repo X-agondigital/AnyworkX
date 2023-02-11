@@ -28,3 +28,23 @@
         
     }
 }
+
+@mixin flexLayoutResponsive{
+    flex-direction: column;
+
+
+    .text-description{
+        width: 100%;
+    }
+
+    .image-container{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 24px;
+        img{
+            width: 80%;
+        }
+        
+    }
+}

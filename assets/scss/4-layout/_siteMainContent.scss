@@ -1,3 +1,4 @@
+/*=======HERO SECTION STYLING=======*/
 .hero-section {
   background-color: $backgroundColor;
   padding: 24px;
@@ -88,7 +89,9 @@
     }
   }
 }
+/*=======END OF HERO SECTION STYLING=======*/
 
+/*=======SERVICE SECTION STYLING=======*/
 .service-section {
   margin-top: 96px;
   header {
@@ -111,18 +114,42 @@
   }
 }
 
+@media (max-width: 900px) {
+  .service-section {
+    .services--wrapper {
+      img {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .service-section {
+    .services--wrapper {
+      @include flexLayoutResponsive;
+    }
+  }
+}
+/*=======END OF SERVICE SECTION STYLING=======*/
+
+/*=======HOW IT WORKS SECTION STYLING=======*/
 .how-it-works {
   margin-top: 96px;
-  h2{
+  h2 {
     text-align: center;
     margin-bottom: 48px;
   }
   img {
     object-fit: contain;
   }
-  .carousel--item__wrapper {
+  .tab--item__wrapper {
     display: flex;
     gap: 48px;
+    .tab-img {
+      width: 300px;
+      height: auto;
+    }
     .customer--guide {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -162,9 +189,141 @@
       width: 200px;
       height: 60px;
     }
-    a{
-        display: flex;
-        justify-content: center;
+    a {
+      display: flex;
+      justify-content: center;
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .how-it-works {
+    .tab--item__wrapper {
+      flex-direction: column;
+      .tab-img {
+        width: 500px;
+        margin-bottom: 48px;
+      }
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .how-it-works {
+    .tab--item__wrapper {
+      .tab-img {
+        width: 100%;
+      }
+      
+    }
+    .download-cta {
+        height: 320px;
+        padding: 24px;
+        button {
+          background-color: none;
+        }
+        img {
+          object-fit: cover;
+        }
+        a {
+          display: flex;
+          justify-content: center;
+        }
+      }
+  }
+}
+/*=======END OF HOW IT WORKS SECTION STYLING=======*/
+
+
+/*=======BENEFITS SECTION STYLING=======*/
+.benefits-section {
+  margin-top: 96px;
+  h2 {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .benefit--items__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 24px;
+    h4 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    svg {
+      margin-left: 6px;
+    }
+  }
+}
+/*=======END OG BENEFITS SECTION STYLING=======*/
+
+
+/*=======TESTIMONIAL SECTION STYLING=======*/
+.testimonial-section {
+  background-color: $secondaryColor;
+  padding: 24px;
+  margin-top: 96px;
+  h2 {
+    max-width: 500px;
+    margin: auto;
+    color: #fff;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .testimonial--container {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .testimonial--item {
+    max-width: 350px;
+    h5 {
+      color: $primaryColor;
+      margin-bottom: 12px;
+    }
+    cite {
+      font-weight: 500;
+    }
+    p {
+      margin-top: 12px;
+    }
+  }
+  .btn {
+    background-color: $primaryColor;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin: auto;
+    margin-top: 48px;
+    &:hover {
+      background-color: $secondaryColor;
+    }
+  }
+}
+/*=======END OF TESTIMONIAL SECTION STYLING=======*/
+
+
+/*=======NEWSLETTER SECTION STYLING=======*/
+.newsletter-section {
+  text-align: center;
+  margin: 96px 0;
+  .newsletter--container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 24px;
+  }
+  h2 {
+    margin-bottom: 12px;
+  }
+  p {
+    margin-bottom: 24px;
+  }
+  .input-field {
+    width: 70%;
+  }
+}
+/*=======END OF NEWSLETTER SECTION STYLING=======*/

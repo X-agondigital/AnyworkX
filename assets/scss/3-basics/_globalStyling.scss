@@ -53,7 +53,30 @@ ul{
 .padding-wrapper{
   padding: 0 40px;
 }
+
+@media(max-width: 500px){}
+.padding-wrapper{
+  padding: 0 24px;
+}
 img{
   object-fit: cover;
   object-position: center;
 }
+
+.input-field{
+  height: 45px;
+  border: 1px solid $primaryColor;
+  border-radius: 8px;
+  // display: block;
+  line-height: 1;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: $transitionDuration;
+  width: 100%;
+}
+.input-field:focus{
+  border-radius: 1.5px solid $secondaryColor;
+  transition: $transitionDuration;
+}
+
