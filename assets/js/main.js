@@ -4,13 +4,16 @@ const hamburger = document.querySelector(".menu--toggle");
 const navMenu = document.querySelector(".right--side__nav");
 const navLinkContainer = document.querySelector(".nav--items__container");
 const navLinks = document.querySelectorAll(".nav-link");
+const overlay = document.querySelector(".overlay");
 
 const navToggle = function () {
   navMenu.classList.toggle("showing");
   navLinkContainer.classList.toggle("showing");
+  overlay.classList.toggle("hidden");
 };
 
 hamburger.addEventListener("click", navToggle);
+overlay.addEventListener('click', navToggle);
 
 for (let i = 0; i < navLinks.length; i++) {
   navLinks[i].addEventListener("click", navToggle);
