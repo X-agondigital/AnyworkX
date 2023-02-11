@@ -120,7 +120,19 @@
         <section class="how-it-works">
             <h2>How it Works</h2>
             <main class="tab-container">
-                <div class="tab--item" id="tab-1">
+                <div class="tab-box">
+                    <button class="tab-btn active">
+                        <i class="ri-user-2-line"></i>
+                        <p>For Customers</p>
+                    </button>
+
+                    <button class="tab-btn">
+                        <i class="ri-briefcase-4-line"></i>
+                        <p>For Vendors</p>
+                    </button>
+                    <div class="line"></div>
+                </div>
+                <div class="tab--item content active" id="tab-1">
                     <article class="tab--item__wrapper">
                         <img src="assets/images/customer.png" class="tab-img"
                             alt="image representing anyworks customer">
@@ -224,7 +236,7 @@
                     </div>
                 </div>
 
-                <div class="tab--item" id="tab-2">
+                <div class="tab--item content" id="tab-2">
                     <article class="tab--item__wrapper">
                         <img src="assets/images/anyworkx-vendor.png" class="tab-img"
                             alt="image representing anyworks vendor">

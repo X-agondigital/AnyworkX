@@ -444,6 +444,45 @@ nav .nav--items__container a:hover {
   text-align: center;
   margin-bottom: 48px;
 }
+.how-it-works .tab-box {
+  display: flex;
+  max-width: 315px;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 48px;
+  position: relative;
+  border-bottom: 2px solid #CCCCCC;
+}
+.how-it-works .tab-btn {
+  background-color: #fff;
+  padding: 6px 12px;
+  border: 0px;
+  font-weight: 600;
+  font-size: 24px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.how-it-works .tab-btn i {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.how-it-works .tab-btn.active {
+  color: rgb(0, 167, 215);
+  background-color: #F5F5F5;
+}
+.how-it-works .tab-btn.active p {
+  color: rgb(0, 167, 215);
+}
+.how-it-works .line {
+  position: absolute;
+  top: 79px;
+  left: 2px;
+  width: 168px;
+  height: 3px;
+  background-color: rgb(0, 167, 215);
+  transition: all 0.3s ease-in-out;
+}
 .how-it-works img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -463,6 +502,23 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .tab--item__wrapper .customer--guide h5 {
   margin-bottom: 12px;
+}
+.how-it-works .tab--item {
+  display: none;
+  animation: moving 0.5s ease-out;
+}
+.how-it-works .tab--item.active {
+  display: block;
+}
+@keyframes moving {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 .how-it-works .download-cta {
   width: 100%;
@@ -551,7 +607,7 @@ nav .nav--items__container a:hover {
   margin-left: 6px;
 }
 
-/*=======END OG BENEFITS SECTION STYLING=======*/
+/*=======END OF BENEFITS SECTION STYLING=======*/
 /*=======TESTIMONIAL SECTION STYLING=======*/
 .testimonial-section {
   background-color: rgb(0, 167, 215);

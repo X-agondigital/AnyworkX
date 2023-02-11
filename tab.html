@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="assets/scss/main.css" rel="stylesheet">
+
+    <!--OWL CAROUSEL CSS CDN-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
+    <style>
+        .content-box .content {
+            display: none;
+            animation: moving .5s ease-out;
+        }
+
+        @keyframes moving{
+            from{
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to{
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .content-box .content.active {
+            display: block;
+        }
+
+        .tab-box {
+            position: relative;
+        }
+
+        .tab-box .tab-btn.active {
+            color: purple;
+        }
+
+        .line {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 78px;
+            height: 5px;
+            background-color: purple;
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab-container">
+        <div class="tab-box">
+            <button class="tab-btn active">For Vendors</button>
+            <button class="tab-btn">For customer</button>
+            <button class="tab-btn">For testing</button>
+            <div class="line"></div>
+        </div>
+
+        <div class="content-box">
+            <div class="content active">
+                <h3>Home</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius tempora ducimus optio a quidem, aperiam
+                    explicabo doloremque deserunt iure earum dolorum nobis eaque enim ex impedit ab facilis tempore
+                    molestias?</p>
+            </div>
+
+            <div class="content">
+                <h3>About</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius tempora ducimus optio a quidem, aperiam
+                    explicabo doloremque deserunt iure earum dolorum nobis eaque enim ex impedit ab facilis tempore
+                    molestias?</p>
+            </div>
+
+            <div class="content">
+                <h3>Testng</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius tempora ducimus optio a quidem, aperiam
+                    explicabo doloremque deserunt iure earum dolorum nobis eaque enim ex impedit ab facilis tempore
+                    molestias?</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-btn');
+        const all_content = document.querySelectorAll('.content');
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', (e) => {
+                tabs.forEach(tab => { tab.classList.remove('active') });
+                tab.classList.add('active');
+
+                const line = document.querySelector('.line');
+                line.style.width = e.target.offsetWidth + 'px';
+                line.style.left = e.target.offsetLeft + 'px';
+
+                all_content.forEach(content => { content.classList.remove('active') });
+                all_content[index].classList.add('active');
+            })
+        })
+    </script>
+</body>
+
+</html>

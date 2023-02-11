@@ -140,6 +140,45 @@
     text-align: center;
     margin-bottom: 48px;
   }
+  .tab-box {
+    display: flex;
+    max-width: 315px;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 48px;
+    position: relative;
+    border-bottom: 2px solid #CCCCCC;
+  }
+  .tab-btn {
+    background-color: #fff;
+    padding: 6px 12px;
+    border: 0px;
+    font-weight: 600;
+    font-size: 24px;
+    font-family: inherit;
+    cursor: pointer;
+    i {
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+  }
+  .tab-btn.active {
+    color: $secondaryColor;
+    background-color: #F5F5F5;
+  }
+  .tab-btn.active p{
+    color: $secondaryColor;
+  }
+  .line {
+    position: absolute;
+    top: 79px;
+    left: 2px;
+    width: 168px;
+    height: 3px;
+    background-color: $secondaryColor;
+    transition: all 0.3s ease-in-out;
+  }
   img {
     object-fit: contain;
   }
@@ -160,6 +199,24 @@
       }
     }
   }
+  .tab--item {
+    display: none;
+    animation: moving 0.5s ease-out;
+  }
+  .tab--item.active {
+    display: block;
+  }
+  @keyframes moving {
+    from {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
   .download-cta {
     width: 100%;
     padding: 24px;
@@ -214,26 +271,24 @@
       .tab-img {
         width: 100%;
       }
-      
     }
     .download-cta {
-        height: 320px;
-        padding: 24px;
-        button {
-          background-color: none;
-        }
-        img {
-          object-fit: cover;
-        }
-        a {
-          display: flex;
-          justify-content: center;
-        }
+      height: 320px;
+      padding: 24px;
+      button {
+        background-color: none;
       }
+      img {
+        object-fit: cover;
+      }
+      a {
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 }
 /*=======END OF HOW IT WORKS SECTION STYLING=======*/
-
 
 /*=======BENEFITS SECTION STYLING=======*/
 .benefits-section {
@@ -256,8 +311,7 @@
     }
   }
 }
-/*=======END OG BENEFITS SECTION STYLING=======*/
-
+/*=======END OF BENEFITS SECTION STYLING=======*/
 
 /*=======TESTIMONIAL SECTION STYLING=======*/
 .testimonial-section {
@@ -305,7 +359,6 @@
   }
 }
 /*=======END OF TESTIMONIAL SECTION STYLING=======*/
-
 
 /*=======NEWSLETTER SECTION STYLING=======*/
 .newsletter-section {
