@@ -1,5 +1,6 @@
 "use strict";
 
+//-----NAVIGATION BAR
 const hamburger = document.querySelector(".menu--toggle");
 const navMenu = document.querySelector(".right--side__nav");
 const navLinkContainer = document.querySelector(".nav--items__container");
@@ -13,13 +14,13 @@ const navToggle = function () {
 };
 
 hamburger.addEventListener("click", navToggle);
-overlay.addEventListener('click', navToggle);
+overlay.addEventListener("click", navToggle);
 
 for (let i = 0; i < navLinks.length; i++) {
   navLinks[i].addEventListener("click", navToggle);
 }
 
-//tab controller
+//-----TAB PANE CONTROLLER
 const tabs = document.querySelectorAll(".tab-btn");
 const all_content = document.querySelectorAll(".content");
 
@@ -40,3 +41,18 @@ tabs.forEach((tab, index) => {
     all_content[index].classList.add("active");
   });
 });
+
+//-----ANIMATION SCRIPT
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    console.log(entry);
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
+    }
+  });
+});
+
+const animateElements = document.querySelectorAll(".animate");
+animateElements.forEach((el) => observer.observe(el));

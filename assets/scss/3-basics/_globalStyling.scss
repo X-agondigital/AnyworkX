@@ -81,3 +81,15 @@ img{
   transition: $transitionDuration;
 }
 
+.animate{
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateX(-20%);
+  transition: all 0.7s ease-in-out;
+}
+
+.show{
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0px);
+}
