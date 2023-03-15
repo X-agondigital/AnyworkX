@@ -5,7 +5,7 @@
   display: flex;
   width: 100%;
   gap: 40px;
-  height: 80vh;
+  height: 100vh;
   // align-items: center;
   .text-description {
     width: 50%;
@@ -94,43 +94,88 @@
 /*=======SERVICE SECTION STYLING=======*/
 .service-section {
   margin-top: 96px;
-  header {
-    max-width: 500px;
-    h2 {
-      margin-bottom: 12px;
+
+  .image-container{
+    text-align: center;
+    background-color: #00A7D7;
+    padding: 24px 12px;
+    
+    .header {
+      max-width: 500px;
+      text-align: center;
+      margin: auto;
+    }
+    h2, p {
+      margin-bottom: 24px;
+      color: #fff;
+    }
+    .main-service-img{
+      max-width: 400px;
+      height: auto;
+      margin: 24px 0;
     }
   }
-  .services--wrapper {
+  .text-description {
     margin-top: 48px;
-    @include flexLayout;
+    display: flex;
+    gap: 48px;
     img {
       object-fit: contain;
-      width: 400px;
+      max-width: 300px;
+    }
+    h4{
+      margin-bottom: 12px;
+    }
+    p{
+      margin-bottom: 24px;
     }
     .service-list {
-      max-width: 400px;
-      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      width: 50%;
+    }
+    .btn--without-bg{
+      max-width: 130px;
+      display: flex;
+      align-items: center;
     }
   }
 }
 
-@media (max-width: 900px) {
-  .service-section {
-    .services--wrapper {
-      img {
-        width: 300px;
+@media (max-width: 1100px){
+  .service-section{
+    .text-description{
+      .service-list{
+        flex-direction: column;
       }
     }
   }
 }
 
-@media (max-width: 650px) {
-  .service-section {
-    .services--wrapper {
-      @include flexLayoutResponsive;
+@media (max-width: 650px){
+  .service-section{
+    .text-description{
+      flex-direction: column;
+      align-items: center;
+      .service-list{
+        width: 100%;
+      }
     }
   }
 }
+
+@media(max-width: 480px){
+  .service-section{
+    .image-container{
+      .main-service-img{
+        width: 100%;
+      }
+    }
+  }
+}
+
+
 /*=======END OF SERVICE SECTION STYLING=======*/
 
 /*=======HOW IT WORKS SECTION STYLING=======*/
@@ -181,12 +226,17 @@
   }
   img {
     object-fit: contain;
+    border-radius: 8px;
   }
   .tab--item__wrapper {
     display: flex;
     gap: 48px;
+    flex-direction: column;
+    .owl-theme .owl-dots .owl-dot.active span{
+      background-color: #00A7D7;
+    }
     .tab-img {
-      width: 300px;
+      max-width: 400px;
       height: auto;
     }
     .customer--guide {
@@ -197,6 +247,9 @@
       h5 {
         margin-bottom: 12px;
       }
+    }
+    .owl-carousel.owl-drag .owl-item{
+      text-align: -moz-center;
     }
   }
   .tab--item {

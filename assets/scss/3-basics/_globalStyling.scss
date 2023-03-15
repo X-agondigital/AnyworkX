@@ -17,11 +17,13 @@ body {
 
 h1 {
   font-size: $h1FontSize;
+  font-family: 'Dela Gothic One', cursive;
   line-height: 1;
 }
 
 h2 {
   font-size: $h2FontSize;
+  
 }
 
 h4 {
@@ -34,6 +36,7 @@ h5 {
 }
 h1, h2{
   color: $primaryColor;
+  line-height: 1;
 }
 
 p {

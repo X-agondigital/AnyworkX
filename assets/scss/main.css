@@ -17,6 +17,7 @@ body {
 
 h1 {
   font-size: clamp(2rem, 4vw, 3rem);
+  font-family: "Dela Gothic One", cursive;
   line-height: 1;
 }
 
@@ -35,6 +36,7 @@ h5 {
 
 h1, h2 {
   color: rgb(126, 0, 196);
+  line-height: 1;
 }
 
 p {
@@ -118,17 +120,19 @@ img {
   font-family: inherit;
   font-size: 1em;
   font-weight: 600;
-  border: 0px;
+  border: 1.5px solid rgb(0, 167, 215);
   border-radius: 6px;
   color: rgb(0, 167, 215);
   padding: 8px 16px;
   transition: 0.3s;
   display: flex;
   align-items: center;
+  background-color: transparent;
 }
 .btn--without-bg:hover {
   color: rgb(126, 0, 196);
   transition: 0.3s;
+  border: 1.5px solid rgb(126, 0, 196);
 }
 
 .link-text {
@@ -327,7 +331,7 @@ nav .nav--items__container a:hover {
   display: flex;
   width: 100%;
   gap: 40px;
-  height: 80vh;
+  height: 100vh;
 }
 .hero-section .text-description {
   width: 50%;
@@ -407,65 +411,70 @@ nav .nav--items__container a:hover {
 .service-section {
   margin-top: 96px;
 }
-.service-section header {
+.service-section .image-container {
+  text-align: center;
+  background-color: #00A7D7;
+  padding: 24px 12px;
+}
+.service-section .image-container .header {
   max-width: 500px;
+  text-align: center;
+  margin: auto;
 }
-.service-section header h2 {
-  margin-bottom: 12px;
+.service-section .image-container h2, .service-section .image-container p {
+  margin-bottom: 24px;
+  color: #fff;
 }
-.service-section .services--wrapper {
+.service-section .image-container .main-service-img {
+  max-width: 400px;
+  height: auto;
+  margin: 24px 0;
+}
+.service-section .text-description {
   margin-top: 48px;
   display: flex;
-  gap: 24px;
+  gap: 48px;
 }
-.service-section .services--wrapper .text-description {
-  width: 50%;
-}
-.service-section .services--wrapper .text-description h4 {
-  margin-bottom: 12px;
-}
-.service-section .services--wrapper .text-description p {
-  margin-bottom: 24px;
-}
-.service-section .services--wrapper .text-description .icon {
-  font-size: 24px;
-  margin-left: 6px;
-}
-.service-section .services--wrapper .image-container {
-  display: flex;
-  justify-content: baseline;
-  width: 50%;
-}
-.service-section .services--wrapper img {
+.service-section .text-description img {
   -o-object-fit: contain;
      object-fit: contain;
-  width: 400px;
+  max-width: 300px;
 }
-.service-section .services--wrapper .service-list {
-  max-width: 400px;
-  margin-bottom: 48px;
+.service-section .text-description h4 {
+  margin-bottom: 12px;
+}
+.service-section .text-description p {
+  margin-bottom: 24px;
+}
+.service-section .text-description .service-list {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 50%;
+}
+.service-section .text-description .btn--without-bg {
+  max-width: 130px;
+  display: flex;
+  align-items: center;
 }
 
-@media (max-width: 900px) {
-  .service-section .services--wrapper img {
-    width: 300px;
+@media (max-width: 1100px) {
+  .service-section .text-description .service-list {
+    flex-direction: column;
   }
 }
 @media (max-width: 650px) {
-  .service-section .services--wrapper {
+  .service-section .text-description {
     flex-direction: column;
+    align-items: center;
   }
-  .service-section .services--wrapper .text-description {
+  .service-section .text-description .service-list {
     width: 100%;
   }
-  .service-section .services--wrapper .image-container {
-    display: flex;
-    justify-content: center;
+}
+@media (max-width: 480px) {
+  .service-section .image-container .main-service-img {
     width: 100%;
-    margin-bottom: 24px;
-  }
-  .service-section .services--wrapper .image-container img {
-    width: 80%;
   }
 }
 /*=======END OF SERVICE SECTION STYLING=======*/
@@ -519,13 +528,18 @@ nav .nav--items__container a:hover {
 .how-it-works img {
   -o-object-fit: contain;
      object-fit: contain;
+  border-radius: 8px;
 }
 .how-it-works .tab--item__wrapper {
   display: flex;
   gap: 48px;
+  flex-direction: column;
+}
+.how-it-works .tab--item__wrapper .owl-theme .owl-dots .owl-dot.active span {
+  background-color: #00A7D7;
 }
 .how-it-works .tab--item__wrapper .tab-img {
-  width: 300px;
+  max-width: 400px;
   height: auto;
 }
 .how-it-works .tab--item__wrapper .customer--guide {
@@ -535,6 +549,9 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .tab--item__wrapper .customer--guide h5 {
   margin-bottom: 12px;
+}
+.how-it-works .tab--item__wrapper .owl-carousel.owl-drag .owl-item {
+  text-align: -moz-center;
 }
 .how-it-works .tab--item {
   display: none;

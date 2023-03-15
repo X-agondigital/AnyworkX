@@ -19,16 +19,18 @@
     font-family: inherit;
     font-size: $bodyFontSize;
     font-weight: 600;
-    border: 0px;
+    border: 1.5px solid $secondaryColor;
     border-radius: 6px;
     color: $secondaryColor;
     padding: 8px 16px;
     transition: $transitionDuration;
     display: flex;
     align-items: center;
+    background-color: transparent;
     &:hover{
         color: $primaryColor;
         transition: $transitionDuration;
+        border: 1.5px solid $primaryColor;
     }
 }
 
