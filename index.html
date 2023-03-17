@@ -24,7 +24,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
-    
+
     <!--Bodymovin CDN-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
 </head>
@@ -76,7 +76,7 @@
         </article>
 
         <article class="image-container animate" id="lottie-animation">
-            
+
         </article>
     </section>
 
@@ -276,10 +276,9 @@
                         </h4>
 
                         <div class="btn-group animate">
-                            <button href="https://play.google.com/store/apps/details?id=com.anyworkx.customer"
-                                class="download-btn"><img src="assets/images/mobile-play-store.png" alt=""></button>
-                            <button href="#" class="download-btn"><img src="assets/images/app-store-badge.png"
-                                    alt=""></button>
+                            <a href="https://play.google.com/store/apps/details?id=com.anyworkx.customer"><button class="download-btn"><img src="assets/images/mobile-play-store.png" alt=""></button></a>
+                            <a href="#"><button href="#" class="download-btn"><img src="assets/images/app-store-badge.png"
+                                    alt=""></button></a>
                         </div>
 
                         <a href="#tab-2" class="link-text bold animate">Are you a vendor? Download here</a>
@@ -435,10 +434,10 @@
                         </h4>
 
                         <div class="btn-group animate">
-                            <button href="https://play.google.com/store/apps/details?id=com.anyworks.artisan"
-                                class="download-btn"><img src="assets/images/mobile-play-store.png" alt=""></button>
-                            <button href="#" class="download-btn"><img src="assets/images/app-store-badge.png"
-                                    alt=""></button>
+                            <a href="https://play.google.com/store/apps/details?id=com.anyworks.artisan"><button
+                                    class="download-btn"><img src="assets/images/mobile-play-store.png"
+                                        alt=""></button></a>
+                            <a href="#"><button class="download-btn"><img src="assets/images/app-store-badge.png" alt=""></button></a>
                         </div>
 
                         <a href="#tab-1" class="link-text bold animate">Want to hire? Click here</a>
@@ -644,16 +643,16 @@
         })
     </script>
 
-<script>
-    const  lottieAnimation = bodymovin.loadAnimation({
-        container: document.getElementById('lottie-animation'),
-        path: 'assets/anyworkx-anime.json',
-        render: 'svg',
-        loop: true,
-        autoplay: true,
-        name: 'lottie animation'
-    });
-</script>
+    <script>
+        const lottieAnimation = bodymovin.loadAnimation({
+            container: document.getElementById('lottie-animation'),
+            path: 'assets/anyworkx-anime.json',
+            render: 'svg',
+            loop: true,
+            autoplay: true,
+            name: 'lottie animation'
+        });
+    </script>
 </body>
 
 </html>

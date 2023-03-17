@@ -598,7 +598,7 @@ nav .nav--items__container a:hover {
   text-align: center;
   font-weight: 500;
   background: rgb(250, 240, 255);
-  height: 250px;
+  height: auto;
   padding: 24px;
   border-radius: 12px;
   margin-top: 48px;
@@ -613,10 +613,15 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .download-cta .btn-group {
   margin: 24px 0;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-flow: row wrap;
 }
 .how-it-works .download-cta button {
   outline: none;
   border: 0px;
+  background-color: transparent;
 }
 .how-it-works .download-cta img {
   width: 200px;
