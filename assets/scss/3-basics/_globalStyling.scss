@@ -17,13 +17,12 @@ body {
 
 h1 {
   font-size: $h1FontSize;
-  font-family: 'Dela Gothic One', cursive;
+  font-family: "Dela Gothic One", cursive;
   line-height: 1;
 }
 
 h2 {
   font-size: $h2FontSize;
-  
 }
 
 h4 {
@@ -34,7 +33,8 @@ h5 {
   font-size: $h5FontSize;
   color: $titleTextColor;
 }
-h1, h2{
+h1,
+h2 {
   color: $primaryColor;
   line-height: 1;
 }
@@ -44,30 +44,32 @@ p {
   color: $bodyTextColor;
 }
 
-a{
+a {
   color: inherit;
   text-decoration: none;
 }
 
-ul{
+ul {
   list-style: none;
   color: $bodyTextColor;
 }
 
-.padding-wrapper{
-  padding: 0 40px;
-}
-
-@media(max-width: 500px){}
-.padding-wrapper{
+.padding-wrapper {
   padding: 0 24px;
 }
-img{
+
+@media (max-width: 550px) {
+  .padding-wrapper {
+    padding: 0;
+  }
+}
+
+img {
   object-fit: cover;
   object-position: center;
 }
 
-.input-field{
+.input-field {
   height: 45px;
   border: 1px solid $primaryColor;
   border-radius: 8px;
@@ -79,19 +81,19 @@ img{
   transition: $transitionDuration;
   width: 100%;
 }
-.input-field:focus{
+.input-field:focus {
   border-radius: 1.5px solid $secondaryColor;
   transition: $transitionDuration;
 }
 
-.animate{
+.animate {
   opacity: 0;
   filter: blur(3px);
   transform: translateX(-20%);
   transition: all 0.7s ease-in-out;
 }
 
-.show{
+.show {
   opacity: 1;
   filter: blur(0);
   transform: translateX(0px);

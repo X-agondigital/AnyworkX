@@ -24,6 +24,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
+    
+    <!--Bodymovin CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
 </head>
 
 <body>
@@ -60,22 +63,29 @@
 
     <section class="hero-section" id="hero-section">
         <article class="text-description animate">
-            <h1>Find a professional service provider in seconds</h1>
-            <p>AnyWorkX makes getting a service provider as seamless as possible. You can now find an electrician,
-                hair
-                stylist, mobile mechanic, virtual assistant or a desired professional anywhere, anytime, anyday!</p>
+            <h1>Your Marketplace For Endless Services</h1>
+            <p>Find a wide range of professional services, from regular to emergency assistance, all in one marketplace.
+            </p>
 
             <div class="btn-group">
-                <button class="btn">Download Now</button>
-                <button class="btn--without-bg">Become a Vendor <i class="ri-arrow-right-s-line icon"></i></button>
+                <a href="#tab-1"><button class="btn">Download Now</button></a>
+                <a href="#tab-2"><button class="btn--without-bg">Become a Vendor <i
+                            class="ri-arrow-right-s-line icon"></i></button></a>
+            </div>
             </div>
         </article>
 
-        <article class="image-container animate">
-            <!-- <img src="assets/images/animation_landing.svg"
-                alt="Animated hero section image showing the connection between service providers and customers"> -->
-
+        <article class="image-container animate" id="lottie-animation">
+            
         </article>
+    </section>
+
+    <section class="mentioned-section">
+        <p>Mentioned On</p>
+        <div class="mentioned-logo">
+            <img src="assets/images/techcabal-logo.png" alt="logo for tech cabal">
+            <img src="assets/images/leadership-logo.png" alt="logo for leadership">
+        </div>
     </section>
 
 
@@ -83,12 +93,12 @@
         <section class="service-section" id="service-section">
 
             <article class="image-container animate">
-                <h2 class="animate header">All the services you need, in one place</h2>
+                <h2 class="animate header">All the services you need, in one marketplace</h2>
                 <img src="assets/images/anyworkx-app-snapshot.png"
                     alt="A screen design showing anyworks mobile app home screen" class="main-service-img animate">
-                <p class="animate header"> Whether you need someone to fix a leaky faucet or install a new light
-                    fixture, our app makes it
-                    simple to find the right person for the job.</p>
+                <p class="animate header"> Whether you need someone to tow your vehicle, fix a leaky tap, install a new
+                    light fixture, or you have an unanticipated service need on the go, our app makes is easy to find
+                    the right person for the job, at the nearest location at anytime.</p>
             </article>
             <main class="services--wrapper">
                 <article class="text-description">
@@ -97,12 +107,25 @@
                             alt="mockup displaying a demo call session between a vendor and a buyer">
 
                         <div class="inner-text">
-                            <h4>Get connected with local service providers in no time</h4>
-                            <p>With just a few taps on your phone, you can find professionals who are close to your
-                                location,
-                                and
-                                are available to help you with whatever you need.</p>
-                            <a href="#" class="btn--without-bg">Learn More <i class="ri-arrow-right-s-line icon"></i></a>
+                            <h4>Get connected with service providers 24/7 and anywhere you are</h4>
+                            <p>With AnyworkX, you do not have to panic anymore. Get quick access to help, even when
+                                you're in an unfamiliar location or in an emergency situation. Just five easy steps on
+                                your phone, and you'll be connected to the service provider you need</p>
+                            <a href="#" class="btn--without-bg">Learn More <i
+                                    class="ri-arrow-right-s-line icon"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="service-list animate">
+                        <img src="assets/images/app-mockup-3.png" alt="mockup displaying a demo wallet balance">
+
+                        <div class="inner-text">
+                            <h4>No cash? No worry!</h4>
+                            <p>You can pay for services rendered through the in-App wallet. Our secure payment methods
+                                are safe and ensure both the customer and vendor are protected from payment dispute or
+                                scam.</p>
+                            <a href="#" class="btn--without-bg">Learn More <i
+                                    class="ri-arrow-right-s-line icon"></i></a>
                         </div>
                     </div>
 
@@ -110,15 +133,15 @@
                         <img src="assets/images/app-mockup-2.png"
                             alt="mockup displaying the location of nearest service provider">
                         <div class="inner-text">
-                            <h4>Find customers near you, quickly and efficiently</h4>
-                            <p>If you are a service provider looking for more customers, no more endless scrolling
-                                through
-                                classified ads or knocking on doors. AnyWorkX lets you find customers, set your
-                                availability
-                                and
-                                services offered, manage your bookings and receive reviews and ratings from them!</p>
+                            <h4>Get More Customers Anytime, Anywhere with AnyworkX</h4>
+                            <p>AnyWorkX connects service providers to customers across Africa. The app enhances
+                                productivity and expands market opportunities for service providers. You can manage your
+                                bookings, get rated for your service, and indicate availability on your profile.
+                                AnyworkX is a cheaper means to advertise your business and track your profile views and
+                                service requests.</p>
 
-                            <a href="#" class="btn--without-bg">Get Started <i class="ri-arrow-right-s-line icon"></i></a>
+                            <a href="#" class="btn--without-bg">Get Started <i
+                                    class="ri-arrow-right-s-line icon"></i></a>
                         </div>
                     </div>
                 </article>
@@ -129,19 +152,17 @@
         <section class="how-it-works" id="how-it-works">
             <h2>How it Works</h2>
             <main class="tab-container">
-                <div class="tab-box">
-                    <button class="tab-btn active">
-                        <i class="ri-user-2-line"></i>
-                        <p>For Customers</p>
-                    </button>
 
-                    <button class="tab-btn">
-                        <i class="ri-briefcase-4-line"></i>
-                        <p>For Vendors</p>
-                    </button>
-                    <div class="line"></div>
-                </div>
-                <div class="tab--item content active" id="tab-1">
+                <div class="tab--item content" id="tab-1">
+                    <div class="tab-box">
+                        <button class="tab-btn active" id="tab-button">
+                            <i class="ri-user-2-line"></i>
+                            <p>For Customers</p>
+                        </button>
+
+
+                        <div class="line"></div>
+                    </div>
                     <article class="tab--item__wrapper">
                         <div class="carousel--container">
                             <div class="owl-carousel owl-theme" id="slider-service">
@@ -166,8 +187,10 @@
                                         d="M23.25 20.25H6.75V17.25C6.75 16.422 6.078 15.75 5.25 15.75C4.422 15.75 3.75 16.422 3.75 17.25V20.25C3.75 21.9067 5.09331 23.25 6.75 23.25H23.25C24.9067 23.25 26.25 21.9067 26.25 20.25V17.25C26.25 16.422 25.578 15.75 24.75 15.75C23.922 15.75 23.25 16.422 23.25 17.25V20.25ZM13.5 13.2579L10.8787 10.2624C10.3334 9.63909 9.38554 9.57613 8.76227 10.1214C8.139 10.6667 8.07604 11.6145 8.62131 12.2378L12.7425 16.9478C13.3118 17.5987 14.1353 17.9722 15 17.9722C15.8647 17.9722 16.6882 17.5987 17.2575 16.9478L21.3787 12.2378C21.924 11.6145 21.861 10.6667 21.2377 10.1214C20.6145 9.57612 19.6666 9.63908 19.1213 10.2624L16.5 13.2579V2.25C16.5 1.422 15.828 0.75 15 0.75C14.172 0.75 13.5 1.422 13.5 2.25L13.5 13.2579Z"
                                         fill="#00A7D7" />
                                 </svg>
-                                <h5>Download and Register</h5>
-                                <p>Sign up by registering all required information.</p>
+                                <h5>Download, Register and Get Verified</h5>
+                                <p>Sign up by downloading the app and providing all required information. Start your
+                                    verification processes to enable you enjoy all the benefits on the app. You must
+                                    complete the basic verification levels to transact on the app.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -183,9 +206,9 @@
                                 </svg>
 
                                 <h5>Book a Service</h5>
-                                <p>Request service and get connected immediately with a qualified service provider close
-                                    to
-                                    your location.</p>
+                                <p>Once customers are connected with their preferred service provider, both parties must
+                                    negotiate terms via the app chat or call feature. All negotiations are done via the
+                                    app for tracking, audit and dispute resolution.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -206,8 +229,7 @@
                                 </svg>
                                 <h5>Negotiate Fees With Service Providers</h5>
                                 <p>Connect with the service providers using the chat or call feature on the app to
-                                    discuss
-                                    further the work and strike a bargain.</p>
+                                    discuss further the work and strike a bargain.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -222,7 +244,10 @@
                                 </svg>
 
                                 <h5>Make Payment</h5>
-                                <p>Once the service provider gets the job done, make the payment.</p>
+                                <p>Payment for transactions consummated via AnyworkX must be done through the in-app
+                                    wallet. Customers are expected to fund their wallet with the full fee negotiated
+                                    with the service provider. Once the service provider gets the job done, the
+                                    customer’s wallet is debited and credited to the service provider’s wallet.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -234,8 +259,10 @@
                                 </svg>
 
                                 <h5>Rate Services</h5>
-                                <p>Give a review of your satisfaction with the service offered by the service provider.
-                                    Other customers of AnyworkX can see this.</p>
+                                <p>AnyworkX provides customers with the opportunity to rate the work of the service
+                                    provider and how satisfied they are with the customer service provided. Ratings from
+                                    customers are aggregated and become part of the profile of the service provider.
+                                </p>
                             </div>
 
 
@@ -244,21 +271,30 @@
                     </article>
 
                     <div class="download-cta">
-                        <h4 class="animate">Download <span>AnyWorkX Customer App</span> and start hiring professionals
+                        <h4 class="animate">Download <span>AnyWorkX Customer App</span> and start hiring service
+                            providers
                         </h4>
 
                         <div class="btn-group animate">
-                            <button href="#" class="download-btn"><img src="assets/images/mobile-play-store.png"
-                                    alt=""></button>
+                            <button href="https://play.google.com/store/apps/details?id=com.anyworkx.customer"
+                                class="download-btn"><img src="assets/images/mobile-play-store.png" alt=""></button>
                             <button href="#" class="download-btn"><img src="assets/images/app-store-badge.png"
                                     alt=""></button>
                         </div>
 
-                        <a href="#" class="link-text bold animate">Are you a vendor? Download here</a>
+                        <a href="#tab-2" class="link-text bold animate">Are you a vendor? Download here</a>
                     </div>
                 </div>
+                <div class="tab--item content active" id="tab-2">
+                    <div class="tab-box">
+                        <button class="tab-btn active" id="tab-button">
+                            <i class="ri-briefcase-4-line"></i>
+                            <p>For Vendors</p>
+                        </button>
 
-                <div class="tab--item content" id="tab-2">
+
+                        <div class="line"></div>
+                    </div>
                     <article class="tab--item__wrapper">
                         <div class="carousel--container">
                             <div class="owl-carousel owl-theme" id="slider-service2">
@@ -283,9 +319,10 @@
                                         d="M9.70146 2.39844C9.48806 2.39755 9.28293 2.48215 9.13226 2.63327C8.98137 2.78438 8.89722 2.98952 8.89833 3.20314V4.06405H7.70456C6.33199 4.06405 5.20142 5.19617 5.20142 6.56874V27.095C5.20142 28.4676 6.33199 29.5997 7.70456 29.5997H18.8606C19.3001 29.5979 19.6559 29.2421 19.6574 28.8029C19.6583 28.5906 19.5748 28.3868 19.4255 28.2361C19.2759 28.0854 19.0728 28.0004 18.8605 27.9997H7.70454C7.1907 27.9997 6.8014 27.6087 6.8014 27.095V6.56875C6.8014 6.05491 7.19068 5.66561 7.70454 5.66561H8.89831V6.52653C8.89764 6.7397 8.98202 6.94438 9.13269 7.09527C9.28358 7.24594 9.48827 7.33032 9.70144 7.32965C9.91371 7.32876 10.1168 7.24371 10.2664 7.09305C10.4157 6.94238 10.4992 6.73858 10.4983 6.52653V5.66561H14.8624V6.52653C14.8617 6.7397 14.9461 6.94438 15.0967 7.09527C15.2476 7.24617 15.4523 7.33032 15.6655 7.32965C15.8778 7.32876 16.0809 7.24371 16.2304 7.09305C16.3798 6.94238 16.4633 6.73858 16.4624 6.52653V5.66561H20.8327V6.52653C20.832 6.7388 20.9157 6.94305 21.0655 7.09349C21.2152 7.24416 21.4188 7.32921 21.6311 7.32965C21.8445 7.33032 22.0492 7.24617 22.2001 7.09527C22.3507 6.94438 22.4351 6.73969 22.4342 6.52653V5.66561H23.6264C24.1402 5.66561 24.5295 6.05512 24.5295 6.56875V22.3299C24.5304 22.7705 24.8873 23.1274 25.328 23.1284C25.5405 23.129 25.7445 23.0453 25.8952 22.8955C26.0458 22.7458 26.1309 22.5422 26.1311 22.3299V6.56878C26.1311 5.19621 24.999 4.06409 23.6264 4.06409H22.4343V3.20318C22.4356 2.98956 22.3514 2.78443 22.2006 2.63331C22.0497 2.48219 21.8447 2.39759 21.6311 2.39848C21.4184 2.39871 21.2146 2.48398 21.0648 2.63487C20.9151 2.78598 20.8316 2.99045 20.8327 3.20317V4.06408H16.4624V3.20317C16.4637 2.99067 16.3805 2.78643 16.2309 2.63554C16.0814 2.48442 15.878 2.39915 15.6655 2.39848C15.4521 2.39759 15.247 2.48219 15.0963 2.63331C14.9454 2.78442 14.8613 2.98956 14.8624 3.20318V4.06409H10.4984V3.20318C10.4997 2.99067 10.4164 2.78643 10.2669 2.63554C10.1173 2.48443 9.91398 2.39916 9.70148 2.39849L9.70146 2.39844ZM10.0561 10.1704C9.84387 10.1707 9.6403 10.2557 9.49052 10.4064C9.34074 10.5571 9.25704 10.7611 9.25771 10.9736C9.2586 11.4142 9.61574 11.7711 10.0562 11.772H21.2767C21.7169 11.7702 22.073 11.4135 22.0736 10.9736C22.0745 10.7613 21.991 10.5575 21.8417 10.4068C21.6921 10.2562 21.489 10.1711 21.2767 10.1704H10.0561ZM10.0561 14.7955C9.61619 14.7961 9.25951 15.1522 9.25768 15.5923C9.25701 15.8046 9.34072 16.0089 9.4905 16.1593C9.64027 16.31 9.84384 16.395 10.0561 16.3955H21.2767C21.489 16.3946 21.6921 16.3095 21.8416 16.1589C21.991 16.0082 22.0745 15.8044 22.0736 15.5923C22.072 15.1528 21.7162 14.797 21.2767 14.7955H10.0561ZM10.0561 19.4189C9.61619 19.4196 9.25951 19.7756 9.25768 20.2158C9.25701 20.428 9.34072 20.6323 9.4905 20.7827C9.64027 20.9334 9.84384 21.0184 10.0561 21.0189H13.2749C13.4871 21.018 13.6903 20.9329 13.8398 20.7823C13.9891 20.6316 14.0726 20.4278 14.0717 20.2158C14.0702 19.7763 13.7144 19.4204 13.2749 19.4189H10.0561ZM16.9093 19.6048C16.6796 19.6118 16.4642 19.7173 16.3176 19.8944C16.1711 20.0714 16.1077 20.3028 16.1437 20.5298L16.4984 22.8205C16.5245 22.9885 16.6033 23.1439 16.7234 23.2642L22.4748 29.0156C23.3011 29.842 24.661 29.7701 25.481 28.95C26.3011 28.1299 26.3714 26.7701 25.5451 25.9438L19.7937 20.1924C19.6718 20.0718 19.5146 19.9935 19.3452 19.9689L17.0593 19.6142C17.0095 19.6064 16.9593 19.6033 16.9093 19.6049L16.9093 19.6048ZM17.8921 21.3627L18.8436 21.5095L24.4124 27.0783C24.5883 27.2542 24.6005 27.5633 24.3467 27.8174C24.0929 28.0712 23.7789 28.0573 23.603 27.8814L18.0345 22.3127L17.8921 21.3627Z"
                                         fill="#00A7D7" stroke="#00A7D7" stroke-width="0.5" />
                                 </svg>
-                                <h5>Download and Register</h5>
-                                <p>Download the AnyworkX app and register as a service provider. Submit all required
-                                    information and documents for verification and background check.</p>
+                                <h5>Download, Register and Get Verified</h5>
+                                <p>Sign up by downloading the app and providing all required information. Start your
+                                    verification processes to enable you enjoy all the benefits on the app. You must
+                                    complete the basic verification levels to transact on the app.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -304,8 +341,9 @@
                                 </svg>
 
                                 <h5>Set Availability</h5>
-                                <p>Turn on your google location and set your availability to connect to customers around
-                                    your vicinity.</p>
+                                <p>Service providers are to turn on their location on their phone and set their
+                                    availability to accept job orders. This is the only way customers can see the
+                                    profile of service providers and connect with them.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -322,9 +360,10 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <h5>Negotiate Price or Offer</h5>
-                                <p>Use the chat or call section on AnyworkX to connect with the customer and reach an
-                                    agreement.</p>
+                                <h5>Negotiate Terms</h5>
+                                <p>Once service providers are connected with a customer, both parties must negotiate
+                                    terms via the app chat or call feature. All negotiations are done via the app for
+                                    tracking, audit, and dispute resolution.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -348,8 +387,22 @@
                                     </defs>
                                 </svg>
 
-                                <h5>Complete The Service</h5>
-                                <p>Deliver the services as required by the customer.</p>
+                                <h5>Accept Customer’s Terms</h5>
+                                <p>Once negotiation is concluded, service providers accept terms and proceed to the
+                                    location of the job.</p>
+                            </div>
+
+                            <div class="customer--guide__item animate">
+                                <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M7.39441 14.4316C6.89858 14.4316 6.48324 14.2642 6.14841 13.9294C5.81241 13.5934 5.64441 13.1775 5.64441 12.6816C5.64441 12.1858 5.81241 11.7699 6.14841 11.4339C6.48324 11.0991 6.89858 10.9316 7.39441 10.9316H24.8944C25.3902 10.9316 25.8062 11.0991 26.1422 11.4339C26.477 11.7699 26.6444 12.1858 26.6444 12.6816C26.6444 13.1775 26.477 13.5934 26.1422 13.9294C25.8062 14.2642 25.3902 14.4316 24.8944 14.4316H7.39441ZM7.39441 21.4316C6.89858 21.4316 6.48324 21.2636 6.14841 20.9276C5.81241 20.5928 5.64441 20.1775 5.64441 19.6816C5.64441 19.1858 5.81241 18.7699 6.14841 18.4339C6.48324 18.0991 6.89858 17.9316 7.39441 17.9316H24.8944C25.3902 17.9316 25.8062 18.0991 26.1422 18.4339C26.477 18.7699 26.6444 19.1858 26.6444 19.6816C26.6444 20.1775 26.477 20.5928 26.1422 20.9276C25.8062 21.2636 25.3902 21.4316 24.8944 21.4316H7.39441ZM7.39441 28.4316C6.89858 28.4316 6.48324 28.2636 6.14841 27.9276C5.81241 27.5928 5.64441 27.1775 5.64441 26.6816C5.64441 26.1858 5.81241 25.7699 6.14841 25.4339C6.48324 25.0991 6.89858 24.9316 7.39441 24.9316H17.8944C18.3902 24.9316 18.8062 25.0991 19.1422 25.4339C19.477 25.7699 19.6444 26.1858 19.6444 26.6816C19.6444 27.1775 19.477 27.5928 19.1422 27.9276C18.8062 28.2636 18.3902 28.4316 17.8944 28.4316H7.39441ZM27.7819 32.4566L24.0194 28.6941C23.6986 28.3733 23.5382 27.965 23.5382 27.4691C23.5382 26.9733 23.6986 26.565 24.0194 26.2441C24.3402 25.9233 24.7416 25.7629 25.2234 25.7629C25.7041 25.7629 26.1194 25.9233 26.4694 26.2441L29.0069 28.6941L35.2194 22.4816C35.5402 22.1608 35.941 22.0004 36.4217 22.0004C36.9035 22.0004 37.3194 22.1754 37.6694 22.5254C38.0194 22.8754 38.1874 23.2983 38.1734 23.7941C38.1582 24.29 37.9757 24.7129 37.6257 25.0629L30.2319 32.4566C29.9111 32.7775 29.5027 32.9379 29.0069 32.9379C28.5111 32.9379 28.1027 32.7775 27.7819 32.4566Z"
+                                        fill="#00A7D7" />
+                                </svg>
+
+                                <h5>Complete the Service</h5>
+                                <p>Service providers are to render the service based on the agreed terms negotiated with
+                                    the customer.</p>
                             </div>
 
                             <div class="customer--guide__item animate">
@@ -367,9 +420,9 @@
                                     </defs>
                                 </svg>
 
-                                <h5>Receive Payment Through The Wallet</h5>
-                                <p>Give a review of your satisfaction with the service offered by the service provider.
-                                    Other customers of AnyworkX can see this.</p>
+                                <h5>Payment Settlement</h5>
+                                <p>Service providers are to render the service based on the agreed terms negotiated with
+                                    the customer.</p>
                             </div>
 
 
@@ -382,13 +435,13 @@
                         </h4>
 
                         <div class="btn-group animate">
-                            <button href="#" class="download-btn"><img src="assets/images/mobile-play-store.png"
-                                    alt=""></button>
+                            <button href="https://play.google.com/store/apps/details?id=com.anyworks.artisan"
+                                class="download-btn"><img src="assets/images/mobile-play-store.png" alt=""></button>
                             <button href="#" class="download-btn"><img src="assets/images/app-store-badge.png"
                                     alt=""></button>
                         </div>
 
-                        <a href="#" class="link-text bold animate">Are you a customer? Download here</a>
+                        <a href="#tab-1" class="link-text bold animate">Want to hire? Click here</a>
                     </div>
                 </div>
             </main>
@@ -406,13 +459,14 @@
                                 fill="#00A7D7" />
                         </svg>
                     </h4>
-                    <p>Service providers and customers go through proper KYC to prevent fake identities or
-                        impersonation.
-                        Both parties determine the level of verification they are comfortable transacting business with.
-                        Service providers also go through mandatory computer-based customer service training as part of
-                        the
-                        onboarding process. The app provides customers with the opportunity to track the movement of the
-                        service provider to where the service is to be rendered.</p>
+                    <p>AnyworkX prioritizes user safety and security by verifying the identities of service providers
+                        and customers to a reasonable extent. Different levels of verification are available, and users
+                        can choose the level of verification they are comfortable with for transacting business.
+                    </p>
+                    <br>
+                    <p>As part of the onboarding process, service providers undergo mandatory computer-based customer
+                        service training and testing. This is reflected on their public profile, allowing customers to
+                        benefit from their training and expertise.</p>
                 </article>
 
                 <article class="benefit--item animate">
@@ -423,27 +477,40 @@
                                 fill="#00A7D7" />
                         </svg>
                     </h4>
-                    <p>AnyworkX guarantees a safe and secure payment method. A wallet feature ensures seamless financial
-                        transactions between customers and service providers. payments for services rendered are upfront
-                        and
-                        escrowed in the wallet until the job is done satisfactorily.</p>
+                    <p>AnyworkX guarantees a safe and secure payment method. The wallet feature of the app is to ensure
+                        seamless financial transaction between customers and service providers. Payment for service by
+                        the customer is escrowed in the customer's wallet until the job is done. This is to give comfort
+                        to both parties.</p>
                 </article>
 
                 <article class="benefit--item animate">
-                    <h4>Professionalism
-                        <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <h4>The Biggest Marketplace
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M26.25 20.625C26.25 21.1 25.9875 21.5125 25.5875 21.725L15.7125 27.275C15.5125 27.425 15.2625 27.5 15 27.5C14.7375 27.5 14.4875 27.425 14.2875 27.275L4.4125 21.725C4.2121 21.6197 4.04439 21.4615 3.9276 21.2675C3.8108 21.0736 3.74938 20.8514 3.75 20.625V9.375C3.75 8.9 4.0125 8.4875 4.4125 8.275L14.2875 2.725C14.4875 2.575 14.7375 2.5 15 2.5C15.2625 2.5 15.5125 2.575 15.7125 2.725L25.5875 8.275C25.9875 8.4875 26.25 8.9 26.25 9.375V20.625ZM6.25 11.25V18.75H7.8125V16.25H8.75C9.41305 16.25 10.0489 15.9866 10.5178 15.5178C10.9866 15.0489 11.25 14.413 11.25 13.75C11.25 13.087 10.9866 12.4511 10.5178 11.9822C10.0489 11.5134 9.41305 11.25 8.75 11.25H6.25ZM7.8125 15V12.5H8.4375C8.76903 12.5 9.08697 12.6317 9.32139 12.8661C9.55581 13.1005 9.6875 13.4185 9.6875 13.75C9.6875 14.0815 9.55581 14.3995 9.32139 14.6339C9.08697 14.8683 8.76903 15 8.4375 15H7.8125ZM12.1875 11.25V18.75H13.75V16.25H14.6875L15.5125 18.75H17.1625L16.175 15.7625C16.7875 15.3125 17.1875 14.575 17.1875 13.75C17.1875 13.087 16.9241 12.4511 16.4553 11.9822C15.9864 11.5134 15.3505 11.25 14.6875 11.25H12.1875ZM13.75 15V12.5H14.375C14.7065 12.5 15.0245 12.6317 15.2589 12.8661C15.4933 13.1005 15.625 13.4185 15.625 13.75C15.625 14.0815 15.4933 14.3995 15.2589 14.6339C15.0245 14.8683 14.7065 15 14.375 15H13.75ZM21.25 11.25C19.525 11.25 18.125 12.925 18.125 15C18.125 17.075 19.525 18.75 21.25 18.75C22.975 18.75 24.375 17.075 24.375 15C24.375 12.925 22.975 11.25 21.25 11.25ZM21.25 12.8125C22.2 12.8125 22.975 13.7875 22.975 15C22.975 16.2125 22.2 17.1875 21.25 17.1875C20.3 17.1875 19.5375 16.2125 19.5375 15C19.5375 13.7875 20.3 12.8125 21.25 12.8125Z"
+                                d="M23.75 7.5H21.25C21.25 4 18.5 1.25 15 1.25C11.5 1.25 8.75 4 8.75 7.5H6.25C4.875 7.5 3.75 8.625 3.75 10V25C3.75 26.375 4.875 27.5 6.25 27.5H23.75C25.125 27.5 26.25 26.375 26.25 25V10C26.25 8.625 25.125 7.5 23.75 7.5ZM15 3.75C17.125 3.75 18.75 5.375 18.75 7.5H11.25C11.25 5.375 12.875 3.75 15 3.75ZM23.75 25H6.25V10H23.75V25ZM15 15C12.875 15 11.25 13.375 11.25 11.25H8.75C8.75 14.75 11.5 17.5 15 17.5C18.5 17.5 21.25 14.75 21.25 11.25H18.75C18.75 13.375 17.125 15 15 15Z"
                                 fill="#00A7D7" />
                         </svg>
+
                     </h4>
-                    <p>AnyworkX connects you to only verified service providers who are immediately available to render
-                        the
-                        services you need whenever and wherever you need them. We have hundreds of services listed and
-                        you
-                        can easily find the perfect service provider closest to where you need the service rendered just
-                        at
-                        the click of a button.</p>
+                    <p>AnyworkX boosts Africa's service economies by creating a vast marketplace for service providers
+                        to earn additional income and transact 24/7. Customers benefit from an array of choices and
+                        convenience. AnyworkX is the right platform for service providers to list their business and
+                        showcase their skill to a huge marketplace of endless possibilities.</p>
+                </article>
+
+                <article class="benefit--item animate">
+                    <h4>Customer Support
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.938 8.4999H21C21.5304 8.4999 22.0391 8.71061 22.4142 9.08569C22.7893 9.46076 23 9.96947 23 10.4999V14.4999C23 15.0303 22.7893 15.539 22.4142 15.9141C22.0391 16.2892 21.5304 16.4999 21 16.4999H19.938C19.6942 18.4332 18.7533 20.2111 17.2917 21.4999C15.8302 22.7887 13.9486 23.4999 12 23.4999V21.4999C13.5913 21.4999 15.1174 20.8678 16.2426 19.7425C17.3679 18.6173 18 17.0912 18 15.4999V9.4999C18 7.9086 17.3679 6.38248 16.2426 5.25726C15.1174 4.13204 13.5913 3.4999 12 3.4999C10.4087 3.4999 8.88258 4.13204 7.75736 5.25726C6.63214 6.38248 6 7.9086 6 9.4999V16.4999H3C2.46957 16.4999 1.96086 16.2892 1.58579 15.9141C1.21071 15.539 1 15.0303 1 14.4999V10.4999C1 9.96947 1.21071 9.46076 1.58579 9.08569C1.96086 8.71061 2.46957 8.4999 3 8.4999H4.062C4.30603 6.5668 5.24708 4.78917 6.70857 3.50058C8.17007 2.21198 10.0516 1.50098 12 1.50098C13.9484 1.50098 15.8299 2.21198 17.2914 3.50058C18.7529 4.78917 19.694 6.5668 19.938 8.4999ZM3 10.4999V14.4999H4V10.4999H3ZM20 10.4999V14.4999H21V10.4999H20ZM7.76 16.2849L8.82 14.5889C9.77308 15.1859 10.8754 15.5017 12 15.4999C13.1246 15.5017 14.2269 15.1859 15.18 14.5889L16.24 16.2849C14.9693 17.081 13.4995 17.5022 12 17.4999C10.5005 17.5022 9.03074 17.081 7.76 16.2849Z"
+                                fill="#00A7D7" />
+                        </svg>
+
+
+                    </h4>
+                    <p>The app provides users with the opportunity to track the movement of the service provider engaged
+                        until they arrive at the location the service is to be rendered. And along with this, a team of
+                        customer support professionals are available 24/7 to assist users every step of the way.</p>
                 </article>
             </div>
         </section>
@@ -528,7 +595,8 @@
 
         <hr class="footer--divider animate">
         <div class="copyright">
-            &copy; 2023 - AnyWorkX. All rights reserved.
+            &copy;
+            <script>document.write(new Date().getFullYear())</script> - AnyWorkX. All rights reserved.
         </div>
     </footer>
 
@@ -575,6 +643,17 @@
             center: true
         })
     </script>
+
+<script>
+    const  lottieAnimation = bodymovin.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        path: 'assets/anyworkx-anime.json',
+        render: 'svg',
+        loop: true,
+        autoplay: true,
+        name: 'lottie animation'
+    });
+</script>
 </body>
 
 </html>

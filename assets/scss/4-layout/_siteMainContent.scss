@@ -6,10 +6,12 @@
   width: 100%;
   gap: 40px;
   height: 100vh;
-  // align-items: center;
+  align-items: center;
   .text-description {
     width: 50%;
-    transform: translateY(100px);
+    .hyperlink{
+      color: $primaryColor;
+    }
     h1 {
       margin-bottom: 24px;
     }
@@ -20,6 +22,12 @@
     .btn-group {
       display: flex;
       gap: 24px;
+      p{
+        margin-bottom: 6px;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+      }
     }
     .icon {
       font-size: 24px;
@@ -39,9 +47,6 @@
 
 @media (max-width: 850px) {
   .hero-section {
-    .text-description {
-      transform: translateY(60px);
-    }
     .image-container {
       align-items: flex-start;
       img {
@@ -53,12 +58,11 @@
 
 @media (max-width: 750px) {
   .hero-section {
+    justify-content: flex-start;
     flex-direction: column;
     .text-description {
       width: 80%;
       margin: auto;
-      transform: translateY(20px);
-
       .btn-group {
         gap: 24px;
       }
@@ -77,9 +81,12 @@
 @media (max-width: 500px) {
   .hero-section {
     gap: 12px;
+    text-align: center;
     .text-description {
       width: 100%;
-      transform: unset;
+      .btn-group {
+        justify-content: center;
+      }
     }
     .image-container {
       width: 100%;
@@ -91,9 +98,28 @@
 }
 /*=======END OF HERO SECTION STYLING=======*/
 
+.mentioned-section{
+  p{
+    text-align: center;
+    padding: 6px;
+    background-color: #EAEAEA;
+  }
+  .mentioned-logo{
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  img{
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
 /*=======SERVICE SECTION STYLING=======*/
 .service-section {
-  margin-top: 96px;
+  margin-top: 60px;
 
   .image-container{
     text-align: center;
@@ -119,6 +145,7 @@
     margin-top: 48px;
     display: flex;
     gap: 48px;
+    
     img {
       object-fit: contain;
       max-width: 300px;
@@ -159,8 +186,12 @@
     .text-description{
       flex-direction: column;
       align-items: center;
+      padding: 0 12px;
       .service-list{
         width: 100%;
+        img{
+          max-width: 100%;
+        }
       }
     }
   }
@@ -188,12 +219,16 @@
   }
   .tab-box {
     display: flex;
-    max-width: 315px;
+    max-width: 170px;
     justify-content: center;
     margin: auto;
     margin-bottom: 48px;
     position: relative;
     border-bottom: 2px solid #CCCCCC;
+  }
+
+  #tab-2{
+    margin-top: 48px;
   }
   .tab-btn {
     background-color: #fff;
@@ -253,23 +288,7 @@
       text-align: -moz-center;
     }
   }
-  .tab--item {
-    display: none;
-    animation: moving 0.5s ease-out;
-  }
-  .tab--item.active {
-    display: block;
-  }
-  @keyframes moving {
-    from {
-      transform: translateX(50px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+  
 
   .download-cta {
     width: 100%;
@@ -322,13 +341,15 @@
 @media (max-width: 540px) {
   .how-it-works {
     .tab--item__wrapper {
+      padding: 0 12px;
       .tab-img {
-        width: 100%;
+        max-width: 100%;
       }
     }
     .download-cta {
       height: 320px;
       padding: 24px;
+      border-radius: 0px;
       button {
         background-color: none;
       }
@@ -362,6 +383,14 @@
     }
     svg {
       margin-left: 6px;
+    }
+  }
+}
+
+@media (max-width: 600px){
+  .benefits-section{
+    .benefit--items__container{
+      padding: 0 12px;
     }
   }
 }

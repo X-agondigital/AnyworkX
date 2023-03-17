@@ -34,7 +34,8 @@ h5 {
   color: rgb(19, 19, 19);
 }
 
-h1, h2 {
+h1,
+h2 {
   color: rgb(126, 0, 196);
   line-height: 1;
 }
@@ -55,13 +56,14 @@ ul {
 }
 
 .padding-wrapper {
-  padding: 0 40px;
-}
-
-.padding-wrapper {
   padding: 0 24px;
 }
 
+@media (max-width: 550px) {
+  .padding-wrapper {
+    padding: 0;
+  }
+}
 img {
   -o-object-fit: cover;
      object-fit: cover;
@@ -103,9 +105,9 @@ img {
   font-family: inherit;
   font-size: 1em;
   font-weight: 600;
-  height: 45px;
   border: 0px;
   border-radius: 6px;
+  cursor: pointer;
   color: #fff;
   background-color: rgb(0, 167, 215);
   padding: 12px 16px;
@@ -120,10 +122,11 @@ img {
   font-family: inherit;
   font-size: 1em;
   font-weight: 600;
+  cursor: pointer;
   border: 1.5px solid rgb(0, 167, 215);
   border-radius: 6px;
   color: rgb(0, 167, 215);
-  padding: 12px 16px;
+  padding: 6px 16px;
   transition: 0.3s;
   display: flex;
   align-items: center;
@@ -140,6 +143,7 @@ img {
   color: rgb(0, 167, 215);
   padding: 4px 8px;
   display: flex;
+  cursor: pointer;
   align-items: center;
   transition: 0.3s;
 }
@@ -332,10 +336,13 @@ nav .nav--items__container a:hover {
   width: 100%;
   gap: 40px;
   height: 100vh;
+  align-items: center;
 }
 .hero-section .text-description {
   width: 50%;
-  transform: translateY(100px);
+}
+.hero-section .text-description .hyperlink {
+  color: rgb(126, 0, 196);
 }
 .hero-section .text-description h1 {
   margin-bottom: 24px;
@@ -346,6 +353,12 @@ nav .nav--items__container a:hover {
 .hero-section .text-description .btn-group {
   display: flex;
   gap: 24px;
+}
+.hero-section .text-description .btn-group p {
+  margin-bottom: 6px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
 }
 .hero-section .text-description .icon {
   font-size: 24px;
@@ -361,9 +374,6 @@ nav .nav--items__container a:hover {
 }
 
 @media (max-width: 850px) {
-  .hero-section .text-description {
-    transform: translateY(60px);
-  }
   .hero-section .image-container {
     align-items: flex-start;
   }
@@ -373,12 +383,12 @@ nav .nav--items__container a:hover {
 }
 @media (max-width: 750px) {
   .hero-section {
+    justify-content: flex-start;
     flex-direction: column;
   }
   .hero-section .text-description {
     width: 80%;
     margin: auto;
-    transform: translateY(20px);
   }
   .hero-section .text-description .btn-group {
     gap: 24px;
@@ -394,10 +404,13 @@ nav .nav--items__container a:hover {
 @media (max-width: 500px) {
   .hero-section {
     gap: 12px;
+    text-align: center;
   }
   .hero-section .text-description {
     width: 100%;
-    transform: unset;
+  }
+  .hero-section .text-description .btn-group {
+    justify-content: center;
   }
   .hero-section .image-container {
     width: 100%;
@@ -407,9 +420,27 @@ nav .nav--items__container a:hover {
   }
 }
 /*=======END OF HERO SECTION STYLING=======*/
+.mentioned-section p {
+  text-align: center;
+  padding: 6px;
+  background-color: #EAEAEA;
+}
+.mentioned-section .mentioned-logo {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.mentioned-section img {
+  width: 150px;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 /*=======SERVICE SECTION STYLING=======*/
 .service-section {
-  margin-top: 96px;
+  margin-top: 60px;
 }
 .service-section .image-container {
   text-align: center;
@@ -468,9 +499,13 @@ nav .nav--items__container a:hover {
   .service-section .text-description {
     flex-direction: column;
     align-items: center;
+    padding: 0 12px;
   }
   .service-section .text-description .service-list {
     width: 100%;
+  }
+  .service-section .text-description .service-list img {
+    max-width: 100%;
   }
 }
 @media (max-width: 480px) {
@@ -489,12 +524,15 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .tab-box {
   display: flex;
-  max-width: 315px;
+  max-width: 170px;
   justify-content: center;
   margin: auto;
   margin-bottom: 48px;
   position: relative;
   border-bottom: 2px solid #CCCCCC;
+}
+.how-it-works #tab-2 {
+  margin-top: 48px;
 }
 .how-it-works .tab-btn {
   background-color: #fff;
@@ -554,23 +592,6 @@ nav .nav--items__container a:hover {
 .how-it-works .tab--item__wrapper .owl-carousel.owl-drag .owl-item {
   text-align: -moz-center;
 }
-.how-it-works .tab--item {
-  display: none;
-  animation: moving 0.5s ease-out;
-}
-.how-it-works .tab--item.active {
-  display: block;
-}
-@keyframes moving {
-  from {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 .how-it-works .download-cta {
   width: 100%;
   padding: 24px;
@@ -616,12 +637,16 @@ nav .nav--items__container a:hover {
   }
 }
 @media (max-width: 540px) {
+  .how-it-works .tab--item__wrapper {
+    padding: 0 12px;
+  }
   .how-it-works .tab--item__wrapper .tab-img {
-    width: 100%;
+    max-width: 100%;
   }
   .how-it-works .download-cta {
     height: 320px;
     padding: 24px;
+    border-radius: 0px;
   }
   .how-it-works .download-cta button {
     background-color: none;
@@ -658,6 +683,11 @@ nav .nav--items__container a:hover {
   margin-left: 6px;
 }
 
+@media (max-width: 600px) {
+  .benefits-section .benefit--items__container {
+    padding: 0 12px;
+  }
+}
 /*=======END OF BENEFITS SECTION STYLING=======*/
 /*=======TESTIMONIAL SECTION STYLING=======*/
 .testimonial-section {

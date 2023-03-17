@@ -21,26 +21,26 @@ for (let i = 0; i < navLinks.length; i++) {
 }
 
 //-----TAB PANE CONTROLLER
-const tabs = document.querySelectorAll(".tab-btn");
-const all_content = document.querySelectorAll(".content");
+const tabs = document.querySelector("#tab-button");
+const line = document.querySelector(".line");
+line.style.width = tabs.offsetWidth + 3 + "px";
+// tabs.forEach((tab, index) => {
+//   tab.addEventListener("click", (e) => {
+//     tabs.forEach((tab) => {
+//       tab.classList.remove("active");
+//     });
+//     tab.classList.add("active");
 
-tabs.forEach((tab, index) => {
-  tab.addEventListener("click", (e) => {
-    tabs.forEach((tab) => {
-      tab.classList.remove("active");
-    });
-    tab.classList.add("active");
+//     const line = document.querySelector(".line");
+//     line.style.width = e.target.offsetWidth + 3 + "px";
+//     line.style.left = e.target.offsetLeft + "px";
 
-    const line = document.querySelector(".line");
-    line.style.width = e.target.offsetWidth + 3 + "px";
-    line.style.left = e.target.offsetLeft + "px";
-
-    all_content.forEach((content) => {
-      content.classList.remove("active");
-    });
-    all_content[index].classList.add("active");
-  });
-});
+//     all_content.forEach((content) => {
+//       content.classList.remove("active");
+//     });
+//     all_content[index].classList.add("active");
+//   });
+// });
 
 //-----ANIMATION SCRIPT
 const observer = new IntersectionObserver((entries) => {
