@@ -8,7 +8,7 @@
     cursor: pointer;
     color: #fff;
     background-color: $secondaryColor;
-    padding: 12px 16px;
+    padding: 16px 16px;
     transition: $transitionDuration;
     &:hover{
         background-color: $primaryColor;
@@ -24,7 +24,7 @@
     border: 1.5px solid $secondaryColor;
     border-radius: 6px;
     color: $secondaryColor;
-    padding: 6px 16px;
+    padding: 12px 16px;
     transition: $transitionDuration;
     display: flex;
     align-items: center;
@@ -34,6 +34,10 @@
         color: $primaryColor;
         transition: $transitionDuration;
         border: 1.5px solid $primaryColor;
+    }
+    i{
+        margin-top: 4px;
+        margin-left: 6px;
     }
 }
 
