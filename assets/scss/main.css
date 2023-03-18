@@ -4,10 +4,11 @@ html {
 
 @font-face {
   font-family: "Px Grotesk Pan";
-  src: url("../font/PxGroteskPan-Bold.eot");
-  src: local("Px Grotesk Pan Bold"), local("../font/PxGroteskPan-Bold"), url("../font/PxGroteskPan-Bold.eot?#iefix") format("embedded-opentype"), url("../font/PxGroteskPan-Bold.woff2") format("woff2"), url("../font/PxGroteskPan-Bold.woff") format("woff"), url("../font/PxGroteskPan-Bold.ttf") format("truetype");
-  font-weight: bold;
+  src: url("../font/PxGroteskPan-Black.eot");
+  src: local("Px Grotesk Pan Black"), local("../font/PxGroteskPan-Black"), url("../font/PxGroteskPan-Black.eot?#iefix") format("embedded-opentype"), url("../font/PxGroteskPan-Black.woff2") format("woff2"), url("../font/PxGroteskPan-Black.woff") format("woff"), url("../font/PxGroteskPan-Black.ttf") format("truetype");
+  font-weight: 900;
   font-style: normal;
+  font-display: swap;
 }
 * {
   margin: 0;
