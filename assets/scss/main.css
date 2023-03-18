@@ -299,6 +299,7 @@ nav .nav--items__container a:hover {
     padding: 0;
     position: fixed;
     width: 100%;
+    top: 0;
   }
   nav .logo--container,
   nav .menu--toggle {
@@ -420,6 +421,7 @@ nav .nav--items__container a:hover {
   .hero-section {
     gap: 12px;
     text-align: center;
+    margin-top: 60px;
   }
   .hero-section .text-description {
     width: 100%;
