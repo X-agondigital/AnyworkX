@@ -47,7 +47,7 @@ nav {
   backdrop-filter: blur(3px);
   z-index: 5;
 }
-.hidden{
+.hidden {
   display: none;
 }
 @media (max-width: 870px) {
@@ -103,6 +103,7 @@ nav {
 
     .hamburger {
       font-size: 24px;
+      transition: $transitionDuration;
     }
   }
 }

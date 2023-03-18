@@ -20,6 +20,18 @@ for (let i = 0; i < navLinks.length; i++) {
   navLinks[i].addEventListener("click", navToggle);
 }
 
+const hamburgerIcon = document.getElementById('hamburger');
+const classPresent = hamburgerIcon.classList.contains('ri-menu-3-line');
+
+function checkActiveClass(){
+  if(classPresent){
+    hamburgerIcon.classList.toggle('ri-menu-3-line');
+    hamburgerIcon.classList.toggle('ri-close-fill');
+  }
+}
+
+hamburgerIcon.addEventListener('click', checkActiveClass);
+
 //-----TAB PANE CONTROLLER
 const tabs = document.querySelectorAll("#tab-box");
 const line = document.querySelector(".line");
