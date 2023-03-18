@@ -21,9 +21,12 @@ for (let i = 0; i < navLinks.length; i++) {
 }
 
 //-----TAB PANE CONTROLLER
-const tabs = document.querySelector("#tab-button");
+const tabs = document.querySelectorAll("#tab-box");
 const line = document.querySelector(".line");
-line.style.width = tabs.offsetWidth + 3 + "px";
+
+for (let i = 0; i < tabs.length; i++){
+  line.style.width = tabs[i].offsetWidth + 3 + "px";
+}
 // tabs.forEach((tab, index) => {
 //   tab.addEventListener("click", (e) => {
 //     tabs.forEach((tab) => {

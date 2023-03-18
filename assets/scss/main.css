@@ -468,6 +468,17 @@ nav .nav--items__container a:hover {
   margin-bottom: 24px;
   color: #fff;
 }
+.service-section .image-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin: auto;
+  margin-top: 24px;
+}
+.service-section .image-container button i {
+  margin-left: 6px;
+}
 .service-section .image-container .main-service-img {
   max-width: 400px;
   height: auto;
@@ -512,14 +523,18 @@ nav .nav--items__container a:hover {
   .service-section .text-description {
     flex-direction: column;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 24px;
     gap: 48px;
   }
   .service-section .text-description .service-list {
     width: 100%;
+    padding: 0 16px;
   }
   .service-section .text-description .service-list img {
     max-width: 100%;
+  }
+  .service-section .image-container .header {
+    max-width: 280px;
   }
 }
 @media (max-width: 480px) {
@@ -530,7 +545,7 @@ nav .nav--items__container a:hover {
 /*=======END OF SERVICE SECTION STYLING=======*/
 /*=======HOW IT WORKS SECTION STYLING=======*/
 .how-it-works {
-  margin-top: 96px;
+  margin-top: 60px;
 }
 .how-it-works h2 {
   text-align: center;
@@ -543,14 +558,13 @@ nav .nav--items__container a:hover {
   margin: auto;
   margin-bottom: 48px;
   position: relative;
-  border-bottom: 2px solid #CCCCCC;
 }
 .how-it-works #tab-2 {
   margin-top: 48px;
 }
 .how-it-works .tab-btn {
   background-color: #fff;
-  padding: 6px 12px;
+  padding: 10px 12px;
   border: 0px;
   font-weight: 600;
   font-size: 24px;
@@ -571,8 +585,8 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .line {
   position: absolute;
-  top: 79px;
-  left: 2px;
+  top: 89px;
+  left: 0px;
   width: 168px;
   height: 3px;
   background-color: rgb(0, 167, 215);
@@ -657,7 +671,7 @@ nav .nav--items__container a:hover {
 }
 @media (max-width: 540px) {
   .how-it-works .tab--item__wrapper {
-    padding: 0 12px;
+    padding: 0 24px;
   }
   .how-it-works .tab--item__wrapper .tab-img {
     max-width: 100%;
@@ -704,7 +718,7 @@ nav .nav--items__container a:hover {
 
 @media (max-width: 600px) {
   .benefits-section .benefit--items__container {
-    padding: 0 12px;
+    padding: 0 24px;
   }
 }
 /*=======END OF BENEFITS SECTION STYLING=======*/
