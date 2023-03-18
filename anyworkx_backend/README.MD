@@ -2,6 +2,7 @@
 pip install virtualenv my_env_name>
 
 #install the requirements file
+#cd anyworkx_backend
 pip install -r requirements.txt
 
 #make migration database
