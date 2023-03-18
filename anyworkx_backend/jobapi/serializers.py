@@ -25,7 +25,7 @@ class JobsSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
     class Meta:
         model = Jobs
-        fields = ['id', 'job_title', 'job_description', 'position', 'applicants', 'created_at']
+        fields = '__all__'
 
 
 class SubscribersSerializer(serializers.ModelSerializer):
