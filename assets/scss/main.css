@@ -41,7 +41,7 @@ h2 {
 }
 
 p {
-  font-size: 16px;
+  font-size: 18px;
   color: rgb(54, 52, 53);
 }
 
@@ -103,7 +103,7 @@ img {
 
 .btn {
   font-family: inherit;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   border: 0px;
   border-radius: 6px;
@@ -120,7 +120,7 @@ img {
 
 .btn--without-bg {
   font-family: inherit;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   border: 1.5px solid rgb(0, 167, 215);
@@ -565,12 +565,13 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .tab-btn {
   background-color: #fff;
-  padding: 10px 12px;
+  padding: 15px 12px;
   border: 0px;
   font-weight: 600;
   font-size: 24px;
   font-family: inherit;
   cursor: pointer;
+  width: 170px;
 }
 .how-it-works .tab-btn i {
   font-size: 32px;
