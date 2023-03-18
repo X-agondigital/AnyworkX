@@ -4,8 +4,8 @@ from datetime import datetime
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from .models import Jobs, Applicant
-from .serializers import JobsSerializer, ApplicantSerializer
+from .models import Jobs, Applicant, Subscribers
+from .serializers import JobsSerializer, ApplicantSerializer,SubscribersSerializer
 
 
 class JobsListViews(generics.ListCreateAPIView):
@@ -51,22 +51,22 @@ class JobsDetailViews(generics.RetrieveUpdateDestroyAPIView):
             return None
 
     def get(self, request, pk):
-        note = self.get_job(pk=pk)
-        if note is None:
-            return Response({"status": "fail", "message": f"Note with Id: {pk} not found"},
+        job = self.get_job(pk=pk)
+        if job is None:
+            return Response({"status": "fail", "message": f"job with Id: {pk} not found"},
                             status=status.HTTP_404_NOT_FOUND)
 
-        serializer = self.serializer_class(note)
-        return Response({"status": "success", "note": serializer.data})
+        serializer = self.serializer_class(job)
+        return Response({"status": "success", "job": serializer.data})
 
     def patch(self, request, pk):
-        note = self.get_note(pk)
-        if note is None:
-            return Response({"status": "fail", "message": f"Note with Id: {pk} not found"},
+        job = self.get_job(pk)
+        if job is None:
+            return Response({"status": "fail", "message": f"job with Id: {pk} not found"},
                             status=status.HTTP_404_NOT_FOUND)
 
         serializer = self.serializer_class(
-            note, data=request.data, partial=True)
+            job, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.validated_data['updated_at'] = datetime.now()
             serializer.save()
@@ -74,12 +74,12 @@ class JobsDetailViews(generics.RetrieveUpdateDestroyAPIView):
         return Response({"status": "fail", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        note = self.get_note(pk)
-        if note is None:
-            return Response({"status": "fail", "message": f"Note with Id: {pk} not found"},
+        job = self.get_job(pk)
+        if job is None:
+            return Response({"status": "fail", "message": f"job with Id: {pk} not found"},
                             status=status.HTTP_404_NOT_FOUND)
 
-        note.delete()
+        job.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -115,7 +115,7 @@ class ApplicationView(generics.CreateAPIView):
         pk = kwargs.get('pk')
         try:
             job = Jobs.objects.get(id=pk)
-        except Jobs.DoesNotExist:
+        except Jobs.Doesjobxist:
             return Response({"message": "Job not found"}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = self.get_serializer(data=request.data)
@@ -140,10 +140,42 @@ class ApplicantDetailViews(generics.RetrieveUpdateDestroyAPIView):
             return None
 
     def get(self, request, pk):
-        note = self.get_applicant(pk=pk)
-        if note == None:
-            return Response({"status": "fail", "message": f"Note with Id: {pk} not found"},
+        job = self.get_applicant(pk=pk)
+        if job == None:
+            return Response({"status": "fail", "message": f"job with Id: {pk} not found"},
                             status=status.HTTP_404_NOT_FOUND)
 
-        serializer = self.serializer_class(note)
-        return Response({"status": "success", "note": serializer.data})
+        serializer = self.serializer_class(job)
+        return Response({"status": "success", "job": serializer.data})
+
+
+class CreateSubscribersView(generics.CreateAPIView):
+    queryset = Subscribers.objects.all().order_by('created_at')
+    serializer_class = SubscribersSerializer
+    
+    def get(self, request):
+        page_num = int(request.GET.get("page", 1))
+        limit_num = int(request.GET.get("limit", 10))
+        start_num = (page_num - 1) * limit_num
+        end_num = limit_num * page_num
+        search_param = request.GET.get("search")
+        subscribers = Subscribers.objects.all()
+        total_subscribers = subscribers.count()
+        if search_param:
+            subscribers = subscribers.filter(title__icontains=search_param)
+        serializer = self.serializer_class(subscribers[start_num:end_num], many=True)
+        return Response({
+            "status": "success",
+            "total": total_subscribers,
+            "page": page_num,
+            "last_page": math.ceil(total_subscribers / limit_num),
+            "subscribers": serializer.data
+        })
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "Subscribers": serializer.data}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"status": "fail", "message": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)

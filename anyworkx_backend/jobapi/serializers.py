@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Jobs, Applicant
+from .models import Jobs, Applicant,Subscribers
 
 
 class JobsSerializer(serializers.ModelSerializer):
@@ -26,3 +26,13 @@ class JobsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Jobs
         fields = ['id', 'job_title', 'job_description', 'position', 'applicants', 'created_at']
+
+
+class SubscribersSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
+    class Meta:
+        model = Subscribers
+        fields = '__all__'
+        
+    

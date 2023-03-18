@@ -51,3 +51,9 @@ class Applicant(models.Model):
         ordering = ('-created_at', )
     class Meta:
         db_table = 'applicant'
+
+class Subscribers(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    email = models.EmailField(max_length=255, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
