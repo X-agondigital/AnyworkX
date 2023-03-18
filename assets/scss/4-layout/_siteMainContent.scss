@@ -498,5 +498,18 @@
   .input-field {
     width: 70%;
   }
+  .btn{
+    padding: 12px 12px;
+  }
+}
+
+@media (max-width: 500px){
+  .newsletter-section{
+    form{
+      width: 100%;
+      display: flex;
+      gap: 12px;
+    }
+  }
 }
 /*=======END OF NEWSLETTER SECTION STYLING=======*/

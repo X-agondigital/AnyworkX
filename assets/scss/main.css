@@ -801,5 +801,15 @@ nav .nav--items__container a:hover {
 .newsletter-section .input-field {
   width: 70%;
 }
+.newsletter-section .btn {
+  padding: 12px 12px;
+}
 
+@media (max-width: 500px) {
+  .newsletter-section form {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+  }
+}
 /*=======END OF NEWSLETTER SECTION STYLING=======*//*# sourceMappingURL=main.css.map */
