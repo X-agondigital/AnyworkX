@@ -23,7 +23,6 @@ class ApplicantSerializer(serializers.ModelSerializer):
 class JobsSerializer(serializers.ModelSerializer):
     applicants = ApplicantSerializer(many=True, read_only=True)
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
-#TODO:Add location table job-req{req-title, body}table what we offer table
     class Meta:
         model = Jobs
         fields = ['id', 'job_title', 'job_description', 'position', 'applicants', 'created_at']
