@@ -1,6 +1,17 @@
 html {
   scroll-behavior: smooth;
 }
+@font-face {
+  font-family: 'Px Grotesk Pan';
+    src: url('../font/PxGroteskPan-Bold.eot');
+    src: local('Px Grotesk Pan Bold'), local('../font/PxGroteskPan-Bold'),
+        url('../font/PxGroteskPan-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../font/PxGroteskPan-Bold.woff2') format('woff2'),
+        url('../font/PxGroteskPan-Bold.woff') format('woff'),
+        url('../font/PxGroteskPan-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
 
 * {
   margin: 0;
@@ -17,7 +28,7 @@ body {
 
 h1 {
   font-size: $h1FontSize;
-  font-family: "Dela Gothic One", cursive;
+  font-family: "Px Grotesk Pan";
   line-height: 1;
 }
 
