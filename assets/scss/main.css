@@ -130,6 +130,7 @@ img {
   transition: 0.3s;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: transparent;
 }
 .btn--without-bg:hover {
@@ -411,6 +412,17 @@ nav .nav--items__container a:hover {
   }
   .hero-section .text-description .btn-group {
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-section .text-description .btn-group .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-section .text-description .btn-group button {
+    width: 200px;
   }
   .hero-section .image-container {
     width: 100%;

@@ -86,6 +86,17 @@
       width: 100%;
       .btn-group {
         justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        .btn{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        button{
+          width: 200px;
+        }
       }
     }
     .image-container {
