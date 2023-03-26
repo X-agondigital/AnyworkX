@@ -951,7 +951,7 @@ nav .nav--items__container a:hover {
 }
 
 .role-not-found {
-  background: linear-gradient(218.9deg, #00A7D7 12.66%, #9747FF 116.59%);
+  background: linear-gradient(218.9deg, #00a7d7 12.66%, #9747ff 116.59%);
   padding: 24px;
 }
 .role-not-found h5 {
@@ -978,8 +978,11 @@ nav .nav--items__container a:hover {
 
 .job-description-section {
   padding: 0 24px;
+  max-width: 900px;
+  margin: auto;
 }
-.job-description-section h2, .job-description-section h3 {
+.job-description-section h2,
+.job-description-section h3 {
   margin-bottom: 24px;
   color: rgb(0, 167, 215);
 }
@@ -994,10 +997,16 @@ nav .nav--items__container a:hover {
   list-style: disc;
   margin-left: 24px;
 }
+.job-description-section a {
+  color: rgb(0, 167, 215);
+  text-decoration: underline;
+}
 
 .job-application__fields {
-  margin-top: 60px;
   padding: 24px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 60px;
 }
 .job-application__fields h2 {
   margin-bottom: 24px;
@@ -1005,7 +1014,8 @@ nav .nav--items__container a:hover {
 .job-application__fields div {
   margin-bottom: 24px;
 }
-.job-application__fields .input-field, .job-application__fields textarea {
+.job-application__fields .input-field,
+.job-application__fields textarea {
   margin-top: 12px;
 }
 .job-application__fields input[type=file] {
@@ -1042,4 +1052,84 @@ nav .nav--items__container a:hover {
   transition: 0.3s;
 }
 
-/*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*//*# sourceMappingURL=main.css.map */
+/*=======END OF POSITION / JOB DESCRIPTION PAGE STYLING=======*/
+/*=======ABOUT PAGE STYLING=======*/
+.about-anyworkx--container {
+  padding: 0 24px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 60px;
+}
+.about-anyworkx--container h2 {
+  margin-bottom: 24px;
+}
+.about-anyworkx--container p {
+  margin-bottom: 12px;
+}
+.about-anyworkx--container .btn-group {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  margin: 48px 0;
+}
+.about-anyworkx--container .btn-group .btn--without-bg {
+  padding: 16px;
+}
+
+.services--container button.accordion {
+  width: 100%;
+  background-color: #faf0ff;
+  border: 1px solid #00a7d7;
+  outline: none;
+  border-radius: 8px;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+  margin-bottom: 12px;
+}
+.services--container button.accordion:after {
+  font-family: remixicon !important;
+  content: "\ea4e";
+  font-size: 18px;
+  float: right;
+}
+.services--container button.accordion.is-open:after {
+  content: "\ea78";
+}
+.services--container button.accordion:hover,
+.services--container button.accordion.is-open {
+  background-color: #ddd;
+}
+.services--container .accordion-content {
+  background-color: white;
+  border-left: 1px solid whitesmoke;
+  border-right: 1px solid whitesmoke;
+  padding: 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  margin-bottom: 24px;
+  transition: max-height 0.2s ease-in-out;
+}
+
+.available--services {
+  margin-top: 60px;
+  padding: 0 24px;
+}
+.available--services h5 {
+  margin-bottom: 24px;
+}
+.available--services ul {
+  list-style: disc;
+  margin-left: 24px;
+}
+
+.paragraph-group p {
+  margin-bottom: 12px;
+}
+
+/*=======END OF ABOUT PAGE STYLING=======*//*# sourceMappingURL=main.css.map */

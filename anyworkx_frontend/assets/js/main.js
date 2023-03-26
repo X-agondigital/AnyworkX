@@ -13,11 +13,11 @@ const navToggle = function () {
   overlay.classList.toggle("hidden");
 };
 
-const collapseNavbar = function(){
+const collapseNavbar = function () {
   overlay.classList.add("hidden");
   navMenu.classList.toggle("showing");
   navLinkContainer.classList.toggle("showing");
-}
+};
 
 hamburger.addEventListener("click", navToggle);
 overlay.addEventListener("click", navToggle);
@@ -26,23 +26,23 @@ for (let i = 0; i < navLinks.length; i++) {
   navLinks[i].addEventListener("click", collapseNavbar);
 }
 
-const hamburgerIcon = document.getElementById('hamburger');
-const classPresent = hamburgerIcon.classList.contains('ri-menu-3-line');
+const hamburgerIcon = document.getElementById("hamburger");
+const classPresent = hamburgerIcon.classList.contains("ri-menu-3-line");
 
-function checkActiveClass(){
-  if(classPresent){
-    hamburgerIcon.classList.toggle('ri-menu-3-line');
-    hamburgerIcon.classList.toggle('ri-close-fill');
+function checkActiveClass() {
+  if (classPresent) {
+    hamburgerIcon.classList.toggle("ri-menu-3-line");
+    hamburgerIcon.classList.toggle("ri-close-fill");
   }
 }
 
-hamburgerIcon.addEventListener('click', checkActiveClass);
+hamburgerIcon.addEventListener("click", checkActiveClass);
 
 //-----TAB PANE CONTROLLER
 const tabs = document.querySelectorAll("#tab-box");
 const line = document.querySelector(".line");
 
-for (let i = 0; i < tabs.length; i++){
+for (let i = 0; i < tabs.length; i++) {
   line.style.width = tabs[i].offsetWidth + 3 + "px";
 }
 // tabs.forEach((tab, index) => {
@@ -77,3 +77,24 @@ const observer = new IntersectionObserver((entries) => {
 
 const animateElements = document.querySelectorAll(".animate");
 animateElements.forEach((el) => observer.observe(el));
+
+//ACCORDION SCRIPT CONTROLLER
+const accordionBtns = document.querySelectorAll(".accordion");
+
+accordionBtns.forEach((accordion) => {
+  accordion.onclick = function () {
+    this.classList.toggle("is-open");
+
+    let content = this.nextElementSibling;
+    console.log(content);
+
+    if (content.style.maxHeight) {
+      //this is if the accordion is open
+      content.style.maxHeight = null;
+    } else {
+      //if the accordion is currently closed
+      content.style.maxHeight = content.scrollHeight + "px";
+      console.log(content.style.maxHeight);
+    }
+  };
+});

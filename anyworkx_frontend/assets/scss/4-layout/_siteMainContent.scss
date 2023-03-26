@@ -570,7 +570,7 @@
 .qualities-section {
   margin-top: 60px;
   padding: 0 24px;
-  h2{
+  h2 {
     max-width: 600px;
     // color: #4F4F4F;
   }
@@ -605,24 +605,24 @@
       display: inline;
     }
   }
-  .positions--wrapper{
+  .positions--wrapper {
     margin-top: 32px;
-    max-width:1000px;
+    max-width: 1000px;
   }
 
-  .open-position{
+  .open-position {
     width: 100%;
     padding: 12px;
     border: 1px solid $primaryColor;
     border-radius: 8px;
     margin-bottom: 24px;
     background-color: #fff;
-    p.small{
+    p.small {
       margin-bottom: unset;
       font-size: 14px;
       margin-top: 6px;
     }
-    a{
+    a {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -630,71 +630,79 @@
   }
 }
 
-.role-not-found{
-  background: linear-gradient(218.9deg, #00A7D7 12.66%, #9747FF 116.59%);
+.role-not-found {
+  background: linear-gradient(218.9deg, #00a7d7 12.66%, #9747ff 116.59%);
   padding: 24px;
-  
-  h5{
+
+  h5 {
     font-weight: 400;
     color: #fff;
-
   }
-  a.email-link{
+  a.email-link {
     text-decoration: underline;
     font-weight: bold;
   }
 }
 /*=======END OF CAREER PAGE STYLING=======*/
 
-
 /*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*/
-.breadcumb-navigation{
+.breadcumb-navigation {
   display: flex;
   align-items: center;
   padding: 24px;
   color: #898989;
 
-  .active{
+  .active {
     font-weight: 600;
     color: #000;
   }
 }
 
-.job-description-section{
+.job-description-section {
   padding: 0 24px;
-  h2, h3{
+  max-width: 900px;
+  margin: auto;
+  h2,
+  h3 {
     margin-bottom: 24px;
     color: $secondaryColor;
   }
-  h4{
+  h4 {
     margin-bottom: 12px;
   }
-  p{
+  p {
     margin-bottom: 12px;
   }
-  ul{
+  ul {
     margin: 12px 0;
     list-style: disc;
     margin-left: 24px;
   }
+  a {
+    color: $secondaryColor;
+    text-decoration: underline;
+  }
 }
 
-.job-application__fields{
-  margin-top: 60px;
+.job-application__fields {
   padding: 24px;
-  h2{
+  max-width: 800px;
+  margin: auto;
+  margin-top: 60px;
+  h2 {
     margin-bottom: 24px;
   }
-  div{
+  div {
     margin-bottom: 24px;
   }
-  .input-field, textarea{
+  .input-field,
+  textarea {
     margin-top: 12px;
   }
-  input[type=file]{
+  input[type="file"] {
     height: auto;
   }
-  input[type=file]::-ms-browse {
+  input[type="file"]::-ms-browse {
     background-color: $secondaryColor;
     border-radius: 8px;
     padding: 10px 25px;
@@ -705,7 +713,7 @@
     color: #fff;
   }
 
-  input[type=file]::-webkit-file-upload-button {
+  input[type="file"]::-webkit-file-upload-button {
     background-color: $secondaryColor;
     border-radius: 8px;
     padding: 6px 20px;
@@ -716,7 +724,7 @@
     color: #fff;
   }
 
-  input[type=file]::file-selector-button {
+  input[type="file"]::file-selector-button {
     background-color: $secondaryColor;
     border-radius: 8px;
     padding: 10px 25px;
@@ -727,24 +735,112 @@
     color: #fff;
   }
 
-  input[type=file]::-ms-browse:hover {
+  input[type="file"]::-ms-browse:hover {
     background-color: $primaryColor;
     transition: $transitionDuration;
   }
 
-  input[type=file]::-webkit-file-upload-button:hover {
+  input[type="file"]::-webkit-file-upload-button:hover {
     background-color: $primaryColor;
     transition: $transitionDuration;
   }
 
-  input[type=file]::file-selector-button:hover {
+  input[type="file"]::file-selector-button:hover {
     background-color: $primaryColor;
     transition: $transitionDuration;
   }
-
 }
 
+/*=======END OF POSITION / JOB DESCRIPTION PAGE STYLING=======*/
 
-/*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*/
+/*=======ABOUT PAGE STYLING=======*/
+.about-anyworkx--container {
+  padding: 0 24px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 60px;
+  h2 {
+    margin-bottom: 24px;
+  }
 
+  p {
+    margin-bottom: 12px;
+  }
 
+  .btn-group {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    margin: 48px 0;
+    .btn--without-bg {
+      padding: 16px;
+    }
+  }
+}
+
+.services--container {
+  button.accordion {
+    width: 100%;
+    background-color: #faf0ff;
+    border: 1px solid #00a7d7;
+    outline: none;
+    border-radius: 8px;
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+    margin-bottom: 12px;
+  }
+
+  button.accordion:after {
+    font-family: remixicon !important;
+    content: "\EA4E";
+    // font-family: "fontawesome";
+    font-size: 18px;
+    float: right;
+  }
+
+  button.accordion.is-open:after {
+    content: "\EA78";
+  }
+
+  button.accordion:hover,
+  button.accordion.is-open {
+    background-color: #ddd;
+  }
+
+  .accordion-content {
+    background-color: white;
+    border-left: 1px solid whitesmoke;
+    border-right: 1px solid whitesmoke;
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: max-height 0.2s ease-in-out;
+  }
+}
+
+.available--services{
+  margin-top: 60px;
+  padding: 0 24px;
+  h5{
+    margin-bottom: 24px;
+  }
+  ul{
+    list-style: disc;
+    margin-left: 24px;
+  }
+}
+
+.paragraph-group{
+  p{
+    margin-bottom: 12px;
+  }
+}
+
+/*=======END OF ABOUT PAGE STYLING=======*/
