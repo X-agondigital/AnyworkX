@@ -644,3 +644,107 @@
     font-weight: bold;
   }
 }
+/*=======END OF CAREER PAGE STYLING=======*/
+
+
+/*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*/
+.breadcumb-navigation{
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  color: #898989;
+
+  .active{
+    font-weight: 600;
+    color: #000;
+  }
+}
+
+.job-description-section{
+  padding: 0 24px;
+  h2, h3{
+    margin-bottom: 24px;
+    color: $secondaryColor;
+  }
+  h4{
+    margin-bottom: 12px;
+  }
+  p{
+    margin-bottom: 12px;
+  }
+  ul{
+    margin: 12px 0;
+    list-style: disc;
+    margin-left: 24px;
+  }
+}
+
+.job-application__fields{
+  margin-top: 60px;
+  padding: 24px;
+  h2{
+    margin-bottom: 24px;
+  }
+  div{
+    margin-bottom: 24px;
+  }
+  .input-field, textarea{
+    margin-top: 12px;
+  }
+  input[type=file]{
+    height: auto;
+  }
+  input[type=file]::-ms-browse {
+    background-color: $secondaryColor;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: $transitionDuration;
+    border: none;
+    color: #fff;
+  }
+
+  input[type=file]::-webkit-file-upload-button {
+    background-color: $secondaryColor;
+    border-radius: 8px;
+    padding: 6px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: $transitionDuration;
+    border: none;
+    color: #fff;
+  }
+
+  input[type=file]::file-selector-button {
+    background-color: $secondaryColor;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: $transitionDuration;
+    border: none;
+    color: #fff;
+  }
+
+  input[type=file]::-ms-browse:hover {
+    background-color: $primaryColor;
+    transition: $transitionDuration;
+  }
+
+  input[type=file]::-webkit-file-upload-button:hover {
+    background-color: $primaryColor;
+    transition: $transitionDuration;
+  }
+
+  input[type=file]::file-selector-button:hover {
+    background-color: $primaryColor;
+    transition: $transitionDuration;
+  }
+
+}
+
+
+/*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*/
+
+

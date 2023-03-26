@@ -82,23 +82,6 @@ img {
      object-position: center;
 }
 
-.input-field {
-  height: 45px;
-  border: 1px solid rgb(126, 0, 196);
-  border-radius: 8px;
-  line-height: 1;
-  padding: 6px 12px;
-  font-family: inherit;
-  font-size: 16px;
-  transition: 0.3s;
-  width: 100%;
-}
-
-.input-field:focus {
-  border-radius: 1.5px solid rgb(0, 167, 215);
-  transition: 0.3s;
-}
-
 .animate {
   opacity: 0;
   filter: blur(3px);
@@ -165,6 +148,41 @@ img {
 }
 .link-text:hover {
   color: rgb(126, 0, 196);
+  transition: 0.3s;
+}
+
+.input-field {
+  height: 45px;
+  border: 1px solid rgb(126, 0, 196);
+  border-radius: 8px;
+  line-height: 1;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.input-field:focus {
+  border: 1px solid rgb(0, 167, 215);
+  transition: 0.3s;
+}
+
+textarea {
+  height: 200px;
+  border: 1px solid rgb(126, 0, 196);
+  border-radius: 8px;
+  line-height: 1;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+  resize: vertical;
+}
+
+textarea:focus {
+  border: 1px solid rgb(0, 167, 215);
   transition: 0.3s;
 }
 
@@ -943,4 +961,85 @@ nav .nav--items__container a:hover {
 .role-not-found a.email-link {
   text-decoration: underline;
   font-weight: bold;
-}/*# sourceMappingURL=main.css.map */
+}
+
+/*=======END OF CAREER PAGE STYLING=======*/
+/*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*/
+.breadcumb-navigation {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  color: #898989;
+}
+.breadcumb-navigation .active {
+  font-weight: 600;
+  color: #000;
+}
+
+.job-description-section {
+  padding: 0 24px;
+}
+.job-description-section h2, .job-description-section h3 {
+  margin-bottom: 24px;
+  color: rgb(0, 167, 215);
+}
+.job-description-section h4 {
+  margin-bottom: 12px;
+}
+.job-description-section p {
+  margin-bottom: 12px;
+}
+.job-description-section ul {
+  margin: 12px 0;
+  list-style: disc;
+  margin-left: 24px;
+}
+
+.job-application__fields {
+  margin-top: 60px;
+  padding: 24px;
+}
+.job-application__fields h2 {
+  margin-bottom: 24px;
+}
+.job-application__fields div {
+  margin-bottom: 24px;
+}
+.job-application__fields .input-field, .job-application__fields textarea {
+  margin-top: 12px;
+}
+.job-application__fields input[type=file] {
+  height: auto;
+}
+.job-application__fields input[type=file]::-ms-browse {
+  background-color: rgb(0, 167, 215);
+  border-radius: 8px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+  border: none;
+  color: #fff;
+}
+.job-application__fields input[type=file]::file-selector-button {
+  background-color: rgb(0, 167, 215);
+  border-radius: 8px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  color: #fff;
+}
+.job-application__fields input[type=file]::-ms-browse:hover {
+  background-color: rgb(126, 0, 196);
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.job-application__fields input[type=file]::file-selector-button:hover {
+  background-color: rgb(126, 0, 196);
+  transition: 0.3s;
+}
+
+/*=======POSITION / JOB DESCRIPTION PSGR STYLING=======*//*# sourceMappingURL=main.css.map */
