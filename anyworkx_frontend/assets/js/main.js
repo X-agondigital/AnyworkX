@@ -13,11 +13,17 @@ const navToggle = function () {
   overlay.classList.toggle("hidden");
 };
 
+const collapseNavbar = function(){
+  overlay.classList.add("hidden");
+  navMenu.classList.toggle("showing");
+  navLinkContainer.classList.toggle("showing");
+}
+
 hamburger.addEventListener("click", navToggle);
 overlay.addEventListener("click", navToggle);
 
 for (let i = 0; i < navLinks.length; i++) {
-  navLinks[i].addEventListener("click", navToggle);
+  navLinks[i].addEventListener("click", collapseNavbar);
 }
 
 const hamburgerIcon = document.getElementById('hamburger');

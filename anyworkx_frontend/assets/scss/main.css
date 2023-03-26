@@ -25,8 +25,11 @@ body {
 
 h1 {
   font-size: clamp(2rem, 4vw, 3rem);
-  font-family: "Px Grotesk Pan";
   line-height: 1;
+}
+
+h1.homepage {
+  font-family: "Px Grotesk Pan";
 }
 
 h2 {
@@ -455,7 +458,7 @@ nav .nav--items__container a:hover {
 .mentioned-section p {
   text-align: center;
   padding: 6px;
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
 }
 .mentioned-section .mentioned-logo {
   display: flex;
@@ -476,7 +479,7 @@ nav .nav--items__container a:hover {
 }
 .service-section .image-container {
   text-align: center;
-  background-color: #00A7D7;
+  background-color: #00a7d7;
   padding: 24px 12px;
 }
 .service-section .image-container .header {
@@ -484,7 +487,8 @@ nav .nav--items__container a:hover {
   text-align: center;
   margin: auto;
 }
-.service-section .image-container h2, .service-section .image-container p {
+.service-section .image-container h2,
+.service-section .image-container p {
   margin-bottom: 24px;
   color: #fff;
 }
@@ -596,7 +600,7 @@ nav .nav--items__container a:hover {
 }
 .how-it-works .tab-btn.active {
   color: rgb(0, 167, 215);
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 .how-it-works .tab-btn.active p {
   color: rgb(0, 167, 215);
@@ -621,7 +625,7 @@ nav .nav--items__container a:hover {
   flex-direction: column;
 }
 .how-it-works .tab--item__wrapper .owl-theme .owl-dots .owl-dot.active span {
-  background-color: #00A7D7;
+  background-color: #00a7d7;
 }
 .how-it-works .tab--item__wrapper .tab-img {
   max-width: 400px;
@@ -816,4 +820,127 @@ nav .nav--items__container a:hover {
     gap: 12px;
   }
 }
-/*=======END OF NEWSLETTER SECTION STYLING=======*//*# sourceMappingURL=main.css.map */
+/*=======END OF NEWSLETTER SECTION STYLING=======*/
+/*=======CAREER PAGE STYLING=======*/
+.career-banner-section {
+  background: linear-gradient(rgba(126, 0, 196, 0.7), rgba(126, 0, 196, 0.7)), url("../images/careers-image-bg.jpg") no-repeat center;
+  background-size: cover;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 48px;
+}
+.career-banner-section h1 {
+  color: #fff;
+  margin-bottom: 48px;
+}
+
+.about-anyworkx-section {
+  padding: 0 24px;
+  margin-top: 60px;
+  display: flex;
+  gap: 24px;
+}
+.about-anyworkx-section .text-description {
+  width: 50%;
+}
+.about-anyworkx-section .text-description h2 {
+  margin-bottom: 24px;
+  color: rgb(0, 167, 215);
+}
+.about-anyworkx-section .text-description p {
+  margin-bottom: 24px;
+}
+.about-anyworkx-section .image-container {
+  width: 50%;
+}
+.about-anyworkx-section .image-container img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+@media (max-width: 650px) {
+  .about-anyworkx-section {
+    flex-direction: column;
+  }
+  .about-anyworkx-section .text-description {
+    width: 100%;
+  }
+  .about-anyworkx-section .image-container {
+    width: 100%;
+  }
+}
+.qualities-section {
+  margin-top: 60px;
+  padding: 0 24px;
+}
+.qualities-section h2 {
+  max-width: 600px;
+}
+
+.qualities-container {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px;
+}
+.qualities-container .quality--list h4 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  color: rgb(0, 167, 215);
+}
+.qualities-container .quality--list h4 svg {
+  margin-right: 12px;
+}
+
+.available-positions {
+  margin-top: 48px;
+  padding: 24px;
+  background: rgba(250, 240, 255, 0.6);
+}
+.available-positions p {
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+.available-positions p a {
+  display: inline;
+}
+.available-positions .positions--wrapper {
+  margin-top: 32px;
+  max-width: 1000px;
+}
+.available-positions .open-position {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgb(126, 0, 196);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  background-color: #fff;
+}
+.available-positions .open-position p.small {
+  margin-bottom: unset;
+  font-size: 14px;
+  margin-top: 6px;
+}
+.available-positions .open-position a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.role-not-found {
+  background: linear-gradient(218.9deg, #00A7D7 12.66%, #9747FF 116.59%);
+  padding: 24px;
+}
+.role-not-found h5 {
+  font-weight: 400;
+  color: #fff;
+}
+.role-not-found a.email-link {
+  text-decoration: underline;
+  font-weight: bold;
+}/*# sourceMappingURL=main.css.map */

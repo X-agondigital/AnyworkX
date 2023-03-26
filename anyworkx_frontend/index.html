@@ -65,7 +65,7 @@
 
     <section class="hero-section" id="hero-section">
         <article class="text-description animate">
-            <h1>Your Marketplace For Endless Services</h1>
+            <h1 class="homepage">Your Marketplace For Endless Services</h1>
             <p>Discover a wide range of professional services, from regular to emergency assistance, all in one app.
             </p>
 
@@ -102,7 +102,8 @@
                     light fixture, or you have an unanticipated service need on the go, our app makes is easy to find
                     the right person for the job, at the nearest location at anytime.</p>
 
-                <a href="#" ><button class="btn--without-bg">Explore <i class="ri-arrow-right-s-line icon"></i></button></a>
+                <a href="#"><button class="btn--without-bg">Explore <i
+                            class="ri-arrow-right-s-line icon"></i></button></a>
             </article>
             <main class="services--wrapper">
                 <article class="text-description">
@@ -309,7 +310,7 @@
                                     alt="image representing anyworks vendor">
                                 <img src="assets/images/ven-5.png" class="tab-img"
                                     alt="image representing anyworks vendor">
-                                    <img src="assets/images/ven-6.png" class="tab-img"
+                                <img src="assets/images/ven-6.png" class="tab-img"
                                     alt="image representing anyworks vendor">
                             </div>
                         </div>
@@ -554,11 +555,12 @@
             <h2 class="animate">Subscribe to our Newsletter</h2>
             <p class="animate">Stay updated with news, updates and our latest features as you use our platform</p>
 
-            <form action="#" method="post">
-                <input type="email" name="emailHASHED" id="email" class="input-field animate" required
+            <form action="#" method="post" id="subscribe-form">
+                <input type="email" name="email" id="email" class="input-field animate" required
                     placeholder="Your email address">
                 <button type="submit" class="btn animate">Subscribe</button>
             </form>
+            <div id="response-message"></div>
         </div>
     </section>
 
@@ -570,7 +572,8 @@
                 <p>Endless Services. Endless Possibilities.</p>
 
                 <div class="social--links">
-                    <a href="https://instagram.com/anyworkx_?igshid=YmMyMTA2M2Y=" class="icon--bg instagram"><i class="ri-instagram-line icon"></i></a>
+                    <a href="https://instagram.com/anyworkx_?igshid=YmMyMTA2M2Y=" class="icon--bg instagram"><i
+                            class="ri-instagram-line icon"></i></a>
                     <a href="#" class="icon--bg youtube"><i class="ri-youtube-fill icon"></i></a>
                     <a href="#" class="icon--bg twitter"><i class="ri-twitter-fill icon"></i></a>
                 </div>
@@ -580,10 +583,10 @@
                 <h4>Quick Access</h4>
                 <ul>
                     <li class="list--items"><a href="#" class="link-text">About us</a></li>
-                    <li class="list--items"><a href="#" class="link-text">Services</a></li>
-                    <li class="list--items"><a href="#" class="link-text">How it works</a></li>
-                    <li class="list--items"><a href="#" class="link-text">Benefits</a></li>
-                    <li class="list--items"><a href="#" class="link-text">FAQs</a></li>
+                    <li class="list--items"><a href="#how-it-works" class="link-text">How it works</a></li>
+                    <li class="list--items"><a href="#" class="link-text">Explore</a></li>
+                    <li class="list--items"><a href="careers.html" class="link-text">Careers</a></li>
+                    <li class="list--items"><a href="#" class="link-text">Contact us</a></li>
                 </ul>
             </div>
 
@@ -605,6 +608,46 @@
     </footer>
 
     <script defer src="assets/js/main.js"></script>
+
+    <script>
+        const form = document.getElementById("subscribe-form");
+        const responseMessage = document.getElementById("response-message");
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault(); // Prevents the default form submission behavior
+
+            const formData = new FormData(form); // Creates a new FormData object with the form data
+            const data = {
+                email: formData.get("email"),
+            }; // Creates a data object from the form data
+
+            const url = "http://142.93.98.21:9001/api/subscribers/";
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            }; // Creates options for the fetch request
+
+            try {
+                const response = await fetch(url, options); // Sends the POST request to the API endpoint
+                const responseData = await response.json(); // Parses the response data as JSON
+
+                // Updates the response message
+                responseMessage.textContent = responseData.status === "success" ?
+                    "Thank you for subscribing!" : responseData.message;
+
+                // Resets the form
+                form.reset();
+            } catch (error) {
+                console.error(error); // Handles any errors that occur during the fetch request
+
+                // Updates the response message
+                responseMessage.textContent = "An error occurred while subscribing. Please try again.";
+            }
+        });
+    </script>
     <!--OWL CAROUSEL 2 CDN-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
