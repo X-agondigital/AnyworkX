@@ -6,17 +6,24 @@ const navMenu = document.querySelector(".right--side__nav");
 const navLinkContainer = document.querySelector(".nav--items__container");
 const navLinks = document.querySelectorAll(".nav-link");
 const overlay = document.querySelector(".overlay");
+const hamburgerIcon = document.getElementById("hamburger");
+const classPresent = hamburgerIcon.classList.contains("ri-menu-3-line");
 
 const navToggle = function () {
   navMenu.classList.toggle("showing");
   navLinkContainer.classList.toggle("showing");
   overlay.classList.toggle("hidden");
+  hamburgerIcon.classList.toggle("ri-menu-3-line");
+  hamburgerIcon.classList.toggle("ri-close-fill");
 };
 
 const collapseNavbar = function () {
+  //to solve the ovrlay issue on desktop, try using if statement to check for desktop breakpoint
   overlay.classList.add("hidden");
   navMenu.classList.toggle("showing");
   navLinkContainer.classList.toggle("showing");
+  hamburgerIcon.classList.toggle("ri-menu-3-line");
+  hamburgerIcon.classList.toggle("ri-close-fill");
 };
 
 hamburger.addEventListener("click", navToggle);
@@ -26,17 +33,7 @@ for (let i = 0; i < navLinks.length; i++) {
   navLinks[i].addEventListener("click", collapseNavbar);
 }
 
-const hamburgerIcon = document.getElementById("hamburger");
-const classPresent = hamburgerIcon.classList.contains("ri-menu-3-line");
 
-function checkActiveClass() {
-  if (classPresent) {
-    hamburgerIcon.classList.toggle("ri-menu-3-line");
-    hamburgerIcon.classList.toggle("ri-close-fill");
-  }
-}
-
-hamburgerIcon.addEventListener("click", checkActiveClass);
 
 //-----TAB PANE CONTROLLER
 const tabs = document.querySelectorAll("#tab-box");

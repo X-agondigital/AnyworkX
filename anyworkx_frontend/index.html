@@ -32,7 +32,7 @@
 <body>
     <nav>
         <div class="logo--container">
-            <img src="assets/images/anyworkx-logo-dark.png" alt="logo for anyworks" class="logo-image">
+            <a href="index.html"><img src="assets/images/anyworkx-logo-dark.png" alt="logo for anyworks" class="logo-image"></a>
         </div>
 
         <div class="menu--toggle">
@@ -44,21 +44,21 @@
                 <a href="#hero-section" class="nav-link">
                     <li class="nav-item">Home</li>
                 </a>
-                <a href="#how-it-works" class="nav-link">
-                    <li class="nav-item">How it works</li>
-                </a>
-                <a href="#" class="nav-link">
+                <a href="about.html" class="nav-link">
                     <li class="nav-item">Explore</li>
                 </a>
-                <a href="#" class="nav-link">
-                    <li class="nav-item">Contact Us</li>
+                <a href="faqs.html" class="nav-link">
+                    <li class="nav-item">FAQs</li>
                 </a>
                 <a href="careers.html" class="nav-link">
                     <li class="nav-item">Careers</li>
                 </a>
+                <a href="contact.html" class="nav-link">
+                    <li class="nav-item">Contact Us</li>
+                </a>
             </ul>
 
-            <div class="cta-button"><button class="btn get--started__btn">Get Started</button></div>
+            <div class="cta-button"><a href="#services--wrapper"><button class="btn get--started__btn">Get Started</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -70,8 +70,8 @@
             </p>
 
             <div class="btn-group">
-                <a href="#tab-1"><button class="btn">Download Now</button></a>
-                <a href="#tab-2"><button class="btn--without-bg">Become a Vendor <i
+                <a href="#tab-1"><button class="btn">Customer? Download</button></a>
+                <a href="#tab-2"><button class="btn--without-bg">Vendor? Download <i
                             class="ri-arrow-right-s-line icon"></i></button></a>
             </div>
             </div>
@@ -81,13 +81,13 @@
         </article>
     </section>
 
-    <section class="mentioned-section">
+    <!-- <section class="mentioned-section">
         <p>Mentioned On</p>
         <div class="mentioned-logo">
             <img src="assets/images/techcabal-logo.png" alt="logo for tech cabal">
             <img src="assets/images/leadership-logo.png" alt="logo for leadership">
         </div>
-    </section>
+    </section> -->
 
 
     <div class="padding-wrapper">
@@ -104,7 +104,7 @@
                 <a href="about.html"><button class="btn--without-bg">Explore <i
                             class="ri-arrow-right-s-line icon"></i></button></a>
             </article>
-            <main class="services--wrapper">
+            <main class="services--wrapper" id="services--wrapper">
                 <article class="text-description">
                     <div class="service-list animate">
                         <img src="assets/images/app-mockup-1.png"
@@ -115,7 +115,7 @@
                             <p>With AnyworkX, you do not have to panic anymore. Get quick access to help, even when
                                 you're in an unfamiliar location or in an emergency situation. Just five easy steps on
                                 your phone, and you'll be connected to the service provider you need</p>
-                            <a href="#how-it-works" class="btn--without-bg">Learn More <i
+                            <a href="#tab-1" class="btn--without-bg">Learn More <i
                                     class="ri-arrow-right-s-line icon"></i></a>
                         </div>
                     </div>
@@ -275,7 +275,7 @@
                             providers
                         </h4>
 
-                        <div class="btn-group animate">
+                        <div class="btn-group animate" id="customer-download">
                             <a href="https://play.google.com/store/apps/details?id=com.anyworkx.customer"><button
                                     class="download-btn"><img src="assets/images/mobile-play-store.png"
                                         alt=""></button></a>
@@ -283,7 +283,7 @@
                                         src="assets/images/app-store-badge.png" alt=""></button></a>
                         </div>
 
-                        <a href="#tab-2" class="link-text bold animate">Are you a vendor? Download here</a>
+                        <a href="#vendor-download" class="link-text bold animate">Are you a vendor? Download here</a>
                     </div>
                 </div>
                 <div class="tab--item content active" id="tab-2">
@@ -437,7 +437,7 @@
                         <h4 class="animate">Download <span>AnyWorkX Vendor App</span> and start earning
                         </h4>
 
-                        <div class="btn-group animate">
+                        <div class="btn-group animate" id="vendor-download">
                             <a href="https://play.google.com/store/apps/details?id=com.anyworks.artisan"><button
                                     class="download-btn"><img src="assets/images/mobile-play-store.png"
                                         alt=""></button></a>
@@ -445,7 +445,7 @@
                                         alt=""></button></a>
                         </div>
 
-                        <a href="#tab-1" class="link-text bold animate">Want to hire? Click here</a>
+                        <a href="#customer-download" class="link-text bold animate">Want to hire? Click here</a>
                     </div>
                 </div>
             </main>
@@ -474,7 +474,7 @@
                 </article>
 
                 <article class="benefit--item animate">
-                    <h4>Secured Payment Method
+                    <h4>Secure Payment Method
                         <svg width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.75 2.5L22.8725 5.35C23.1269 5.42943 23.3493 5.5881 23.5072 5.80286C23.665 6.01762 23.7501 6.27721 23.75 6.54375V8.75H26.25C26.5815 8.75 26.8995 8.8817 27.1339 9.11612C27.3683 9.35054 27.5 9.66848 27.5 10V20C27.5 20.3315 27.3683 20.6495 27.1339 20.8839C26.8995 21.1183 26.5815 21.25 26.25 21.25L22.225 21.2512C21.7413 21.8888 21.1537 22.4513 20.475 22.9137L13.75 27.5L7.025 22.915C6.01565 22.2268 5.18969 21.3025 4.61892 20.2224C4.04816 19.1423 3.74987 17.9391 3.75 16.7175V6.54375C3.75015 6.27743 3.83536 6.01811 3.9932 5.80361C4.15105 5.5891 4.37328 5.43061 4.6275 5.35125L13.75 2.5ZM13.75 5.1175L6.25 7.4625V16.7175C6.24982 17.4828 6.42531 18.2379 6.76296 18.9247C7.1006 19.6114 7.59138 20.2115 8.1975 20.6787L8.43375 20.8488L13.75 24.475L18.4775 21.25H12.5C12.1685 21.25 11.8505 21.1183 11.6161 20.8839C11.3817 20.6495 11.25 20.3315 11.25 20V10C11.25 9.66848 11.3817 9.35054 11.6161 9.11612C11.8505 8.8817 12.1685 8.75 12.5 8.75H21.25V7.4625L13.75 5.1175ZM13.75 15V18.75H25V15H13.75ZM13.75 12.5H25V11.25H13.75V12.5Z"
@@ -545,7 +545,7 @@
             </article>
         </div>
 
-        <a href="#" class="btn animate">Download Now</a>
+        <a href="#customer-download" class="btn animate">Download Now</a>
     </section>
 
 
@@ -571,9 +571,9 @@
                 <p>Endless Services. Endless Possibilities.</p>
 
                 <div class="social--links">
-                    <a href="https://instagram.com/anyworkx_?igshid=YmMyMTA2M2Y=" class="icon--bg instagram"><i
+                    <a href="https://instagram.com/_anyworkx?igshid=ZDdkNTZiNTM=" class="icon--bg instagram"><i
                             class="ri-instagram-line icon"></i></a>
-                    <a href="#" class="icon--bg youtube"><i class="ri-youtube-fill icon"></i></a>
+                    <a href="https://www.youtube.com/channel/UCwezC1Mm3-D10xDTxEesJqg" class="icon--bg youtube"><i class="ri-youtube-fill icon"></i></a>
                     <a href="#" class="icon--bg twitter"><i class="ri-twitter-fill icon"></i></a>
                 </div>
             </div>
@@ -584,6 +584,7 @@
                     <li class="list--items"><a href="about.html" class="link-text">About us</a></li>
                     <li class="list--items"><a href="index.html#how-it-works" class="link-text">How it works</a></li>
                     <li class="list--items"><a href="careers.html" class="link-text">Careers</a></li>
+                    <li class="list--items"><a href="faqs.html" class="link-text">FAQs</a></li>
                     <li class="list--items"><a href="#" class="link-text">Contact us</a></li>
                 </ul>
             </div>
@@ -593,6 +594,7 @@
                 <ul>
                     <li class="list--item"><a href="#" class="link-text">Privacy Policy</a></li>
                     <li class="list--item"><a href="#" class="link-text">Terms of Use</a></li>
+                    <li class="list--item"><a href="#" class="link-text">Community</a></li>
                     <li class="list--item"><a href="#" class="link-text">Contact Us</a></li>
                 </ul>
             </div>
@@ -619,7 +621,7 @@
                 email: formData.get("email"),
             }; // Creates a data object from the form data
 
-            const url = "http://142.93.98.21:9001/api/subscribers/";
+            const url = "http://142.93.98.21:8000/api/subscribers/";
             const options = {
                 method: "POST",
                 headers: {

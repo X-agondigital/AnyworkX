@@ -1059,6 +1059,28 @@ nav .nav--items__container a:hover {
 }
 
 /*=======END OF POSITION / JOB DESCRIPTION PAGE STYLING=======*/
+.privacy--wrapper h1 {
+  text-align: center;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.privacy--wrapper article.privacies {
+  margin-top: unset;
+}
+.privacy--wrapper article {
+  margin-top: 60px;
+}
+.privacy--wrapper h4 {
+  margin-top: 24px;
+}
+.privacy--wrapper address {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+}
+
 /*=======ABOUT PAGE STYLING=======*/
 .about-anyworkx--container {
   padding: 0 24px;

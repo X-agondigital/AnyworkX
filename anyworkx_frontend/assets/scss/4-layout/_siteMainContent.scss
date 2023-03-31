@@ -756,6 +756,30 @@
 
 /*=======END OF POSITION / JOB DESCRIPTION PAGE STYLING=======*/
 
+.privacy--wrapper {
+  h1 {
+    text-align: center;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  article.privacies{
+    margin-top: unset;
+  }
+  article {
+    margin-top: 60px;
+  }
+  h4 {
+    margin-top: 24px;
+  }
+  address {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0;
+  }
+}
+
 /*=======ABOUT PAGE STYLING=======*/
 .about-anyworkx--container {
   padding: 0 24px;
@@ -828,20 +852,20 @@
   }
 }
 
-.available--services{
+.available--services {
   margin-top: 60px;
   padding: 0 24px;
-  h5{
+  h5 {
     margin-bottom: 24px;
   }
-  ul{
+  ul {
     list-style: disc;
     margin-left: 24px;
   }
 }
 
-.paragraph-group{
-  p{
+.paragraph-group {
+  p {
     margin-bottom: 12px;
   }
 }
