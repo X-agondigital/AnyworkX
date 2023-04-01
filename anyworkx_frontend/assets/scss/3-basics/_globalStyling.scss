@@ -66,6 +66,7 @@ a {
 ul {
   list-style: none;
   color: $bodyTextColor;
+  font-size: $bodyFontSize;
 }
 
 .padding-wrapper {
@@ -82,7 +83,9 @@ img {
   object-fit: cover;
   object-position: center;
 }
-
+.bold{
+  font-weight: bold;
+}
 // div#response-message {
 //   background: rgba(21, 187, 21, 0.6);
 //   color: #fff;

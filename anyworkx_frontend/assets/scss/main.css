@@ -64,6 +64,7 @@ a {
 ul {
   list-style: none;
   color: rgb(54, 52, 53);
+  font-size: 18px;
 }
 
 .padding-wrapper {
@@ -80,6 +81,10 @@ img {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .animate {
