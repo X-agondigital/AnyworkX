@@ -36,6 +36,10 @@ h2 {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
 h4 {
   font-size: clamp(1.3rem, 2vw, 1.5rem);
 }
@@ -1198,4 +1202,92 @@ nav .nav--items__container a:hover {
   margin-bottom: 12px;
 }
 
-/*=======END OF ABOUT PAGE STYLING=======*//*# sourceMappingURL=main.css.map */
+/*=======END OF ABOUT PAGE STYLING=======*/
+/*========CONTACT PAGE STYLING=========*/
+.upper--contact-section {
+  padding: 0 24px;
+}
+.upper--contact-section header {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.upper--contact-section header h1 {
+  margin-bottom: 24px;
+}
+.upper--contact-section header h3 {
+  margin-bottom: 12px;
+}
+.upper--contact-section header h4 {
+  color: #a3a1a1;
+}
+.upper--contact-section .info--container {
+  display: flex;
+  gap: 24px;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.upper--contact-section .contact--details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  align-items: center;
+}
+.upper--contact-section .contact--details span {
+  background-color: rgba(127, 0, 196, 0.2);
+  padding: 6px;
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upper--contact-section .contact--details i {
+  color: rgb(126, 0, 196);
+  font-size: 24px;
+}
+.upper--contact-section .contact--details a {
+  font-weight: 600;
+  color: rgb(126, 0, 196);
+}
+
+.lower--contact-section {
+  padding: 0 24px;
+}
+.lower--contact-section header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 96px 0 48px;
+}
+.lower--contact-section header h2 {
+  margin-bottom: 12px;
+}
+.lower--contact-section header h4 {
+  color: #a3a1a1;
+}
+.lower--contact-section form {
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 60px;
+}
+.lower--contact-section div {
+  margin-bottom: 24px;
+}
+.lower--contact-section .input-field,
+.lower--contact-section textarea {
+  margin-top: 12px;
+}
+.lower--contact-section button {
+  width: 100%;
+  text-align: center;
+}
+
+/*===============END OF CONTACT PAGE STYLING=========*//*# sourceMappingURL=main.css.map */
