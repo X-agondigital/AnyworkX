@@ -87,6 +87,36 @@ img {
   font-weight: bold;
 }
 
+.response--success-message {
+  background: rgba(21, 187, 21, 0.6);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid rgb(21, 187, 21);
+  width: 50%;
+  margin: auto;
+  margin-top: 12px;
+}
+
+.response--error-message {
+  background: rgba(228, 14, 14, 0.6);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid rgb(228, 14, 14);
+  width: 50%;
+  margin: auto;
+  margin-top: 12px;
+}
+
+@media (max-width: 550px) {
+  .response--success-message {
+    width: 100%;
+  }
+  .response--error-message {
+    width: 100%;
+  }
+}
 .animate {
   opacity: 0;
   filter: blur(3px);

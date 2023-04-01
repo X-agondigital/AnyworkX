@@ -32,7 +32,8 @@
 <body>
     <nav>
         <div class="logo--container">
-            <a href="index.html"><img src="assets/images/anyworkx-logo-dark.png" alt="logo for anyworks" class="logo-image"></a>
+            <a href="index.html"><img src="assets/images/anyworkx-logo-dark.png" alt="logo for anyworks"
+                    class="logo-image"></a>
         </div>
 
         <div class="menu--toggle">
@@ -58,7 +59,8 @@
                 </a>
             </ul>
 
-            <div class="cta-button"><a href="index.html#services--wrapper"><button class="btn get--started__btn">Get Started</button></a></div>
+            <div class="cta-button"><a href="index.html#services--wrapper"><button class="btn get--started__btn">Get
+                        Started</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -573,9 +575,12 @@
                 <div class="social--links">
                     <a href="https://instagram.com/_anyworkx?igshid=ZDdkNTZiNTM=" class="icon--bg instagram"><i
                             class="ri-instagram-line icon"></i></a>
-                    <a href="https://www.youtube.com/channel/UCwezC1Mm3-D10xDTxEesJqg" class="icon--bg youtube"><i class="ri-youtube-fill icon"></i></a>
-                    <a href="https://twitter.com/Anyworkx__" class="icon--bg twitter"><i class="ri-twitter-fill icon"></i></a>
-                    <a href="https://www.facebook.com/anyworkx?mibextid=ZbWKwL" class="icon--bg facebook"><i class="ri-facebook-fill icon"></i></a>
+                    <a href="https://www.youtube.com/channel/UCwezC1Mm3-D10xDTxEesJqg" class="icon--bg youtube"><i
+                            class="ri-youtube-fill icon"></i></a>
+                    <a href="https://twitter.com/Anyworkx__" class="icon--bg twitter"><i
+                            class="ri-twitter-fill icon"></i></a>
+                    <a href="https://www.facebook.com/anyworkx?mibextid=ZbWKwL" class="icon--bg facebook"><i
+                            class="ri-facebook-fill icon"></i></a>
                 </div>
             </div>
 
@@ -637,6 +642,13 @@
                 // Updates the response message
                 responseMessage.textContent = responseData.status === "success" ?
                     "Thank you for subscribing!" : responseData.message;
+                responseMessage.classList.add('response--success-message');
+
+                const messageDisappear = function () {
+                        responseMessage.style.display = "none";
+                }
+
+                setTimeout(messageDisappear, 5000);
 
                 // Resets the form
                 form.reset();
@@ -645,6 +657,13 @@
 
                 // Updates the response message
                 responseMessage.textContent = "An error occurred while subscribing. Please try again.";
+                responseMessage.classList.add('response--error-message');
+
+                const messageDisappear = function () {
+                        responseMessage.style.display = "none";
+                }
+
+                setTimeout(messageDisappear, 5000);
             }
         });
     </script>
