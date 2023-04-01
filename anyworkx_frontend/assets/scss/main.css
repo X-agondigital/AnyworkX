@@ -1226,7 +1226,7 @@ nav .nav--items__container a:hover {
 }
 .upper--contact-section .info--container {
   display: flex;
-  gap: 24px;
+  gap: 48px;
   flex-flow: row wrap;
   justify-content: space-around;
 }
@@ -1253,6 +1253,7 @@ nav .nav--items__container a:hover {
 }
 .upper--contact-section .contact--details a {
   font-weight: 600;
+  font-size: 18px;
   color: rgb(126, 0, 196);
 }
 

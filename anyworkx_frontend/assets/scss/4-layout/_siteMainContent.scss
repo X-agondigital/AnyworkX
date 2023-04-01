@@ -898,7 +898,7 @@
 
   .info--container {
     display: flex;
-    gap: 24px;
+    gap: 48px;
     flex-flow: row wrap;
     justify-content: space-around;
   }
@@ -924,6 +924,7 @@
     }
     a {
       font-weight: 600;
+      font-size: 18px;
       color: $primaryColor;
     }
   }
