@@ -882,6 +882,11 @@ nav .nav--items__container a:hover {
   }
 }
 /*=======END OF NEWSLETTER SECTION STYLING=======*/
+.faqs-section h1 {
+  text-align: center;
+  margin: 96px 60px 0;
+}
+
 /*=======CAREER PAGE STYLING=======*/
 .career-banner-section {
   background: linear-gradient(rgba(126, 0, 196, 0.7), rgba(126, 0, 196, 0.7)), url("../images/careers-image-bg.jpg") no-repeat center;
