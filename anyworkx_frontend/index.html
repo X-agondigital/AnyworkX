@@ -10,6 +10,8 @@
     <link rel="icon" href="assets/images/favicon.png">
     <meta name="description" content="AnyworkX is an online marketplace where vendors of legitimate services can showcase their business,
     competence and experience to prospective customers who may need their services anywhere">
+    <meta name="keywords"
+        content="Vendor, Online vendor, Services, Service providers, Service provider in Nigeria, Online Marketplace, 24/7, Anytime, Anywhere, Customer, Customers online, Satisfied customers, How to get customers, How to get customers online, Location, Current location, Wallet, On-demand services, Services on demand, Home Services on demand, Professional Services, Negotiable, Profile, Verification, Professional services marketplace, Service provider, Online booking system, Africa service marketplace, Verified service provider, Convenient service booking, 24/7 service availability, Affordable service provider, Customer service training, Emergency services">
 
     <!-- Google Font CDN -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -571,6 +573,9 @@
             <div id="response-message"></div>
         </div>
     </section>
+    <div class="floating-msg-button">
+            <i class="ri-message-2-line msg-icon"></i>
+    </div>
 
 
     <footer id="footer">
@@ -620,60 +625,7 @@
     </footer>
 
     <script defer src="assets/js/main.js"></script>
-
-    <script>
-        const form = document.getElementById("subscribe-form");
-        const responseMessage = document.getElementById("response-message");
-
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault(); // Prevents the default form submission behavior
-
-            const formData = new FormData(form); // Creates a new FormData object with the form data
-            const data = {
-                email: formData.get("email"),
-            }; // Creates a data object from the form data
-
-            const url = "http://142.93.98.21:8000/api/subscribers/";
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            }; // Creates options for the fetch request
-
-            try {
-                const response = await fetch(url, options); // Sends the POST request to the API endpoint
-                const responseData = await response.json(); // Parses the response data as JSON
-
-                // Updates the response message
-                responseMessage.textContent = responseData.status === "success" ?
-                    "Thank you for subscribing!" : responseData.message;
-                responseMessage.classList.add('response--success-message');
-
-                const messageDisappear = function () {
-                    responseMessage.style.display = "none";
-                }
-
-                setTimeout(messageDisappear, 5000);
-
-                // Resets the form
-                form.reset();
-            } catch (error) {
-                console.error(error); // Handles any errors that occur during the fetch request
-
-                // Updates the response message
-                responseMessage.textContent = "An error occurred while subscribing. Please try again.";
-                responseMessage.classList.add('response--error-message');
-
-                const messageDisappear = function () {
-                    responseMessage.style.display = "none";
-                }
-
-                setTimeout(messageDisappear, 5000);
-            }
-        });
-    </script>
+    <script defer src="assets/js/index.js"></script>
 
     <script async>
         const lottieAnimation = bodymovin.loadAnimation({
@@ -690,9 +642,9 @@
 
     <script>
         var typed = new Typed(".auto-type", {
-            strings: ["Home Maintenance,", "Automobile Services,", "Culinary,", "Education,", "Logistics Services,", "Health & Wellness", "Entertainment."],
-            typeSpeed: 250,
-            backSpeed: 250,
+            strings: ["Home Maintenance", "Automobile Services", "Culinary", "Education", "Logistics Services", "Health & Wellness", "Entertainment"],
+            typeSpeed: 100,
+            backSpeed: 100,
             loop: true
         })
     </script>
