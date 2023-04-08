@@ -1300,8 +1300,8 @@ nav .nav--items__container a:hover {
 .floating-msg-button {
   background: rgb(0, 167, 215);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1321,7 +1321,7 @@ nav .nav--items__container a:hover {
 aside.modal-window {
   position: fixed;
   right: 10px;
-  bottom: 70px;
+  bottom: 80px;
   z-index: 2000;
 }
 aside.modal-window .modal--wrapper {
