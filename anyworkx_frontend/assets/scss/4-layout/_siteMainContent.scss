@@ -1025,9 +1025,9 @@ aside.modal-window {
   display: none;
 }
 
-@media(max-width: 400px){
-  aside.modal-window{
-    .modal--wrapper{
+@media (max-width: 400px) {
+  aside.modal-window {
+    .modal--wrapper {
       width: 90%;
     }
   }

@@ -33,10 +33,6 @@ for (let i = 0; i < navLinks.length; i++) {
   navLinks[i].addEventListener("click", collapseNavbar);
 }
 
-
-
-
-
 //-----ANIMATION SCRIPT
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -73,12 +69,11 @@ accordionBtns.forEach((accordion) => {
   };
 });
 
-
 //modal window for popup message
 const modalWindow = document.querySelector(".modal-window");
 const overlay1 = document.querySelector(".overlay");
 const closeBtn = document.querySelector(".close-btn");
-const modal_btn = document.querySelector('.floating-msg-button');
+const modal_btn = document.querySelector(".floating-msg-button");
 
 const openModal = function () {
   modalWindow.classList.toggle("hidden");
@@ -87,7 +82,6 @@ const openModal = function () {
 const closeModal = function () {
   modalWindow.classList.add("hidden");
 };
-
 
 modal_btn.addEventListener("click", openModal);
 closeBtn.addEventListener("click", closeModal);
