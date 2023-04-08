@@ -981,7 +981,7 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 24px;
+  font-size: 28px;
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -995,8 +995,8 @@
 
 aside.modal-window {
   position: fixed;
-  right: 10px;
-  bottom: 80px;
+  right: 20px;
+  bottom: 100px;
   z-index: 2000;
   .modal--wrapper {
     padding: 24px;
