@@ -35,30 +35,7 @@ for (let i = 0; i < navLinks.length; i++) {
 
 
 
-//-----TAB PANE CONTROLLER
-const tabs = document.querySelectorAll("#tab-box");
-const line = document.querySelector(".line");
 
-for (let i = 0; i < tabs.length; i++) {
-  line.style.width = tabs[i].offsetWidth + 3 + "px";
-}
-// tabs.forEach((tab, index) => {
-//   tab.addEventListener("click", (e) => {
-//     tabs.forEach((tab) => {
-//       tab.classList.remove("active");
-//     });
-//     tab.classList.add("active");
-
-//     const line = document.querySelector(".line");
-//     line.style.width = e.target.offsetWidth + 3 + "px";
-//     line.style.left = e.target.offsetLeft + "px";
-
-//     all_content.forEach((content) => {
-//       content.classList.remove("active");
-//     });
-//     all_content[index].classList.add("active");
-//   });
-// });
 
 //-----ANIMATION SCRIPT
 const observer = new IntersectionObserver((entries) => {
@@ -95,3 +72,22 @@ accordionBtns.forEach((accordion) => {
     }
   };
 });
+
+
+//modal window for popup message
+const modalWindow = document.querySelector(".modal-window");
+const overlay1 = document.querySelector(".overlay");
+const closeBtn = document.querySelector(".close-btn");
+const modal_btn = document.querySelector('.floating-msg-button');
+
+const openModal = function () {
+  modalWindow.classList.toggle("hidden");
+};
+
+const closeModal = function () {
+  modalWindow.classList.add("hidden");
+};
+
+
+modal_btn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);

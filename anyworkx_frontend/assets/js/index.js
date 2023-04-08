@@ -52,3 +52,30 @@ form.addEventListener("submit", async (event) => {
     setTimeout(messageDisappear, 5000);
   }
 });
+
+//-----TAB PANE CONTROLLER
+const tabs = document.querySelectorAll("#tab-box");
+const line = document.querySelector(".line");
+
+for (let i = 0; i < tabs.length; i++) {
+  line.style.width = tabs[i].offsetWidth + 3 + "px";
+}
+// tabs.forEach((tab, index) => {
+//   tab.addEventListener("click", (e) => {
+//     tabs.forEach((tab) => {
+//       tab.classList.remove("active");
+//     });
+//     tab.classList.add("active");
+
+//     const line = document.querySelector(".line");
+//     line.style.width = e.target.offsetWidth + 3 + "px";
+//     line.style.left = e.target.offsetLeft + "px";
+
+//     all_content.forEach((content) => {
+//       content.classList.remove("active");
+//     });
+//     all_content[index].classList.add("active");
+//   });
+// });
+
+

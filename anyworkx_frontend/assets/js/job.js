@@ -1,11 +1,12 @@
-let jobName = document.getElementById("nameHASHED").value;
-let email = document.getElementById("emailHASHED").value;
-let mobileNo = document.getElementById("mobile-no").value;
+let firstName = document.getElementById("first_name").value;
+let email = document.getElementById("email").value;
+let mobileNo = document.getElementById("phone_number").value;
+let state = document.getElementById("state").value;
 let country = document.getElementById("country").value;
-let coverLetter = document.getElementById("cover-letter").value;
-let resume = document.getElementById("resume").value;
+let coverLetter = document.getElementById("cover_letter").value;
+let resume = document.getElementById("cv_upload").value;
 let salary = document.getElementById("salary").value;
-let socialLinks = document.getElementById("social-links").value;
+// let socialLinks = document.getElementById("social-links").value;
 
 function postJob(e) {
   e.preventDefault();
@@ -15,21 +16,21 @@ function postJob(e) {
     {
       method: "POST",
       headers: {
-        Accept: "application/json, text/plain, */*",
+        Accept: "application/json",
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name: jobName,
+        first_name: firstName,
         email: email,
         number: mobileNo,
         country: country,
         cover_letter: coverLetter,
-        resume: resume,
+        cv_upload: resume,
         salary: salary,
-        social_links: socialLinks,
       })
         .then((res) => res.json())
         .then((data) => console.log(data))
+        .catch((err) => console.log(err))
     }
   );
 }

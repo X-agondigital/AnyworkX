@@ -170,18 +170,23 @@
         <form action="position-description.html" method="post">
             <div>
                 <label for="name">Full Name</label>
-                <input type="text" class="input-field" name="name" id="nameHASHED" required
+                <input type="text" class="input-field" name="name" id="first_name" required
                     placeholder="Your full name">
             </div>
             <div>
                 <label for="email">Email Address</label>
-                <input type="email" class="input-field" name="email" id="emailHASHED" required
+                <input type="email" class="input-field" name="email" id="email" required
                     placeholder="Your email address">
             </div>
             <div>
                 <label for="number">Phone Number</label>
-                <input type="tel" class="input-field" name="number" id="mobile-no" required
+                <input type="tel" class="input-field" name="number" id="phone_number" required
                     placeholder="Your phone number">
+            </div>
+            <div>
+                <label for="state">State</label>
+                <input type="text" class="input-field" name="state" id="state" required
+                    placeholder="State of residence">
             </div>
             <div>
                 <label for="country">Which Country are you based in?</label>
@@ -190,21 +195,21 @@
             </div>
             <div>
                 <label for="cover-letter">Cover Letter</label>
-                <textarea name="cover-letter" id="cover-letter"></textarea>
+                <textarea name="cover-letter" id="cover_letter"></textarea>
             </div>
             <div>
                 <label for="resume">Upload your CV or Resume</label>
-                <input type="file" name="resume" class="input-field" id="resume" required>
+                <input type="file" name="resume" class="input-field" id="cv_upload" required>
             </div>
             <div>
                 <label for="salary">What is your expected salary?</label>
                 <input type="number" name="salary" class="input-field" id="salary" required value="$33">
             </div>
-            <div>
+            <!-- <div>
                 <label for="social-links">LinkedIn, Facebook, Twitter, Instagram accounts?</label>
                 <input type="url" name="social-links" class="input-field" id="social-links"
                     placeholder="Any social media accounts?">
-            </div>
+            </div> -->
 
             <button type="submit" class="btn">Submit Application</button>
         </form>
