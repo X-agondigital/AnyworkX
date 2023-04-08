@@ -1319,13 +1319,13 @@ nav .nav--items__container a:hover {
 }
 
 aside.modal-window {
-  padding: 12px;
   position: fixed;
   right: 10px;
   bottom: 70px;
   z-index: 2000;
 }
 aside.modal-window .modal--wrapper {
+  padding: 24px;
   width: 300px;
   height: 200px;
   background-color: #fff;
@@ -1351,8 +1351,9 @@ aside.modal-window .modal--wrapper h4 {
   display: none;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   aside.modal-window .modal--wrapper {
-    width: 90%;
+    padding: 12px;
+    width: 100%;
   }
 }/*# sourceMappingURL=main.css.map */
