@@ -1359,4 +1359,36 @@ aside.modal-window .modal--wrapper h4 {
     padding: 12px;
     width: 100%;
   }
-}/*# sourceMappingURL=main.css.map */
+}
+/*==========ERROR 404 PAGE STYLING==========*/
+.error--page {
+  text-align: center;
+  max-width: 900px;
+  margin: 60px auto;
+  height: 100vh;
+  padding: 24px;
+}
+.error--page img {
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 48px;
+}
+.error--page h1 {
+  margin-bottom: 12px;
+}
+.error--page a.link-text {
+  display: inline;
+}
+.error--page button {
+  margin-top: 24px;
+}
+
+@media (max-width: 500px) {
+  .error--page {
+    padding: 12px;
+  }
+  .error--page img {
+    width: 90%;
+  }
+}
+/*==========ERROR 404 PAGE STYLING==========*//*# sourceMappingURL=main.css.map */
