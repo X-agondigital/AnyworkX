@@ -444,6 +444,9 @@ nav .nav--items__container a:hover {
   font-size: 14px;
   color: #666;
 }
+.hero-section .text-description .btn-group .btn--without-bg {
+  padding: 12px 12px;
+}
 .hero-section .text-description .icon {
   font-size: 24px;
   margin-left: 6px;
