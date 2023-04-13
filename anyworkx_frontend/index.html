@@ -574,11 +574,37 @@
         </div>
     </section>
 
-    <aside class="modal-window hidden">
+    <!-- <aside class="modal-window hidden">
         <div class="modal--wrapper">
             <i class="ri-close-fill close-btn"></i>
             <h4>Live chat coming soon</h4>
             <a href="https://wa.me/+2348108022689" class="btn">Chat with us on WhatsApp</a>
+        </div>
+    </aside> -->
+
+    <aside class="modal-window hidden">
+        <div class="modal--wrapper">
+            <i class="ri-close-fill close-btn"></i>
+            <article class="chat-window--container">
+                <h4>Chat with us. What's your name and email address?</h4>
+
+                <form id="start-chat-form">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" class="input-field" name="name" id="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label for="email">Email Address</label>
+                        <input type="email" class="input-field" name="email" id="email" required
+                            placeholder="Your email address">
+                    </div>
+                    
+
+                    <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now">
+                </form>
+
+                <div id="chat-container"></div>
+            </article>
         </div>
     </aside>
     <div class="floating-msg-button">
@@ -659,6 +685,52 @@
     <!--OWL CAROUSEL 2 CDN-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function() {
+			$("#start-chat-form").submit(function(event) {
+				event.preventDefault();
+				const name = $("#name").val();
+				const email = $("#email").val();
+				$.ajax({
+					url: "chat-window.html",
+					type: "GET",
+					cache: false,
+					success: function(response) {
+                        $("#start-chat-form").hide();
+						$("#chat-container").html(response);
+						startChat(name, email);
+					}
+				});
+			});
+		});
+
+		function startChat(name, email) {
+			// Initialize the Socket.io client and connect to the server
+			const socket = io.connect("http://localhost:3000");
+			
+			// Emit a "new-user" event to the server with the user's name and email
+			socket.emit("new-user", { name: name, email: email });
+
+			// Handle the form submission for sending a message
+			$("#message-form").submit(function(event) {
+				event.preventDefault();
+				const message = $("#message-input").val();
+				socket.emit("send-message", message);
+				$("#message-input").val("");
+			});
+
+			// Handle the receipt of a new message from the server
+			socket.on("receive-message", function(data) {
+				const message = $("<li>").text(`${data.name}: ${data.message}`);
+				$("#messages").append(message);
+			});
+
+			// Display the user's name in the chat window
+			$("#name").text(name);
+		}
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
     <script type="text/javascript">
         $('#slider').owlCarousel({

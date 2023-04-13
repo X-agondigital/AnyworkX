@@ -53,6 +53,88 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+//LIVE CHAT SCRIPTS
+// const liveForm = document.getElementById('live-chat-form');
+
+// liveForm.addEventListener('submit', function(e){
+//   e.preventDefault();
+// })
+
+function saveUserDetails(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+
+  fetch("https://jsonplaceholder.typicode.com/users/1")
+    .then((response) => response.json())
+    .then((data) => {
+      sessionStorage.setItem("userId", data.id);
+      sessionStorage.setItem("userName", data.name);
+      sessionStorage.setItem("userEmail", email);
+      openChatWindow();
+    });
+}
+
+function openChatWindow() {
+  const userId = sessionStorage.getItem("userId");
+  const userName = sessionStorage.getItem("userName");
+  const chatWindow = `
+				<div>
+					<h3>Welcome ${userName}</h3>
+					<ul id="messages"></ul>
+					<form onsubmit="sendMessage(event)">
+						<input id="messageInput" autocomplete="off" placeholder="Type your message...">
+						<button>Send</button>
+					</form>
+				</div>
+			`;
+  document.body.innerHTML = chatWindow;
+  startChat(userId);
+}
+
+function sendMessage(event) {
+  event.preventDefault();
+
+  const userId = sessionStorage.getItem("userId");
+  const userName = sessionStorage.getItem("userName");
+  const userEmail = sessionStorage.getItem("userEmail");
+  const message = document.getElementById("messageInput").value;
+
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify({
+      userId: userId,
+      userName: userName,
+      userEmail: userEmail,
+      message: message,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const messagesList = document.getElementById("messages");
+      const messageItem = document.createElement("li");
+      messageItem.textContent = `${userName}: ${data.message}`;
+      messagesList.appendChild(messageItem);
+    });
+}
+
+function startChat(userId) {
+  const eventSource = new EventSource(
+    `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
+  );
+  eventSource.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    const messagesList = document.getElementById("messages");
+    const messageItem = document.createElement("li");
+    messageItem.textContent = `${data.userName}: ${data.message}`;
+    messagesList.appendChild(messageItem);
+  };
+}
+
 //-----TAB PANE CONTROLLER
 const tabs = document.querySelectorAll("#tab-box");
 const line = document.querySelector(".line");
@@ -77,5 +159,3 @@ for (let i = 0; i < tabs.length; i++) {
 //     all_content[index].classList.add("active");
 //   });
 // });
-
-
