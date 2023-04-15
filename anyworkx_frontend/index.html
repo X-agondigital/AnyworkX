@@ -586,9 +586,9 @@
         <div class="modal--wrapper">
             <i class="ri-close-fill close-btn"></i>
             <article class="chat-window--container">
-                <h4>Chat with us. What's your name and email address?</h4>
 
                 <form id="start-chat-form">
+                    <h4 class="title-header">Chat with us. What's your name and email address?</h4>
                     <div>
                         <label for="name">Name</label>
                         <input type="text" class="input-field" name="name" id="name" required placeholder="Your name">
@@ -598,7 +598,7 @@
                         <input type="email" class="input-field" name="email" id="email" required
                             placeholder="Your email address">
                     </div>
-                    
+
 
                     <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now">
                 </form>
@@ -687,48 +687,49 @@
         referrerpolicy="no-referrer"></script>
 
     <script>
-        $(document).ready(function() {
-			$("#start-chat-form").submit(function(event) {
-				event.preventDefault();
-				const name = $("#name").val();
-				const email = $("#email").val();
-				$.ajax({
-					url: "chat-window.html",
-					type: "GET",
-					cache: false,
-					success: function(response) {
+        $(document).ready(function () {
+            $("#start-chat-form").submit(function (event) {
+                event.preventDefault();
+                const name = $("#name").val();
+                const email = $("#email").val();
+                $.ajax({
+                    url: "chat-window.html",
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
                         $("#start-chat-form").hide();
-						$("#chat-container").html(response);
-						startChat(name, email);
-					}
-				});
-			});
-		});
+                        $('.title-header').hide();
+                        $("#chat-container").html(response);
+                        startChat(name, email);
+                    }
+                });
+            });
+        });
 
-		function startChat(name, email) {
-			// Initialize the Socket.io client and connect to the server
-			const socket = io.connect("http://localhost:3000");
-			
-			// Emit a "new-user" event to the server with the user's name and email
-			socket.emit("new-user", { name: name, email: email });
+        function startChat(name, email) {
+            // Initialize the Socket.io client and connect to the server
+            const socket = io.connect("http://localhost:3000");
 
-			// Handle the form submission for sending a message
-			$("#message-form").submit(function(event) {
-				event.preventDefault();
-				const message = $("#message-input").val();
-				socket.emit("send-message", message);
-				$("#message-input").val("");
-			});
+            // Emit a "new-user" event to the server with the user's name and email
+            socket.emit("new-user", { name: name, email: email });
 
-			// Handle the receipt of a new message from the server
-			socket.on("receive-message", function(data) {
-				const message = $("<li>").text(`${data.name}: ${data.message}`);
-				$("#messages").append(message);
-			});
+            // Handle the form submission for sending a message
+            $("#message-form").submit(function (event) {
+                event.preventDefault();
+                const message = $("#message-input").val();
+                socket.emit("send-message", message);
+                $("#message-input").val("");
+            });
 
-			// Display the user's name in the chat window
-			$("#name").text(name);
-		}
+            // Handle the receipt of a new message from the server
+            socket.on("receive-message", function (data) {
+                const message = $("<li>").text(`${data.name}: ${data.message}`);
+                $("#messages").append(message);
+            });
+
+            // Display the user's name in the chat window
+            $("#name").text(name);
+        }
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>

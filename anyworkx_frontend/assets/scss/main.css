@@ -1346,16 +1346,18 @@ aside.modal-window .modal--wrapper .close-btn {
   padding: 6px;
   transform: translate(0px, -20px);
   cursor: pointer;
+  margin-top: 12px;
 }
 aside.modal-window .modal--wrapper h4 {
   margin-bottom: 24px;
 }
 aside.modal-window .chat-window--container {
-  height: 70%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 aside.modal-window .chat-window--container div {
   margin-bottom: 24px;
