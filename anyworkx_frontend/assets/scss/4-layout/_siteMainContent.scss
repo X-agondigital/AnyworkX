@@ -28,7 +28,7 @@
         font-size: 14px;
         color: #666;
       }
-      .btn--without-bg{
+      .btn--without-bg {
         padding: 12px 12px;
       }
     }
@@ -939,7 +939,6 @@
   }
 }
 
-
 .lower--contact-section {
   padding: 0 24px;
   header {
@@ -976,7 +975,6 @@
 }
 
 /*===============END OF CONTACT PAGE STYLING=========*/
-
 
 /*==============LIVE CHAT STYLING SECTION===========*/
 .floating-msg-button {
@@ -1029,13 +1027,13 @@ aside.modal-window {
     }
   }
 
-  .chat-window--container{
+  .chat-window--container {
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    // max-width: 500px;
     div {
       margin-bottom: 24px;
     }
@@ -1048,7 +1046,6 @@ aside.modal-window {
       text-align: center;
     }
   }
-  
 }
 .hidden {
   display: none;
@@ -1063,45 +1060,44 @@ aside.modal-window {
   }
 }
 
-#chat-container{
-  width: 100%;
+#chat-container {
+  // max-width: 400px !important;
+  max-height: 500px;
+  overflow-y: auto;
+  min-width: 300px !important;
 }
 /*==============END OF LIVE CHAT STYLING SECTION===========*/
 
-
 /*==========ERROR 404 PAGE STYLING==========*/
-.error--page{
+.error--page {
   text-align: center;
   max-width: 900px;
   margin: 60px auto;
   height: 100vh;
   padding: 24px;
-  img{
+  img {
     max-width: 400px;
     height: auto;
     margin-bottom: 48px;
   }
-  h1{
+  h1 {
     margin-bottom: 12px;
   }
-  a.link-text{
+  a.link-text {
     display: inline;
   }
-  button{
+  button {
     margin-top: 24px;
   }
 }
 
-@media (max-width: 500px){
-  .error--page{
+@media (max-width: 500px) {
+  .error--page {
     padding: 12px;
-    img{
+    img {
       width: 90%;
     }
   }
 }
 
-
 /*==========ERROR 404 PAGE STYLING==========*/
-
-

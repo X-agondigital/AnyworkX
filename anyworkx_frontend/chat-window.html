@@ -14,8 +14,8 @@
     <style>
 
         .chatbox-message-wrapper {
-            height: auto;
-            max-width: 420px;
+            height: 80%;
+            width: 100%;
             border-radius: .5rem;
             overflow: hidden;
             transition: .2s;
@@ -33,7 +33,6 @@
             max-height: 60%;
             overflow-y: auto;
             width: 100%;
-            
         }
 
         .chatbox-message-item {
@@ -63,11 +62,14 @@
 
         .chatbox-message-bottom {
             background: var(--white);
-            /* padding: .75rem 1.5rem; */
+            padding: 0 6px;
             position: absolute;
-            bottom: 0;
-            max-width: 420px;
+            bottom:10px;
+            width: 100%;
+            height: 20%;
         }
+
+        
 
         .chatbox-message-form {
             display: flex;
@@ -228,10 +230,10 @@
             return text.length > 0
         }
 
-        const messageBottom = document.querySelector('.chatbox-message-bottom');
-        const messageContent = document.querySelector('.chatbox-message-content');
+        // const messageBottom = document.querySelector('.chatbox-message-bottom');
+        // const messageContent = document.querySelector('.chatbox-message-content');
 
-        messageBottom.style.width = messageContent.offsetWidth + "px";
+        // messageBottom.style.width = messageContent.offsetWidth + "px";
     </script>
 </body>
 

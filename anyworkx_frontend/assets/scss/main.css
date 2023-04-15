@@ -1357,7 +1357,6 @@ aside.modal-window .chat-window--container {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 aside.modal-window .chat-window--container div {
   margin-bottom: 24px;
@@ -1382,7 +1381,9 @@ aside.modal-window .chat-window--container input[type=submit] {
   }
 }
 #chat-container {
-  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+  min-width: 300px !important;
 }
 
 /*==============END OF LIVE CHAT STYLING SECTION===========*/
