@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Real-Time Chatting Web Application</title>
+    <style>
+      /* Add your CSS styling here */
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to the Chat Room!</h1>
+    <form id="login-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br />
+
+      <button type="submit">Join Chat</button>
+    </form>
+
+    <div id="chat-window"></div>
+    <form id="message-form">
+      <input type="text" id="message-input" placeholder="Type your message here" required />
+      <button type="submit">Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const loginForm = document.getElementById("login-form");
+      const chatWindow = document.getElementById("chat-window");
+      const messageForm = document.getElementById("message-form");
+      const messageInput = document.getElementById("message-input");
+
+      let name = "";
+      let email = "";
+
+      // Handle login form submission
+      loginForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        name = event.target.elements.name.value;
+        email = event.target.elements.email.value;
+        socket.emit("join", { name, email });
+        loginForm.style.display = "none";
+        messageForm.style.display = "block";
+      });
+
+      // Handle message form submission
+      messageForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const message = messageInput.value;
+        socket.emit("chat message", message);
+        messageInput.value = "";
+      });
+
+      // Handle receiving chat messages
+      socket.on("chat message", (message) => {
+        const messageElement = document.createElement("div");
+        messageElement.innerText = `${message.name}: ${message.text}`;
+        chatWindow.appendChild(messageElement);
+      });
+
+      // Handle receiving automated responses
+      socket.on("auto-reply", (reply) => {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("auto-reply");
+        messageElement.innerText = reply;
+        chatWindow.appendChild(messageElement);
+      });
+    </script>
+  </body>
+</html>

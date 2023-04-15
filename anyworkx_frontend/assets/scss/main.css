@@ -1385,6 +1385,11 @@ aside.modal-window .chat-window--container input[type=submit] {
   overflow-y: auto;
   min-width: 300px !important;
 }
+#chat-container a {
+  color: rgb(0, 167, 215);
+  text-decoration: underline;
+  font-weight: 500;
+}
 
 /*==============END OF LIVE CHAT STYLING SECTION===========*/
 /*==========ERROR 404 PAGE STYLING==========*/

@@ -1065,6 +1065,11 @@ aside.modal-window {
   max-height: 500px;
   overflow-y: auto;
   min-width: 300px !important;
+  a{
+    color: $secondaryColor;
+    text-decoration: underline;
+    font-weight: 500;
+  }
 }
 /*==============END OF LIVE CHAT STYLING SECTION===========*/
 
