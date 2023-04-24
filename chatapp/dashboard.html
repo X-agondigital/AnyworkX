@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatting Page</title>
+
+    <style>
+        .chatbox{
+            padding: 24px;
+        }
+        #messages {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            padding: 1rem;
+        }
+        .message {
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 40px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .sent-message {
+            align-self: flex-end;
+            background: hsla(193, 100%, 42%, 1);
+            color: #fff;
+            border-radius: .75rem 0 .75rem .75rem;
+        }
+
+        .chatbox-message-bottom {
+            background: #fff;
+            padding: 0 6px;
+            position: fixed;
+            bottom: 0;
+            width: 93%;
+            height: 20%;
+        }
+        .chatbox-message-form {
+            display: flex;
+            align-items: center;
+            background: hsla(193, 100%, 94%, 1);
+            border-radius: .5rem;
+            padding: .5rem 1.25rem;
+        }
+        
+
+        .received-message {
+            align-self: flex-start;
+            background: hsla(0, 0%, 85%, 1);
+            border-radius: 0 .75rem .75rem .75rem;
+        }
+
+        
+    </style>
+    <link rel="stylesheet" href="../anyworkx_frontend/assets/scss/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Welcome to the Chatting Page</h1>
+    <section class="chatbox">
+        <div id="messages">
+            <!-- messages will be added dynamically here -->
+        </div>
+        <div class="chatbox-message-bottom">
+            <form id="message-form" class="chatbox-message-form">
+                <input type="text" id="message-input" class="input-field">
+                <button type="submit" class="btn">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Get the token from the query string
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const token = urlParams.get('token');
+        // retrieve the token from local storage
+        const url = 'https://cerdo.pythonanywhere.com/api/messages/';
+
+        const token = localStorage.getItem("token");
+
+        // localStorage.setItem('token', token);
+        if (token) {
+            getMessages(token);
+        } else {
+            console.error("Token not found in localStorage");
+        }
+
+        // Get the messages from the server
+        function getMessages(token) {
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.status}`);
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+                    // Display the messages
+                    const messagesDiv = document.getElementById('messages');
+                    messagesDiv.innerHTML = '';
+                    data.forEach(message => {
+                        const div = document.createElement('div');
+                        div.innerHTML = message.message;
+                        div.classList.add('message');
+                        if (message.sender === 1) {
+                            div.classList.add('sent-message');
+                        } else {
+                            div.classList.add('received-message');
+                        }
+                        messagesDiv.appendChild(div);
+                    });
+
+                    // Scroll to the bottom of the messages
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Error getting messages:', error);
+                });
+        }
+
+        // Send a message to the server
+        // send message to server
+        function sendMessage(message) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Message sent');
+                    } else {
+                        console.log('Message failed to send');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                });
+        }
+
+        // handle form submission
+        const messageForm = document.getElementById('message-form');
+        messageForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const messageInput = document.getElementById('message-input');
+            const messageBody = messageInput.value.trim();
+            if (messageBody) {
+                sendMessage(messageBody);
+                messageInput.value = '';
+            }
+        });
+
+        // Refresh the messages every 5 seconds
+        setInterval(() => getMessages(token), 1000);
+
+    </script>
+
+
+</body>
+
+</html>
