@@ -4,6 +4,9 @@
     align-items: center;
     height: 60px;
     padding: 24px;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 .upper-section--container img{
     width: 180px;
