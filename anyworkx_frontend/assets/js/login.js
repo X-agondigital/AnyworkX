@@ -24,7 +24,7 @@ function login() {
       localStorage.setItem("token", data.access);
 
       // Redirect to messaging page
-      window.location.href = '/anyworkx_frontend/chat-window.html';
+      window.location.href = '/chat-window.html';
     })
     .catch((error) => {
       console.error("Error during login:", error);
