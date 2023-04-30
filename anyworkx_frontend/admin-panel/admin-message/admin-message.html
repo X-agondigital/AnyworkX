@@ -57,7 +57,7 @@
         // get selected user ID from dropdown
         const userId = document.getElementById('user-dropdown').value;
 
-        div.innerHTML = `<strong>${message.sender}: </strong>${message.message}`;
+        // div.innerHTML = `<strong>${message.sender}: </strong>${message.message}`;
 
         function getMessages(userId) {
             fetch(`${messageUrl}?user_id=${userId}`, {
