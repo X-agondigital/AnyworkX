@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <select id="user-dropdown" onchange="getMessages(this.value)">
+        <option value="">Select a user</option>
+        <!-- options for each user will be added dynamically here -->
+    </select>
+    <div id="messages"></div>
+    <form id="reply-form">
+        <label for="user-id">Selected User ID:</label>
+        <input type="text" id="user-id" disabled>
+        <br>
+        <label for="reply-message">Reply Message:</label>
+        <input type="text" id="reply-message">
+        <br>
+        <button type="submit">Send</button>
+    </form>
+
+
+</body>
+
+</html>
+
+
+<script>
+    const usersList = 'https://cerdo.pythonanywhere.com/api/list/users/';
+        const messageUrl = 'https://cerdo.pythonanywhere.com/api/messages/'
+
+        // get admin token from localStorage
+        const adminToken = localStorage.getItem('adminToken');
+
+        fetch(usersList)
+            .then(response => response.json())
+            .then(data => {
+                // Populate the dropdown list with users
+                const usersSelect = document.getElementById('user-dropdown');
+                usersSelect.innerHTML = '';
+                data.forEach(user => {
+                    const option = document.createElement('option');
+                    option.value = user.id;
+                    option.innerHTML = user.username;
+                    usersSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+            });
+
+        // get selected user ID from dropdown
+        const userId = document.getElementById('user-dropdown').value;
+
+        div.innerHTML = `<strong>${message.sender}: </strong>${message.message}`;
+
+        function getMessages(userId) {
+            fetch(`${messageUrl}?user_id=${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${adminToken}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.status}`);
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+                    // Display the messages for the selected user
+                    const messagesDiv = document.getElementById('messages');
+                    messagesDiv.innerHTML = '';
+                    data.forEach(message => {
+                        const sender = message.sender === 2 ? 'You' : message.sender;
+                        messagesDiv.innerHTML += `<strong>${sender}: </strong>${message.message}<br>`;
+                    });
+
+                    // Scroll to the bottom of the messages
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+                    // set the user-id field value
+                    const userIdField = document.getElementById('user-id');
+                    userIdField.value = userId;
+                })
+                .catch(error => {
+                    console.error('Error getting messages:', error);
+                });
+        }
+
+        const replyForm = document.getElementById('reply-form');
+        replyForm.addEventListener('submit', event => {
+            event.preventDefault();
+            // const replyMessage = document.getElementById('messages').value;
+            const messageInput = document.getElementById('reply-message');
+            const messageBody = messageInput.value.trim();
+            const userId = document.getElementById('user-id').value;
+
+            if (messageBody && userId) {
+                sendMessage(userId, messageBody);
+                messageInput.value = '';
+            }
+            // sendMessageReply(replyMessage, userId);
+        });
+
+        function sendMessage(message, userId) {
+            fetch(`${messageUrl}reply/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${adminToken}`
+                },
+                body: JSON.stringify({
+                    recipient: userId,
+                    message: message
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Message sent');
+                        // Get the new messages for the selected user and update the HTML page
+                        fetch(`${url}?user_id=${userId}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${adminToken}`
+                            }
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`Network response was not ok: ${response.status}`);
+                                }
+
+                                return response.json();
+                            })
+                            .then(data => {
+                                // Display the messages
+                                const messagesDiv = document.getElementById('messages');
+                                messagesDiv.innerHTML = '';
+                                data.forEach(message => {
+                                    const div = document.createElement('div');
+                                    if (message.sender === 2) {
+                                        div.classList.add('admin-message');
+                                    } else {
+                                        div.classList.add('user-message');
+                                    }
+                                    div.innerHTML = message.message;
+                                    messagesDiv.appendChild(div);
+                                });
+
+                                // Scroll to the bottom of the messages
+                                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                            })
+                            .catch(error => {
+                                console.error('Error getting messages:', error);
+                            });
+                    } else {
+                        console.log('Message failed to send');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                });
+        }
+</script>
+</body>
+
+</html>

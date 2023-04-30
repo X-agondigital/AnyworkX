@@ -70,6 +70,7 @@
         </div>
     </nav>
     <div class="overlay hidden"></div>
+    https://cerdo.pythonanywhere.com/api/messages/reply/${userId}/
 
     <section class="hero-section" id="hero-section">
         <article class="text-description animate">
@@ -589,17 +590,19 @@
 
                 <form id="start-chat-form">
                     <h4 class="title-header">Chat with us. What's your name and email address?</h4>
-                    <div>
-                        <label for="email">Email:</label>
-                        <input type="email" id="login-email" name="email" class="input-field"
-                            placeholder="Your email address">
+                    <div class="field">
+                        <label for="firstname">Firstname:</label>
+                        <input type="text" id="username-id" name="username" class="input-field"
+                            placeholder="Your first name" required>
                     </div>
-                    <div>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" class="input-field" placeholder="Input password">
+                    <div class="field">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email-id" name="email" class="input-field" placeholder="Input your email address" required>
                     </div>
 
-                    <button type="button" class="btn" id="submit_btn" onclick="login()">Login</button>
+                    <div class="error-message"></div>
+
+                    <button type="button" class="btn" id="submit_btn" onclick="login()">Start Chatting</button>
                     <!-- <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now"> -->
                 </form>
 

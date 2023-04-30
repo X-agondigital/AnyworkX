@@ -1,15 +1,15 @@
 
 function login() {
   // e.preventDefault();
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("password").value;
+  const username = document.getElementById("username-id").value;
+  const email = document.getElementById("email-id").value;
 
-  fetch("https://cerdo.pythonanywhere.com/api/login/", {
+  fetch("https://cerdo.pythonanywhere.com/api/register/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ username, email }),
   })
     .then((response) => {
       if (!response.ok) {
@@ -19,14 +19,14 @@ function login() {
       return response.json();
     })
     .then((data) => {
-   
-      console.log("Token:", data.access);
+      // console.log("Token:", data.access);
       localStorage.setItem("token", data.access);
 
       // Redirect to messaging page
-      window.location.href = '/chat-window.html';
+      window.location.href = '/anyworkx_frontend/chat-window.html';
     })
     .catch((error) => {
+      document.querySelector('.error-message').textContent = "Something went wrong, please try again"
       console.error("Error during login:", error);
     });
 }

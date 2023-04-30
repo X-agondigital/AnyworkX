@@ -22,7 +22,7 @@
 
         // function to send reply message
         function sendReplyMessage(message) {
-            fetch('https://cerdo.pythonanywhere.com/api/messages/reply/1/', {
+            fetch(`https://cerdo.pythonanywhere.com/api/messages/reply/${message.id}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

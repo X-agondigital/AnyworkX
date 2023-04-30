@@ -34,10 +34,11 @@ function getMessages(token) {
         div.innerHTML = message.message;
         div.classList.add("message");
 
-        if (message.sender === 1) {
+        if (message.recipient === 2) {
           div.classList.add("sent-message");
         } else {
           div.classList.add("received-message");
+          // console.log(message.sender);
         }
         messagesDiv.appendChild(div);
       });
@@ -108,3 +109,5 @@ window.onload = function () {
     window.scrollTo(0, document.body.scrollHeight);
   }, 3000);
 };
+
+

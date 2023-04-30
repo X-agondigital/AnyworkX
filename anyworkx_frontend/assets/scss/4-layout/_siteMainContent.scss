@@ -318,8 +318,12 @@
         margin-bottom: 12px;
       }
     }
+    #slider-service{
+      text-align: center;
+    }
     .owl-carousel.owl-drag .owl-item {
       text-align: -moz-center;
+      text-align: center;
     }
   }
 
@@ -1034,9 +1038,9 @@ aside.modal-window {
     justify-content: center;
     align-items: center;
     max-width: 500px;
-    // div {
-    //   margin-bottom: 24px;
-    // }
+    div.field {
+      margin-bottom: 24px;
+    }
     .input-field,
     textarea {
       margin-top: 12px;
@@ -1046,6 +1050,11 @@ aside.modal-window {
       text-align: center;
     }
   }
+  .error-message{
+    color: rgb(202, 36, 36);
+    font-size: 16px;
+    margin: 12px 0;
+}
 }
 .hidden {
   display: none;
