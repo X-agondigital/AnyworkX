@@ -1,0 +1,110 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    height: 66px;
+    background-color: #fff;
+    position: relative;
+    z-index: 9999;
+  
+    .logo-image {
+      width: 200px;
+      height: auto;
+    }
+  
+    .right--side__nav {
+      display: flex;
+      align-items: center;
+    }
+    .nav--items__container {
+      li {
+        display: inline;
+        margin-right: 24px;
+      }
+  
+      a {
+        transition: $transitionDuration;
+        &:hover {
+          color: $primaryColor;
+          transition: $transitionDuration;
+        }
+      }
+    }
+  }
+  
+  .menu--toggle {
+    display: none;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+  }
+  .hidden {
+    display: none;
+  }
+  @media (max-width: 870px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+  
+      .logo--container,
+      .menu--toggle {
+        margin: 15px 0 0 24px;
+      }
+      .right--side__nav {
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        z-index: 1111;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+      }
+  
+      .showing {
+        opacity: 1;
+        visibility: visible !important;
+        transition: 0.3s;
+      }
+      .nav--items__container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 48px;
+        a {
+          width: 100%;
+          padding: 12px;
+        }
+      }
+      .cta-button {
+        margin: 24px 0 32px;
+      }
+    }
+    .menu--toggle {
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      // border: 1px solid red;
+      right: 12px;
+      cursor: pointer;
+      padding: 6px;
+  
+      .hamburger {
+        font-size: 24px;
+        transition: $transitionDuration;
+      }
+    }
+  }
+  

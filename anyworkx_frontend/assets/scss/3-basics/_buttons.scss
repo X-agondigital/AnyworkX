@@ -58,3 +58,24 @@
 button{
     font-family: inherit;
 }
+.btn--action{
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid $secondaryColor;
+    border-radius: 6px;
+    color: $secondaryColor;
+    padding: 12px 16px;
+    transition: $transitionDuration;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    min-width: 100px;
+    &:hover{
+        color: $primaryColor;
+        transition: $transitionDuration;
+        border: 1.5px solid $primaryColor;
+    }
+}

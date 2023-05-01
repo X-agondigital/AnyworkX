@@ -1,5 +1,3 @@
-//This is the single file output by sass. It is intended to ONLY @import other files.
-
 //1 - HELPERS
 @import "1-helpers/variables";
 @import "1-helpers/functions";
@@ -16,9 +14,6 @@
 
 
 //4-LAYOUT
-// @import "4-layout/adminPanelContent";
-@import "4-layout/footer";
+@import "4-layout/adminPanelContent";
 @import "4-layout/navigation";
 @import "4-layout/sidebar";
-@import "4-layout/siteMainContent";
-// @import "4-layout/chat";

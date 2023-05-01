@@ -194,6 +194,28 @@ button {
   font-family: inherit;
 }
 
+.btn--action {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid rgb(0, 167, 215);
+  border-radius: 6px;
+  color: rgb(0, 167, 215);
+  padding: 12px 16px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  min-width: 100px;
+}
+.btn--action:hover {
+  color: rgb(126, 0, 196);
+  transition: 0.3s;
+  border: 1.5px solid rgb(126, 0, 196);
+}
+
 .input-field {
   height: 45px;
   border: 1px solid rgb(126, 0, 196);
@@ -227,58 +249,6 @@ textarea {
 textarea:focus {
   border: 1px solid rgb(0, 167, 215);
   transition: 0.3s;
-}
-
-.login-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 24px;
-  height: 60px;
-  align-items: center;
-}
-.login-nav .logo--container img {
-  width: 150px;
-  height: auto;
-}
-.login-nav .indicator {
-  background-color: #ccc;
-  font-weight: 600;
-  color: #fff;
-  border: none;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: inherit;
-}
-
-.admin-login--wrapper {
-  padding: 24px;
-}
-.admin-login--wrapper form {
-  max-width: 700px;
-  margin: auto;
-  transform: translateY(30%);
-  padding: 24px;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0px 12px 40px rgba(174, 174, 174, 0.15);
-}
-.admin-login--wrapper form .marginator {
-  margin-bottom: 24px;
-}
-.admin-login--wrapper form .input-field {
-  margin-top: 12px;
-}
-.admin-login--wrapper form button {
-  width: 100%;
-  margin-top: 24px;
-}
-.admin-login--wrapper form p {
-  margin-top: 12px;
-  text-align: center;
-}
-.admin-login--wrapper form .link-text {
-  display: inline;
 }
 
 /*=======FOOTER SECTION STYLING=======*/
@@ -361,6 +331,10 @@ footer .copyright {
     margin-top: 32px;
   }
 }
+nav.admin-nav {
+  box-shadow: 0px 12px 40px rgba(174, 174, 174, 0.15);
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -378,10 +352,16 @@ nav .logo-image {
 nav .right--side__nav {
   display: flex;
   align-items: center;
+  gap: 24px;
 }
 nav .nav--items__container li {
   display: inline;
   margin-right: 24px;
+}
+nav .nav--items__container li.admin_nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 nav .nav--items__container a {
   transition: 0.3s;
@@ -389,6 +369,15 @@ nav .nav--items__container a {
 nav .nav--items__container a:hover {
   color: rgb(126, 0, 196);
   transition: 0.3s;
+}
+nav .nav--items__container a.admin_nav-link {
+  padding: 10px 18px;
+  margin-right: 24px;
+  border-radius: 8px;
+}
+nav .nav--items__container a.active {
+  background-color: rgb(0, 167, 215);
+  color: #fff;
 }
 
 .menu--toggle {
