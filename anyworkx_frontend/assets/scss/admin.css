@@ -307,6 +307,44 @@ textarea:focus {
   padding: 24px;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+  border: 1px solid #d2d2d2;
+  border-radius: 16px;
+}
+table thead {
+  background-color: rgb(126, 0, 196);
+  color: #fff;
+}
+table th,
+table td {
+  text-align: left;
+  padding: 12px;
+}
+table td {
+  border-bottom: 1px solid #e2e1e5;
+}
+table td a.delete {
+  color: #f14668;
+  border: 1px solid #f14668;
+  max-width: 100px;
+}
+table td a.delete:hover {
+  color: #cb2244;
+  border: 1px solid #cb2244;
+}
+table td a.edit {
+  background-color: rgb(0, 167, 215);
+  color: #fff;
+  max-width: 100px;
+}
+table td a.edit:hover {
+  color: #fff;
+  background-color: rgb(64, 212, 253);
+}
+
 /*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
 .subscribers-page button.no--bg {
   border: none;
@@ -338,34 +376,6 @@ textarea:focus {
 
 .newsletter-lower--section {
   margin-top: 48px;
-}
-.newsletter-lower--section table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: auto;
-  border: 1px solid #d2d2d2;
-  border-radius: 16px;
-}
-.newsletter-lower--section table thead {
-  background-color: rgb(126, 0, 196);
-  color: #fff;
-}
-.newsletter-lower--section table th,
-.newsletter-lower--section table td {
-  text-align: left;
-  padding: 12px;
-}
-.newsletter-lower--section table td {
-  border-bottom: 1px solid #e2e1e5;
-}
-.newsletter-lower--section table td a.delete {
-  color: #F14668;
-  border: 1px solid #F14668;
-  max-width: 100px;
-}
-.newsletter-lower--section table td a.delete:hover {
-  color: #cb2244;
-  border: 1px solid #cb2244;
 }
 
 @media screen and (max-width: 600px) {
@@ -401,8 +411,37 @@ textarea:focus {
     border-bottom: 0;
   }
 }
+/*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
+.secondary--nav {
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px 0 48px;
+  flex-flow: row wrap;
+  gap: 24px 48px;
+}
+
+.job-application--fields {
+  padding: 12px;
+  margin-bottom: 48px;
+}
+.job-application--fields div {
+  margin-bottom: 24px;
+}
+.job-application--fields .input-field,
+.job-application--fields textarea {
+  margin-top: 12px;
+}
+.job-application--fields button {
+  float: right;
+}
+
 nav.admin-nav {
   box-shadow: 0px 12px 40px rgba(174, 174, 174, 0.15);
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 nav {
@@ -521,5 +560,56 @@ nav .nav--items__container a.active {
   .menu--toggle .hamburger {
     font-size: 24px;
     transition: 0.3s;
+  }
+}
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: hsl(279, 100%, 38%);
+  color: #fff;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  margin-top: 60px;
+}
+.sidebar a {
+  display: block;
+  padding: 16px;
+  color: #fff;
+  text-decoration: none;
+}
+.sidebar p {
+  color: #fff;
+}
+.sidebar a.active {
+  background-color: rgba(217, 217, 217, 0.28);
+}
+.sidebar a:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
+main.aside-sidebar {
+  margin-left: 200px;
+  padding: 1px 16px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {
+    float: left;
+  }
+  main.aside-sidebar {
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
   }
 }/*# sourceMappingURL=admin.css.map */

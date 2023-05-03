@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnyWorkX Admin panel | Subscribers</title>
+    <title>AnyWorkX Admin panel | All Jobs List</title>
 
     <link rel="icon" href="../../assets/images/favicon.png">
 
@@ -33,10 +33,10 @@
                 <a href="../admin-message/admin-message.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-message-2-line"></i> <span>Messages</span></li>
                 </a>
-                <a href="subscribers.html" class="admin_nav-link">
+                <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
                 </a>
-                <a href="../admin-job/create.html" class="admin_nav-link active">
+                <a href="create.html active" class="admin_nav-link active">
                     <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
                 </a>
                 <a href="../manage-admin/admin.html" class="admin_nav-link">
@@ -50,8 +50,48 @@
     </nav>
     <div class="overlay hidden"></div>
 
-    <main class="main-content">
+    <div class="sidebar">
+        <a class="active" href="#home">
+            <h4>Job</h4>
+            <p>Edit and update jobs</p>
+        </a>
+        <a class="" href="view-application.html">
+            <h4>Applications</h4>
+            <p>View available applications</p>
+        </a>
+    </div>
+
+    <main class="main-content aside-sidebar">
+
+        <header class="secondary--nav">
+            <h2>All Jobs</h2>
+            <a href="create.html" class="btn">Create a job</a>
+        </header>
+
+        <section class="jobs--list">
+            <table id="table-jobs-list">
+                <thead id="thead-output">
+                    <tr>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Time Created</th>
+                        <th scope="col" colspan="2">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="jobs_list-table-body">
+                    <tr>
+                        <td data-label="Job Title">Content Manager</td>
+                        <td data-label="Time Created">9:30 03/08/2023</td>
+                        <td data-label="Actions"><a class="edit btn--action">Edit</a></td>
+                        <td><a class="delete btn--action">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
         
     </main>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/admin.js"></script>
 </body>
 </html>

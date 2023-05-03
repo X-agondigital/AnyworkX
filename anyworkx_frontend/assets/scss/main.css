@@ -333,6 +333,9 @@ footer .copyright {
 }
 nav.admin-nav {
   box-shadow: 0px 12px 40px rgba(174, 174, 174, 0.15);
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 nav {

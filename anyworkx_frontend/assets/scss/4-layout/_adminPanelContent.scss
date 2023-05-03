@@ -52,6 +52,44 @@
   padding: 24px;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+  border: 1px solid #d2d2d2;
+  border-radius: 16px;
+  thead {
+    background-color: $primaryColor;
+    color: #fff;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 12px;
+  }
+  td {
+    border-bottom: 1px solid #e2e1e5;
+    a.delete {
+      color: #f14668;
+      border: 1px solid #f14668;
+      max-width: 100px;
+      &:hover {
+        color: #cb2244;
+        border: 1px solid #cb2244;
+      }
+    }
+    a.edit{
+      background-color: $secondaryColor;
+      color: #fff;
+      max-width: 100px;
+      &:hover {
+        color: #fff;
+        background-color: rgb(64, 212, 253);
+      }
+    }
+  }
+}
+
 /*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
 .subscribers-page {
   button.no--bg {
@@ -88,35 +126,6 @@
 
 .newsletter-lower--section {
   margin-top: 48px;
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: auto;
-    border: 1px solid #d2d2d2;
-    border-radius: 16px;
-    thead {
-      background-color: $primaryColor;
-      color: #fff;
-    }
-    th,
-    td {
-      text-align: left;
-      padding: 12px;
-    }
-    td {
-      border-bottom: 1px solid #e2e1e5;
-      a.delete{
-        color: #F14668;
-        border: 1px solid #F14668;
-        max-width: 100px;
-        &:hover{
-            color: #cb2244;
-        border: 1px solid #cb2244;
-        }
-      }
-    }
-
-  }
 }
 
 @media screen and (max-width: 600px) {
@@ -152,5 +161,31 @@
         }
       }
     }
+  }
+}
+/*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
+
+.secondary--nav {
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px 0 48px;
+  flex-flow: row wrap;
+  gap: 24px 48px;
+}
+
+.job-application--fields {
+  padding: 12px;
+  margin-bottom: 48px;
+  div {
+    margin-bottom: 24px;
+  }
+  .input-field,
+  textarea {
+    margin-top: 12px;
+  }
+  button{
+    float: right;
   }
 }
