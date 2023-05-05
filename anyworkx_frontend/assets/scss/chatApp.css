@@ -21,7 +21,7 @@
 .chatbox {
     padding: 24px 24px 12px;
     background-color: #F5F5F5;
-    height: 95vh;
+    min-height: 95vh;
 }
 
 #messages {
@@ -30,6 +30,7 @@
     width: 90%;
     padding: 1rem;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 .message {
@@ -49,7 +50,7 @@
 
 .chatbox-message-bottom {
     padding: 0 6px;
-    position: sticky;
+    position: fixed;
     bottom: 8px;
     width: 90%;
     margin: auto;
