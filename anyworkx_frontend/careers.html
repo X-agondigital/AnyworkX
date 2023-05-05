@@ -168,45 +168,8 @@
         <h2>View open positions</h2>
 
         <div class="positions--wrapper">
-            <div class="open-position">
-                <a href="job-description.html">
-                    <header>
-                        <h5>Chief Executive Officer</h5>
-                        <p class="small">Lagos, Nigeria - Acrra, Ghana</p>
-                    </header>
-                    <i class="ri-arrow-right-s-line arrow-icon"></i>
-                </a>
-            </div>
 
-            <div class="open-position">
-                <a href="job-description.html">
-                    <header>
-                        <h5>Chief Executive Officer</h5>
-                        <p class="small">Lagos, Nigeria - Acrra, Ghana</p>
-                    </header>
-                    <i class="ri-arrow-right-s-line arrow-icon"></i>
-                </a>
-            </div>
 
-            <div class="open-position">
-                <a href="job-description.html">
-                    <header>
-                        <h5>Chief Executive Officer</h5>
-                        <p class="small">Lagos, Nigeria - Acrra, Ghana</p>
-                    </header>
-                    <i class="ri-arrow-right-s-line arrow-icon"></i>
-                </a>
-            </div>
-
-            <div class="open-position">
-                <a href="job-description.html">
-                    <header>
-                        <h5>Chief Executive Officer</h5>
-                        <p class="small">Lagos, Nigeria - Acrra, Ghana</p>
-                    </header>
-                    <i class="ri-arrow-right-s-line arrow-icon"></i>
-                </a>
-            </div>
         </div>
     </section>
 
@@ -223,7 +186,7 @@
 
     <footer id="footer">
         <div class="footer--container">
-            <div class="anyworkx--container animate">
+            <div class="anyworkx--container">
                 <img src="assets/images/anyworkx-logo.png" alt="Logo for anyworks">
                 <p>Endless Services. Endless Possibilities.</p>
 
@@ -239,7 +202,7 @@
                 </div>
             </div>
 
-            <div class="quick--links f-mg-top animate">
+            <div class="quick--links f-mg-top">
                 <h4>Quick Access</h4>
                 <ul>
                     <li class="list--items"><a href="about.html" class="link-text">About us</a></li>
@@ -250,7 +213,7 @@
                 </ul>
             </div>
 
-            <div class="company--links f-mg-top animate">
+            <div class="company--links f-mg-top">
                 <h4>Company</h4>
                 <ul>
                     <li class="list--item"><a href="privacy.html" class="link-text">Privacy Policy</a></li>
@@ -260,7 +223,7 @@
             </div>
         </div>
 
-        <hr class="footer--divider animate">
+        <hr class="footer--divider">
         <div class="copyright">
             &copy;
             <script>document.write(new Date().getFullYear())</script> - AnyWorkX. All rights reserved.
@@ -268,6 +231,37 @@
     </footer>
 
     <script defer src="assets/js/main.js"></script>
+    <script>
+        function getJobPositions() {
+            fetch('https://cerdo.pythonanywhere.com/api/create/job/list/')
+                .then((response) => response.json())
+                .then((jobs) => {
+                    let output = ``;
+                    for (const [key, job] of Object.entries(jobs.jobs)) { // <-- use a different variable name here
+                        output += `
+                        <div class="open-position">
+                            <a href="job-description.html?id=${job.id}">
+                            <header>
+                                <h5 id="job-position">${job.job_title}</h5>
+                                <p class="small" id="job-location">${job.job_location}</p>
+                            </header>
+                            <i class="ri-arrow-right-s-line arrow-icon"></i>
+                            </a>
+                        </div>
+                        `
+                    }
+
+                    document.querySelector('.positions--wrapper').innerHTML = output;
+                })
+                .catch((error) => {
+                    console.log(`Error loading job openings: ${error}`);
+                });
+        }
+
+        getJobPositions();
+
+
+    </script>
 </body>
 
 </html>

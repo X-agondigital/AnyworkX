@@ -21,6 +21,7 @@
 .chatbox {
     padding: 24px 24px 12px;
     background-color: #F5F5F5;
+    height: 95vh;
 }
 
 #messages {
@@ -51,7 +52,6 @@
     position: sticky;
     bottom: 8px;
     width: 90%;
-    height: 20%;
     margin: auto;
 }
 @media (max-width: 550px){

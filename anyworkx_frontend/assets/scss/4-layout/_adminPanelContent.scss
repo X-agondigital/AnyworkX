@@ -72,19 +72,62 @@ table {
     a.delete {
       color: #f14668;
       border: 1px solid #f14668;
-      max-width: 100px;
+      max-width: 150px;
       &:hover {
         color: #cb2244;
         border: 1px solid #cb2244;
       }
     }
-    a.edit{
+    a.secondary-action{
+      color: $secondaryColor;
+      border: 1px solid $secondaryColor;
+      width: 30px;
+    }
+    a.edit {
       background-color: $secondaryColor;
       color: #fff;
-      max-width: 100px;
+      max-width: 150px;
       &:hover {
         color: #fff;
         background-color: rgb(64, 212, 253);
+      }
+    }
+  }
+  .flex-container{
+    display: flex;
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+    thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    tr {
+      display: block;
+      margin-bottom: 48px;
+    }
+    td {
+      border-bottom: 1px solid #bcbcbc;
+      display: block;
+      text-align: right;
+      &::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      &:last-child {
+        border-bottom: 0;
       }
     }
   }
@@ -128,41 +171,7 @@ table {
   margin-top: 48px;
 }
 
-@media screen and (max-width: 600px) {
-  .newsletter-lower--section {
-    table {
-      border: 0;
-      thead {
-        border: none;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-      }
-      tr {
-        display: block;
-        margin-bottom: 48px;
-      }
-      td {
-        border-bottom: 1px solid #bcbcbc;
-        display: block;
-        text-align: right;
-        &::before {
-          content: attr(data-label);
-          float: left;
-          font-weight: bold;
-          text-transform: capitalize;
-        }
-        &:last-child {
-          border-bottom: 0;
-        }
-      }
-    }
-  }
-}
+
 /*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
 
 .secondary--nav {
@@ -173,6 +182,19 @@ table {
   margin: 60px 0 48px;
   flex-flow: row wrap;
   gap: 24px 48px;
+  .prev-btn{
+    display: flex;
+    align-items: center;
+    transition: $transitionDuration;
+    &:hover{
+      color: $bodyTextColor;
+      transition: $transitionDuration;
+    }
+  }
+  .prev-icon{
+    font-size: 32px;
+    color: $secondaryColor;
+  }
 }
 
 .job-application--fields {
@@ -181,11 +203,22 @@ table {
   div {
     margin-bottom: 24px;
   }
+  .btn-group{
+    float: none;
+    display: flex;
+    gap: 24px;
+    justify-content: flex-end;
+    .delete{
+      color: #cb2244;
+      background-color: unset;
+      border: 1px solid #cb2244;
+    }
+  }
   .input-field,
   textarea {
     margin-top: 12px;
   }
-  button{
+  button {
     float: right;
   }
 }

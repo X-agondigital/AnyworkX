@@ -51,11 +51,11 @@
     <div class="overlay hidden"></div>
 
     <div class="sidebar">
-        <a class="active" href="all-job.html">
+        <a href="all-job.html">
             <h4>Job</h4>
             <p>Edit and update jobs</p>
         </a>
-        <a class="" href="job-list.html">
+        <a class="active" href="#">
             <h4>Applications</h4>
             <p>View available applications</p>
         </a>
@@ -64,7 +64,7 @@
     <main class="main-content aside-sidebar">
 
         <header class="secondary--nav">
-            <h2>All Jobs</h2>
+            <h2>Listed Jobs</h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
 
@@ -73,13 +73,18 @@
                 <thead id="thead-output">
                     <tr>
                         <th scope="col">Job Title</th>
-                        <th scope="col">Time Created</th>
-                        <th scope="col" colspan="2">Actions</th>
+                        <th scope="col">Number of Applications</th>
+                        <th scope="col" colspan="2">Action</th>
                     </tr>
                 </thead>
 
                 <tbody id="jobs_list-table-body">
-                    
+                    <tr>
+                        <td data-label="Job Title">Content Manager</td>
+                        <td data-label="Number of Applications">2</td>
+                        <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
+                        
+                    </tr>
                 </tbody>
             </table>
         </section>
@@ -91,17 +96,17 @@
 
     <script>
         function getJobPositions() {
-            fetch('https://cerdo.pythonanywhere.com/api/create/job/list/')
+            fetch('https://cerdo.pythonanywhere.com/api/view/job/application/')
                 .then((response) => response.json())
-                .then((jobs) => {
+                .then((applicants) => {
                     let output = ``;
-                    for (const [key, job] of Object.entries(jobs.jobs)) { // <-- use a different variable name here
+                    for (const [key, applicant] of Object.entries(applicants.applicants)) { // <-- use a different variable name here
                         output += `
                         <tr>
                             <td data-label="Job Title">${job.job_title}</td>
-                            <td data-label="Time Created">${job.created_at}</td>
-                            <td><a class="edit btn--action">Edit</a></td>
-                            <td><a class="delete btn--action">Delete</a></td>
+                            <td data-label="Number of Applications">2</td>
+                            <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
+                            
                         </tr>
                         `
                     }

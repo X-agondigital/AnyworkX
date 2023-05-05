@@ -53,11 +53,11 @@
     <div class="overlay hidden"></div>
 
     <div class="sidebar">
-        <a class="active" href="#home">
+        <a class="active" href="all-job.html">
             <h4>Job</h4>
             <p>Edit and update jobs</p>
         </a>
-        <a class="" href="view-application.html">
+        <a class="" href="job-list.html">
             <h4>Applications</h4>
             <p>View available applications</p>
         </a>
@@ -71,19 +71,29 @@
             </header>
 
             <article class="job-application--fields">
-                <form action="contact.html" method="post">
+                <form id="create-job">
                     <div>
                         <label for="job-title">Job Title</label>
-                        <input type="text" class="input-field" name="job-title" id="job-title" required>
+                        <input type="text" class="input-field" name="job_title" id="job-title" required>
                     </div>
                     <div>
                         <label for="about-job">About Job</label>
-                        <textarea name="about-job" id="about-job"></textarea>
+                        <textarea name="about-job" id="job_description"></textarea>
+                    </div>
+                    <div>
+                        <label for="position">Position</label>
+                        <input type="text" class="input-field" name="position" id="position" required>
                     </div>
                     <div>
                         <label for="location">Location</label>
-                        <input type="text" class="input-field" name="location" id="location" required
+                        <input type="text" class="input-field" name="job_location" id="job-location" required
                             placeholder="E.g. “Nigeria, Ghana” or “Anywhere”">
+                    </div>
+                    
+                    <div>
+                        <label for="requirement-heading">Job Requirements Heading</label>
+                        <input type="text" class="input-field" name="requirement-heading" id="requirement-heading" required
+                            placeholder="E.g. Job Requirements">
                     </div>
 
                     <div>
@@ -100,14 +110,14 @@
                         <label for="offer">What we offer</label>
                         <textarea name="offer" id="offer"></textarea>
                     </div>
-                    <button type="submit" class="btn">Publish Job</button>
+                    <button type="submit" class="btn" id="publish-btn">Publish Job</button>
                 </form>
             </article>
         </section>
     </main>
 
-    <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/admin.js"></script>
+    <script src="../../assets/js/main.js"></script>
 </body>
 
 </html>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnyWorkX Admin panel | Subscribers</title>
+    <title>AnyWorkX Admin panel | All Jobs List</title>
 
     <link rel="icon" href="../../assets/images/favicon.png">
 
@@ -18,6 +19,7 @@
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="admin-nav">
         <div class="logo--container">
@@ -33,16 +35,16 @@
                 <a href="../admin-message/admin-message.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-message-2-line"></i> <span>Messages</span></li>
                 </a>
-                <a href="subscribers.html" class="admin_nav-link">
+                <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
                 </a>
-                <a href="../admin-job/create.html" class="admin_nav-link active">
+                <a href="create.html active" class="admin_nav-link active">
                     <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
                 </a>
                 <a href="../manage-admin/admin.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-user-3-line"></i> <span>Manage Admins</span></li>
                 </a>
-                
+
             </ul>
 
             <div class="cta-button"><a href="#"><button class="btn get--started__btn">Logout</button></a></div>
@@ -50,8 +52,83 @@
     </nav>
     <div class="overlay hidden"></div>
 
-    <main class="main-content">
-        
+    <div class="sidebar">
+        <a href="all-job.html">
+            <h4>Job</h4>
+            <p>Edit and update jobs</p>
+        </a>
+        <a class="active" href="#">
+            <h4>Applications</h4>
+            <p>View available applications</p>
+        </a>
+    </div>
+
+    <main class="main-content aside-sidebar">
+
+        <header class="secondary--nav">
+            <a href="view-applicants.html" class="prev-btn"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
+            <h2>Applications under Content Manager</h2>
+            <a href="create.html" class="btn">Create a job</a>
+        </header>
+
+        <article class="job-application--fields">
+            <form action="contact.html" method="post">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" class="input-field" name="name" id="applicant-name" disabled
+                        value="Veronica Dekiunle">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" class="input-field" name="email" id="applicant-email" disabled
+                        value="Veronicadekunle@gmail.com">
+                </div>
+                <div>
+                    <label for="number">Phone Number</label>
+                    <input type="text" class="input-field" name="number" id="applicant-number" disabled
+                        value="08089099890">
+                </div>
+                <div>
+                    <label for="country">Country</label>
+                    <input type="text" class="input-field" name="country" id="applicant-country" disabled
+                        value="Nigeria">
+                </div>
+                <div>
+                    <label for="cover-letter">Cover Letter</label>
+                    <textarea name="cover-letter" id="cover-letter"
+                        disabled>I can do all things listed below:
+
+                            Develop and execute email marketing campaigns to support business goals and increase customer engagement.
+                            Design and build automated email campaigns, including welcome sequences, nurture campaigns, and re-engagement flows.
+                            Segment email lists to personalize campaigns and improve performance.
+                            Test and optimize email campaigns for deliverability, open rates, click-through rates, and conversion rates.
+                            Handling and automating the progression of potential customers through the sales pipeline in a Customer Relationship Management system.</textarea>
+                </div>
+                <div>
+                    <label for="resume">Resume</label>
+                    <input type="text" class="input-field" name="resume" id="applicant-resume" disabled value="https://cloudinary.com/cerdo/files/resume-1">
+                </div>
+
+                <div>
+                    <label for="salary">Expected Salary</label>
+                    <input type="text" class="input-field" name="salary" id="applicant-salary" disabled value="40,000">
+                </div>
+
+                <div>
+                    <label for="socials">LinkedIn, Facebook or any other Social Media</label>
+                    <input type="text" class="input-field" name="socials" id="applicant-socials" disabled value="https://www.linkedin.com/Veronica-ESQ">
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn delete">Delete</button>
+                    <button type="submit" class="btn--without-bg"><i class="ri-star-line"></i></button>
+                </div>
+            </form>
+        </article>
+
     </main>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/admin.js"></script>
 </body>
+
 </html>

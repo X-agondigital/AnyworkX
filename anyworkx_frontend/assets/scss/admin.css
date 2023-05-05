@@ -329,22 +329,64 @@ table td {
 table td a.delete {
   color: #f14668;
   border: 1px solid #f14668;
-  max-width: 100px;
+  max-width: 150px;
 }
 table td a.delete:hover {
   color: #cb2244;
   border: 1px solid #cb2244;
 }
+table td a.secondary-action {
+  color: rgb(0, 167, 215);
+  border: 1px solid rgb(0, 167, 215);
+  width: 30px;
+}
 table td a.edit {
   background-color: rgb(0, 167, 215);
   color: #fff;
-  max-width: 100px;
+  max-width: 150px;
 }
 table td a.edit:hover {
   color: #fff;
   background-color: rgb(64, 212, 253);
 }
+table .flex-container {
+  display: flex;
+  gap: 24px;
+}
 
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    display: block;
+    margin-bottom: 48px;
+  }
+  table td {
+    border-bottom: 1px solid #bcbcbc;
+    display: block;
+    text-align: right;
+  }
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
 /*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
 .subscribers-page button.no--bg {
   border: none;
@@ -378,39 +420,6 @@ table td a.edit:hover {
   margin-top: 48px;
 }
 
-@media screen and (max-width: 600px) {
-  .newsletter-lower--section table {
-    border: 0;
-  }
-  .newsletter-lower--section table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-  .newsletter-lower--section table tr {
-    display: block;
-    margin-bottom: 48px;
-  }
-  .newsletter-lower--section table td {
-    border-bottom: 1px solid #bcbcbc;
-    display: block;
-    text-align: right;
-  }
-  .newsletter-lower--section table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-  .newsletter-lower--section table td:last-child {
-    border-bottom: 0;
-  }
-}
 /*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
 .secondary--nav {
   display: flex;
@@ -421,6 +430,19 @@ table td a.edit:hover {
   flex-flow: row wrap;
   gap: 24px 48px;
 }
+.secondary--nav .prev-btn {
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+.secondary--nav .prev-btn:hover {
+  color: rgb(54, 52, 53);
+  transition: 0.3s;
+}
+.secondary--nav .prev-icon {
+  font-size: 32px;
+  color: rgb(0, 167, 215);
+}
 
 .job-application--fields {
   padding: 12px;
@@ -428,6 +450,17 @@ table td a.edit:hover {
 }
 .job-application--fields div {
   margin-bottom: 24px;
+}
+.job-application--fields .btn-group {
+  float: none;
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
+}
+.job-application--fields .btn-group .delete {
+  color: #cb2244;
+  background-color: unset;
+  border: 1px solid #cb2244;
 }
 .job-application--fields .input-field,
 .job-application--fields textarea {

@@ -1,18 +1,19 @@
-let firstName = document.getElementById("first_name").value;
-let email = document.getElementById("email").value;
-let mobileNo = document.getElementById("phone_number").value;
-let state = document.getElementById("state").value;
-let country = document.getElementById("country").value;
-let coverLetter = document.getElementById("cover_letter").value;
-let resume = document.getElementById("cv_upload").value;
-let salary = document.getElementById("salary").value;
-// let socialLinks = document.getElementById("social-links").value;
 
-function postJob(e) {
+function applyForJob(e) {
   e.preventDefault();
+  
+  const firstName = document.getElementById("first_name").value;
+  const email = document.getElementById("email").value;
+  const mobileNo = document.getElementById("phone_number").value;
+  const state = document.getElementById("state").value;
+  const country = document.getElementById("country").value;
+  const coverconstter = document.getElementById("cover_constter").value;
+  const socialLinks = document.getElementById("social-links").value;
+  const resume = document.getElementById("cv_upload").value;
+  const salary = document.getElementById("salary").value;
 
   fetch(
-    "http://142.93.98.21:8000/api/jobs/apply/9938b621-59fb-455a-8e72-ae66abbb448c/",
+    "https://cerdo.pythonanywhere.com/api/jobs/apply/be70a1a2-0d94-4177-8edd-d394070e1438/",
     {
       method: "POST",
       headers: {
@@ -24,13 +25,13 @@ function postJob(e) {
         email: email,
         number: mobileNo,
         country: country,
-        cover_letter: coverLetter,
+        cover_constter: coverconstter,
         cv_upload: resume,
         salary: salary,
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err))
+      }),
     }
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
   );
 }

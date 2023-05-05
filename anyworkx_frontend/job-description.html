@@ -71,8 +71,8 @@
     </nav>
     <div class="overlay hidden"></div>
 
-    <section class="career-banner-section">
-        <h1 class="job-title">Email Marketing and Automation Specialist</h1>
+    <section class="career-banner-section" id="job-title">
+        <!-- <h1 class="job-title">Email Marketing and Automation Specialist</h1> -->
     </section>
 
     <aside class="breadcumb-navigation">
@@ -83,85 +83,7 @@
     </aside>
 
     <section class="job-description-section">
-        <h2>Email Marketing and Automation Specialist</h2>
 
-        <main class="job-description">
-            <p>Are you a talented Email Marketing and Automation Specialist with a knack for creating compelling content
-                that resonates with targeted audiences? Do you keep up with the latest advancements and trends in email
-                marketing? If so, we have an exciting opportunity waiting for you!</p>
-
-            <p>The ideal candidate will be responsible for establishing a successful email marketing channel for the B2B
-                market. Responsibilities will include developing and implementing marketing strategies, as well as
-                creating and automating effective email sequences for our users and prospective users.</p>
-
-            <p>AnyWorkx is a fast-moving, award-winning company that focuses on making service hiring as easy and
-                enjoyable as it can be.</p>
-
-            <br>
-
-            <h2>Job Requirements</h2>
-
-            <p>Campaign Development and Execution</p>
-            <ul>
-                <li>Develop and execute email marketing campaigns to support business goals and increase customer
-                    engagement.</li>
-                <li>Design and build automated email campaigns, including welcome sequences, nurture campaigns, and
-                    re-engagement flows.</li>
-                <li>Segment email lists to personalize campaigns and improve performance.</li>
-                <li>Test and optimize email campaigns for deliverability, open rates, click-through rates, and
-                    conversion rates.</li>
-                <li>Handling and automating the progression of potential customers through the sales pipeline in a
-                    Customer Relationship Management system.</li>
-            </ul>
-
-            <p>Data Analysis and Optimization</p>
-
-            <ul>
-                <li>Analyze email campaign data and use insights to inform future strategy and tactics.</li>
-                <li>Monitor and report on key metrics to measure campaign success and provide solutions for workflow
-                    improvement.</li>
-            </ul>
-
-            <p>Cross-functional Collaboration</p>
-            <ul>
-                <li>Collaborate with cross-functional teams, such as creative, content, and product, to ensure cohesive
-                    campaigns that drive results.</li>
-            </ul>
-
-            <br>
-
-            <h2>What we're looking for</h2>
-            <ul>
-                <li>Very strong grasp of the English language.</li>
-                <li>2+ years of experience in creating & executing email marketing campaigns within marketing automation
-                    or email marketing platforms and CRM systems.</li>
-                <li>Strong understanding of email marketing strategies and best practices, including segmentation,
-                    creating customer journeys, A/B testing, and deliverability.</li>
-                <li>Working knowledge and hands-on experience with various email marketing platforms and tools.</li>
-                <li>Passion for data-driven decision-making with high attention to detail.</li>
-                <li>Familiarity with analytics and reporting tools to measure and analyze the success of email
-                    campaigns.</li>
-                <li>Creativity and a problem-solving mindset for creating new and innovative ways to engage audiences
-                    through email.</li>
-                <li>Excellent project management, organization, and time management skills.</li>
-                <li>Strong written and verbal communication skills for collaborating with internal teams and clients.
-                </li>
-            </ul>
-
-            <br>
-
-            <h2>What we offer</h2>
-            <ul>
-                <li>Competitive contractor pay.</li>
-                <li>40+ paid days off a year, plus maternity, paternity, and other standard time off policies.</li>
-                <li>Flexible hours and freedom within the job.</li>
-                <li>Various bonuses based on performance, including gift cards, prepaid credit cards, etc.</li>
-                <li>Team building and a focus on work-life balance.</li>
-                <li>A chance to work with an exceptional international team that is highly productive, creative, and
-                    fun!</li>
-                <li>A place where you can get things done. No unnecessary meetings or admin work.</li>
-            </ul>
-        </main>
 
     </section>
 
@@ -273,6 +195,98 @@
 
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/job.js"></script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get('id');
+
+        function getJobPosts() {
+            fetch(`https://cerdo.pythonanywhere.com/api/job/details/${jobId}/`)
+                .then((response) => response.json())
+                .then((note) => {
+                    let outputTitle = ``;
+                    let output = ``;
+                    for (const [key, job] of Object.entries(note)) { // <-- use a different variable name here
+                        outputTitle = `
+                        <h1 class="job-title">${job.job_title}</h1>
+                        `
+
+                        output = `
+                        <h2>${job.job_title}</h2>
+
+                        <main class="job-description">
+                            <article>
+                                ${job.job_description}
+                            </article>
+
+                            <br>
+
+                            <h2>${job.job_requirements_title}</h2>
+
+                            <article>
+                                ${job.job_requirements_body}
+                            </article>
+
+                            <br>
+
+                            <h2>${job.offer_title}</h2>
+                            
+                            <article>
+                                ${job.we_offer}
+                            </article>
+                        </main>
+                        `
+                    }
+
+                    document.querySelector('.career-banner-section').innerHTML = outputTitle;
+                    document.querySelector(".job-description-section").innerHTML = output;
+
+                })
+                .catch((error) => {
+                    console.log(`Error loading job openings: ${error}`);
+                });
+        }
+
+        getJobPosts();
+
+        function applyForJob(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById("first_name").value;
+            const email = document.getElementById("email").value;
+            const mobileNo = document.getElementById("phone_number").value;
+            const state = document.getElementById("state").value;
+            const country = document.getElementById("country").value;
+            const coverconstter = document.getElementById("cover_constter").value;
+            // const socialLinks = document.getElementById("social-links").value;
+            const resume = document.getElementById("cv_upload").value;
+            const salary = document.getElementById("salary").value;
+
+            fetch(
+                "https://cerdo.pythonanywhere.com/api/jobs/apply/be70a1a2-0d94-4177-8edd-d394070e1438/",
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        first_name: firstName,
+                        email: email,
+                        number: mobileNo,
+                        country: country,
+                        cover_constter: coverconstter,
+                        cv_upload: resume,
+                        salary: salary,
+                    }),
+                }
+                    .then((res) => res.json())
+                    .then((data) => console.log(data))
+                    .catch((err) => console.log(err))
+            );
+        }
+
+    </script>
 </body>
 
 </html>
