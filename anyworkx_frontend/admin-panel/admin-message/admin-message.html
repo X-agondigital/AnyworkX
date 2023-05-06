@@ -348,6 +348,8 @@
         // sendMessageReply(replyMessage, userId);
     });
 
+    setInterval(() => getMessages(userId), 1000);
+
     function sendMessage(message, userId) {
         fetch(`https://anyworkx.onrender.com/api/messages/reply/${userId}/`, {
             method: 'POST',
