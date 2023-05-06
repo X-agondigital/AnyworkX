@@ -1,4 +1,4 @@
-const url = "https://cerdo.pythonanywhere.com/api/messages/";
+const url = "https://anyworkx.onrender.com/api/messages/";
 
 const token = localStorage.getItem("token");
 

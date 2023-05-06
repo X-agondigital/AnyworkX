@@ -103,15 +103,51 @@
                             <td data-label="Job Title">${job.job_title}</td>
                             <td data-label="Time Created">${job.created_at}</td>
                             <td><a class="edit btn--action">Edit</a></td>
-                            <td><a class="delete btn--action">Delete</a></td>
+                            <td><a class="delete btn--action" data-id="${job.id}">Delete</a></td>
                         </tr>
                         `
                     }
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
+
+                    // Add event listener to delete button
+                    const deleteButtons = document.querySelectorAll('.delete');
+                    deleteButtons.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            deleteJob(jobId);
+                        });
+                    });
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
+                });
+        }
+
+        function deleteJob(jobId) {
+            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then((data) => {
+                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
+                    // Refresh job postings table after deleting job
+                    // Remove the row from the HTML table
+                    // const row = document.querySelector(`tr[data-id="${jobId}"]`);
+                    // if (row) {
+                    //     row.remove();
+                    // }
+                })
+                .catch((error) => {
+                    console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
                 });
         }
 
