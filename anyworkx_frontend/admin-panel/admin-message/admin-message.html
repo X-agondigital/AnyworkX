@@ -196,7 +196,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="#"><button class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="#"><a href="../admin-login.html"><button
+                            class="btn get--started__btn">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -280,8 +281,6 @@
 
     // div.innerHTML = `<strong>${message.sender}: </strong>${message.message}`;
 
-
-
     function getMessages(userId) {
         fetch(`${adminMessageUrl}${userId}/`, {
             method: 'GET',
@@ -333,23 +332,6 @@
     }
 
 
-    const replyForm = document.getElementById('reply-form');
-    replyForm.addEventListener('submit', event => {
-        event.preventDefault();
-        // const replyMessage = document.getElementById('messages').value;
-        const messageInput = document.getElementById('reply-message');
-        const messageBody = messageInput.value.trim();
-        const userId = document.getElementById('user-id').value;
-
-        if (messageBody && userId) {
-            sendMessage(messageBody, userId);
-            messageInput.value = '';
-        }
-        // sendMessageReply(replyMessage, userId);
-    });
-
-    setInterval(() => getMessages(userId), 1000);
-
     function sendMessage(message, userId) {
         fetch(`https://anyworkx.onrender.com/api/messages/reply/${userId}/`, {
             method: 'POST',
@@ -364,10 +346,10 @@
             .then(response => {
                 if (response.ok) {
                     console.log('Reply sent');
-                    // clear the input field
-                    messageInput.value = '';
+
                     // refresh the messages for the selected user
-                    getMessages(userId);
+                    setInterval(() => getMessages(userId), 1000);
+                    // getMessages(userId);
                 } else {
                     console.log('Reply failed to send');
                 }
@@ -376,6 +358,22 @@
                 console.error('Error sending message:', error);
             });
     }
+
+
+    const replyForm = document.getElementById('reply-form');
+    replyForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const messageInput = document.getElementById('reply-message');
+        const messageBody = messageInput.value.trim();
+        const userId = document.getElementById('user-id').value;
+
+        if (messageBody && userId) {
+            sendMessage(messageBody, userId);
+            messageInput.value = '';
+        }
+    });
+    // setInterval((userId) => getMessages(`${userId}`), 1000);
+
 
 
 </script>
