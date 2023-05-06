@@ -76,10 +76,7 @@
     </section>
 
     <aside class="breadcumb-navigation">
-        <a href="careers.html">careers</a> <i class="ri-arrow-right-s-line arrow-icon"></i> <a href="#"
-            class="active">Email
-            marketing and
-            automtion...</a>
+        
     </aside>
 
     <section class="job-description-section">
@@ -89,11 +86,14 @@
 
     <section class="job-application__fields">
         <h2>Apply Below</h2>
-        <form action="position-description.html" method="post">
+        <form id="application-form" enctype="multipart/form-data">
             <div>
-                <label for="name">Full Name</label>
-                <input type="text" class="input-field" name="name" id="first_name" required
-                    placeholder="Your full name">
+                <label for="firstname">Firstname</label>
+                <input type="text" class="input-field" name="name" id="first_name" required placeholder="First name">
+            </div>
+            <div>
+                <label for="lastname">Last name</label>
+                <input type="text" class="input-field" name="lastname" id="last_name" required placeholder="Last name">
             </div>
             <div>
                 <label for="email">Email Address</label>
@@ -104,6 +104,10 @@
                 <label for="number">Phone Number</label>
                 <input type="tel" class="input-field" name="number" id="phone_number" required
                     placeholder="Your phone number">
+            </div>
+            <div>
+                <label for="address">Address</label>
+                <input type="text" class="input-field" name="state" id="address" required placeholder="Your address">
             </div>
             <div>
                 <label for="state">State</label>
@@ -127,6 +131,7 @@
                 <label for="salary">What is your expected salary?</label>
                 <input type="number" name="salary" class="input-field" id="salary" required value="$33">
             </div>
+
             <!-- <div>
                 <label for="social-links">LinkedIn, Facebook, Twitter, Instagram accounts?</label>
                 <input type="url" name="social-links" class="input-field" id="social-links"
@@ -135,6 +140,7 @@
 
             <button type="submit" class="btn">Submit Application</button>
         </form>
+        <div id="response-message"></div>
     </section>
 
     <section class="role-not-found">
@@ -149,7 +155,7 @@
 
     <footer id="footer">
         <div class="footer--container">
-            <div class="anyworkx--container animate">
+            <div class="anyworkx--container">
                 <img src="assets/images/anyworkx-logo.png" alt="Logo for anyworks">
                 <p>Endless Services. Endless Possibilities.</p>
 
@@ -165,7 +171,7 @@
                 </div>
             </div>
 
-            <div class="quick--links f-mg-top animate">
+            <div class="quick--links f-mg-top">
                 <h4>Quick Access</h4>
                 <ul>
                     <li class="list--items"><a href="about.html" class="link-text">About us</a></li>
@@ -176,7 +182,7 @@
                 </ul>
             </div>
 
-            <div class="company--links f-mg-top animate">
+            <div class="company--links f-mg-top">
                 <h4>Company</h4>
                 <ul>
                     <li class="list--item"><a href="privacy.html" class="link-text">Privacy Policy</a></li>
@@ -186,7 +192,7 @@
             </div>
         </div>
 
-        <hr class="footer--divider animate">
+        <hr class="footer--divider">
         <div class="copyright">
             &copy;
             <script>document.write(new Date().getFullYear())</script> - AnyWorkX. All rights reserved.
@@ -201,16 +207,20 @@
         const jobId = urlParams.get('id');
 
         function getJobPosts() {
-            fetch(`https://cerdo.pythonanywhere.com/api/job/details/${jobId}/`)
+            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`)
                 .then((response) => response.json())
                 .then((note) => {
+                    let breadCumb = ``;
                     let outputTitle = ``;
                     let output = ``;
                     for (const [key, job] of Object.entries(note)) { // <-- use a different variable name here
                         outputTitle = `
                         <h1 class="job-title">${job.job_title}</h1>
                         `
-
+                        breadCumb = `
+                        <a href="careers.html">careers</a> <i class="ri-arrow-right-s-line arrow-icon"></i> <a href="#"
+                        class="active">${job.job_title}</a>
+                        `
                         output = `
                         <h2>${job.job_title}</h2>
 
@@ -237,7 +247,7 @@
                         </main>
                         `
                     }
-
+                    document.querySelector(".breadcumb-navigation").innerHTML = breadCumb;
                     document.querySelector('.career-banner-section').innerHTML = outputTitle;
                     document.querySelector(".job-description-section").innerHTML = output;
 
@@ -249,42 +259,60 @@
 
         getJobPosts();
 
-        function applyForJob(e) {
+
+        //Function for applying for job
+        const applicationForm = document.getElementById("application-form");
+
+        applicationForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
             const firstName = document.getElementById("first_name").value;
+            const lastName = document.getElementById("last_name").value;
             const email = document.getElementById("email").value;
             const mobileNo = document.getElementById("phone_number").value;
+            const address = document.getElementById("address").value;
             const state = document.getElementById("state").value;
             const country = document.getElementById("country").value;
-            const coverconstter = document.getElementById("cover_constter").value;
-            // const socialLinks = document.getElementById("social-links").value;
-            const resume = document.getElementById("cv_upload").value;
+            const coverLetter = document.getElementById("cover_letter").value;
+            const resume = document.getElementById("cv_upload").files[0];
             const salary = document.getElementById("salary").value;
 
-            fetch(
-                "https://cerdo.pythonanywhere.com/api/jobs/apply/be70a1a2-0d94-4177-8edd-d394070e1438/",
-                {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        first_name: firstName,
-                        email: email,
-                        number: mobileNo,
-                        country: country,
-                        cover_constter: coverconstter,
-                        cv_upload: resume,
-                        salary: salary,
-                    }),
-                }
-                    .then((res) => res.json())
-                    .then((data) => console.log(data))
-                    .catch((err) => console.log(err))
-            );
-        }
+            const formData = new FormData();
+            formData.append("first_name", firstName);
+            formData.append("last_name", lastName);
+            formData.append("email", email);
+            formData.append("phone_number", mobileNo);
+            formData.append("address", address);
+            formData.append("state", state);
+            formData.append("country", country);
+            formData.append("cover_letter", coverLetter);
+            formData.append("cv_upload", resume);
+            formData.append("salary", salary);
+
+            fetch(`https://anyworkx.onrender.com/api/jobs/apply/${jobId}/`, {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((data) => {
+
+                    console.log(data)
+                    // clear the form
+                    applicationForm.reset();
+                    applicationForm.style.display="none";
+                    // display success message
+
+                    const successMsg = document.getElementById("response-message");
+                    successMsg.classList.add("response--success-message");
+                    successMsg.textContent = "Application submitted successfully!";
+                    // applicationForm.insertAdjacentElement("beforebegin", successMsg);
+                })
+                .catch((err) => console.log(err));
+        });
+
+
+
+
 
     </script>
 </body>

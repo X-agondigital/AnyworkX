@@ -2,7 +2,7 @@ function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  fetch("https://cerdo.pythonanywhere.com/api/login/", {
+  fetch("https://anyworkx.onrender.com/api/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,7 @@ function login() {
 
       // Redirect to messaging page
       window.location.href = "/admin-panel/admin-message/admin-message.html";
-    //   window.location.href = "/anyworkx_frontend/admin-panel/admin-message/admin-message.html";
+      //   window.location.href = "/anyworkx_frontend/admin-panel/admin-message/admin-message.html";
     })
     .catch((error) => {
       console.error("Error during login:", error);

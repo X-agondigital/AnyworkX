@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
 const form = document.getElementById("create-job");
@@ -17,7 +17,7 @@ form.addEventListener("submit", (event) => {
   const skillRequirement = document.getElementById("skill-requirement").value;
   const anyworkxOffer = document.getElementById("offer").value;
 
-  fetch("https://cerdo.pythonanywhere.com/api/create/job/list/", {
+  fetch("https://anyworkx.onrender.com/api/create/job/list/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

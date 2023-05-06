@@ -44,8 +44,8 @@ function getMessages(token) {
       });
 
       // Scroll to the bottom of the messages
-      messagesDiv.scrollTo = document.body.scrollHeight;
-      // textarea.focus();
+      messagesDiv.scrollTop = messageDiv.scrollHeight;
+      textarea.focus();
     })
     .catch((error) => {
       console.error("Error getting messages:", error);
@@ -93,17 +93,13 @@ messageForm.addEventListener("submit", (event) => {
 setInterval(() => getMessages(token), 1000);
 
 //script that controls scroll to bottom
-bottomPage = document.querySelector(".down-arrow");
+const bottomPage = document.querySelector(".down-arrow");
 bottomPage.addEventListener("click", scrollToBottom);
 function scrollToBottom() {
   window.scrollTo(0, document.body.scrollHeight);
 }
 
 //This code enables the page to scroll to the bottom of the page onload
-window.onload = function () {
-  setInterval(function () {
-    window.scrollTo(0, document.body.scrollHeight);
-  }, 1000);
-};
-
-
+window.onload = setTimeout(() => {
+  window.scrollTo(0, document.body.scrollHeight);
+}, 1000);

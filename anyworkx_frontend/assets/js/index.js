@@ -9,7 +9,7 @@ form.addEventListener("submit", async (event) => {
     email: formData.get("email"),
   }; // Creates a data object from the form data
 
-  const url = "https://cerdo.pythonanywhere.com/api/subscribers/";
+  const url = "https://anyworkx.onrender.com/api/subscribers/";
   const options = {
     method: "POST",
     headers: {

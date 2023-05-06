@@ -1,7 +1,6 @@
-
 function applyForJob(e) {
   e.preventDefault();
-  
+
   const firstName = document.getElementById("first_name").value;
   const email = document.getElementById("email").value;
   const mobileNo = document.getElementById("phone_number").value;
@@ -13,7 +12,7 @@ function applyForJob(e) {
   const salary = document.getElementById("salary").value;
 
   fetch(
-    "https://cerdo.pythonanywhere.com/api/jobs/apply/be70a1a2-0d94-4177-8edd-d394070e1438/",
+    "https://anyworkx.onrender.com/api/jobs/apply/be70a1a2-0d94-4177-8edd-d394070e1438/",
     {
       method: "POST",
       headers: {

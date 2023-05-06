@@ -1,10 +1,9 @@
-
 function login() {
   // e.preventDefault();
   const username = document.getElementById("username-id").value;
   const email = document.getElementById("email-id").value;
 
-  fetch("https://cerdo.pythonanywhere.com/api/register/", {
+  fetch("https://anyworkx.onrender.com/api/register/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,10 +22,11 @@ function login() {
       localStorage.setItem("token", data.access);
 
       // Redirect to messaging page
-      window.location.href = '/anyworkx_frontend/chat-window.html';
+      window.location.href = "/chat-window.html";
     })
     .catch((error) => {
-      document.querySelector('.error-message').textContent = "Something went wrong, please try again"
+      document.querySelector(".error-message").textContent =
+        "Something went wrong, please try again";
       console.error("Error during login:", error);
     });
 }
