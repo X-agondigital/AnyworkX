@@ -18,6 +18,51 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn--cancel,
+        .btn--delete {
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn--cancel {
+            background-color: #f1f1f1;
+        }
+
+        .btn--delete {
+            background-color: #dd4b39;
+            color: white;
+        }
+        .is-active{
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,7 +92,7 @@
 
             </ul>
 
-            <div class="cta-button"><a href="#"><button class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -62,6 +107,17 @@
             <p>View available applications</p>
         </a>
     </div>
+
+    <div class="modal" id="delete-job-modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this job?</p>
+            <div class="modal-buttons">
+                <button class="btn--cancel">Cancel</button>
+                <button class="btn--delete" data-id="${job.id}">Delete</button>
+            </div>
+        </div>
+    </div>
+
 
     <main class="main-content aside-sidebar">
 
@@ -92,8 +148,17 @@
     <script src="../../assets/js/admin.js"></script>
 
     <script>
+        // get admin token from localStorage
+        // const adminToken = localStorage.getItem('adminToken');
+
         function getJobPositions() {
-            fetch('https://anyworkx.onrender.com/api/create/job/list/')
+            fetch('https://anyworkx.onrender.com/api/create/job/list/', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                    // "Authorization": `Bearer ${adminToken}`
+                }
+            })
                 .then((response) => response.json())
                 .then((jobs) => {
                     let output = ``;
@@ -102,7 +167,7 @@
                         <tr>
                             <td data-label="Job Title">${job.job_title}</td>
                             <td data-label="Time Created">${job.created_at}</td>
-                            <td><a class="edit btn--action">Edit</a></td>
+                            <td><a class="edit btn--action" data-id="${job.id}">Edit</a></td>
                             <td><a class="delete btn--action" data-id="${job.id}">Delete</a></td>
                         </tr>
                         `
@@ -110,7 +175,16 @@
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
 
-                    // Add event listener to delete button
+                    // Add event listener to edit and delete button
+                    const editButtons = document.querySelectorAll('.edit');
+                    editButtons.forEach((button) =>{
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            window.location.href = `edit-job.html?id=${jobId}`
+                        })
+                    })
+
+
                     const deleteButtons = document.querySelectorAll('.delete');
                     deleteButtons.forEach((button) => {
                         button.addEventListener('click', (e) => {
@@ -132,24 +206,26 @@
                 },
             })
                 .then((response) => {
-                    if (response.ok) {
+                    if (response.status === 204) {
+                        // Job was successfully deleted, so return an empty object
+                        return {};
+                    } else if (response.ok) {
+                        // Job was not deleted, but response body contains JSON
                         return response.json();
+                    } else {
+                        // Response was not successful, so throw an error
+                        throw new Error('Network response was not ok.');
                     }
-                    throw new Error('Network response was not ok.');
                 })
                 .then((data) => {
                     console.log(`Job posting with ID ${jobId} deleted successfully.`);
-                    // Refresh job postings table after deleting job
-                    // Remove the row from the HTML table
-                    // const row = document.querySelector(`tr[data-id="${jobId}"]`);
-                    // if (row) {
-                    //     row.remove();
-                    // }
+                    getJobPositions();
                 })
                 .catch((error) => {
                     console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
                 });
         }
+
 
         getJobPositions();
     </script>

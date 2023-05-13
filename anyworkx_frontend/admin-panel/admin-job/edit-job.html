@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnyWorkX Admin panel | Create Job</title>
+    <title>AnyWorkX Admin panel | Edit Job</title>
 
     <link rel="icon" href="../../assets/images/favicon.png">
 
@@ -47,7 +47,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button
+                        class="btn get--started__btn">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -66,12 +67,12 @@
     <main class="main-content aside-sidebar">
         <section class="create-job--wrapper">
             <header class="secondary--nav">
-                <h2>Create a Job</h2>
+                <h2>Edit Job</h2>
                 <a href="all-job.html" class="btn">View all jobs</a>
             </header>
 
             <article class="job-application--fields">
-                <form id="create-job">
+                <form id="edit-job">
                     <div>
                         <label for="job-title">Job Title</label>
                         <input type="text" class="input-field" name="job_title" id="job-title" required>
@@ -89,11 +90,11 @@
                         <input type="text" class="input-field" name="job_location" id="job-location" required
                             placeholder="E.g. “Nigeria, Ghana” or “Anywhere”">
                     </div>
-                    
+
                     <div>
                         <label for="requirement-heading">Job Requirements Heading</label>
-                        <input type="text" class="input-field" name="requirement-heading" id="requirement-heading" required
-                            placeholder="E.g. Job Requirements">
+                        <input type="text" class="input-field" name="requirement-heading" id="requirement-heading"
+                            required placeholder="E.g. Job Requirements">
                     </div>
 
                     <div>
@@ -116,8 +117,39 @@
         </section>
     </main>
 
-    <script src="../../assets/js/admin.js"></script>
+    <!-- <script src="../../assets/js/admin.js"></script> -->
     <script src="../../assets/js/main.js"></script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get('id');
+
+        function editJob() {
+            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${adminToken}`
+                }
+            })
+                .then((response) => response.json())
+                .then((jobs) => {
+                    const editForm = document.querySelector("#edit-job");
+                    editForm.elements['job_title'].value = jobs.job_title;
+                    editForm.elements['about-job'].value = jobs.job_description;
+                    editForm.elements['position'].value = jobs.position;
+                    editForm.elements['job_location'].value = jobs.job_location;
+                    editForm.elements['requirement-heading'].value = jobs.job_requirements_title;
+                    editForm.elements['job-requirements'].value = jobs.job_requirements_body;
+                    editForm.elements['skill-requirement'].value = jobs.offer_title;
+                    editForm.elements['offer'].value = jobs.we_offer;
+
+                })
+                .catch((error) => {
+                    console.log(`Error loading job details: ${error}`);
+                });
+        }
+    </script>
 </body>
 
 </html>

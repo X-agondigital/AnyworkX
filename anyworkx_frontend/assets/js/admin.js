@@ -1,4 +1,7 @@
 "use strict";
+// get admin token from localStorage
+const adminToken = localStorage.getItem('adminToken');
+
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
 const form = document.getElementById("create-job");
@@ -21,6 +24,7 @@ form.addEventListener("submit", (event) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      'Authorization': `Bearer ${adminToken}`
     },
     body: JSON.stringify({
       job_title: jobTitle,
@@ -36,7 +40,7 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      window.location.href = "/admin-panel/admin-job/all-job.html/"
+      window.location.href = "/admin-panel/admin-job/all-job.html"
     })
     .catch((error) => {
       console.error("Error:", error);
