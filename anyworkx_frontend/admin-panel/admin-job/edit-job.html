@@ -127,17 +127,6 @@
         const jobId = urlParams.get('id');
         console.log(jobId);
 
-        function populateJobDetails(jobs) {
-            document.getElementById('job-title').value = jobs.job_title;
-            document.getElementById('job_description').value = jobs.job_description;
-            document.getElementById('position').value = jobs.position;
-            document.getElementById('job-location').value = jobs.job_location;
-            document.getElementById('requirement-heading').value = jobs.requirement_heading;
-            document.getElementById('job-requirements').value = jobs.job_requirements;
-            document.getElementById('skill-requirement').value = jobs.skill_requirement;
-            document.getElementById('offer').value = jobs.offer;
-        }
-
         function editJob() {
             fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
                 method: "GET",
@@ -147,14 +136,21 @@
                 }
             })
                 .then((response) => response.json())
-                .then((jobs) => {
-                    populateJobDetails(jobs);
-
+                .then((job) => {
+                    document.getElementById("job-title").value = job.job_title;
+                    document.getElementById("job_description").value = job.job_description;
+                    document.getElementById("position").value = job.position;
+                    document.getElementById("job-location").value = job.job_location;
+                    document.getElementById("requirement-heading").value = job.job_requirements_title;
+                    document.getElementById("job-requirements").value = job.job_requirements_body;
+                    document.getElementById("skill-requirement").value = job.offer_title;
+                    document.getElementById("offer").value = job.we_offer;
                 })
                 .catch((error) => {
                     console.log(`Error loading job details: ${error}`);
                 });
         }
+
     </script>
 </body>
 
