@@ -111,7 +111,7 @@
                         <label for="offer">What we offer</label>
                         <textarea name="offer" id="offer"></textarea>
                     </div>
-                    <button type="submit" class="btn" id="publish-btn">Publish Job</button>
+                    <button type="submit" class="btn" id="publish-btn">Update Job</button>
                 </form>
             </article>
         </section>
@@ -127,7 +127,7 @@
         const jobId = urlParams.get('id');
         console.log(jobId);
 
-        function editJob() {
+        function populateJobField() {
             fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
                 method: "GET",
                 headers: {
@@ -150,6 +150,52 @@
                     console.log(`Error loading job details: ${error}`);
                 });
         }
+
+        populateJobField();
+
+
+        //SCRIPT FOR EDITING JOB FIELDS
+        const editForm = document.getElementById("edit-job");
+
+        editForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const jobTitle = document.getElementById("job-title").value;
+            const jobDescription = document.getElementById("job_description").value;
+            const jobPosition = document.getElementById("position").value;
+            const jobLocation = document.getElementById("job-location").value;
+            const jobRequirementsTitle = document.getElementById(
+                "requirement-heading"
+            ).value;
+            const jobRequirements = document.getElementById("job-requirements").value;
+            const skillRequirement = document.getElementById("skill-requirement").value;
+            const anyworkxOffer = document.getElementById("offer").value;
+
+            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    // "Authorization": `Bearer ${adminToken}`
+                },
+                body: JSON.stringify({
+                    job_title: jobTitle,
+                    job_description: jobDescription,
+                    position: jobPosition,
+                    job_location: jobLocation,
+                    job_requirements_title: jobRequirementsTitle,
+                    job_requirements_body: jobRequirements,
+                    offer_title: skillRequirement,
+                    we_offer: anyworkxOffer,
+                })
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.error("Unable to edit job:", error);
+                });
+        })
 
     </script>
 </body>

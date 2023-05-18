@@ -81,12 +81,12 @@
                 </thead>
 
                 <tbody id="jobs_list-table-body">
-                    <tr>
+                    <!-- <tr>
                         <td data-label="Job Title">Content Manager</td>
                         <td data-label="Number of Applications">2</td>
                         <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
 
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </section>
@@ -102,7 +102,7 @@
                 .then((response) => response.json())
                 .then((applicants) => {
                     let output = ``;
-                    for (const [key, applicant] of Object.entries(applicants.applicants)) { // <-- use a different variable name here
+                    for (const [key, applicant] of Object.entries(applicants.applicant)) { // <-- use a different variable name here
                         output += `
                         <tr>
                             <td data-label="Job Title">${job.job_title}</td>
