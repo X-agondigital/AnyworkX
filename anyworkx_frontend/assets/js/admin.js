@@ -40,7 +40,7 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      window.location.href = "/admin-panel/admin-job/all-job.html"
+      // window.location.href = 'all-job.html';
     })
     .catch((error) => {
       console.error("Error:", error);

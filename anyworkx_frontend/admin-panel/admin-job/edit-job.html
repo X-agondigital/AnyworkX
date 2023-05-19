@@ -191,6 +191,7 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
+                    window.location.href = 'all-job.html';
                 })
                 .catch((error) => {
                     console.error("Unable to edit job:", error);

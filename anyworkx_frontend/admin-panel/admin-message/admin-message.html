@@ -22,77 +22,194 @@
 
 
     <style>
+        aside.sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            background-color: #00A7D7;
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+        }
+
+        .sidebar.active {
+            width: 60px;
+            display: none;
+        }
+
+        .sidebar li {
+            cursor: pointer;
+            padding: 12px;
+            border-bottom: 1px solid rgba(217, 217, 217, 0.28);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: 0.3s ease-in;
+            color: #fff;
+            margin: 6px 0;
+
+        }
+
+        .sidebar li:hover {
+            background-color: rgba(217, 217, 217, 0.28);
+            transition: 0.3s ease-in;
+        }
+
+        .sidebar li.selected {
+            background-color: rgba(217, 217, 217, 0.28);
+        }
+
+        .main-page {
+            position: relative;
+            min-height: 100vh;
+            width: calc(100% - 250px);
+            left: 250px;
+            transition: all 0.3s ease-in;
+        }
+
+        .sidebar.active~.main-page {
+            width: calc(100% - 10px);
+            left: 10px;
+        }
+
+        .main-page .panel-nav {
+            display: flex;
+            justify-content: flex-start;
+            height: 80px;
+            position: fixed;
+            width: calc(100% - 250px);
+            left: 250px;
+            z-index: 100;
+            padding: 0 20px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.active~.main-page .panel-nav {
+            left: 0px;
+            width: calc(100% - 10px);
+        }
+
+        .main-page .panel-nav .hamburger-wrap {
+            display: flex;
+            align-items: center;
+            transform: translateY(60px);
+        }
+
+        .hamburger-wrap .hamburger-icon {
+            font-size: 24px;
+            background-color: #00A7D7;
+            border-radius: 8px;
+            padding: 8px;
+            color: #fff;
+        }
+
+        @media(max-width: 1250px) {
+            .sidebar {
+                width: 20px;
+                display: none;
+            }
+
+            .sidebar.active {
+                width: 220px;
+                display: block;
+            }
+
+            .main-page {
+                width: calc(100% - 10px);
+                left: 10px;
+            }
+
+            .sidebar.active~.main-page {
+                /* width: calc(100% - 220px); */
+                /* overflow: hidden; */
+                left: 220px;
+            }
+
+            .main-page .panel-nav {
+                width: calc(100% - 10px);
+                left: 10px;
+            }
+
+            .sidebar.active~.main-page .panel-nav {
+                width: calc(100% - 220px);
+                left: 220px;
+            }
+        }
+
         .chatbox {
             margin-top: 100px;
         }
 
-        .user-select {
-            position: fixed;
-            top: 12%;
+        .user-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        select {
-            /* A reset of styles, including removing the default dropdown arrow */
-            appearance: none;
-            /* Additional resets for further consistency */
-            background-color: transparent;
-            border: none;
-            padding: 0 1em 0 0;
+        /* .user-list li {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .user-list li:hover,
+        .user-list li.selected {
+            background: #e3e3e3;
+        } */
+
+        .content {
+            padding: 10px;
+        }
+
+        .messages {
+            height: 400px;
+            overflow-y: scroll;
+        }
+
+        .message-container {
+            margin-bottom: 10px;
+        }
+
+        .admin-message {
+            background-color: lightblue;
+            float: right;
+        }
+
+        .user-message {
+            background-color: lightgray;
+            float: left;
+        }
+
+        .user-message strong {
+            color: #333;
+        }
+
+        /* .sidebar {
+            width: 200px;
+            background: #f1f1f1;
+        }
+
+        .user-list {
+            list-style: none;
+            padding: 0;
             margin: 0;
-            width: 100%;
-            font-family: inherit;
-            font-size: inherit;
+        } */
+
+        /* .user-list li {
             cursor: pointer;
-            line-height: inherit;
-            outline: none;
-        }
+            padding: 10px;
+        } */
 
-        .select {
-            width: 100%;
-            min-width: 15ch;
-            max-width: 30ch;
-            border: 1px solid rgba(0, 167, 215, 1);
-            border-radius: 0.25em;
-            padding: 0.25em 0.5em;
-            font-size: 1.25rem;
-            cursor: pointer;
-            line-height: 1.1;
-            background-color: #fff;
-            display: grid;
-            grid-template-areas: "select";
-            align-items: center;
-            position: relative;
-            margin-top: 12px;
-            /* background-image: linear-gradient(to top, #f9f9f9, #fff 33%); */
-        }
+        /* .user-list li:hover,
+        .user-list li.selected {
+            background: #e3e3e3;
+        } */
 
-        select,
-        .select:after {
-            grid-area: select;
-        }
 
-        .select::after {
-            content: "";
-            width: 0.8em;
-            height: 0.5em;
-            background-color: rgba(0, 167, 215, 1);
-            clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-            justify-self: end;
-        }
 
-        select::-ms-expand {
-            display: none;
-        }
-
-        select:focus+.focus-select {
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border: 2px solid rgba(0, 167, 215, 1);
-            border-radius: inherit;
-        }
 
         #messages {
             display: flex;
@@ -148,7 +265,7 @@
             padding: .5rem 1.25rem;
             position: fixed;
             bottom: 8px;
-            width: 90%;
+            width: -webkit-fill-available;
             margin: 0 auto;
         }
 
@@ -202,44 +319,35 @@
     </nav>
     <div class="overlay hidden"></div>
 
-    <!-- <div class="sidebar">
-        <a href="all-job.html">
-            <h4>Job</h4>
-            <p>Edit and update jobs</p>
-        </a>
-        <a class="active" href="#">
-            <h4>Applications</h4>
-            <p>View available applications</p>
-        </a>
-    </div> -->
+    <aside class="sidebar">
+        <ul id="user-list" class="user-list"></ul>
+    </aside>
 
-    <main class="main-content">
-        <section class="chatbox">
-            <div class="user-select">
-                <label for="">Select a user to reply to</label>
-                <div class="select">
-                    <select id="user-dropdown" onchange="getMessages(this.value)">
-                        <option value="">Select a user</option>
-                        <!-- options for each user will be added dynamically here -->
-                    </select>
-                    <span class="focus-select"></span>
-                </div>
+    <main class="main-page">
+        <section class="panel-nav">
+            <div class="hamburger-wrap">
+                <i class="ri-menu-fold-line hamburger-icon"></i>
             </div>
-            <div id="messages"></div>
-            <div class="chatbox-message-bottom">
-                <form id="reply-form" class="chatbox-message-form">
-                    <div class="id-display">
-                        <label for="user-id">Selected User ID:</label>
-                        <input type="text" id="user-id" disabled>
-                    </div>
-                    <br>
-                    <div class="message-field">
-                        <input type="text" id="reply-message" class="input-field" autofocus>
+        </section>
+
+        <section class="main-content">
+            <section class="chatbox">
+                <div id="messages"></div>
+                <div class="chatbox-message-bottom">
+                    <form id="reply-form" class="chatbox-message-form">
+                        <div class="id-display">
+                            <label for="user-id">Selected User ID:</label>
+                            <input type="text" id="user-id" disabled>
+                        </div>
                         <br>
-                        <button type="submit" class="chat-btn"><i class="ri-send-plane-2-line"></i></button>
-                    </div>
-                </form>
-            </div>
+                        <div class="message-field">
+                            <input type="text" id="reply-message" class="input-field" autofocus>
+                            <br>
+                            <button type="submit" class="chat-btn"><i class="ri-send-plane-2-line"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </section>
         </section>
 
 
@@ -252,6 +360,27 @@
 
 
 <script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarBtn = document.querySelector(".hamburger-wrap");
+    const hamburgerMenu = document.querySelector(".hamburger-icon")
+
+    sidebarBtn.addEventListener('click', function () {
+        console.log("button clicked");
+        sidebar.classList.toggle("active");
+
+        if (sidebar.classList.contains("active")) {
+            hamburgerMenu.classList.remove("ri-menu-fold-line");
+            hamburgerMenu.classList.add("ri-menu-unfold-line");
+        } else {
+
+            hamburgerMenu.classList.add("ri-menu-fold-line");
+            hamburgerMenu.classList.remove("ri-menu-unfold-line");
+        }
+    })
+    // sidebarBtn.onclick = function () {
+
+    //     
+    // }
     const usersList = 'https://anyworkx.onrender.com/api/list/users/';
     const messageUrl = 'https://anyworkx.onrender.com/api/messages/';
     const adminMessageUrl = 'https://anyworkx.onrender.com/api/admin/messages/';
@@ -259,17 +388,39 @@
     // get admin token from localStorage
     const adminToken = localStorage.getItem('adminToken');
 
+    const userList = document.getElementById('user-list');
+    // const messagesDiv = document.getElementById('messages');
+
     fetch(usersList)
         .then(response => response.json())
         .then(data => {
-            // Populate the dropdown list with users
-            const usersSelect = document.getElementById('user-dropdown');
-            usersSelect.innerHTML = '';
             data.forEach(user => {
-                const option = document.createElement('option');
-                option.value = user.id;
-                option.innerHTML = user.username;
-                usersSelect.appendChild(option);
+                const listItem = document.createElement('li');
+                const usernameElement = document.createElement('span');
+                const emailElement = document.createElement('span');
+
+                usernameElement.textContent = user.username;
+                emailElement.textContent = user.email;
+                emailElement.style.fontWeight = 600;
+
+                listItem.appendChild(usernameElement);
+                // listItem.appendChild(document.createTextNode(' ('));
+                listItem.appendChild(emailElement);
+                // listItem.appendChild(document.createTextNode(')'));
+
+                listItem.addEventListener('click', () => {
+                    // Clear selected state from other list items
+                    const selectedItems = document.querySelectorAll('.user-list .selected');
+                    selectedItems.forEach(item => item.classList.remove('selected'));
+
+                    // Add selected state to the clicked item
+                    listItem.classList.add('selected');
+
+                    // Fetch and display the messages for the selected user
+                    getMessages(user.id);
+                });
+
+                userList.appendChild(listItem);
             });
         })
         .catch(error => {
@@ -277,7 +428,7 @@
         });
 
     // get selected user ID from dropdown
-    const userId = document.getElementById('user-dropdown').value;
+    // const userId = document.getElementById('user-dropdown').value;
 
     // div.innerHTML = `<strong>${message.sender}: </strong>${message.message}`;
 
