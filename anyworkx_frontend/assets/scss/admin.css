@@ -419,6 +419,22 @@ table .flex-container {
 .newsletter-lower--section {
   margin-top: 48px;
 }
+.newsletter-lower--section .pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin: 48px;
+}
+.newsletter-lower--section .pagination button {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid rgb(0, 167, 215);
+  border-radius: 6px;
+  color: rgb(54, 52, 53);
+}
+.newsletter-lower--section .pagination .current-page {
+  background-color: rgb(0, 167, 215);
+  color: #fff;
+}
 
 /*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
 .secondary--nav {

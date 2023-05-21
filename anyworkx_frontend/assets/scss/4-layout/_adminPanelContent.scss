@@ -78,7 +78,7 @@ table {
         border: 1px solid #cb2244;
       }
     }
-    a.secondary-action{
+    a.secondary-action {
       color: $secondaryColor;
       border: 1px solid $secondaryColor;
       width: 30px;
@@ -93,7 +93,7 @@ table {
       }
     }
   }
-  .flex-container{
+  .flex-container {
     display: flex;
     gap: 24px;
   }
@@ -169,8 +169,23 @@ table {
 
 .newsletter-lower--section {
   margin-top: 48px;
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin: 48px;
+    button {
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid $secondaryColor;
+      border-radius: 6px;
+      color: $bodyTextColor;
+    }
+    .current-page{
+      background-color: $secondaryColor;
+      color: #fff;
+    }
+  }
 }
-
 
 /*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
 
@@ -182,16 +197,16 @@ table {
   margin: 60px 0 48px;
   flex-flow: row wrap;
   gap: 24px 48px;
-  .prev-btn{
+  .prev-btn {
     display: flex;
     align-items: center;
     transition: $transitionDuration;
-    &:hover{
+    &:hover {
       color: $bodyTextColor;
       transition: $transitionDuration;
     }
   }
-  .prev-icon{
+  .prev-icon {
     font-size: 32px;
     color: $secondaryColor;
   }
@@ -203,12 +218,12 @@ table {
   div {
     margin-bottom: 24px;
   }
-  .btn-group{
+  .btn-group {
     float: none;
     display: flex;
     gap: 24px;
     justify-content: flex-end;
-    .delete{
+    .delete {
       color: #cb2244;
       background-color: unset;
       border: 1px solid #cb2244;
