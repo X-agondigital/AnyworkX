@@ -388,6 +388,9 @@ table .flex-container {
   }
 }
 /*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
+.subscribers-page {
+  margin-top: 48px;
+}
 .subscribers-page button.no--bg {
   border: none;
   font-family: inherit;

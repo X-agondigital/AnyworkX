@@ -61,8 +61,8 @@
                     <button class="no--bg">Today</button>
                 </div>
                 <div class="download-options">
-                    <button class="btn">Download as CSV</button>
-                    <button class="btn--without-bg">Download as XLS</button>
+                    <button class="btn" id="download-csv">Download as CSV</button>
+                    <button class="btn--without-bg" id="download-xls">Download as XLS</button>
                 </div>
             </header>
 
@@ -138,6 +138,43 @@
 
         // Initialize with the first page
         getSubscribers(currentPage);
+
+        // Helper function to convert an array of objects to CSV format
+        function convertArrayToCSV(dataArray) {
+            const header = Object.keys(dataArray[0]).join(",");
+            const rows = dataArray.map((data) => Object.values(data).join(","));
+            return header + "\n" + rows.join("\n");
+        }
+
+        // Helper function to create a downloadable file
+        function downloadFile(data, filename, mimeType) {
+            const blob = new Blob([data], { type: mimeType });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = filename;
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Event listener for the CSV download button
+        document.getElementById("download-csv").addEventListener("click", () => {
+            const subscribers = Array.from(document.querySelectorAll("#table-subscribers tbody tr")).map((row) => {
+                const email = row.querySelector("td:nth-child(1)").textContent;
+                const dateSubscribed = row.querySelector("td:nth-child(2)").textContent;
+                return { email, dateSubscribed };
+            });
+            const csvData = convertArrayToCSV(subscribers);
+            downloadFile(csvData, "subscribers.csv", "text/csv");
+        });
+
+        // Event listener for the XLS download button
+        document.getElementById("download-xls").addEventListener("click", () => {
+            // Implement XLS download logic here
+            // You can use a library like SheetJS (https://sheetjs.com/) to generate XLS files
+            // Refer to the library's documentation for usage instructions
+        });
+
     </script>
 </body>
 
