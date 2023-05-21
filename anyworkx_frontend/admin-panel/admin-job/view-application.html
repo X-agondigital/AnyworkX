@@ -20,6 +20,12 @@
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
 </head>
 
+<style>
+    .input-field{
+        color: black;
+    }
+</style>
+
 <body>
     <nav class="admin-nav">
         <div class="logo--container">
@@ -47,7 +53,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button
+                        class="btn get--started__btn">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -67,57 +74,57 @@
 
         <header class="secondary--nav">
             <a href="view-applicants.html" class="prev-btn"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
-            <h2>Applications under Content Manager</h2>
+            <h2>Applications under <span id="job-title"></span></h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
 
         <article class="job-application--fields">
             <form action="contact.html" method="post">
+                
                 <div>
                     <label for="name">Name</label>
-                    <input type="text" class="input-field" name="name" id="applicant-name" disabled
-                        value="Veronica Dekiunle">
+                    <input type="text" class="input-field" name="name" id="applicant-name" disabled>
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="text" class="input-field" name="email" id="applicant-email" disabled
-                        value="Veronicadekunle@gmail.com">
+                    <input type="text" class="input-field" name="email" id="applicant-email" disabled>
                 </div>
                 <div>
                     <label for="number">Phone Number</label>
-                    <input type="text" class="input-field" name="number" id="applicant-number" disabled
-                        value="08089099890">
+                    <input type="text" class="input-field" name="number" id="applicant-number" disabled>
+                </div>
+                <div>
+                    <label for="number">Address</label>
+                    <input type="text" class="input-field" name="number" id="applicant-address" disabled>
+                </div>
+                <div>
+                    <label for="number">Applicant State</label>
+                    <input type="text" class="input-field" name="number" id="applicant-state" disabled>
                 </div>
                 <div>
                     <label for="country">Country</label>
-                    <input type="text" class="input-field" name="country" id="applicant-country" disabled
-                        value="Nigeria">
+                    <input type="text" class="input-field" name="country" id="applicant-country" disabled>
                 </div>
                 <div>
                     <label for="cover-letter">Cover Letter</label>
                     <textarea name="cover-letter" id="cover-letter"
-                        disabled>I can do all things listed below:
-
-                            Develop and execute email marketing campaigns to support business goals and increase customer engagement.
-                            Design and build automated email campaigns, including welcome sequences, nurture campaigns, and re-engagement flows.
-                            Segment email lists to personalize campaigns and improve performance.
-                            Test and optimize email campaigns for deliverability, open rates, click-through rates, and conversion rates.
-                            Handling and automating the progression of potential customers through the sales pipeline in a Customer Relationship Management system.</textarea>
+                        disabled></textarea>
                 </div>
                 <div>
                     <label for="resume">Resume</label>
-                    <input type="text" class="input-field" name="resume" id="applicant-resume" disabled value="https://cloudinary.com/cerdo/files/resume-1">
+                    <input type="url" class="input-field" name="resume" id="applicant-resume" disabled>
                 </div>
 
                 <div>
                     <label for="salary">Expected Salary</label>
-                    <input type="text" class="input-field" name="salary" id="applicant-salary" disabled value="40,000">
+                    <input type="text" class="input-field" name="salary" id="applicant-salary" disabled>
                 </div>
 
-                <div>
+                <!-- <div>
                     <label for="socials">LinkedIn, Facebook or any other Social Media</label>
-                    <input type="text" class="input-field" name="socials" id="applicant-socials" disabled value="https://www.linkedin.com/Veronica-ESQ">
-                </div>
+                    <input type="text" class="input-field" name="socials" id="applicant-socials" disabled
+                        value="https://www.linkedin.com/Veronica-ESQ">
+                </div> -->
                 <div class="btn-group">
                     <button type="submit" class="btn delete">Delete</button>
                     <button type="submit" class="btn--without-bg"><i class="ri-star-line"></i></button>
@@ -129,6 +136,47 @@
 
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/admin.js"></script>
+
+    <script>
+        // const adminToken = localStorage.getItem('adminToken');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const applicantId = urlParams.get('id');
+        console.log(applicantId);
+
+        function populateJobField() {
+            fetch(`https://anyworkx.onrender.com/api/view/application/details/${applicantId}/`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    // "Authorization": `Bearer ${adminToken}`
+                }
+            })
+                .then((response) => response.json())
+                .then((applicant) => {
+                    document.getElementById("applicant-name").value = applicant.note.first_name;
+                    document.getElementById("applicant-email").value = applicant.note.email;
+                    document.getElementById("applicant-number").value = applicant.note.phone_number;
+                    document.getElementById("applicant-address").value = applicant.note.address;
+                    document.getElementById("applicant-state").value = applicant.note.state;
+                    document.getElementById("applicant-country").value = applicant.note.country;
+                    document.getElementById("cover-letter").value = applicant.note.cover_letter;
+                    document.getElementById("applicant-resume").value = applicant.cv_upload;
+                    document.getElementById("applicant-salary").value = applicant.note.salary;
+                    document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
+
+                    // const output = 
+                    
+                })
+                .catch((error) => {
+                    console.log(`Error loading job details: ${error}`);
+                });
+        }
+
+        populateJobField();
+
+
+    </script>
 </body>
 
 </html>

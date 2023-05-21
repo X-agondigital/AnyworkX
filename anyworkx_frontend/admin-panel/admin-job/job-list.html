@@ -82,12 +82,7 @@
                 </thead>
 
                 <tbody id="jobs_list-table-body">
-                    <tr>
-                        <td data-label="Job Title" id="job-title">Content Manager</td>
-                        <td data-label="Number of Applications">2</td>
-                        <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
-
-                    </tr>
+                    
                 </tbody>
             </table>
         </section>
@@ -98,47 +93,24 @@
     <script src="../../assets/js/admin.js"></script>
 
     <script>
-        const jobsApi = `https://anyworkx.onrender.com/api/create/job/list/`;
-
-        function getJobTitle() {
-            fetch('https://anyworkx.onrender.com/api/create/job/list/', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then((response) => response.json())
-                .then((jobs) => {
-                    let titleOutput = ` `
-                    for (const [key, job] of Object.entries(jobs)) {
-                        titleOutput += `
-                    <td data-label="Job Title">${job.job_title}</td>
-                    `
-                    }
-
-                    document.querySelector('#jobs_list-table-body').innerHTML = titleOutput;
-                })
-
-                .catch((error) => {
-                    console.log(`Error loading job title: ${error}`);
-                });
-        }
 
         function getJobPositions() {
             fetch('https://anyworkx.onrender.com/api/view/job/application/')
                 .then((response) => response.json())
                 .then((applicants) => {
-                    let output = ``;
-                    for (const [key, applicant] of Object.entries(applicants)) { // <-- use a different variable name here
+                    let output = '';
+                    applicants.Applicant.forEach((applicant) => {
+                        const jobTitle = applicant.job.job_title;
+                        const numOfApplications = applicants.total;
+
                         output += `
-                        <tr>
-                            
-                            <td data-label="Number of Applications">2</td>
-                            <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
-                            
-                        </tr>
-                        `
-                    }
+                            <tr>
+                                <td data-label="Job Title">${jobTitle}</td>
+                                <td data-label="Number of Applications">${numOfApplications}</td>
+                                <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
+                            </tr>
+                        `;
+                    });
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
                 })
@@ -147,7 +119,7 @@
                 });
         }
 
-        // getJobPositions();
+        getJobPositions();
     </script>
 </body>
 

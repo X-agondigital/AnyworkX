@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +19,7 @@
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="admin-nav">
         <div class="logo--container">
@@ -42,10 +44,11 @@
                 <a href="../manage-admin/admin.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-user-3-line"></i> <span>Manage Admins</span></li>
                 </a>
-                
+
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button
+                        class="btn get--started__btn">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -65,7 +68,7 @@
 
         <header class="secondary--nav">
             <a href="job-list.html" class="prev-btn"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
-            <h2>Applications under Content Manager</h2>
+            <h2>Applications under <span id="job-title"></span></h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
 
@@ -83,15 +86,63 @@
                     <tr>
                         <td data-label="Namee of Applicants">Veronica Dekunle</td>
                         <td data-label="Date Applied">9:30 03/08/2023</td>
-                        <td class="flex-container"><a href="view-application.html" class="edit btn--action">View</a> <a class="secondary-action btn--action"><i class="ri-star-line"></i></a> <a class="delete btn--action">Delete</a></td>                        
+                        <td class="flex-container"><a href="view-application.html" class="edit btn--action">View</a> <a
+                                class="secondary-action btn--action"><i class="ri-star-line"></i></a> <a
+                                class="delete btn--action">Delete</a></td>
                     </tr>
                 </tbody>
             </table>
         </section>
-        
+
     </main>
 
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/admin.js"></script>
+
+    <script>
+
+        function getJobPositions() {
+            fetch('https://anyworkx.onrender.com/api/view/job/application/')
+                .then((response) => response.json())
+                .then((applicants) => {
+                    let output = '';
+                    let jobTitle = ``;
+                    applicants.Applicant.forEach((applicant) => {
+                        const applicantName = applicant.first_name + " " + applicant.last_name;
+                        const dateApplied = applicant.created_at;
+                        const applicantId = applicant.id;
+
+                        output += `
+                            <tr>
+                                <td data-label="Job Title">${applicantName}</td>
+                                <td data-label="Number of Applications">${dateApplied}</td>
+                                <td class="flex-container"><a class="edit btn--action" data-id="${applicantId}">View</a> <a class="secondary-action btn--action"><i class="ri-star-line"></i></a> <a class="delete btn--action">Delete</a></td>     
+                            </tr>
+                        `;
+                        jobTitle = `${applicant.job.job_title}`;
+
+                    });
+
+                    document.querySelector('#jobs_list-table-body').innerHTML = output;
+                    document.querySelector("#job-title").innerHTML = jobTitle;
+
+                    // Add event listener to view button
+                    const viewApplicant = document.querySelectorAll('.edit');
+                    viewApplicant.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            window.location.href = `view-application.html?id=${jobId}`
+                        })
+                    })
+
+                })
+                .catch((error) => {
+                    console.log(`Error loading job openings: ${error}`);
+                });
+        }
+
+        getJobPositions();
+    </script>
 </body>
+
 </html>
