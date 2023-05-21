@@ -76,7 +76,7 @@
     </section>
 
     <aside class="breadcumb-navigation">
-        
+
     </aside>
 
     <section class="job-description-section">
@@ -129,7 +129,7 @@
             </div>
             <div>
                 <label for="salary">What is your expected salary?</label>
-                <input type="number" name="salary" class="input-field" id="salary" required value="$33">
+                <input type="number" name="salary" class="input-field" id="salary" required>
             </div>
 
             <!-- <div>
@@ -209,48 +209,44 @@
         function getJobPosts() {
             fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`)
                 .then((response) => response.json())
-                .then((note) => {
+                .then((jobs) => {
+                    const job = jobs; // Access the job details from the nested structure if applicable
+
                     let breadCumb = ``;
                     let outputTitle = ``;
                     let output = ``;
-                    for (const [key, job] of Object.entries(note)) { // <-- use a different variable name here
-                        outputTitle = `
+
+                    outputTitle = `
                         <h1 class="job-title">${job.job_title}</h1>
-                        `
-                        breadCumb = `
+                    `;
+
+                                    breadCumb = `
                         <a href="careers.html">careers</a> <i class="ri-arrow-right-s-line arrow-icon"></i> <a href="#"
                         class="active">${job.job_title}</a>
-                        `
-                        output = `
+                    `;
+
+                                    output = `
                         <h2>${job.job_title}</h2>
-
                         <main class="job-description">
-                            <article>
-                                ${job.job_description}
-                            </article>
-
-                            <br>
-
-                            <h2>${job.job_requirements_title}</h2>
-
-                            <article>
-                                ${job.job_requirements_body}
-                            </article>
-
-                            <br>
-
-                            <h2>${job.offer_title}</h2>
-                            
-                            <article>
-                                ${job.we_offer}
-                            </article>
+                        <article>
+                            ${job.job_description}
+                        </article>
+                        <br>
+                        <h2>${job.job_requirements_title}</h2>
+                        <article>
+                            ${job.job_requirements_body}
+                        </article>
+                        <br>
+                        <h2>${job.offer_title}</h2>
+                        <article>
+                            ${job.we_offer}
+                        </article>
                         </main>
-                        `
-                    }
+                    `;
+
                     document.querySelector(".breadcumb-navigation").innerHTML = breadCumb;
                     document.querySelector('.career-banner-section').innerHTML = outputTitle;
                     document.querySelector(".job-description-section").innerHTML = output;
-
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
@@ -258,6 +254,7 @@
         }
 
         getJobPosts();
+
 
 
         //Function for applying for job
@@ -299,7 +296,7 @@
                     console.log(data)
                     // clear the form
                     applicationForm.reset();
-                    applicationForm.style.display="none";
+                    applicationForm.style.display = "none";
                     // display success message
 
                     const successMsg = document.getElementById("response-message");

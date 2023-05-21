@@ -47,7 +47,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button
+                        class="btn get--started__btn">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -81,12 +82,12 @@
                 </thead>
 
                 <tbody id="jobs_list-table-body">
-                    <!-- <tr>
-                        <td data-label="Job Title">Content Manager</td>
+                    <tr>
+                        <td data-label="Job Title" id="job-title">Content Manager</td>
                         <td data-label="Number of Applications">2</td>
                         <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
 
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
         </section>
@@ -97,15 +98,41 @@
     <script src="../../assets/js/admin.js"></script>
 
     <script>
+        const jobsApi = `https://anyworkx.onrender.com/api/create/job/list/`;
+
+        function getJobTitle() {
+            fetch('https://anyworkx.onrender.com/api/create/job/list/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then((jobs) => {
+                    let titleOutput = ` `
+                    for (const [key, job] of Object.entries(jobs)) {
+                        titleOutput += `
+                    <td data-label="Job Title">${job.job_title}</td>
+                    `
+                    }
+
+                    document.querySelector('#jobs_list-table-body').innerHTML = titleOutput;
+                })
+
+                .catch((error) => {
+                    console.log(`Error loading job title: ${error}`);
+                });
+        }
+
         function getJobPositions() {
             fetch('https://anyworkx.onrender.com/api/view/job/application/')
                 .then((response) => response.json())
                 .then((applicants) => {
                     let output = ``;
-                    for (const [key, applicant] of Object.entries(applicants.applicant)) { // <-- use a different variable name here
+                    for (const [key, applicant] of Object.entries(applicants)) { // <-- use a different variable name here
                         output += `
                         <tr>
-                            <td data-label="Job Title">${job.job_title}</td>
+                            
                             <td data-label="Number of Applications">2</td>
                             <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
                             
@@ -120,7 +147,7 @@
                 });
         }
 
-        getJobPositions();
+        // getJobPositions();
     </script>
 </body>
 
