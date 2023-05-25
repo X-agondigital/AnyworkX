@@ -40,7 +40,7 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      setTimeout(window.location.href = 'all-job.html', 2000) ;
+      // setTimeout(window.location.href = 'all-job.html', 2000) ;
     })
     .catch((error) => {
       console.error("Error:", error);

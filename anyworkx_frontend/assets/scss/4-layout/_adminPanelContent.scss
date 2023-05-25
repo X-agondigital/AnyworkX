@@ -152,6 +152,7 @@ table {
     button {
       margin-right: 12px;
       min-width: 40px;
+      cursor: pointer;
     }
     button.active {
       border-bottom: 3px solid $secondaryColor;
@@ -170,6 +171,12 @@ table {
 
 .newsletter-lower--section {
   margin-top: 48px;
+  .no-subscribers{
+    color: #ccc;
+    text-align: center;
+    transform: translateY(24px);
+
+  }
   .pagination {
     display: flex;
     justify-content: flex-end;

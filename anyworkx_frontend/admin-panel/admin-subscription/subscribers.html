@@ -18,6 +18,11 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/scss/tab.css" rel="stylesheet">
+
+    <!-- Import SheetJS library -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
@@ -67,30 +72,62 @@
             </header>
 
             <article class="newsletter-lower--section">
-                <table id="table-subscribers">
-                    <thead id="thead-output">
-                        <tr>
-                            <th scope="col">Email Address</th>
-                            <th scope="col">Date subscribed</th>
-                            <th scope="col" colspan="2">Action</th>
-                        </tr>
-                    </thead>
 
-                    <tbody id="subscriber-table-body">
+                <div class="tab-content">
+                    <div class="tab--item active">
+                        <table id="table-subscribers all">
+                            <thead id="thead-output">
+                                <tr>
+                                    <th scope="col">Email Address</th>
+                                    <th scope="col">Date subscribed</th>
+                                    <th scope="col" colspan="2">Action</th>
+                                </tr>
+                            </thead>
 
-                    </tbody>
-                </table>
+                            <tbody id="subscriber-table-body">
 
-                <div class="pagination">
-                    <p id="pagination-output">Page <button class="pagination-button">1</button></p>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab--item">
+                        <h3 class="no-subscribers hidden">There are no new subscribers in the last 24 hours</h3>
+                        <table id="table-subscribers today">
+
+                            <thead id="thead-output">
+                                <tr>
+                                    <th scope="col">Email Address</th>
+                                    <th scope="col">Date subscribed</th>
+                                    <th scope="col" colspan="2">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="subscriber-table-body-2">
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
+                <div class="pagination" id="pagination-all">
+                    <p id="pagination-output-all">Page <button class="pagination-button">1</button></p>
+                </div>
+
+                <div class="pagination" id="pagination-today">
+                    <p id="pagination-output-today">Page <button class="pagination-button">1</button></p>
+                </div>
+
             </article>
         </section>
     </main>
+
+
     <script src="../../assets/js/admin.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script>
-        let currentPage = 1; // Track the current page globally
+        // Define separate currentPage variables for each tab
+        let currentPageAll = 1;
+        let currentPageToday = 1;
 
         function getSubscribers(page) {
             fetch(`https://anyworkx.onrender.com/api/subscribers/?page=${page}`)
@@ -107,16 +144,39 @@
                 `;
                     }
                     document.getElementById("subscriber-table-body").innerHTML = output;
-                    currentPage = page; // Update the current page value
-                    generatePaginationButtons(subscribers.last_page);
+                    currentPageAll = page; // Update the current page value for the "All" tab
+                    generatePaginationButtons(subscribers.last_page, page, "all");
                 })
                 .catch((error) => {
                     console.log(`Error loading subscribers: ${error}`);
                 });
         }
 
-        function generatePaginationButtons(totalPages) {
-            const paginationDiv = document.querySelector(".pagination");
+        function getTodaySubscribers(page) {
+            fetch(`https://anyworkx.onrender.com/api/subscribers/last-24-hours/?page=${page}`)
+                .then((response) => response.json())
+                .then((subscribers) => {
+                    let output = '';
+                    for (const subscriber of subscribers) {
+                        output += `
+                    <tr>
+                        <td data-label="Email Address">${subscriber.email}</td>
+                        <td data-label="Date subscribed">${subscriber.created_at}</td>
+                        <td><a class="delete btn--action">Delete</a></td>
+                    </tr>
+                `;
+                    }
+                    document.getElementById("subscriber-table-body-2").innerHTML = output;
+                    currentPageToday = page; // Update the current page value for the "Today" tab
+                    generatePaginationButtons(subscribers.last_page, page, "today");
+                })
+                .catch((error) => {
+                    console.log(`Error loading subscribers: ${error}`);
+                });
+        }
+
+        function generatePaginationButtons(totalPages, currentPage, tab) {
+            const paginationDiv = document.getElementById(`pagination-${tab}`);
             let paginationOutput = "Page ";
             for (let i = 1; i <= totalPages; i++) {
                 if (i === currentPage) {
@@ -129,15 +189,21 @@
             const buttons = paginationDiv.querySelectorAll(".pagination-button");
             buttons.forEach((button) => {
                 button.addEventListener("click", () => {
-                    getSubscribers(button.textContent);
+                    if (tab === "all") {
+                        getSubscribers(button.textContent);
+                    } else if (tab === "today") {
+                        getTodaySubscribers(button.textContent);
+                    }
                     buttons.forEach((button) => button.classList.remove("current-page"));
                     button.classList.add("current-page");
                 });
             });
         }
 
-        // Initialize with the first page
-        getSubscribers(currentPage);
+        // Initialize with the first page for each tab
+        getSubscribers(currentPageAll);
+        getTodaySubscribers(currentPageToday);
+
 
         // Helper function to convert an array of objects to CSV format
         function convertArrayToCSV(dataArray) {
@@ -168,14 +234,54 @@
             downloadFile(csvData, "subscribers.csv", "text/csv");
         });
 
-        // Event listener for the XLS download button
-        document.getElementById("download-xls").addEventListener("click", () => {
-            // Implement XLS download logic here
-            // You can use a library like SheetJS (https://sheetjs.com/) to generate XLS files
-            // Refer to the library's documentation for usage instructions
+        const xlsDownloadButton = document.getElementById("download-xls");
+
+        xlsDownloadButton.addEventListener("click", async () => {
+            try {
+                const response = await fetch("https://anyworkx.onrender.com/api/subscribers/last-24-hours/");
+                const data = await response.json();
+
+                // Convert JSON to XLS format
+                const worksheet = XLSX.utils.json_to_sheet(data);
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Subscribers");
+
+                // Generate XLS file blob
+                const xlsBlob = new Blob([s2ab(XLSX.write(workbook, { type: "binary" }))], { type: "application/octet-stream" });
+
+                // Create a link element and set its attributes
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(xlsBlob);
+                link.download = "subscribers.xls";
+
+                // Append the link to the document body
+                document.body.appendChild(link);
+
+                // Simulate a click on the link to trigger the download
+                link.click();
+
+                // Clean up by removing the link
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error(error);
+                // Handle any error that occurs during the fetch request
+            }
         });
 
+        // Utility function to convert s to array buffer
+        function s2ab(s) {
+            const buf = new ArrayBuffer(s.length);
+            const view = new Uint8Array(buf);
+            for (let i = 0; i < s.length; i++) {
+                view[i] = s.charCodeAt(i) & 0xff;
+            }
+            return buf;
+        }
+
+
+
     </script>
+    <script src="../../assets/js/tab.js"></script>
 </body>
 
 </html>
