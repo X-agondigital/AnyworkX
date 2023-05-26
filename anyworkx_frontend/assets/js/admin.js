@@ -1,7 +1,21 @@
 "use strict";
-// get admin token from localStorage
-const adminToken = localStorage.getItem('adminToken');
+// function checkAuth() {
+//   const adminToken = localStorage.getItem('adminToken');
+//   if (!adminToken) {
+//     // Admin is not logged in, redirect to login page
+//     window.location.href = '/login.html'; // Replace with your login page URL
+//   }
+// }
 
+// function logout() {
+//   localStorage.removeItem('adminToken');
+//   // Redirect to the login page
+//   window.location.href = '/login.html'; // Replace with your login page URL
+// }
+
+// document.getElementById('logout').addEventListener('click', logout())
+// get admin token from localStorage
+const adminToken = localStorage.getItem("adminToken");
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
 const form = document.getElementById("create-job");
@@ -24,7 +38,7 @@ form.addEventListener("submit", (event) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      'Authorization': `Bearer ${adminToken}`
+      Authorization: `Bearer ${adminToken}`,
     },
     body: JSON.stringify({
       job_title: jobTitle,
@@ -46,3 +60,5 @@ form.addEventListener("submit", (event) => {
       console.error("Error:", error);
     });
 });
+
+

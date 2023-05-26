@@ -49,3 +49,46 @@
 
 
 
+const xlsDownloadButton = document.getElementById("download-xls");
+
+        xlsDownloadButton.addEventListener("click", async () => {
+            try {
+                const response = await fetch("https://anyworkx.onrender.com/api/subscribers/last-24-hours/");
+                const data = await response.json();
+
+                // Convert JSON to XLS format
+                const worksheet = XLSX.utils.json_to_sheet(data);
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Subscribers");
+
+                // Generate XLS file blob
+                const xlsBlob = new Blob([s2ab(XLSX.write(workbook, { type: "binary" }))], { type: "application/octet-stream" });
+
+                // Create a link element and set its attributes
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(xlsBlob);
+                link.download = "subscribers.xls";
+
+                // Append the link to the document body
+                document.body.appendChild(link);
+
+                // Simulate a click on the link to trigger the download
+                link.click();
+
+                // Clean up by removing the link
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error(error);
+                // Handle any error that occurs during the fetch request
+            }
+        });
+
+        // Utility function to convert s to array buffer
+        function s2ab(s) {
+            const buf = new ArrayBuffer(s.length);
+            const view = new Uint8Array(buf);
+            for (let i = 0; i < s.length; i++) {
+                view[i] = s.charCodeAt(i) & 0xff;
+            }
+            return buf;
+        }
