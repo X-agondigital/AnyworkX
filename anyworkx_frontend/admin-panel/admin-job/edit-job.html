@@ -78,6 +78,13 @@
             <article class="job-application--fields">
                 <form id="edit-job">
                     <div>
+                        <label for="job-category">Job Category</label>
+                        <select name="job-category" id="job-category" class="input-field"
+                            placeholder="Select job category">
+
+                        </select>
+                    </div>
+                    <div>
                         <label for="job-title">Job Title</label>
                         <input type="text" class="input-field" name="job_title" id="job-title" required>
                     </div>
@@ -125,22 +132,52 @@
     <script src="../../assets/js/main.js"></script>
 
     <script>
-        // const adminToken = localStorage.getItem('adminToken');
+        const adminToken = localStorage.getItem('adminToken');
 
         const urlParams = new URLSearchParams(window.location.search);
         const jobId = urlParams.get('id');
         console.log(jobId);
+
+        fetch("https://anyworkx.onrender.com/api/admin/create/job_category/",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${adminToken}`
+                }
+            })
+            .then((response) => response.json())
+            .then((jobCategories) => {
+                const jobCategorySelect = document.getElementById("job-category");
+
+                jobCategories.jobs_category.forEach((category) => {
+                    const categoryId = category.id;
+                    const categoryName = category.category_name;
+
+                    // Create option element
+                    const option = document.createElement("option");
+                    option.value = categoryId;
+                    option.textContent = categoryName;
+
+                    // Append option to select
+                    jobCategorySelect.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                console.log(`Error loading job categories: ${error}`);
+            });
 
         function populateJobField() {
             fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    // "Authorization": `Bearer ${adminToken}`
+                    "Authorization": `Bearer ${adminToken}`
                 }
             })
                 .then((response) => response.json())
                 .then((job) => {
+                    document.getElementById("job-category").value = job.job_category;
                     document.getElementById("job-title").value = job.job_title;
                     document.getElementById("job_description").value = job.job_description;
                     document.getElementById("position").value = job.position;
@@ -163,7 +200,7 @@
 
         editForm.addEventListener("submit", (event) => {
             event.preventDefault();
-
+            const jobCategory = document.getElementById("job-category").value;
             const jobTitle = document.getElementById("job-title").value;
             const jobDescription = document.getElementById("job_description").value;
             const jobPosition = document.getElementById("position").value;
@@ -182,6 +219,7 @@
                     // "Authorization": `Bearer ${adminToken}`
                 },
                 body: JSON.stringify({
+                    job_category: jobCategory,
                     job_title: jobTitle,
                     job_description: jobDescription,
                     position: jobPosition,
