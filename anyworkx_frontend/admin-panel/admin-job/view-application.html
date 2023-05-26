@@ -21,7 +21,7 @@
 </head>
 
 <style>
-    .input-field{
+    .input-field {
         color: black;
     }
 </style>
@@ -64,7 +64,11 @@
             <h4>Job</h4>
             <p>Edit and update jobs</p>
         </a>
-        <a class="active" href="#">
+        <a href="job-category.html">
+            <h4>Job Category</h4>
+            <p>Edit and create job category</p>
+        </a>
+        <a class="active" href="job-list.html">
             <h4>Applications</h4>
             <p>View available applications</p>
         </a>
@@ -80,7 +84,7 @@
 
         <article class="job-application--fields">
             <form action="contact.html" method="post">
-                
+
                 <div>
                     <label for="name">Name</label>
                     <input type="text" class="input-field" name="name" id="applicant-name" disabled>
@@ -107,8 +111,7 @@
                 </div>
                 <div>
                     <label for="cover-letter">Cover Letter</label>
-                    <textarea name="cover-letter" id="cover-letter"
-                        disabled></textarea>
+                    <textarea name="cover-letter" id="cover-letter" disabled></textarea>
                 </div>
                 <div>
                     <label for="resume">Resume</label>
@@ -166,7 +169,7 @@
                     document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
 
                     // const output = 
-                    
+
                 })
                 .catch((error) => {
                     console.log(`Error loading job details: ${error}`);

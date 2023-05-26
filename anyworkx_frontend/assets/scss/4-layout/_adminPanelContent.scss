@@ -19,6 +19,28 @@
     font-family: inherit;
   }
 }
+#response-message {
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  margin: auto;
+  position: absolute;
+  top: 12px;
+  z-index: 90000000;
+  left: 43%;
+  text-align: center;
+  width: fit-content;
+}
+
+.response--success-message {
+  background: hsl(120, 80%, 70%);
+  border: 2px solid rgb(21, 187, 21);
+}
+
+.response--error-message {
+  background: hsl(0, 88%, 60%);
+  border: 2px solid rgba(228, 14, 14, 1);
+}
 .admin-login--wrapper {
   padding: 24px;
   form {
@@ -171,11 +193,10 @@ table {
 
 .newsletter-lower--section {
   margin-top: 48px;
-  .no-subscribers{
+  .no-subscribers {
     color: #ccc;
     text-align: center;
     transform: translateY(24px);
-
   }
   .pagination {
     display: flex;
@@ -188,7 +209,7 @@ table {
       border-radius: 6px;
       color: $bodyTextColor;
     }
-    .current-page{
+    .current-page {
       background-color: $secondaryColor;
       color: #fff;
     }

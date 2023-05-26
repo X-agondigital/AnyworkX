@@ -738,6 +738,7 @@ nav .nav--items__container a.active {
 .how-it-works .tab--item__wrapper .tab-img {
   max-width: 400px;
   height: auto;
+  margin: auto;
 }
 .how-it-works .tab--item__wrapper .customer--guide {
   display: grid;

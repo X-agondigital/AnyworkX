@@ -98,18 +98,17 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><button class="btn get--started__btn">Logout</button></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
 
     <div class="sidebar">
-        <a class="active" href="all-job.html">
+        <a href="all-job.html">
             <h4>Job</h4>
             <p>Edit and update jobs</p>
         </a>
-        <a href="job-category.html">
+        <a class="active" href="job-category.html">
             <h4>Job Category</h4>
             <p>Edit and create job category</p>
         </a>
@@ -123,10 +122,10 @@
 
     <div class="modal" id="delete-job-modal">
         <div class="modal-content">
-            <p>Are you sure you want to delete this job?</p>
+            <p>Are you sure you want to delete this category?</p>
             <div class="modal-buttons">
                 <button class="btn--cancel">Cancel</button>
-                <button class="btn--delete" data-id="${job.id}">Delete</button>
+                <button class="btn--delete" data-id="${jobCategory.id}">Delete</button>
             </div>
         </div>
     </div>
@@ -135,15 +134,15 @@
     <main class="main-content aside-sidebar">
 
         <header class="secondary--nav">
-            <h2>All Jobs</h2>
-            <a href="create.html" class="btn">Create a job</a>
+            <h2>Job Categories</h2>
+            <a href="job-category.html" class="btn">Create Category</a>
         </header>
 
         <section class="jobs--list">
             <table id="table-jobs-list">
                 <thead id="thead-output">
                     <tr>
-                        <th scope="col">Job Title</th>
+                        <th scope="col">Category Name</th>
                         <th scope="col">Time Created</th>
                         <th scope="col" colspan="2">Actions</th>
                     </tr>
@@ -158,37 +157,44 @@
     </main>
 
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/admin.js"></script>
+    <!-- <script src="../../assets/js/admin.js"></script> -->
 
     <script>
         // get admin token from localStorage
-        // const adminToken = localStorage.getItem('adminToken');
-        
+        const adminToken = localStorage.getItem('adminToken');
+
 
         const openDeleteModal = document.querySelector("#delete-job-modal");
         openDeleteModal.classList.add('hide-modal');
 
-        function getJobPositions() {
-            fetch('https://anyworkx.onrender.com/api/create/job/list/', {
+        function getJobCategories() {
+            fetch('https://anyworkx.onrender.com/api/admin/create/job_category/', {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json"
-                    // "Authorization": `Bearer ${adminToken}`
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${adminToken}`
                 }
             })
                 .then((response) => response.json())
-                .then((jobs) => {
-                    let output = ``;
-                    for (const [key, job] of Object.entries(jobs.jobs)) { // <-- use a different variable name here
+                .then((jobCategories) => {
+
+                    // console.log(jobCategories);
+                    let output = '';
+                    jobCategories.jobs_category.forEach((category) => {
+                        // Access the properties of each job category
+                        const categoryId = category.id;
+                        const categoryName = category.category_name;
+                        const createdAt = category.created_at;
+
                         output += `
                         <tr>
-                            <td data-label="Job Title">${job.job_title}</td>
-                            <td data-label="Time Created">${job.created_at}</td>
-                            <td><a class="edit btn--action" data-id="${job.id}">Edit</a></td>
-                            <td><a class="delete delete-btn btn--action" data-id="${job.id}">Delete</a></td>
-                </tr>
-                `
-                    }
+                            <td data-label="Category Name">${categoryName}</td>
+                            <td data-label="Time Created">${createdAt}</td>
+                            <td><a class="edit btn--action" data-id="${categoryId}">Edit</a></td>
+                            <td><a class="delete delete-btn btn--action" data-id="${categoryId}">Delete</a></td>
+                        </tr>
+                        `;
+                    })
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
 
@@ -202,9 +208,9 @@
 
                     for (let i = 0; i < btnOpenModal.length; i++) {
                         btnOpenModal[i].addEventListener("click", function (event) {
-                            const jobId = event.target.getAttribute('data-id');
-                            const deleteJobButton = document.querySelector('.btn--delete');
-                            deleteJobButton.setAttribute('data-id', jobId);
+                            const categoryId = event.target.getAttribute('data-id');
+                            const deleteCategoryButton = document.querySelector('.btn--delete');
+                            deleteCategoryButton.setAttribute('data-id', categoryId);
                             openDeleteModal.classList.remove("hide-modal");
                             console.log('button clicked');
                         });
@@ -227,8 +233,8 @@
                     const editButtons = document.querySelectorAll('.edit');
                     editButtons.forEach((button) => {
                         button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            window.location.href = `edit-job.html?id=${jobId}`
+                            const categoryId = e.target.getAttribute('data-id');
+                            window.location.href = `edit-category.html?id=${categoryId}`
                         })
                     })
 
@@ -236,8 +242,8 @@
                     const deleteButtons = document.querySelectorAll('.btn--delete');
                     deleteButtons.forEach((button) => {
                         button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            deleteJob(jobId);
+                            const categoryId = e.target.getAttribute('data-id');
+                            deleteCategory(categoryId);
                         });
                     });
                 })
@@ -246,11 +252,12 @@
                 });
         }
 
-        function deleteJob(jobId) {
-            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}`, {
+        function deleteCategory(categoryId) {
+            fetch(`https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${adminToken}`
                 },
             })
                 .then((response) => {
@@ -266,34 +273,34 @@
                     }
                 })
                 .then((data) => {
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add('response--success-message');
-                    alertMessage.textContent = "Job post deleted succesfully";
+                    // const alertMessage = document.querySelector("#response-message");
+                    // alertMessage.classList.add('response--success-message');
+                    // alertMessage.textContent = "Job category post deleted succesfully";
 
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
+                    // const messageDisappear = function () {
+                    //     alertMessage.style.display = "none";
+                    // };
 
-                    setTimeout(messageDisappear, 5000);
+                    // setTimeout(messageDisappear, 5000);
 
-                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
-                    getJobPositions();
+                    console.log(`Job posting with ID ${categoryId} deleted successfully.`);
+                    getJobCategories();
                 })
                 .catch((error) => {
-                    alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Something went wrong, please try again";
-                    
-                    console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
+                    // alertMessage.classList.add('response--error-message');
+                    // alertMessage.textContent = "Something went wrong, please try again";
+
+                    console.log(`Error deleting job posting with ID ${categoryId}: ${error}`);
                 });
         }
 
 
-        getJobPositions();
+        getJobCategories();
 
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn--delete')) {
-                const jobId = e.target.getAttribute('data-id');
-                deleteJob(jobId);
+                const categoryId = e.target.getAttribute('data-id');
+                deleteCategory(categoryId);
             }
         });
 

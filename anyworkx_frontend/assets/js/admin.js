@@ -3,7 +3,7 @@
 //   const adminToken = localStorage.getItem('adminToken');
 //   if (!adminToken) {
 //     // Admin is not logged in, redirect to login page
-//     window.location.href = '/login.html'; // Replace with your login page URL
+//     window.location.href = '../admin-login.html'; // Replace with your login page URL
 //   }
 // }
 
@@ -18,11 +18,41 @@
 const adminToken = localStorage.getItem("adminToken");
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
+// Fetch job categories and populate dropdown
+fetch("https://anyworkx.onrender.com/api/admin/create/job_category/",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${adminToken}`
+    }
+  })
+    .then((response) => response.json())
+    .then((jobCategories) => {
+      const jobCategorySelect = document.getElementById("job-category");
+
+      jobCategories.jobs_category.forEach((category) => {
+        const categoryId = category.id;
+        const categoryName = category.category_name;
+
+        // Create option element
+        const option = document.createElement("option");
+        option.value = categoryId;
+        option.textContent = categoryName;
+
+        // Append option to select
+        jobCategorySelect.appendChild(option);
+      });
+    })
+    .catch((error) => {
+      console.log(`Error loading job categories: ${error}`);
+    });
+
 const form = document.getElementById("create-job");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
+  const jobCategory = document.getElementById("job-category").value;
   const jobTitle = document.getElementById("job-title").value;
   const jobDescription = document.getElementById("job_description").value;
   const jobPosition = document.getElementById("position").value;
@@ -38,9 +68,10 @@ form.addEventListener("submit", (event) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${adminToken}`,
+      "Authorization": `Bearer ${adminToken}`,
     },
     body: JSON.stringify({
+      job_category: jobCategory,
       job_title: jobTitle,
       job_description: jobDescription,
       position: jobPosition,
@@ -60,5 +91,3 @@ form.addEventListener("submit", (event) => {
       console.error("Error:", error);
     });
 });
-
-
