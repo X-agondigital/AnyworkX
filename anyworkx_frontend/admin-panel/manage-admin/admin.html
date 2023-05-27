@@ -38,10 +38,10 @@
                 <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
                 </a>
-                <a href="create.html" class="admin_nav-link active">
+                <a href="../admin-job/create.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
                 </a>
-                <a href="../manage-admin/all-admin.html" class="admin_nav-link">
+                <a href="all-admin.html" class="admin_nav-link active">
                     <li class="admin_nav-item"><i class="ri-user-3-line"></i> <span>Manage Admins</span></li>
                 </a>
 
@@ -53,100 +53,71 @@
     </nav>
     <div class="overlay hidden"></div>
 
-    <div id="response-message"></div>
 
-    <div class="sidebar">
-        <a href="all-job.html">
-            <h4>Job</h4>
-            <p>Edit and update jobs</p>
-        </a>
-        <a class="active" href="job-category.html">
-            <h4>Job Category</h4>
-            <p>Edit and create job category</p>
-        </a>
-        <a class="" href="job-list.html">
-            <h4>Applications</h4>
-            <p>View available applications</p>
-        </a>
-    </div>
-
-    <main class="main-content aside-sidebar">
+    <main class="main-content">
         <section class="create-job--wrapper">
             <header class="secondary--nav">
-                <h2>Create Job Category</h2>
-                <a href="all-category.html" class="btn">View all Categories</a>
+                <h2>Create Admin</h2>
+                <a href="all-admin.html" class="btn">Manage-admins</a>
             </header>
 
             <article class="job-application--fields">
-                <form id="edit-category">
+                <form id="create-admin">
                     <div>
-                        <label for="job-category">Job Category</label>
-                        <input type="text" class="input-field" name="job-category" id="job-category" required>
+                        <label for="username">Username:</label>
+                        <input type="text" id="admin-username" name="admin-username" class="input-field">
                     </div>
-
-                    <button type="submit" class="btn" id="publish-btn">Update Category</button>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="admin-email" name="admin-email" class="input-field">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="admin-password" name="admin-password" class="input-field">
+                    </div>
+                    <button type="submit" class="btn" id="publish-btn">Create Admin</button>
                 </form>
             </article>
         </section>
     </main>
 
-    <!-- <script src="../../assets/js/admin.js"></script> -->
     <script src="../../assets/js/main.js"></script>
 
     <script>
-        const adminToken = localStorage.getItem('adminToken');
+        const adminForm = document.getElementById("create-admin");
+        adminForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const categoryId = urlParams.get('id');
-        console.log(categoryId);
+            const adminUsername = document.getElementById("admin-username").value;
+            const adminEmail = document.getElementById("admin-email").value;
+            const adminPassword = document.getElementById("admin-password").value;
 
-        function populateCategoryField() {
-            fetch(`https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`, {
-                method: "GET",
+            fetch("https://anyworkx.onrender.com/api/create/list/staff/", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${adminToken}`
-                }
-            })
-                .then((response) => response.json())
-                .then((jobCategory) => {
-                    document.getElementById("job-category").value = jobCategory.category_name;
-
-                })
-                .catch((error) => {
-                    console.log(`Error loading category details: ${error}`);
-                });
-        }
-
-        populateCategoryField();
-
-
-        //SCRIPT FOR EDITING JOB FIELDS
-        const editCategoryForm = document.getElementById("edit-category");
-
-        editCategoryForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-
-            const jobCategory = document.getElementById("job-category").value;
-
-
-            fetch(`https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${adminToken}`
                 },
                 body: JSON.stringify({
-                    category_name: jobCategory
-                })
+                    username: adminUsername,
+                    email: adminEmail,
+                    password: adminPassword
+                }),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.status}`);
+                    }
+
+                    return response.json();
+                })
                 .then((data) => {
                     console.log(data);
-                    window.location.href = 'all-category.html';
+                    // window.location.href = "/chat-window.html";
                 })
                 .catch((error) => {
-                    console.error("Unable to edit job:", error);
+                    // document.querySelector(".error-message").textContent =
+                    //     "Something went wrong, please try again";
+                    console.error("Error during login:", error);
                 });
         })
     </script>
