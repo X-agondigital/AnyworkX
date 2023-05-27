@@ -103,3 +103,20 @@ function scrollToBottom() {
 window.onload = setTimeout(() => {
   window.scrollTo(0, document.body.scrollHeight);
 }, 1000);
+
+
+
+function checkAuth() {
+  if (!token) {
+    // Admin is not logged in, redirect to login page
+    window.location.href = 'index.html'; // Replace with your login page URL
+  }
+}
+
+checkAuth();
+
+function logout() {
+  localStorage.removeItem('token');
+  // Redirect to the login page
+  window.location.href = 'index.html'; // Replace with your login page URL
+}
