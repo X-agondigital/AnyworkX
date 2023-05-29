@@ -430,22 +430,22 @@
                 console.error('Error fetching users:', error);
             });
 
-        const socket = new WebSocket('ws://' + window.location.host + '/ws/messages/');
+        // const socket = new WebSocket('ws://' + window.location.host + '/ws/messages/');
 
-        socket.onopen = function (e) {
-            console.log('WebSocket connection established.');
-        };
+        // socket.onopen = function (e) {
+        //     console.log('WebSocket connection established.');
+        // };
 
-        socket.onmessage = function (e) {
-            const data = JSON.parse(e.data);
-            console.log('Received message:', data.message);
-            // Update UI with new message
-            getMessages(data.userId);
-        };
+        // socket.onmessage = function (e) {
+        //     const data = JSON.parse(e.data);
+        //     console.log('Received message:', data.message);
+        //     // Update UI with new message
+        //     getMessages(data.userId);
+        // };
 
-        socket.onclose = function (e) {
-            console.log('WebSocket connection closed.');
-        };
+        // socket.onclose = function (e) {
+        //     console.log('WebSocket connection closed.');
+        // };
         // get selected user ID from dropdown
         // const userId = document.getElementById('user-dropdown').value;
 
