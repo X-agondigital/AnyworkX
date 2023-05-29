@@ -358,28 +358,28 @@
 
 
     <script>
-        const sidebar = document.querySelector(".sidebar");
-        const sidebarBtn = document.querySelector(".hamburger-wrap");
-        const hamburgerMenu = document.querySelector(".hamburger-icon")
+        // const sidebar = document.querySelector(".sidebar");
+        // const sidebarBtn = document.querySelector(".hamburger-wrap");
+        // const hamburgerMenu = document.querySelector(".hamburger-icon")
 
-        sidebarBtn.addEventListener('click', function () {
-            console.log("button clicked");
-            sidebar.classList.toggle("active");
+        // sidebarBtn.addEventListener('click', function () {
+        //     console.log("button clicked");
+        //     sidebar.classList.toggle("active");
 
-            if (sidebar.classList.contains("active")) {
-                hamburgerMenu.classList.remove("ri-menu-fold-line");
-                hamburgerMenu.classList.add("ri-menu-unfold-line");
-            } else {
+        //     if (sidebar.classList.contains("active")) {
+        //         hamburgerMenu.classList.remove("ri-menu-fold-line");
+        //         hamburgerMenu.classList.add("ri-menu-unfold-line");
+        //     } else {
 
-                hamburgerMenu.classList.add("ri-menu-fold-line");
-                hamburgerMenu.classList.remove("ri-menu-unfold-line");
-            }
-        })
+        //         hamburgerMenu.classList.add("ri-menu-fold-line");
+        //         hamburgerMenu.classList.remove("ri-menu-unfold-line");
+        //     }
+        // })
         // sidebarBtn.onclick = function () {
 
         //     
         // }
-        const usersList = 'https://anyworkx.onrender.com/api/list/users/';
+        const usersList = 'https://anyworkx.onrender.com/api/admin/list/users/';
         const messageUrl = 'https://anyworkx.onrender.com/api/messages/';
         const adminMessageUrl = 'https://anyworkx.onrender.com/api/admin/messages/';
 
@@ -503,7 +503,7 @@
 
 
         function sendMessage(message, userId) {
-            fetch(`https://anyworkx.onrender.com/api/messages/reply/${userId}/`, {
+            fetch(`https://anyworkx.onrender.com/api/admin/messages/reply/${userId}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

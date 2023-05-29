@@ -99,7 +99,7 @@
             </ul>
 
             <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn">Logout</button></a></div>
+                        class="btn get--started__btn" id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -170,7 +170,7 @@
         openDeleteModal.classList.add('hide-modal');
 
         function getJobPositions() {
-            fetch('https://anyworkx.onrender.com/api/create/job/list/', {
+            fetch('https://anyworkx.onrender.com/api/admin/create/job/list/', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

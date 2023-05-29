@@ -50,7 +50,7 @@ form.addEventListener("submit", (event) => {
   const skillRequirement = document.getElementById("skill-requirement").value;
   const anyworkxOffer = document.getElementById("offer").value;
 
-  fetch("https://anyworkx.onrender.com/api/create/job/list/", {
+  fetch("https://anyworkx.onrender.com/api/admin/create/job/list/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

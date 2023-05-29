@@ -48,7 +48,7 @@
             </ul>
 
             <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn">Logout</button></a></div>
+                        class="btn get--started__btn" id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -100,7 +100,7 @@
     <script>
 
         function getJobPositions() {
-            fetch('https://anyworkx.onrender.com/api/view/job/application/')
+            fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
                 .then((response) => response.json())
                 .then((applicants) => {
                     let output = '';

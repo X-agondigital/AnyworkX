@@ -47,8 +47,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
+                        id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -85,6 +85,8 @@
     <script src="../../assets/js/auth.js"></script>
 
     <script>
+        const adminToken = localStorage.getItem('adminToken');
+
         const adminForm = document.getElementById("create-admin");
         adminForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -93,10 +95,11 @@
             const adminEmail = document.getElementById("admin-email").value;
             const adminPassword = document.getElementById("admin-password").value;
 
-            fetch("https://anyworkx.onrender.com/api/create/list/staff/", {
+            fetch("https://anyworkx.onrender.com/api/admin/create/list/staff/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${adminToken}`
                 },
                 body: JSON.stringify({
                     username: adminUsername,
@@ -118,7 +121,13 @@
                 .catch((error) => {
                     // document.querySelector(".error-message").textContent =
                     //     "Something went wrong, please try again";
-                    console.error("Error occured:", error);
+                    if (error.response) {
+                        error.response.json().then((errorMessage) => {
+                            console.error("Error during login:", errorMessage);
+                        });
+                    } else {
+                        console.error("Error during login:", error.message);
+                    }
                 });
         })
     </script>

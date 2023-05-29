@@ -8,10 +8,11 @@ function checkAuth() {
 
 checkAuth();
 
+
 function logout() {
   localStorage.removeItem("adminToken");
   // Redirect to the login page
   window.location.href = "../admin-login.html"; // Replace with your login page URL
 }
 
-document.getElementById("logout").addEventListener("click", logout);
+document.querySelector("#logout").addEventListener("click", logout);

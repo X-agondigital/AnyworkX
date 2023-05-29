@@ -245,7 +245,7 @@
     <script defer src="assets/js/main.js"></script>
     <script>
         function getJobPositions() {
-            fetch('https://anyworkx.onrender.com/api/create/job/list/')
+            fetch('https://anyworkx.onrender.com/api/admin/create/job/list/')
                 .then((response) => response.json())
                 .then((jobs) => {
                     let output = ``;

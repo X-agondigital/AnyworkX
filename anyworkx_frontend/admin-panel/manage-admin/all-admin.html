@@ -98,7 +98,7 @@
 
             </ul>
 
-            <div class="cta-button"><button class="btn get--started__btn">Logout</button></div>
+            <div class="cta-button"><button class="btn get--started__btn" id="logout">Logout</button></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -154,11 +154,11 @@
         openDeleteModal.classList.add('hide-modal');
 
         function getAdmins() {
-            fetch('https://anyworkx.onrender.com/api/create/list/staff/', {
+            fetch('https://anyworkx.onrender.com/api/admin/create/list/staff/', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    // "Authorization": `Bearer ${adminToken}`
+                    "Authorization": `Bearer ${adminToken}`
                 }
             })
                 .then((response) => response.json())

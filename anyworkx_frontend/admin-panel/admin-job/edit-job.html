@@ -48,7 +48,7 @@
             </ul>
 
             <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn">Logout</button></a></div>
+                        class="btn get--started__btn" id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -169,7 +169,7 @@
             });
 
         function populateJobField() {
-            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
+            fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -213,7 +213,7 @@
             const skillRequirement = document.getElementById("skill-requirement").value;
             const anyworkxOffer = document.getElementById("offer").value;
 
-            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
+            fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

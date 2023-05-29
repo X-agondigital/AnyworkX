@@ -207,7 +207,7 @@
         const jobId = urlParams.get('id');
 
         function getJobPosts() {
-            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`)
+            fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`)
                 .then((response) => response.json())
                 .then((jobs) => {
                     const job = jobs; // Access the job details from the nested structure if applicable
@@ -286,7 +286,7 @@
             formData.append("cv_upload", resume);
             formData.append("salary", salary);
 
-            fetch(`https://anyworkx.onrender.com/api/jobs/apply/${jobId}/`, {
+            fetch(`https://anyworkx.onrender.com/api/applicant/jobs/apply/${jobId}/`, {
                 method: "POST",
                 body: formData,
             })

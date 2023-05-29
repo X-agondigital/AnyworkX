@@ -54,7 +54,7 @@
             </ul>
 
             <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn">Logout</button></a></div>
+                        class="btn get--started__btn" id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -149,7 +149,7 @@
         console.log(applicantId);
 
         function populateJobField() {
-            fetch(`https://anyworkx.onrender.com/api/view/application/details/${applicantId}/`, {
+            fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -158,7 +158,7 @@
             })
                 .then((response) => response.json())
                 .then((applicant) => {
-                    document.getElementById("applicant-name").value = applicant.note.first_name;
+                    document.getElementById("applicant-name").value = applicant.note.first_name + " " + applicant.note.last_name;
                     document.getElementById("applicant-email").value = applicant.note.email;
                     document.getElementById("applicant-number").value = applicant.note.phone_number;
                     document.getElementById("applicant-address").value = applicant.note.address;
