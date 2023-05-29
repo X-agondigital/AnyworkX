@@ -99,8 +99,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn" id="logout">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
+                        id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -168,6 +168,7 @@
     <!-- <script src="../../assets/js/admin.js"></script> -->
 
     <script>
+        const adminToken = localStorage.getItem('adminToken');
 
         function getJobPositions() {
             fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
@@ -186,9 +187,13 @@
                             <tr>
                                 <td data-label="Job Title">${applicantName}</td>
                                 <td data-label="Number of Applications">${dateApplied}</td>
-                                <td class="flex-container"><a class="edit btn--action" data-id="${applicantId}">View</a> <a class="secondary-action btn--action "><i class="ri-star-line"></i></a> <a class="delete delete-btn btn--action" data-id="${applicantId}">Delete</a></td>     
+                                <td class="flex-container">
+                                <a class="edit btn--action" data-id="${applicantId}">View</a>
+                                <a class="secondary-action bookmark btn--action" data-id="${applicantId}"><i class="ri-star-line"></i></a>
+                                <a class="delete delete-btn btn--action" data-id="${applicantId}">Delete</a>
+                                </td>     
                             </tr>
-                        `;
+                            `;
                         jobTitle = `${applicant.job.job_title}`;
 
                     });
@@ -211,6 +216,14 @@
                             const jobId = e.target.getAttribute('data-id');
                             deleteJob(jobId);
                         });
+                    });
+
+                    const bookmarkButtons = document.querySelectorAll('.bookmark');
+                    bookmarkButtons.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            bookmarkApplicant(jobId)
+                        })
                     });
 
                     //SCRIPT FOR MODAL
@@ -244,7 +257,7 @@
 
                     btnCloseModal.addEventListener("click", closeModalWindow);
 
-                    
+
 
                 })
                 .catch((error) => {
@@ -253,7 +266,7 @@
         }
 
         function deleteJob(applicantId) {
-            fetch(`https://anyworkx.onrender.com/api/view/application/details/${applicantId}/`, {
+            fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -293,6 +306,55 @@
                 });
         }
 
+        function bookmarkApplicant(applicantId) {
+            const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
+            const alertMessage = document.querySelector('#response-message');
+
+            fetch(`https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${adminToken}`
+                },
+            })
+                .then((response) => {
+                    if (response.status === 204) {
+                        // Job was successfully deleted, so return an empty object
+                        return {};
+                    } else if (response.ok) {
+                        // Job was not deleted, but response body contains JSON
+                        return response.json();
+                    } else {
+                        // Response was not successful, so throw an error
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .then((data) => {
+                    console.log(`Applicant with ID ${applicantId} marked successfully.`);
+
+                    bookmarkButton.classList.toggle('active-bookmark');
+
+                    alertMessage.classList.add('response--success-message');
+                    alertMessage.textContent = "Applicant bookmarked successfully.";
+
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
+                    setTimeout(messageDisappear, 3000);
+                })
+                .catch((error) => {
+                    console.log(`Error adding Applicant with ID ${applicantId}: ${error}`);
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something, went wrong. Please, refresh aand try again";
+
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
+                    setTimeout(messageDisappear, 3000);
+                });
+        }
+
+
         getJobPositions();
 
         document.addEventListener('click', (e) => {
@@ -301,7 +363,15 @@
                 deleteJob(jobId);
             }
         });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('bookmark')) {
+                const applicantId = e.target.getAttribute('data-id');
+                bookmarkApplicant(applicantId);
+            }
+        });
     </script>
+
 </body>
 
 </html>

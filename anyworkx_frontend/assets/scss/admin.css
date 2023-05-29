@@ -378,6 +378,12 @@ table .flex-container {
   gap: 24px;
 }
 
+.active-bookmark {
+  color: rgb(126, 0, 196);
+  transition: 0.3s;
+  border: 1.5px solid rgb(126, 0, 196);
+}
+
 @media screen and (max-width: 600px) {
   table {
     border: 0;
