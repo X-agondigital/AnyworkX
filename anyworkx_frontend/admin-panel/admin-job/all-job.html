@@ -18,57 +18,9 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
-    <style>
-        .hide-modal {
-            display: none;
-        }
-
-
-        .modal {
-
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
-        }
-
-        .modal-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .btn--cancel,
-        .btn--delete {
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .btn--cancel {
-            background-color: #f1f1f1;
-        }
-
-        .btn--delete {
-            background-color: #dd4b39;
-            color: white;
-        }
-
-        .is-active {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="../../assets/scss/modal.css" rel="stylesheet">
+    
+    
 </head>
 
 <body>
@@ -281,6 +233,7 @@
                     getJobPositions();
                 })
                 .catch((error) => {
+                    const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add('response--error-message');
                     alertMessage.textContent = "Something went wrong, please try again";
                     

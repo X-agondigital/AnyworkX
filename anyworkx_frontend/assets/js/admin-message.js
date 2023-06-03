@@ -68,6 +68,17 @@ fetch(usersList)
     console.error("Error fetching users:", error);
   });
 
+var pusher = new Pusher("4329042c17d3987f58c2", {
+  cluster: "eu",
+  encrypted: true,
+});
+
+var channel = pusher.subscribe("chat");
+channel.bind('new_message', function(data) {
+  console.log(data.message);
+  // Update the chat interface with the new message
+});
+
 // const socket = new WebSocket('ws://' + window.location.host + '/ws/messages/');
 
 // socket.onopen = function (e) {
