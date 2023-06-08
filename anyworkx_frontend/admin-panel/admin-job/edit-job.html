@@ -48,8 +48,8 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn" id="logout">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
+                        id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
@@ -239,6 +239,10 @@
                 })
                 .catch((error) => {
                     console.error("Unable to edit job:", error);
+
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
                 });
         })
 

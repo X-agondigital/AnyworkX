@@ -197,6 +197,11 @@
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
+
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Unable to load jobs, please refresh and try again";
+                    
                 });
         }
 

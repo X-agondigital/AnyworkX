@@ -5,34 +5,33 @@ const adminToken = localStorage.getItem("adminToken");
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
 // Fetch job categories and populate dropdown
-fetch("https://anyworkx.onrender.com/api/admin/create/job_category/",
-  {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${adminToken}`
-    }
-  })
-    .then((response) => response.json())
-    .then((jobCategories) => {
-      const jobCategorySelect = document.getElementById("job-category");
+fetch("https://anyworkx.onrender.com/api/admin/create/job_category/", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${adminToken}`,
+  },
+})
+  .then((response) => response.json())
+  .then((jobCategories) => {
+    const jobCategorySelect = document.getElementById("job-category");
 
-      jobCategories.jobs_category.forEach((category) => {
-        const categoryId = category.id;
-        const categoryName = category.category_name;
+    jobCategories.jobs_category.forEach((category) => {
+      const categoryId = category.id;
+      const categoryName = category.category_name;
 
-        // Create option element
-        const option = document.createElement("option");
-        option.value = categoryId;
-        option.textContent = categoryName;
+      // Create option element
+      const option = document.createElement("option");
+      option.value = categoryId;
+      option.textContent = categoryName;
 
-        // Append option to select
-        jobCategorySelect.appendChild(option);
-      });
-    })
-    .catch((error) => {
-      console.log(`Error loading job categories: ${error}`);
+      // Append option to select
+      jobCategorySelect.appendChild(option);
     });
+  })
+  .catch((error) => {
+    console.log(`Error loading job categories: ${error}`);
+  });
 
 const form = document.getElementById("create-job");
 
@@ -54,7 +53,7 @@ form.addEventListener("submit", (event) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${adminToken}`,
+      Authorization: `Bearer ${adminToken}`,
     },
     body: JSON.stringify({
       job_category: jobCategory,
@@ -71,9 +70,12 @@ form.addEventListener("submit", (event) => {
     .then((response) => response.json())
     .then((data) => {
       // console.log(data);
-      setTimeout(window.location.href = 'all-job.html', 2000) ;
+      setTimeout((window.location.href = "all-job.html"), 2000);
     })
     .catch((error) => {
       console.error("Error:", error);
+      const alertMessage = document.querySelector("#response-message");
+      alertMessage.classList.add("response--error-message");
+      alertMessage.textContent = "Something went wrong, please refresh and try again";
     });
 });

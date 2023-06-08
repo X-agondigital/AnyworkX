@@ -117,6 +117,9 @@
                 })
                 .catch((error) => {
                     console.log(`Error loading category details: ${error}`);
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please try again";
                 });
         }
 

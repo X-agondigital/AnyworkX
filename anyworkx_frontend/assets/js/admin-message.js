@@ -66,18 +66,29 @@ fetch(usersList)
   })
   .catch((error) => {
     console.error("Error fetching users:", error);
+
+    const alertMessage = document.querySelector("#response-message");
+      alertMessage.classList.add("response--error-message");
+      alertMessage.textContent = "Unable to fetch users, please try again";
+
+      const messageDisappear = function () {
+        alertMessage.style.display = "none";
+      };
+
+      setTimeout(messageDisappear, 5000);
   });
 
-var pusher = new Pusher("4329042c17d3987f58c2", {
+/*var pusher = new Pusher("4329042c17d3987f58c2", {
   cluster: "eu",
   encrypted: true,
 });
 
 var channel = pusher.subscribe("chat");
-channel.bind('new_message', function(data) {
+channel.bind("new_message", function (data) {
   console.log(data.message);
   // Update the chat interface with the new message
 });
+*/
 
 // const socket = new WebSocket('ws://' + window.location.host + '/ws/messages/');
 
@@ -147,6 +158,16 @@ function getMessages(userId) {
     })
     .catch((error) => {
       console.error("Error getting messages:", error);
+
+      const alertMessage = document.querySelector("#response-message");
+      alertMessage.classList.add("response--error-message");
+      alertMessage.textContent = "Unable to get messages, please try again";
+
+      const messageDisappear = function () {
+        alertMessage.style.display = "none";
+      };
+
+      setTimeout(messageDisappear, 5000);
     });
 }
 
@@ -174,6 +195,16 @@ function sendMessage(message, userId) {
     })
     .catch((error) => {
       console.error("Error sending message:", error);
+
+      const alertMessage = document.querySelector("#response-message");
+      alertMessage.classList.add("response--error-message");
+      alertMessage.textContent = "Error occured while sending message, please try again";
+
+      const messageDisappear = function () {
+        alertMessage.style.display = "none";
+      };
+
+      setTimeout(messageDisappear, 5000);
     });
 }
 

@@ -55,6 +55,8 @@
     </nav>
     <div class="overlay hidden"></div>
 
+    <div id="response-message"></div>
+
     <div class="sidebar">
         <a href="all-job.html">
             <h4>Job</h4>
@@ -201,6 +203,10 @@
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
+
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Unable to load job categories, please refresh the page";
                 });
         }
 
@@ -225,22 +231,23 @@
                     }
                 })
                 .then((data) => {
-                    // const alertMessage = document.querySelector("#response-message");
-                    // alertMessage.classList.add('response--success-message');
-                    // alertMessage.textContent = "Job category post deleted succesfully";
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add('response--success-message');
+                    alertMessage.textContent = "Job category deleted succesfully";
 
-                    // const messageDisappear = function () {
-                    //     alertMessage.style.display = "none";
-                    // };
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
 
-                    // setTimeout(messageDisappear, 5000);
+                    setTimeout(messageDisappear, 5000);
 
                     console.log(`Job posting with ID ${categoryId} deleted successfully.`);
                     getJobCategories();
                 })
                 .catch((error) => {
-                    // alertMessage.classList.add('response--error-message');
-                    // alertMessage.textContent = "Something went wrong, please try again";
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Unable to delete category, please try again";
 
                     console.log(`Error deleting job posting with ID ${categoryId}: ${error}`);
                 });
