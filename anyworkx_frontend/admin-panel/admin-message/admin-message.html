@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/scss/admin-message.css" rel="stylesheet">
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
 
 </head>
 
@@ -51,6 +51,8 @@
 
             </ul>
 
+            <button id="requestPermissionButton"><i class="ri-notification-2-line"></i></button>
+
             <div class="cta-button"><button class="btn get--started__btn" id="logout">Logout</button></div>
         </div>
     </nav>
@@ -68,6 +70,8 @@
             </div>
         </section>
 
+
+
         <section class="main-content">
             <section class="chatbox">
                 <div id="messages"></div>
@@ -78,6 +82,7 @@
                             <input type="text" id="user-id" disabled>
                         </div>
                         <br>
+
                         <div class="message-field">
                             <input type="text" id="reply-message" class="input-field" autofocus>
                             <br>
@@ -90,7 +95,7 @@
 
 
     </main>
-
+    <script type="module" src="../../assets/js/pusher-notification.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/admin-message.js"></script>
     <script>

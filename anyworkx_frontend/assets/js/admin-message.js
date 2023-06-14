@@ -1,3 +1,43 @@
+// import Pusher from 'pusher-js';
+
+// const pusher = new Pusher("4329042c17d3987f58c2", {
+//   cluster: "eu",
+//   // encrypted: true,
+// });
+
+// Pusher.log = function (msg) {
+//   console.log(msg);
+// }
+// pusher.connection.bind('state_change', stateChanged);
+// function stateChanged(change){
+//   document.getElementById('connection_status').value= (change.current)
+// }
+// const channel = pusher.subscribe("notifications");
+// channel.bind("new-notification", 
+// function (data) {
+//   console.log('connection successful');
+//   console.log('New notification:', data.message);
+//   // Update the chat interface with the new message
+// });
+
+// const socket = new WebSocket('ws://anyworkx.onrender.com/api/ws/messages/');
+
+// socket.onopen = function (e) {
+//     console.log('WebSocket connection established.');
+// };
+
+// socket.onmessage = function (e) {
+//     const data = JSON.parse(e.data);
+//     console.log('Received message:', data.message);
+//     // Update UI with new message
+//     getMessages(data.userId);
+// };
+
+// socket.onclose = function (e) {
+//     console.log('WebSocket connection closed.');
+// };
+
+
 const sidebar = document.querySelector(".sidebar");
 const sidebarBtn = document.querySelector(".hamburger-wrap");
 const hamburgerMenu = document.querySelector(".hamburger-icon");
@@ -78,34 +118,7 @@ fetch(usersList)
       setTimeout(messageDisappear, 5000);
   });
 
-/*var pusher = new Pusher("4329042c17d3987f58c2", {
-  cluster: "eu",
-  encrypted: true,
-});
 
-var channel = pusher.subscribe("chat");
-channel.bind("new_message", function (data) {
-  console.log(data.message);
-  // Update the chat interface with the new message
-});
-*/
-
-// const socket = new WebSocket('ws://' + window.location.host + '/ws/messages/');
-
-// socket.onopen = function (e) {
-//     console.log('WebSocket connection established.');
-// };
-
-// socket.onmessage = function (e) {
-//     const data = JSON.parse(e.data);
-//     console.log('Received message:', data.message);
-//     // Update UI with new message
-//     getMessages(data.userId);
-// };
-
-// socket.onclose = function (e) {
-//     console.log('WebSocket connection closed.');
-// };
 // get selected user ID from dropdown
 // const userId = document.getElementById('user-dropdown').value;
 
