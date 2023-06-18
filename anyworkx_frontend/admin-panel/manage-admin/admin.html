@@ -53,7 +53,9 @@
         </div>
     </nav>
     <div class="overlay hidden"></div>
-
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
 
     <main class="main-content">
         <section class="create-job--wrapper">
@@ -87,10 +89,12 @@
 
     <script>
         const adminToken = localStorage.getItem('adminToken');
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         const adminForm = document.getElementById("create-admin");
         adminForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            loadingOverlay.classList.add('active');
 
             const adminUsername = document.getElementById("admin-username").value;
             const adminEmail = document.getElementById("admin-email").value;
@@ -115,10 +119,15 @@
                 }
 
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
+                loadingOverlay.classList.remove('active');
                 window.location.href = "all-admin.html";
             } catch (error) {
-                console.error("Error during admin creation:", error);
+                // console.error("Error during admin creation:", error);
+                const alertMessage = document.querySelector("#response-message");
+                alertMessage.classList.add("response--error-message");
+                alertMessage.textContent = "Something went wrong, please refresh and try again";
+                loadingOverlay.classList.remove('active');
 
                 // Check if the error message exists in the error object
                 if (error.message) {

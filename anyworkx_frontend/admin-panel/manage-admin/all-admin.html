@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/scss/modal.css" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -54,6 +54,10 @@
         </div>
     </nav>
     <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
 
     <div id="response-message"></div>
 
@@ -100,9 +104,10 @@
     <script>
         // get admin token from localStorage
         const adminToken = localStorage.getItem('adminToken');
-
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         function getAdmins() {
+            loadingOverlay.classList.add('active');
             fetch('https://anyworkx.onrender.com/api/admin/create/list/staff/', {
                 method: "GET",
                 headers: {
@@ -181,13 +186,19 @@
                             deleteAdmin(adminId);
                         });
                     });
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
-                    console.log(`Error loading job openings: ${error}`);
+                    // console.log(`Error loading admins: ${error}`);
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    loadingOverlay.classList.remove('active');
                 });
         }
 
         function deleteAdmin(adminId) {
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/update_staff/delete/${adminId}/`, {
                 method: 'DELETE',
                 headers: {
@@ -220,6 +231,7 @@
 
                     console.log(`Admin with ID ${adminId} deleted successfully.`);
                     getAdmins();
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     const alertMessage = document.querySelector("#response-message");
@@ -227,6 +239,7 @@
                     alertMessage.textContent = "Something went wrong, please try again";
 
                     console.log(`Error deleting admin with ID ${adminId}: ${error}`);
+                    loadingOverlay.classList.remove('active');
                 });
         }
 

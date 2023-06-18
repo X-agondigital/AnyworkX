@@ -54,11 +54,15 @@
 
             </ul>
 
-            <div class="cta-button"><a href="../admin-login.html"><button
-                        class="btn get--started__btn" id="logout">Logout</button></a></div>
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
+                        id="logout">Logout</button></a></div>
         </div>
     </nav>
     <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
 
     <div class="sidebar">
         <a href="all-job.html">
@@ -144,12 +148,14 @@
 
     <script>
         // const adminToken = localStorage.getItem('adminToken');
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         const urlParams = new URLSearchParams(window.location.search);
         const applicantId = urlParams.get('id');
         console.log(applicantId);
 
         function populateJobField() {
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: "GET",
                 headers: {
@@ -170,11 +176,17 @@
                     document.getElementById("applicant-salary").value = applicant.note.salary;
                     document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
 
+                    loadingOverlay.classList.remove('active');
+
                     // const output = 
 
                 })
                 .catch((error) => {
-                    console.log(`Error loading job details: ${error}`);
+                    // console.log(`Error loading job details: ${error}`);
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    loadingOverlay.classList.remove('active');
                 });
         }
 

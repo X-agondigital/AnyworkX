@@ -54,6 +54,10 @@
     </nav>
     <div class="overlay hidden"></div>
 
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
     <div id="response-message"></div>
 
     <div class="sidebar">
@@ -130,10 +134,9 @@
         const editCategoryForm = document.getElementById("edit-category");
 
         editCategoryForm.addEventListener("submit", (event) => {
+            loadingOverlay.classList.add('active');
             event.preventDefault();
-
             const jobCategory = document.getElementById("job-category").value;
-
 
             fetch(`https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`, {
                 method: "PATCH",
@@ -151,7 +154,11 @@
                     window.location.href = 'all-category.html';
                 })
                 .catch((error) => {
-                    console.error("Unable to edit job:", error);
+                    // console.error("Unable to edit job:", error);
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    loadingOverlay.classList.remove('active');
                 });
         })
     </script>

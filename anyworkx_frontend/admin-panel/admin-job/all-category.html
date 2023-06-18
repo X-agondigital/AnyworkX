@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/scss/modal.css" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -56,6 +56,11 @@
     <div class="overlay hidden"></div>
 
     <div id="response-message"></div>
+
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
 
     <div class="sidebar">
         <a href="all-job.html">
@@ -116,12 +121,13 @@
     <script>
         // get admin token from localStorage
         const adminToken = localStorage.getItem('adminToken');
-
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         const openDeleteModal = document.querySelector("#delete-job-modal");
         openDeleteModal.classList.add('hide-modal');
 
         function getJobCategories() {
+            loadingOverlay.classList.add('active');
             fetch('https://anyworkx.onrender.com/api/admin/create/job_category/', {
                 method: "GET",
                 headers: {
@@ -200,6 +206,7 @@
                             deleteCategory(categoryId);
                         });
                     });
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
@@ -207,10 +214,13 @@
                     const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add('response--error-message');
                     alertMessage.textContent = "Unable to load job categories, please refresh the page";
+
+                    loadingOverlay.classList.remove('active');
                 });
         }
 
         function deleteCategory(categoryId) {
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`, {
                 method: 'DELETE',
                 headers: {
@@ -243,6 +253,8 @@
 
                     console.log(`Job posting with ID ${categoryId} deleted successfully.`);
                     getJobCategories();
+
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     const alertMessage = document.querySelector("#response-message");
@@ -250,6 +262,8 @@
                     alertMessage.textContent = "Unable to delete category, please try again";
 
                     console.log(`Error deleting job posting with ID ${categoryId}: ${error}`);
+
+                    loadingOverlay.classList.remove('active');
                 });
         }
 

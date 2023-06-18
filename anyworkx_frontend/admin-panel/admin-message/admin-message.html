@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/scss/admin-message.css" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -83,6 +82,8 @@
                         </div>
                         <br>
 
+                        <p id="token"></p>
+
                         <div class="message-field">
                             <input type="text" id="reply-message" class="input-field" autofocus>
                             <br>
@@ -95,6 +96,30 @@
 
 
     </main>
+    <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <script>
+        /*if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/anyworkx_frontend/firebase-messaging-sw.js')
+                .then(function (registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function (error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }*/
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                .then(function (registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function (error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+
     <script type="module" src="../../assets/js/pusher-notification.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/admin-message.js"></script>

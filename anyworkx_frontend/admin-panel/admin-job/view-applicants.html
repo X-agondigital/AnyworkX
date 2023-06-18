@@ -57,6 +57,10 @@
     </nav>
     <div class="overlay hidden"></div>
 
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
     <div class="sidebar">
         <a href="all-job.html">
             <h4>Job</h4>
@@ -112,7 +116,7 @@
                                 <th scope="col" colspan="2">Actions</th>
                             </tr>
                         </thead>
-        
+
                         <tbody id="jobs_list-table-body">
                             <!-- <tr>
                                 <td data-label="Namee of Applicants">Veronica Dekunle</td>
@@ -134,9 +138,9 @@
                                 <th scope="col" colspan="2">Actions</th>
                             </tr>
                         </thead>
-        
+
                         <tbody id="jobs_list-table-body">
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -151,7 +155,10 @@
     <script>
         const adminToken = localStorage.getItem('adminToken');
 
+        const loadingOverlay = document.getElementById('loading-overlay');
+
         function getJobPositions() {
+            loadingOverlay.classList.add('active');
             fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
                 .then((response) => response.json())
                 .then((applicants) => {
@@ -235,18 +242,21 @@
                         }
                     }
 
-
                     btnCloseModal.addEventListener("click", closeModalWindow);
 
-
-
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
-                    console.log(`Error loading job openings: ${error}`);
+                    // console.log(`Error loading job openings: ${error}`);
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    loadingOverlay.classList.remove('active');
                 });
         }
 
         function deleteJob(applicantId) {
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: 'DELETE',
                 headers: {
@@ -278,18 +288,23 @@
 
                     console.log(`Job posting with ID ${jobId} deleted successfully.`);
                     getJobPositions();
+
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     alertMessage.classList.add('response--error-message');
                     alertMessage.textContent = "Something went wrong, please try again";
 
                     console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
+
+                    loadingOverlay.classList.remove('active');
                 });
         }
 
         function bookmarkApplicant(applicantId) {
             const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
             const alertMessage = document.querySelector('#response-message');
+            loadingOverlay.classList.add('active');
 
             fetch(`https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`, {
                 method: 'POST',
@@ -322,6 +337,8 @@
                         alertMessage.style.display = "none";
                     };
                     setTimeout(messageDisappear, 3000);
+
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     console.log(`Error adding Applicant with ID ${applicantId}: ${error}`);
@@ -332,6 +349,8 @@
                         alertMessage.style.display = "none";
                     };
                     setTimeout(messageDisappear, 3000);
+
+                    loadingOverlay.classList.remove('active');
                 });
         }
 

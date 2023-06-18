@@ -59,6 +59,10 @@
     </nav>
     <div class="overlay hidden"></div>
 
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
     <div id="response-message"></div>
 
     <div class="modal" id="delete-job-modal">
@@ -146,6 +150,9 @@
         let currentPageToday = 1;
 
         function getSubscribers(page) {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.classList.add('active');
+
             fetch(`https://anyworkx.onrender.com/api/subscribers/?page=${page}`)
                 .then((response) => response.json())
                 .then((subscribers) => {
@@ -201,6 +208,8 @@
                             deleteSubscriber(subscriberId);
                         });
                     });
+
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     console.log(`Error loading subscribers: ${error}`);
@@ -215,12 +224,15 @@
                     const messageDisappear = function () {
                         alertMessage.style.display = "none";
                     };
+                    loadingOverlay.classList.remove('active');
 
                     setTimeout(messageDisappear, 5000);
                 });
         }
 
         function deleteSubscriber(subscriberId) {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/delete_subscribers/${subscriberId}`, {
                 method: 'DELETE',
                 headers: {
@@ -253,6 +265,8 @@
 
                     console.log(`Subscriber with ID ${subscriberId} deleted successfully.`);
                     getSubscribers(currentPageAll);
+
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     const alertMessage = document.querySelector("#response-message");
@@ -260,6 +274,8 @@
                     alertMessage.textContent = "Something went wrong, please try again";
 
                     console.log(`Error deleting Subscriber with ID ${subscriberId}: ${error}`);
+
+                    loadingOverlay.classList.remove('active');
                 });
         }
 

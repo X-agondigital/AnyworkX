@@ -54,6 +54,10 @@
     </nav>
     <div class="overlay hidden"></div>
 
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
     <div id="response-message"></div>
 
     <div class="sidebar">
@@ -98,6 +102,8 @@
     <script>
         const adminToken = localStorage.getItem("adminToken");
 
+        const loadingOverlay = document.getElementById('loading-overlay');
+
         //SCRIPT FOR CREATING JOB CATEGORY
         const formCategory = document.getElementById("create-category");
 
@@ -117,7 +123,8 @@
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
+                    // console.log(data);
+                    loadingOverlay.classList.add('active');
                     window.location.href = 'all-category.html';
                     // setTimeout(window.location.href = 'all-job.html', 2000) ;
                 })
@@ -127,6 +134,7 @@
                     const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add("response--error-message");
                     alertMessage.textContent = "Something went wrong, please try again";
+                    loadingOverlay.classList.remove('active');
                 });
         });
     </script>

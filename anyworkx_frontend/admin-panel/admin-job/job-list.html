@@ -54,6 +54,10 @@
     </nav>
     <div class="overlay hidden"></div>
 
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
     <div id="response-message"></div>
 
     <div class="sidebar">
@@ -101,8 +105,10 @@
     <!-- <script src="../../assets/js/admin.js"></script> -->
 
     <script>
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         function getJobPositions() {
+            loadingOverlay.classList.add('active');
             fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
                 .then((response) => response.json())
                 .then((applicants) => {
@@ -121,6 +127,8 @@
                     });
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
+
+                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
@@ -128,6 +136,8 @@
                     const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add("response--error-message");
                     alertMessage.textContent = "Something went wrong, please refresh the page";
+
+                    loadingOverlay.classList.remove('active');
                 });
         }
 
