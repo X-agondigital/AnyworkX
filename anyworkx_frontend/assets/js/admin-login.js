@@ -1,7 +1,8 @@
 function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-
+  const loadingOverlay = document.getElementById('loading-overlay');
+  loadingOverlay.classList.add('active');
   fetch("https://anyworkx.onrender.com/api/login/", {
     method: "POST",
     headers: {
@@ -17,9 +18,6 @@ function login() {
       return response.json();
     })
     .then((data) => {
-      // const token = data.token;
-      // localStorage.setItem("token", token);
-      // console.log(token);
       console.log("Token:", data.access);
       localStorage.setItem("adminToken", data.access);
 
@@ -28,6 +26,10 @@ function login() {
         // window.location.href = "/anyworkx_frontend/admin-panel/admin-message/admin-message.html";
     })
     .catch((error) => {
-      console.error("Error during login:", error);
+      // console.error("Error during login:", error);
+      loadingOverlay.classList.remove('active');
+      const alertMessage = document.querySelector("#response-message");
+      alertMessage.classList.add("response--error-message");
+      alertMessage.textContent = "Something went wrong, please refresh and try again";
     });
 }
