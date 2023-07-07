@@ -1418,6 +1418,36 @@ aside.modal-window .chat-window--container input[type=submit] {
   width: 100%;
   text-align: center;
 }
+aside.modal-window .chat-window--container .send-button {
+  position: relative;
+}
+aside.modal-window .chat-window--container .send-button:active {
+  background: #666;
+}
+aside.modal-window .chat-window--container .button__text {
+  color: #fff;
+  transition: all 0.2s;
+}
+aside.modal-window .button--loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  inset: 0;
+  margin: auto;
+  border: 4px solid transparent;
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+}
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
 aside.modal-window .error-message {
   color: rgb(202, 36, 36);
   font-size: 16px;

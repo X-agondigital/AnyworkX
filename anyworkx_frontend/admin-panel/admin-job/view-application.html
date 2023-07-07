@@ -64,6 +64,18 @@
         <div class="loading-indicator"></div>
     </div>
 
+    <div id="response-message"></div>
+
+    <div class="modal" id="delete-job-modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this job?</p>
+            <div class="modal-buttons">
+                <button class="btn--cancel">Cancel</button>
+                <button class="btn--delete" data-id="${job.id}">Delete</button>
+            </div>
+        </div>
+    </div>
+
     <div class="sidebar">
         <a href="all-job.html">
             <h4>Job</h4>
@@ -83,7 +95,7 @@
 
         <header class="secondary--nav">
             <a href="view-applicants.html" class="prev-btn"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
-            <h2>Applications under <span id="job-title"></span></h2>
+            <h2>Application under <span id="job-title"></span></h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
 
@@ -143,19 +155,20 @@
     </main>
 
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/admin.js"></script>
+    <!-- <script src="../../assets/js/admin.js"></script> -->
     <script src="../../assets/js/auth.js"></script>
 
     <script>
         // const adminToken = localStorage.getItem('adminToken');
         const loadingOverlay = document.getElementById('loading-overlay');
+        const alertMessage = document.querySelector("#response-message");
 
         const urlParams = new URLSearchParams(window.location.search);
         const applicantId = urlParams.get('id');
         console.log(applicantId);
 
         function populateJobField() {
-            loadingOverlay.classList.add('active');
+            // loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: "GET",
                 headers: {
@@ -165,6 +178,7 @@
             })
                 .then((response) => response.json())
                 .then((applicant) => {
+
                     document.getElementById("applicant-name").value = applicant.note.first_name + " " + applicant.note.last_name;
                     document.getElementById("applicant-email").value = applicant.note.email;
                     document.getElementById("applicant-number").value = applicant.note.phone_number;
@@ -174,7 +188,7 @@
                     document.getElementById("cover-letter").value = applicant.note.cover_letter;
                     document.getElementById("applicant-resume").value = applicant.cv_upload;
                     document.getElementById("applicant-salary").value = applicant.note.salary;
-                    document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
+                    // document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
 
                     loadingOverlay.classList.remove('active');
 
@@ -182,8 +196,7 @@
 
                 })
                 .catch((error) => {
-                    // console.log(`Error loading job details: ${error}`);
-                    const alertMessage = document.querySelector("#response-message");
+                    console.log(`Error loading job details: ${error}`);
                     alertMessage.classList.add("response--error-message");
                     alertMessage.textContent = "Something went wrong, please refresh and try again";
                     loadingOverlay.classList.remove('active');
@@ -192,6 +205,44 @@
 
         populateJobField();
 
+        function getJobPositions() {
+            fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
+                .then((response) => response.json())
+                .then((applicants) => {
+                    let jobTitle = ``;
+                    applicants.Applicant.forEach((applicant) => {
+                        jobTitle = `${applicant.job.job_title}`;
+
+                    });
+
+                    document.querySelector("#job-title").innerHTML = jobTitle;
+
+                    const deleteButtons = document.querySelectorAll('.btn--delete');
+                    deleteButtons.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            deleteJob(jobId);
+                        });
+                    });
+
+                    const bookmarkButtons = document.querySelectorAll('.bookmark');
+                    bookmarkButtons.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            bookmarkApplicant(jobId)
+                        })
+                    });
+
+                })
+                .catch((error) => {
+                    console.log(`Error loading job openings: ${error}`);
+
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    loadingOverlay.classList.remove('active');
+                });
+        }
+        getJobPositions()
 
     </script>
 </body>

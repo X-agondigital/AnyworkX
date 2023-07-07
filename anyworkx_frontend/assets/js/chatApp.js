@@ -9,8 +9,43 @@ if (token) {
   console.error("Token not found in localStorage");
 }
 
+// Function to extract expiration timestamp from the token
+function getTokenExpiration(token) {
+  const base64Url = token.split('.')[1]; // Extract the payload part of the token
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Replace URL-safe characters
+  const payload = JSON.parse(atob(base64)); // Decode base64 to JSON object
+
+  // The "exp" claim in the token holds the expiration time in Unix timestamp format
+  const expirationTime = payload.exp;
+
+  return expirationTime;
+}
+
+// Function to check if access token has expired
+function checkAccessTokenExpiry() {  
+  if (!token) {
+    // No access token found, redirect to homepage or perform other actions
+    window.location.href = 'index.html';
+    return;
+  }
+
+  const currentTimestamp = Math.floor(Date.now() / 1000); // Current time in seconds
+  const expiryTimestamp = getTokenExpiration(token);
+
+  if (expiryTimestamp < currentTimestamp) {
+    // Access token has expired, log user out or perform other actions
+    localStorage.removeItem('token');
+    window.location.href = 'index.html';
+  }
+}
+
+// Call the checkAccessTokenExpiry function when needed, such as on page load or after a certain time interval
+checkAccessTokenExpiry();
+
+
 // Get the messages from the server
 function getMessages(token) {
+  const messagesDiv = document.getElementById("messages");
   fetch(url, {
     method: "GET",
     headers: {
@@ -26,7 +61,7 @@ function getMessages(token) {
     })
     .then((data) => {
       // Display the messages
-      const messagesDiv = document.getElementById("messages");
+
       const textarea = document.querySelector("textarea");
       messagesDiv.innerHTML = "";
       data.forEach((message) => {
@@ -44,7 +79,7 @@ function getMessages(token) {
       });
 
       // Scroll to the bottom of the messages
-      messagesDiv.scrollTop = messageDiv.scrollHeight;
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
       textarea.focus();
     })
     .catch((error) => {
@@ -104,19 +139,17 @@ window.onload = setTimeout(() => {
   window.scrollTo(0, document.body.scrollHeight);
 }, 1000);
 
-
-
 function checkAuth() {
   if (!token) {
     // Admin is not logged in, redirect to login page
-    window.location.href = 'index.html'; // Replace with your login page URL
+    window.location.href = "index.html"; // Replace with your login page URL
   }
 }
 
 checkAuth();
 
 function logout() {
-  localStorage.removeItem('token');
+  localStorage.removeItem("token");
   // Redirect to the login page
-  window.location.href = 'index.html'; // Replace with your login page URL
+  window.location.href = "index.html"; // Replace with your login page URL
 }

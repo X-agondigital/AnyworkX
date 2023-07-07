@@ -507,6 +507,7 @@ table .flex-container {
   display: flex;
   justify-content: flex-end;
   margin: 48px;
+  gap: 6px;
 }
 .newsletter-lower--section .pagination button {
   padding: 6px 12px;

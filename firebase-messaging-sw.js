@@ -16,3 +16,16 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
+
+self.addEventListener("push", function (event) {
+  const notificationData = event.data.json();
+  const { title, body } = notificationData;
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: body,
+      icon: "/anyworkx_frontend/assets/images/favicon.png",
+    })
+  );
+});
+

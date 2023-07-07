@@ -1,3 +1,10 @@
+const chatButton = document.querySelector(".send-button");
+
+chatButton.addEventListener("click", () => {
+  chatButton.classList.add("button--loading");
+  document.querySelector(".button__text").style.visibility = "hidden";
+});
+
 function login() {
   // e.preventDefault();
   const username = document.getElementById("username-id").value;
@@ -28,6 +35,9 @@ function login() {
     .catch((error) => {
       document.querySelector(".error-message").textContent =
         "Something went wrong, please try again";
+
+        chatButton.classList.remove("button--loading");
+  document.querySelector(".button__text").style.visibility = "visible";
       console.error("Error during login:", error);
     });
 }

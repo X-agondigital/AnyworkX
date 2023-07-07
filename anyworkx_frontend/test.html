@@ -5,90 +5,57 @@
     <title>Customer Service Chat App</title>
     <style>
       /* Add your CSS styling here */
+      .send-button{
+        position: relative;
+        padding: 8px 16px;
+        background: #009579;
+        
+      }
+
+      .send-button:active{
+        background: #007a63;
+      }
+      .button__text{
+        font: bold 20px 'poppins', sans-serif;
+        color: #fff;
+        transition: all 0.2s;
+      }
+      .button--loading::after{
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        inset: 0;
+        margin: auto;
+        border: 4px solid transparent;
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: button-loading-spinner 1s ease infinite;
+      }
+      @keyframes button-loading-spinner {
+        from{
+            transform: rotate(0turn);
+        }
+        to{
+            transform: rotate(1turn);
+        }
+      }
     </style>
   </head>
   <body>
     <!-- <td><a class="delete btn--action" data-id="${job.id}">Delete</a></td> -->
 
-    <input type="text" id="message-input" value="testing" placeholder="Type your message here" />
-    <button id="send-button">Send</button>
-    <div id="output"></div>
-
+    <button class="send-button">
+        <span class="button__text">Proceed</span>
+    </button>
+    
     <script>
-      
-      const inputValue = document.getElementById("message-input");
-      console.log(inputValue.value);
+        const sendButton = document.querySelector('.send-button')
 
-      function editJob() {
-            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}/`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    // "Authorization": `Bearer ${adminToken}`
-                }
-            })
-                .then((response) => response.json())
-                .then((job) => {
-                    document.getElementById("job-title").value = job.job_title;
-                    document.getElementById("job_description").value = job.job_description;
-                    document.getElementById("position").value = job.position;
-                    document.getElementById("job-location").value = job.job_location;
-                    document.getElementById("requirement-heading").value = job.job_requirements_title;
-                    document.getElementById("job-requirements").value = job.job_requirements_body;
-                    document.getElementById("skill-requirement").value = job.offer_title;
-                    document.getElementById("offer").value = job.we_offer;
-                })
-                .catch((error) => {
-                    console.log(`Error loading job details: ${error}`);
-                });
-        }
-      
+        sendButton.addEventListener('click', ()=>{
+            sendButton.classList.add("button--loading")
+            document.querySelector('.button__text').style.visibility="hidden";
+        })
     </script>
   </body>
 </html>
-
-
-
-const xlsDownloadButton = document.getElementById("download-xls");
-
-        xlsDownloadButton.addEventListener("click", async () => {
-            try {
-                const response = await fetch("https://anyworkx.onrender.com/api/subscribers/last-24-hours/");
-                const data = await response.json();
-
-                // Convert JSON to XLS format
-                const worksheet = XLSX.utils.json_to_sheet(data);
-                const workbook = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(workbook, worksheet, "Subscribers");
-
-                // Generate XLS file blob
-                const xlsBlob = new Blob([s2ab(XLSX.write(workbook, { type: "binary" }))], { type: "application/octet-stream" });
-
-                // Create a link element and set its attributes
-                const link = document.createElement("a");
-                link.href = URL.createObjectURL(xlsBlob);
-                link.download = "subscribers.xls";
-
-                // Append the link to the document body
-                document.body.appendChild(link);
-
-                // Simulate a click on the link to trigger the download
-                link.click();
-
-                // Clean up by removing the link
-                document.body.removeChild(link);
-            } catch (error) {
-                console.error(error);
-                // Handle any error that occurs during the fetch request
-            }
-        });
-
-        // Utility function to convert s to array buffer
-        function s2ab(s) {
-            const buf = new ArrayBuffer(s.length);
-            const view = new Uint8Array(buf);
-            for (let i = 0; i < s.length; i++) {
-                view[i] = s.charCodeAt(i) & 0xff;
-            }
-            return buf;
-        }

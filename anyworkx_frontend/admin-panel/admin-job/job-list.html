@@ -112,19 +112,34 @@
             fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
                 .then((response) => response.json())
                 .then((applicants) => {
-                    let output = '';
+                    const categoryCounts = {}; // Object to store the number of applications per job category
+
                     applicants.Applicant.forEach((applicant) => {
                         const jobCategory = applicant.job.job_category;
-                        const numOfApplications = applicants.total;
+                        const jobId = applicant.job.id;
+
+                        // Increment the count for the job category
+                        if (categoryCounts[jobCategory]) {
+                            categoryCounts[jobCategory]++;
+                        } else {
+                            categoryCounts[jobCategory] = 1;
+                        }
+                    });
+
+                    let output = '';
+
+                    // Iterate over the job categories and display the data
+                    for (const category in categoryCounts) {
+                        const numOfApplications = categoryCounts[category];
 
                         output += `
-                            <tr>
-                                <td data-label="Job Title">${jobCategory}</td>
-                                <td data-label="Number of Applications">${numOfApplications}</td>
-                                <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
-                            </tr>
-                        `;
-                    });
+          <tr>
+            <td data-label="Job Category">${category}</td>
+            <td data-label="Number of Applications">${numOfApplications}</td>
+            <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
+          </tr>
+        `;
+                    }
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
 
@@ -142,6 +157,7 @@
         }
 
         getJobPositions();
+
     </script>
 </body>
 
