@@ -115,7 +115,7 @@
                     const categoryCounts = {}; // Object to store the number of applications per job category
 
                     applicants.Applicant.forEach((applicant) => {
-                        const jobCategory = applicant.job.job_category;
+                        const jobCategory = applicant.job.job_title;
                         const jobId = applicant.job.id;
 
                         // Increment the count for the job category
