@@ -1,9 +1,12 @@
-const chatButton = document.querySelector(".send-button");
+const chatButton = document.querySelectorAll(".send-button");
+const buttonText = document.querySelectorAll(".button__text");
 
-chatButton.addEventListener("click", () => {
-  chatButton.classList.add("button--loading");
-  document.querySelector(".button__text").style.visibility = "hidden";
-});
+for(let i =0; i<chatButton.length; i++){
+  chatButton[i].addEventListener("click", () => {
+    chatButton[i].classList.add("button--loading");
+    buttonText[i].style.visibility = "hidden";
+  });
+}
 
 function login() {
   // e.preventDefault();
@@ -35,9 +38,10 @@ function login() {
     .catch((error) => {
       document.querySelector(".error-message").textContent =
         "Something went wrong, please try again";
-
-        chatButton.classList.remove("button--loading");
-  document.querySelector(".button__text").style.visibility = "visible";
-      console.error("Error during login:", error);
+        for(let i =0; i<chatButton.length; i++){
+          chatButton[i].classList.remove("button--loading");
+          buttonText[i].style.visibility = "visible";
+        }
+      // console.error("Error during login:", error);
     });
 }

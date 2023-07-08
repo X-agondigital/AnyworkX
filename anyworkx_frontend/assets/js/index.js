@@ -38,12 +38,17 @@ form.addEventListener("submit", async (event) => {
     // Resets the form
     form.reset();
   } catch (error) {
-    console.error(error); // Handles any errors that occur during the fetch request
+    // console.error(error); // Handles any errors that occur during the fetch request
 
     // Updates the response message
     responseMessage.textContent =
       "An error occurred while subscribing. Please try again.";
     responseMessage.classList.add("response--error-message");
+
+    for(let i =0; i<chatButton.length; i++){
+      chatButton[i].classList.remove("button--loading");
+      buttonText[i].style.visibility = "visible";
+    }
 
     const messageDisappear = function () {
       responseMessage.style.display = "none";
@@ -53,12 +58,7 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-//LIVE CHAT SCRIPTS
-// const liveForm = document.getElementById('live-chat-form');
 
-// liveForm.addEventListener('submit', function(e){
-//   e.preventDefault();
-// })
 
 function saveUserDetails(event) {
   event.preventDefault();
