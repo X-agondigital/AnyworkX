@@ -313,18 +313,7 @@
                     "Authorization": `Bearer ${adminToken}`
                 },
             })
-                .then((response) => {
-                    if (response.status === 204) {
-                        // Job was successfully deleted, so return an empty object
-                        return {};
-                    } else if (response.ok) {
-                        // Job was not deleted, but response body contains JSON
-                        return response.json();
-                    } else {
-                        // Response was not successful, so throw an error
-                        throw new Error('Network response was not ok.');
-                    }
-                })
+                .then((response) => response.json())
                 .then((data) => {
                     console.log(`Applicant with ID ${applicantId} marked successfully.`);
 
