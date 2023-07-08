@@ -24,7 +24,6 @@ function getTokenExpiration(token) {
 // Function to check if access token has expired
 function checkAccessTokenExpiry() {  
   if (!token) {
-    // No access token found, redirect to homepage or perform other actions
     window.location.href = 'index.html';
     return;
   }
@@ -33,14 +32,14 @@ function checkAccessTokenExpiry() {
   const expiryTimestamp = getTokenExpiration(token);
 
   if (expiryTimestamp < currentTimestamp) {
-    // Access token has expired, log user out or perform other actions
     localStorage.removeItem('token');
     window.location.href = 'index.html';
   }
 }
 
-// Call the checkAccessTokenExpiry function when needed, such as on page load or after a certain time interval
 checkAccessTokenExpiry();
+
+document.addEventListener('DOMContentLoaded', checkAccessTokenExpiry);
 
 
 // Get the messages from the server

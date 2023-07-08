@@ -54,16 +54,43 @@ sidebarBtn.addEventListener("click", function () {
     hamburgerMenu.classList.remove("ri-menu-unfold-line");
   }
 });
-// sidebarBtn.onclick = function () {
 
-//
-// }
 const usersList = "https://anyworkx.onrender.com/api/admin/list/users/";
 const messageUrl = "https://anyworkx.onrender.com/api/messages/";
 const adminMessageUrl = "https://anyworkx.onrender.com/api/admin/messages/";
 
 // get admin token from localStorage
 const adminToken = localStorage.getItem("adminToken");
+
+function getTokenExpiration(adminToken) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const payload = JSON.parse(atob(base64));
+
+  const expirationTime = payload.exp;
+
+  return expirationTime;
+}
+
+function checkAccessTokenExpiry() {
+  if (!adminToken) {
+    window.location.href = '../admin-login.html';
+    return;
+  }
+
+  const currentTimestamp = Math.floor(Date.now() / 1000); // Current time in seconds
+  const expiryTimestamp = getTokenExpiration(adminToken);
+
+  if (expiryTimestamp < currentTimestamp) {
+    // Access token has expired, perform logout actions
+    localStorage.removeItem('adminToken');
+    window.location.href = '../admin-login.html';
+  }
+}
+
+// Call the checkAccessTokenExpiry function when needed, such as on page load or after a certain time interval
+checkAccessTokenExpiry();
+document.addEventListener('DOMContentLoaded', checkAccessTokenExpiry);
 
 const userList = document.getElementById("user-list");
 
