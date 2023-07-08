@@ -63,7 +63,7 @@ const adminMessageUrl = "https://anyworkx.onrender.com/api/admin/messages/";
 const adminToken = localStorage.getItem("adminToken");
 
 function getTokenExpiration(adminToken) {
-  const base64Url = token.split('.')[1];
+  const base64Url = adminToken.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const payload = JSON.parse(atob(base64));
 
