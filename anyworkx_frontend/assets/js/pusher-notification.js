@@ -55,7 +55,7 @@ messaging
   });
 
 messaging.onMessage(function (payload) {
-  console.log("Message received. ", payload);
+  console.log("Message received. ", payload.notification);
   // Handle the notification payload here
 });
 

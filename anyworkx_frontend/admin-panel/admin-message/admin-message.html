@@ -50,7 +50,7 @@
 
             </ul>
 
-            <button id="requestPermissionButton"><i class="ri-notification-2-line"></i></button>
+            <button id="requestPermissionButton"><i class="ri-notification-2-line notification-icon"></i></button>
 
             <div class="cta-button"><button class="btn get--started__btn" id="logout">Logout</button></div>
         </div>
@@ -99,7 +99,7 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
     <script>
-        /*if ('serviceWorker' in navigator) {
+        if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/anyworkx_frontend/firebase-messaging-sw.js')
                 .then(function (registration) {
                     console.log('Service Worker registered with scope:', registration.scope);
@@ -107,17 +107,17 @@
                 .catch(function (error) {
                     console.log('Service Worker registration failed:', error);
                 });
-        }*/
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js')
-                .then(function (registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch(function (error) {
-                    console.log('Service Worker registration failed:', error);
-                });
         }
+
+        // if ('serviceWorker' in navigator) {
+        //     navigator.serviceWorker.register('/firebase-messaging-sw.js')
+        //         .then(function (registration) {
+        //             console.log('Service Worker registered with scope:', registration.scope);
+        //         })
+        //         .catch(function (error) {
+        //             console.log('Service Worker registration failed:', error);
+        //         });
+        // }
     </script>
 
     <script type="module" src="../../assets/js/pusher-notification.js"></script>

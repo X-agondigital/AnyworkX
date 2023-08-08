@@ -94,7 +94,7 @@
     <main class="main-content aside-sidebar">
 
         <header class="secondary--nav">
-            <a href="view-applicants.html" class="prev-btn"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
+            <a class="prev-btn" onclick="history.back()"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
             <h2>Application under <span id="job-title"></span></h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
@@ -145,9 +145,8 @@
                     <input type="text" class="input-field" name="socials" id="applicant-socials" disabled
                         value="https://www.linkedin.com/Veronica-ESQ">
                 </div> -->
-                <div class="btn-group">
-                    <button type="submit" class="btn delete">Delete</button>
-                    <button type="submit" class="btn--without-bg"><i class="ri-star-line"></i></button>
+                <div class="application-btn-group">
+
                 </div>
             </form>
         </article>
@@ -165,7 +164,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const applicantId = urlParams.get('id');
-        console.log(applicantId);
+        // console.log(applicantId);
 
         function populateJobField() {
             // loadingOverlay.classList.add('active');
@@ -178,7 +177,10 @@
             })
                 .then((response) => response.json())
                 .then((applicant) => {
-
+                    let output = `
+                    <button type="submit" class="btn btn--delete" data-id="${applicantId}">Delete</button>
+                    <button type="submit" class="btn--without-bg bookmarkBtn" data-id="${applicantId}"><i class="ri-star-line"></i></button>
+                    `;
                     document.getElementById("applicant-name").value = applicant.note.first_name + " " + applicant.note.last_name;
                     document.getElementById("applicant-email").value = applicant.note.email;
                     document.getElementById("applicant-number").value = applicant.note.phone_number;
@@ -189,6 +191,8 @@
                     document.getElementById("applicant-resume").value = applicant.cv_upload;
                     document.getElementById("applicant-salary").value = applicant.note.salary;
                     // document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
+
+                    document.querySelector('.application-btn-group').innerHTML = output;
 
                     loadingOverlay.classList.remove('active');
 
@@ -205,44 +209,97 @@
 
         populateJobField();
 
-        function getJobPositions() {
-            fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
-                .then((response) => response.json())
-                .then((applicants) => {
-                    let jobTitle = ``;
-                    applicants.Applicant.forEach((applicant) => {
-                        jobTitle = `${applicant.job.job_title}`;
 
-                    });
+        function deleteApplication(applicantId) {   
+            fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // "Authorization": `Bearer ${adminToken}`
+                },
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .then((data) => {
+                    alertMessage.classList.add('response--success-message');
+                    alertMessage.textContent = "Applicant deleted succesfully";
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
 
-                    document.querySelector("#job-title").innerHTML = jobTitle;
+                    setTimeout(messageDisappear, 5000);
 
-                    const deleteButtons = document.querySelectorAll('.btn--delete');
-                    deleteButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            deleteJob(jobId);
-                        });
-                    });
-
-                    const bookmarkButtons = document.querySelectorAll('.bookmark');
-                    bookmarkButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            bookmarkApplicant(jobId)
-                        })
-                    });
-
+                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
+                    window.location.href="view-applicants.html";
                 })
                 .catch((error) => {
-                    console.log(`Error loading job openings: ${error}`);
+                    
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something went wrong, please try again";
 
-                    alertMessage.classList.add("response--error-message");
-                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    console.log(`Error deleting applicant with ID ${jobId}: ${error}`);
+                });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn--delete')) {
+                const applicantId = e.target.getAttribute('data-id');
+                deleteApplication(applicantId);
+            }
+        });
+
+        function bookmarkApplicant(applicantId) {
+            const bookmarkButton = document.querySelector('.bookmarkBtn');
+            loadingOverlay.classList.add('active');
+
+            fetch(`https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // "Authorization": `Bearer ${adminToken}`
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(`Applicant with ID ${applicantId} marked successfully.`);
+
+                    bookmarkButton.classList.toggle('active-bookmark');
+
+                    alertMessage.classList.add('response--success-message');
+                    alertMessage.textContent = "Applicant bookmarked successfully.";
+
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
+                    setTimeout(messageDisappear, 3000);
+
+                    loadingOverlay.classList.remove('active');
+                })
+                .catch((error) => {
+                    console.log(`Error adding Applicant with ID ${applicantId}: ${error}`);
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something, went wrong. Please, refresh and try again";
+
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
+                    setTimeout(messageDisappear, 3000);
+
                     loadingOverlay.classList.remove('active');
                 });
         }
-        getJobPositions()
+        
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('bookmarkBtn')) {
+                const applicantId = e.target.getAttribute('data-id');
+                bookmarkApplicant(applicantId);
+            }
+        });
 
     </script>
 </body>

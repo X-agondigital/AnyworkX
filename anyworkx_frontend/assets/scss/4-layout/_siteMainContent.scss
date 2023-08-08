@@ -519,6 +519,17 @@
   }
 }
 /*=======END OF NEWSLETTER SECTION STYLING=======*/
+.powered-by{
+  text-align: center;
+  padding: 12px;
+  background-color: $secondaryColor;
+  color: #fff;
+
+  a{
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}
 
 .faqs-section {
   h1 {

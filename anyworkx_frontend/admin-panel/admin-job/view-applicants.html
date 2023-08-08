@@ -91,7 +91,7 @@
     <main class="main-content aside-sidebar">
 
         <header class="secondary--nav">
-            <a href="job-list.html" class="prev-btn"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
+            <a class="prev-btn" onclick="history.back()"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
             <h2>Applications under <span id="job-title"></span></h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
@@ -119,12 +119,12 @@
 
                         <tbody id="jobs_list-table-body">
                             <!-- <tr>
-                                <td data-label="Namee of Applicants">Veronica Dekunle</td>
-                                <td data-label="Date Applied">9:30 03/08/2023</td>
-                                <td class="flex-container"><a href="view-application.html" class="edit btn--action">View</a> <a
-                                        class="secondary-action btn--action"><i class="ri-star-line"></i></a> <a
-                                        class="delete btn--action">Delete</a></td>
-                            </tr> -->
+                                    <td data-label="Namee of Applicants">Veronica Dekunle</td>
+                                    <td data-label="Date Applied">9:30 03/08/2023</td>
+                                    <td class="flex-container"><a href="view-application.html" class="edit btn--action">View</a> <a
+                                            class="secondary-action btn--action"><i class="ri-star-line"></i></a> <a
+                                            class="delete btn--action">Delete</a></td>
+                                </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -139,63 +139,74 @@
                             </tr>
                         </thead>
 
-                        <tbody id="jobs_list-table-body">
+                        <tbody id="jobs_list-table-body-2">
 
                         </tbody>
                     </table>
                 </div>
             </div>
+            <!-- <div class="pagination" id="pagination-all">
+                <p id="pagination-output-all">Page <button class="pagination-button">1</button></p>
+            </div> -->
+
+            <!-- <div class="pagination" id="pagination-today" style="visibility: hidden;">
+                <p id="pagination-output-today">Page <button class="pagination-button">1</button></p>
+            </div> -->
+
         </section>
 
     </main>
 
     <script src="../../assets/js/main.js"></script>
     <!-- <script src="../../assets/js/admin.js"></script> -->
+    <script src="../../assets/js/auth.js"></script>
 
     <script>
         const adminToken = localStorage.getItem('adminToken');
-
         const loadingOverlay = document.getElementById('loading-overlay');
 
-        function getJobPositions() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const applicantId = urlParams.get('id');
+        console.log(applicantId);
+
+        function getJobPositions(categoryId) {
             loadingOverlay.classList.add('active');
-            fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
+            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/?category=${categoryId}`)
                 .then((response) => response.json())
                 .then((applicants) => {
                     let output = '';
-                    let jobTitle = ``;
+                    let jobTitle = '';
                     applicants.Applicant.forEach((applicant) => {
-                        const applicantName = applicant.first_name + " " + applicant.last_name;
+                        const applicantName = applicant.first_name + ' ' + applicant.last_name;
                         const dateApplied = applicant.created_at;
                         const applicantId = applicant.id;
 
-                        console.log(applicantId);
-
                         output += `
-                            <tr>
-                                <td data-label="Job Title">${applicantName}</td>
-                                <td data-label="Number of Applications">${dateApplied}</td>
-                                <td class="flex-container">
-                                <a class="edit btn--action" data-id="${applicantId}">View</a>
-                                <a class="secondary-action bookmark btn--action" data-id="${applicantId}"><i class="ri-star-line"></i></a>
-                                <a class="delete delete-btn btn--action" data-id="${applicantId}">Delete</a>
-                                </td>     
-                            </tr>
-                            `;
+                    <tr>
+                        <td data-label="Job Title">${applicantName}</td>
+                        <td data-label="Number of Applications">${dateApplied}</td>
+                        <td class="flex-container">
+                            <a class="edit btn--action" data-id="${applicantId}">View</a>
+                            <a class="secondary-action bookmark btn--action" data-id="${applicantId}">
+                                <i class="ri-star-line"></i>
+                            </a>
+                            <a class="delete delete-btn btn--action" data-id="${applicantId}">Delete</a>
+                        </td>
+                    </tr>
+                `;
                         jobTitle = `${applicant.job.job_title}`;
-
                     });
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
-                    document.querySelector("#job-title").innerHTML = jobTitle;
+                    document.querySelector('#job-title').innerHTML = jobTitle;
 
                     // Add event listener to view button
                     const viewApplicant = document.querySelectorAll('.edit');
                     viewApplicant.forEach((button) => {
                         button.addEventListener('click', (e) => {
                             const jobId = e.target.getAttribute('data-id');
-                            window.location.href = `view-application.html?id=${jobId}`
-                        })
+                            window.location.href = `view-application.html?id=${jobId}`;
+                        });
                     });
 
                     const deleteButtons = document.querySelectorAll('.btn--delete');
@@ -210,50 +221,153 @@
                     bookmarkButtons.forEach((button) => {
                         button.addEventListener('click', (e) => {
                             const jobId = e.target.getAttribute('data-id');
-                            bookmarkApplicant(jobId)
-                        })
+                            bookmarkApplicant(jobId);
+                        });
                     });
 
-                    //SCRIPT FOR MODAL
-                    const openDeleteModal = document.querySelector("#delete-job-modal");
-                    // const overlay = document.querySelector(".overlay");
-                    const btnCloseModal = document.querySelector(".btn--cancel");
-                    const btnOpenModal = document.querySelectorAll(".delete-btn");
+                    // SCRIPT FOR MODAL
+                    const openDeleteModal = document.querySelector('#delete-job-modal');
+                    const btnCloseModal = document.querySelector('.btn--cancel');
+                    const btnOpenModal = document.querySelectorAll('.delete-btn');
 
                     openDeleteModal.classList.add('hide-modal');
 
                     for (let i = 0; i < btnOpenModal.length; i++) {
-                        btnOpenModal[i].addEventListener("click", function (event) {
+                        btnOpenModal[i].addEventListener('click', function (event) {
                             const jobId = event.target.getAttribute('data-id');
                             const deleteJobButton = document.querySelector('.btn--delete');
                             deleteJobButton.setAttribute('data-id', jobId);
-                            openDeleteModal.classList.remove("hide-modal");
+                            openDeleteModal.classList.remove('hide-modal');
                             console.log('button clicked');
                         });
                     }
 
                     const closeModalWindow = function () {
-                        openDeleteModal.classList.add("hide-modal");
+                        openDeleteModal.classList.add('hide-modal');
                     };
 
                     window.onclick = function (event) {
                         if (event.target === openDeleteModal) {
-                            openDeleteModal.classList.add('hide-modal')
+                            openDeleteModal.classList.add('hide-modal');
                         }
-                    }
+                    };
 
-                    btnCloseModal.addEventListener("click", closeModalWindow);
+                    btnCloseModal.addEventListener('click', closeModalWindow);
 
                     loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
-                    // console.log(`Error loading job openings: ${error}`);
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add("response--error-message");
-                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    const alertMessage = document.querySelector('#response-message');
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = 'Something went wrong, please refresh and try again';
                     loadingOverlay.classList.remove('active');
                 });
         }
+
+        const categoryId = '123'; // Replace with the actual category ID
+        getJobPositions(categoryId);
+
+        function getBookmarkedApplicant() {
+            fetch(`https://anyworkx.onrender.com/api/admin/all_mark/applicant/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${adminToken}`
+                },
+            })
+                .then((response) => response.json())
+                .then((applicants) => {
+                    let output = '';
+                    applicants.Applicant.forEach((applicant) => {
+                        const applicantName = applicant.first_name + ' ' + applicant.last_name;
+                        const dateApplied = applicant.created_at;
+                        const applicantId = applicant.id;
+
+                        output += `
+                    <tr>
+                        <td data-label="Job Title">${applicantName}</td>
+                        <td data-label="Number of Applications">${dateApplied}</td>
+                        <td class="flex-container">
+                            <a class="edit btn--action" data-id="${applicantId}">View</a>
+                            <a class="secondary-action deleteBookmark btn--action active-bookmark" data-id="${applicantId}">
+                                <i class="ri-star-line"></i>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+                    });
+
+                    document.querySelector('#jobs_list-table-body-2').innerHTML = output;
+                    // document.querySelector('#job-title').innerHTML = jobTitle;
+
+                    // Add event listener to view button
+                    const viewApplicant = document.querySelectorAll('.edit');
+                    viewApplicant.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            window.location.href = `view-application.html?id=${jobId}`;
+                        });
+                    });
+
+                    const deleteButtons = document.querySelectorAll('.btn--delete');
+                    deleteButtons.forEach((button) => {
+                        button.addEventListener('click', (e) => {
+                            const jobId = e.target.getAttribute('data-id');
+                            deleteJob(jobId);
+                        });
+                    });
+
+                    // const bookmarkButtons = document.querySelectorAll('.bookmark');
+                    // bookmarkButtons.forEach((button) => {
+                    //     button.addEventListener('click', (e) => {
+                    //         const jobId = e.target.getAttribute('data-id');
+                    //         bookmarkApplicant(jobId);
+                    //     });
+                    // });
+
+                    // SCRIPT FOR MODAL
+                    const openDeleteModal = document.querySelector('#delete-job-modal');
+                    const btnCloseModal = document.querySelector('.btn--cancel');
+                    const btnOpenModal = document.querySelectorAll('.delete-btn');
+
+                    openDeleteModal.classList.add('hide-modal');
+
+                    for (let i = 0; i < btnOpenModal.length; i++) {
+                        btnOpenModal[i].addEventListener('click', function (event) {
+                            const jobId = event.target.getAttribute('data-id');
+                            const deleteJobButton = document.querySelector('.btn--delete');
+                            deleteJobButton.setAttribute('data-id', jobId);
+                            openDeleteModal.classList.remove('hide-modal');
+                            console.log('button clicked');
+                        });
+                    }
+
+                    const closeModalWindow = function () {
+                        openDeleteModal.classList.add('hide-modal');
+                    };
+
+                    window.onclick = function (event) {
+                        if (event.target === openDeleteModal) {
+                            openDeleteModal.classList.add('hide-modal');
+                        }
+                    };
+
+                    btnCloseModal.addEventListener('click', closeModalWindow);
+
+                    loadingOverlay.classList.remove('active');
+                })
+
+                .catch((error) => {
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something went wrong, please try again";
+
+                    console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
+
+                    loadingOverlay.classList.remove('active');
+                });
+        }
+
 
         function deleteJob(applicantId) {
             loadingOverlay.classList.add('active');
@@ -276,7 +390,7 @@
                     }
                 })
                 .then((data) => {
-                    let alertMessage = document.querySelector("#response-message");
+                    const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add('response--success-message');
                     alertMessage.textContent = "Applicant deleted succesfully";
 
@@ -292,10 +406,11 @@
                     loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
+                    const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add('response--error-message');
                     alertMessage.textContent = "Something went wrong, please try again";
 
-                    console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
+                    // console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
 
                     loadingOverlay.classList.remove('active');
                 });
@@ -360,6 +475,7 @@
             }
         });
     </script>
+    <script src="../../assets/js/tab.js"></script>
 
 </body>
 
