@@ -68,16 +68,6 @@
 
     <div id="response-message"></div>
 
-    <!-- <div class="modal" id="delete-job-modal">
-        <div class="modal-content">
-            <p>Are you sure you want to delete this email?</p>
-            <div class="modal-buttons">
-                <button class="btn--cancel">Cancel</button>
-                <button class="btn--delete" data-id="${job.id}">Delete</button>
-            </div>
-        </div>
-    </div> -->
-
     <main class="main-content">
         <section class="subscribers-page">
             <h1>Contact Page</h1>
@@ -97,9 +87,9 @@
 
                     </tbody>
                 </table>
-                <div class="pagination" id="pagination-all">
+                <!-- <div class="pagination" id="pagination-all">
                     <p id="pagination-output-all">Page <button class="pagination-button">1</button></p>
-                </div>
+                </div> -->
 
             </article>
         </section>
@@ -121,16 +111,6 @@
             .then((response)=> response.json())
             .then((contacts)=>{
                 let output='';
-
-                // for (const contact of contactSerializers){
-                //     output+=`
-                //         <tr>
-                //             <td data-label="Email Address">${subscriber.email}</td>
-                //             <td data-label="Date subscribed">${subscriber.created_at}</td>
-                //             <td><a class="delete delete-btn btn--action" data-id="${subscriber.id}">Delete</a></td>
-                //         </tr>
-                //     `
-                // }
 
                 contacts.forEach((contact) => {
                     const emailAddress = contact.email;
