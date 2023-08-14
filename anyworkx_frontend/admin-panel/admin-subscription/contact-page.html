@@ -93,7 +93,7 @@
                         </tr>
                     </thead>
 
-                    <tbody id="subscriber-table-body">
+                    <tbody id="contact-table-body">
 
                     </tbody>
                 </table>
@@ -119,20 +119,38 @@
                 }
             })
             .then((response)=> response.json())
-            .then((contact)=>{
+            .then((contacts)=>{
                 let output='';
 
-                for (const contact of contactSerializers){
+                // for (const contact of contactSerializers){
+                //     output+=`
+                //         <tr>
+                //             <td data-label="Email Address">${subscriber.email}</td>
+                //             <td data-label="Date subscribed">${subscriber.created_at}</td>
+                //             <td><a class="delete delete-btn btn--action" data-id="${subscriber.id}">Delete</a></td>
+                //         </tr>
+                //     `
+                // }
+
+                contacts.forEach((contact) => {
+                    const emailAddress = contact.email;
+                    const fullName = contact.fullname;
+                    const messageReceived = contact.message;
+
                     output+=`
-                        <tr>
-                            <td data-label="Email Address">${subscriber.email}</td>
-                            <td data-label="Date subscribed">${subscriber.created_at}</td>
-                            <td><a class="delete delete-btn btn--action" data-id="${subscriber.id}">Delete</a></td>
-                        </tr>
-                    `
-                }
+                         <tr>
+                             <td data-label="Email Address">${emailAddress}</td>
+                             <td data-label="Full Name">${fullName}</td>
+                             <td data-label="Message">${messageReceived}</td>
+                         </tr>
+                     `
+                });
+                document.querySelector('#contact-table-body').innerHTML = output;
             })
+            .catch((err)=> console.log(err))
         }
+
+        getContactMessages();
     </script>
 </body>
 
