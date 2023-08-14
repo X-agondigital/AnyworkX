@@ -217,13 +217,13 @@
                         });
                     });
 
-                    const bookmarkButtons = document.querySelectorAll('.bookmark');
-                    bookmarkButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            bookmarkApplicant(jobId);
-                        });
-                    });
+                    // const bookmarkButtons = document.querySelectorAll('.bookmark');
+                    // bookmarkButtons.forEach((button) => {
+                    //     button.addEventListener('click', (e) => {
+                    //         const jobId = e.target.getAttribute('data-id');
+                    //         bookmarkApplicant(jobId);
+                    //     });
+                    // });
 
                     // SCRIPT FOR MODAL
                     const openDeleteModal = document.querySelector('#delete-job-modal');
@@ -278,7 +278,7 @@
                 .then((response) => response.json())
                 .then((applicants) => {
                     let output = '';
-                    applicants.Applicant.forEach((applicant) => {
+                    applicants.forEach((applicant) => {
                         const applicantName = applicant.first_name + ' ' + applicant.last_name;
                         const dateApplied = applicant.created_at;
                         const applicantId = applicant.id;
@@ -368,6 +368,8 @@
                 });
         }
 
+        getBookmarkedApplicant();
+
 
         function deleteJob(applicantId) {
             loadingOverlay.classList.add('active');
@@ -417,7 +419,7 @@
         }
 
         function bookmarkApplicant(applicantId) {
-            const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
+            // const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
             const alertMessage = document.querySelector('#response-message');
             loadingOverlay.classList.add('active');
 
@@ -432,7 +434,7 @@
                 .then((data) => {
                     console.log(`Applicant with ID ${applicantId} marked successfully.`);
 
-                    bookmarkButton.classList.toggle('active-bookmark');
+                    // bookmarkButton.classList.toggle('active-bookmark');
 
                     alertMessage.classList.add('response--success-message');
                     alertMessage.textContent = "Applicant bookmarked successfully.";

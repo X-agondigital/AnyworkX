@@ -24,6 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/scss/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/scss/admin.css" rel="stylesheet">
 
     <!--OWL CAROUSEL CSS CDN-->
     <link rel="stylesheet" type="text/css"
@@ -39,11 +40,11 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NKWK8ZT4Y"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-2NKWK8ZT4Y');
+    gtag('config', 'G-2NKWK8ZT4Y');
 </script>
 
 
@@ -82,6 +83,12 @@
         </div>
     </nav>
     <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
+    <div id="response-message"></div>
 
     <section class="upper--contact-section">
         <header>
@@ -124,21 +131,22 @@
             <h4>We’d love to hear from you. Please fill out this form.</h4>
         </header>
 
-        <form action="contact.html" method="post">
+        <form id="contact-form">
             <div>
                 <label for="name">Full Name</label>
-                <input type="text" class="input-field" name="name" id="name" required placeholder="Your full name">
+                <input type="text" class="input-field" name="name" id="nameHASHED" required
+                    placeholder="Your full name">
             </div>
             <div>
                 <label for="email">Email Address</label>
-                <input type="email" class="input-field" name="email" id="email" required
+                <input type="email" class="input-field" name="email" id="emailHASHED" required
                     placeholder="Your email address">
             </div>
             <div>
                 <label for="cover-letter">Message</label>
-                <textarea name="message" id="message"></textarea>
+                <textarea name="message" id="messageHASHED"></textarea>
             </div>
-            <button type="submit" class="btn">Send Message</button>
+            <button type="submit" class="btn" id="submit-btn">Send Message</button>
         </form>
     </section>
 
@@ -192,6 +200,42 @@
     </footer>
 
     <script defer src="assets/js/main.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', submitForm);
+
+
+        function submitForm(e) {
+            e.preventDefault()
+
+            const name = document.getElementById('nameHASHED').value;
+            const emailAddress = document.getElementById('emailHASHED').value;
+            const messageArea = document.getElementById('messageHASHED').value;
+            const submitBtn = document.getElementById('submit-btn');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.classList.add('active');
+
+            fetch(`https://anyworkx.onrender.com/api/contact/`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fullname: name,
+                    email: emailAddress,
+                    message: messageArea
+                })
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    loadingOverlay.classList.remove('active');
+                    submitBtn.textContent = "Message Sent";
+
+                    setTimeout(e.target.reset(), 5000)
+                    
+                })
+                .catch((err) => console.log(err))
+        }
+    </script>
 </body>
 
 </html>
