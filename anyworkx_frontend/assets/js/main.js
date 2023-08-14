@@ -48,6 +48,40 @@ const observer = new IntersectionObserver((entries) => {
 const animateElements = document.querySelectorAll(".animate");
 animateElements.forEach((el) => observer.observe(el));
 
+//SCRIPT FOR CONTACT FORM
+document.getElementById("contact-form").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("nameHASHED").value;
+  const emailAddress = document.getElementById("emailHASHED").value;
+  const messageArea = document.getElementById("messageHASHED").value;
+  const submitBtn = document.getElementById("submit-btn");
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.classList.add("active");
+
+  fetch(`https://anyworkx.onrender.com/api/contact/`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      fullname: name,
+      email: emailAddress,
+      message: messageArea,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      loadingOverlay.classList.remove("active");
+      submitBtn.textContent = "Message Sent";
+
+      setTimeout(e.target.reset(), 5000);
+    })
+    .catch((err) => console.log(err));
+}
+
 //ACCORDION SCRIPT CONTROLLER
 const accordionBtns = document.querySelectorAll(".accordion");
 
