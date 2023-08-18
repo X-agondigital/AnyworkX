@@ -2,16 +2,16 @@ html {
   scroll-behavior: smooth;
 }
 @font-face {
-  font-family: 'Px Grotesk Pan';
-    src: url('../font/PxGroteskPan-Black.eot');
-    src: local('Px Grotesk Pan Black'), local('../font/PxGroteskPan-Black'),
-        url('../font/PxGroteskPan-Black.eot?#iefix') format('embedded-opentype'),
-        url('../font/PxGroteskPan-Black.woff2') format('woff2'),
-        url('../font/PxGroteskPan-Black.woff') format('woff'),
-        url('../font/PxGroteskPan-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Px Grotesk Pan";
+  src: url("../font/PxGroteskPan-Black.eot");
+  src: local("Px Grotesk Pan Black"), local("../font/PxGroteskPan-Black"),
+    url("../font/PxGroteskPan-Black.eot?#iefix") format("embedded-opentype"),
+    url("../font/PxGroteskPan-Black.woff2") format("woff2"),
+    url("../font/PxGroteskPan-Black.woff") format("woff"),
+    url("../font/PxGroteskPan-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  max-width: 1440px;
+  // max-width: 1440px;
   margin: auto;
   font-family: $fontFamily;
   position: relative;
@@ -38,7 +38,7 @@ h1.homepage {
 h2 {
   font-size: $h2FontSize;
 }
-h3{
+h3 {
   font-size: $h3FontSize;
 }
 
@@ -87,7 +87,7 @@ img {
   object-fit: cover;
   object-position: center;
 }
-.bold{
+.bold {
   font-weight: bold;
 }
 .response--success-message {
@@ -101,7 +101,7 @@ img {
   margin-top: 12px;
 }
 
-.response--error-message{
+.response--error-message {
   background: rgba(228, 14, 14, 0.6);
   color: #fff;
   padding: 12px;
@@ -112,12 +112,12 @@ img {
   margin-top: 12px;
 }
 
-@media (max-width: 550px){
+@media (max-width: 550px) {
   .response--success-message {
     width: 100%;
   }
 
-  .response--error-message{
+  .response--error-message {
     width: 100%;
   }
 }

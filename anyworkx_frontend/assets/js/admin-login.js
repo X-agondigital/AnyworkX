@@ -22,8 +22,8 @@ function login() {
       localStorage.setItem("adminToken", data.access);
 
       // Redirect to messaging page
-      window.location.href = "/admin-panel/admin-message/admin-message.html";
-        // window.location.href = "/anyworkx_frontend/admin-panel/admin-message/admin-message.html";
+      // window.location.href = "/admin-panel/admin-message/admin-message.html";
+        window.location.href = "/anyworkx_frontend/admin-panel/admin-message/admin-message.html";
     })
     .catch((error) => {
       // console.error("Error during login:", error);
