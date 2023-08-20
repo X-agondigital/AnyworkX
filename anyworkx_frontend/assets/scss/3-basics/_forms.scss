@@ -10,9 +10,18 @@
   transition: $transitionDuration;
   width: 100%;
 }
+.small{
+  font-size: 14px;
+}
 .input-field:focus {
   border: 1px solid $secondaryColor;
   transition: $transitionDuration;
+}
+
+select{
+  display: block;
+  margin-top: 12px;
+
 }
 
 textarea {

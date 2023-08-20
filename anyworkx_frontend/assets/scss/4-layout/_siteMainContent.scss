@@ -563,12 +563,25 @@
   gap: 24px;
   .text-description {
     width: 50%;
+    .text-link{
+      font-weight: 600;
+      color: $primaryColor;
+      text-decoration: underline;
+    }
     h2 {
       margin-bottom: 24px;
       color: $secondaryColor;
     }
     p {
       margin-bottom: 24px;
+    }
+    ul {
+      margin: 12px 0;
+      list-style: disc;
+      margin-left: 24px;
+      li{
+        margin-bottom: 12px;
+      }
     }
   }
   .image-container {
@@ -622,7 +635,9 @@
   margin-top: 48px;
   padding: 24px;
   background: rgba(250, 240, 255, 0.6);
-
+  h4{
+    margin-bottom: 6px;
+  }
   p {
     margin-bottom: 24px;
     max-width: 800px;

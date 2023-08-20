@@ -228,9 +228,18 @@ button {
   width: 100%;
 }
 
+.small {
+  font-size: 14px;
+}
+
 .input-field:focus {
   border: 1px solid rgb(0, 167, 215);
   transition: 0.3s;
+}
+
+select {
+  display: block;
+  margin-top: 12px;
 }
 
 textarea {
@@ -976,12 +985,25 @@ nav .nav--items__container a.active {
 .about-anyworkx-section .text-description {
   width: 50%;
 }
+.about-anyworkx-section .text-description .text-link {
+  font-weight: 600;
+  color: rgb(126, 0, 196);
+  text-decoration: underline;
+}
 .about-anyworkx-section .text-description h2 {
   margin-bottom: 24px;
   color: rgb(0, 167, 215);
 }
 .about-anyworkx-section .text-description p {
   margin-bottom: 24px;
+}
+.about-anyworkx-section .text-description ul {
+  margin: 12px 0;
+  list-style: disc;
+  margin-left: 24px;
+}
+.about-anyworkx-section .text-description ul li {
+  margin-bottom: 12px;
 }
 .about-anyworkx-section .image-container {
   width: 50%;
@@ -1030,6 +1052,9 @@ nav .nav--items__container a.active {
   margin-top: 48px;
   padding: 24px;
   background: rgba(250, 240, 255, 0.6);
+}
+.available-positions h4 {
+  margin-bottom: 6px;
 }
 .available-positions p {
   margin-bottom: 24px;

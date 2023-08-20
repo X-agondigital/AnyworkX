@@ -228,9 +228,18 @@ button {
   width: 100%;
 }
 
+.small {
+  font-size: 14px;
+}
+
 .input-field:focus {
   border: 1px solid rgb(0, 167, 215);
   transition: 0.3s;
+}
+
+select {
+  display: block;
+  margin-top: 12px;
 }
 
 textarea {
