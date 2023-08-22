@@ -116,7 +116,7 @@
     </main>
 
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/auth.js"></script>
+    <!-- <script src="../../assets/js/auth.js"></script> -->
 
     <script>
         // get admin token from localStorage
@@ -145,7 +145,6 @@
                         const categoryId = category.id;
                         const categoryName = category.category_name;
                         const createdAt = category.created_at;
-                        console.log(categoryId);
                         output += `
                         <tr>
                             <td data-label="Category Name">${categoryName}</td>
@@ -228,15 +227,15 @@
                     'Authorization': `Bearer ${adminToken}`
                 },
             })
-                .then((response) => {
+                .then(response => {
                     if (response.status === 204) {
-                        // Job was successfully deleted, so return an empty object
-                        return {};
+                        // Successful deletion, no content returned
+                        return Promise.resolve();
                     } else if (response.ok) {
-                        // Job was not deleted, but response body contains JSON
+                        // Deletion not successful, but response contains JSON data
                         return response.json();
                     } else {
-                        // Response was not successful, so throw an error
+                        // Response was not successful, throw an error
                         throw new Error('Network response was not ok.');
                     }
                 })
@@ -252,14 +251,14 @@
                     setTimeout(messageDisappear, 5000);
 
                     console.log(`Job posting with ID ${categoryId} deleted successfully.`);
-                    getJobCategories();
+                   
 
                     loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Unable to delete category, please try again";
+                    // const alertMessage = document.querySelector("#response-message");
+                    // alertMessage.classList.add('response--error-message');
+                    // alertMessage.textContent = "Unable to delete category, please try again";
 
                     console.log(`Error deleting job posting with ID ${categoryId}: ${error}`);
 

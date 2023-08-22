@@ -115,30 +115,188 @@
     </main>
 
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/admin.js"></script>
-    <script src="../../assets/js/auth.js"></script>
+    <!-- <script src="../../assets/js/admin.js"></script> -->
+    <!-- <script src="../../assets/js/auth.js"></script> -->
 
     <script>
         // get admin token from localStorage
         // const adminToken = localStorage.getItem('adminToken');
 
 
+        // const openDeleteModal = document.querySelector("#delete-job-modal");
+        // openDeleteModal.classList.add('hide-modal');
+
+        // function getJobPositions() {
+        //     const loadingOverlay = document.getElementById('loading-overlay');
+        //     loadingOverlay.classList.add('active');
+
+        //     fetch('https://anyworkx.onrender.com/api/admin/create/job/list/', {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //             // "Authorization": `Bearer ${adminToken}`
+        //         }
+        //     })
+        //         .then((response) => response.json())
+        //         .then((jobs) => {
+        //             let output = ``;
+        //             for (const [key, job] of Object.entries(jobs.jobs)) { // <-- use a different variable name here
+        //                 output += `
+        //                 <tr>
+        //                     <td data-label="Job Title">${job.job_title}</td>
+        //                     <td data-label="Time Created">${job.created_at}</td>
+        //                     <td><a class="edit btn--action" data-id="${job.id}">Edit</a></td>
+        //                     <td><a class="delete delete-btn btn--action" data-id="${job.id}">Delete</a></td>
+        //         </tr>
+        //         `
+        //             }
+
+        //             document.querySelector('#jobs_list-table-body').innerHTML = output;
+
+        //             //SCRIPT FOR MODAL
+        //             const openDeleteModal = document.querySelector("#delete-job-modal");
+        //             // const overlay = document.querySelector(".overlay");
+        //             const btnCloseModal = document.querySelector(".btn--cancel");
+        //             const btnOpenModal = document.querySelectorAll(".delete-btn");
+
+        //             openDeleteModal.classList.add('hide-modal');
+
+        //             for (let i = 0; i < btnOpenModal.length; i++) {
+        //                 btnOpenModal[i].addEventListener("click", function (event) {
+        //                     const jobId = event.target.getAttribute('data-id');
+        //                     const deleteJobButton = document.querySelector('.btn--delete');
+        //                     deleteJobButton.setAttribute('data-id', jobId);
+        //                     openDeleteModal.classList.remove("hide-modal");
+        //                     console.log('button clicked');
+        //                 });
+        //             }
+
+        //             const closeModalWindow = function () {
+        //                 openDeleteModal.classList.add("hide-modal");
+        //             };
+
+        //             window.onclick = function (event) {
+        //                 if (event.target === openDeleteModal) {
+        //                     openDeleteModal.classList.add('hide-modal')
+        //                 }
+        //             }
+
+
+        //             btnCloseModal.addEventListener("click", closeModalWindow);
+
+        //             // Add event listener to edit and delete button
+        //             const editButtons = document.querySelectorAll('.edit');
+        //             editButtons.forEach((button) => {
+        //                 button.addEventListener('click', (e) => {
+        //                     const jobId = e.target.getAttribute('data-id');
+        //                     window.location.href = `edit-job.html?id=${jobId}`
+        //                 })
+        //             })
+
+
+        //             const deleteButtons = document.querySelectorAll('.btn--delete');
+        //             deleteButtons.forEach((button) => {
+        //                 button.addEventListener('click', (e) => {
+        //                     const jobId = e.target.getAttribute('data-id');
+        //                     deleteJob(jobId);
+        //                 });
+        //             });
+        //             loadingOverlay.classList.remove('active');
+        //         })
+        //         .catch((error) => {
+        //             console.log(`Error loading job openings: ${error}`);
+
+        //             const alertMessage = document.querySelector("#response-message");
+        //             alertMessage.classList.add('response--error-message');
+        //             alertMessage.textContent = "Unable to load jobs, please refresh and try again";
+
+        //             loadingOverlay.classList.remove('active');
+
+        //         });
+        // }
+
+        // function deleteJob(jobId) {
+        //     fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}`, {
+        //         method: 'DELETE',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //     })
+        //         .then((response) => {
+        //             if (response.status === 204) {
+        //                 // Job was successfully deleted, so return an empty object
+        //                 return {};
+        //             } else if (response.ok) {
+        //                 // Job was not deleted, but response body contains JSON
+        //                 return response.json();
+        //             } else {
+        //                 // Response was not successful, so throw an error
+        //                 throw new Error('Network response was not ok.');
+        //             }
+        //         })
+        //         .then((data) => {
+        //             const alertMessage = document.querySelector("#response-message");
+        //             alertMessage.classList.add('response--success-message');
+        //             alertMessage.textContent = "Job post deleted succesfully";
+
+        //             const messageDisappear = function () {
+        //                 alertMessage.style.display = "none";
+        //             };
+
+        //             setTimeout(messageDisappear, 5000);
+
+        //             console.log(`Job posting with ID ${jobId} deleted successfully.`);
+        //             getJobPositions();
+        //         })
+        //         .catch((error) => {
+        //             const alertMessage = document.querySelector("#response-message");
+        //             alertMessage.classList.add('response--error-message');
+        //             alertMessage.textContent = "Something went wrong, please try again";
+
+        //             console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
+        //         });
+        // }
+
+
+        // getJobPositions();
+
+        // document.addEventListener('click', (e) => {
+        //     if (e.target.classList.contains('btn--delete')) {
+        //         const jobId = e.target.getAttribute('data-id');
+        //         deleteJob(jobId);
+        //     }
+        // });
+
         const openDeleteModal = document.querySelector("#delete-job-modal");
-        openDeleteModal.classList.add('hide-modal');
+        openDeleteModal.classList.add('hide-modal')
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        function showModal(jobId) {
+            const deleteJobButton = document.querySelector('.btn--delete');
+            deleteJobButton.setAttribute('data-id', jobId);
+            openDeleteModal.classList.remove("hide-modal");
+            console.log('button clicked');
+        }
+
+        function hideModal() {
+            openDeleteModal.classList.add("hide-modal");
+        }
+
+        function showResponseMessage(message, isSuccess) {
+            const alertMessage = document.querySelector("#response-message");
+            alertMessage.classList.add(isSuccess ? 'response--success-message' : 'response--error-message');
+            alertMessage.textContent = message;
+            setTimeout(() => {
+                alertMessage.style.display = "none";
+            }, 5000);
+        }
 
         function getJobPositions() {
-            const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.classList.add('active');
 
-            fetch('https://anyworkx.onrender.com/api/admin/create/job/list/', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                    // "Authorization": `Bearer ${adminToken}`
-                }
-            })
-                .then((response) => response.json())
-                .then((jobs) => {
+            fetch('https://anyworkx.onrender.com/api/admin/create/job/list/')
+                .then(response => response.json())
+                .then(jobs => {
                     let output = ``;
                     for (const [key, job] of Object.entries(jobs.jobs)) { // <-- use a different variable name here
                         output += `
@@ -152,37 +310,7 @@
                     }
 
                     document.querySelector('#jobs_list-table-body').innerHTML = output;
-
-                    //SCRIPT FOR MODAL
-                    const openDeleteModal = document.querySelector("#delete-job-modal");
-                    // const overlay = document.querySelector(".overlay");
-                    const btnCloseModal = document.querySelector(".btn--cancel");
-                    const btnOpenModal = document.querySelectorAll(".delete-btn");
-
-                    openDeleteModal.classList.add('hide-modal');
-
-                    for (let i = 0; i < btnOpenModal.length; i++) {
-                        btnOpenModal[i].addEventListener("click", function (event) {
-                            const jobId = event.target.getAttribute('data-id');
-                            const deleteJobButton = document.querySelector('.btn--delete');
-                            deleteJobButton.setAttribute('data-id', jobId);
-                            openDeleteModal.classList.remove("hide-modal");
-                            console.log('button clicked');
-                        });
-                    }
-
-                    const closeModalWindow = function () {
-                        openDeleteModal.classList.add("hide-modal");
-                    };
-
-                    window.onclick = function (event) {
-                        if (event.target === openDeleteModal) {
-                            openDeleteModal.classList.add('hide-modal')
-                        }
-                    }
-
-
-                    btnCloseModal.addEventListener("click", closeModalWindow);
+                    loadingOverlay.classList.remove('active');
 
                     // Add event listener to edit and delete button
                     const editButtons = document.querySelectorAll('.edit');
@@ -192,80 +320,66 @@
                             window.location.href = `edit-job.html?id=${jobId}`
                         })
                     })
-
-
-                    const deleteButtons = document.querySelectorAll('.btn--delete');
-                    deleteButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            deleteJob(jobId);
-                        });
-                    });
-                    loadingOverlay.classList.remove('active');
                 })
-                .catch((error) => {
-                    console.log(`Error loading job openings: ${error}`);
-
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Unable to load jobs, please refresh and try again";
-
+                .catch(error => {
+                    console.error(`Error loading job openings: ${error}`);
+                    showResponseMessage("Unable to load jobs, please refresh and try again", false);
                     loadingOverlay.classList.remove('active');
-
                 });
         }
 
         function deleteJob(jobId) {
-            fetch(`https://anyworkx.onrender.com/api/job/details/${jobId}`, {
+            loadingOverlay.classList.add('active');
+            fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
                 method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
             })
-                .then((response) => {
+                .then(response => {
                     if (response.status === 204) {
-                        // Job was successfully deleted, so return an empty object
-                        return {};
+                        // Successful deletion, no content returned
+                        return Promise.resolve();
                     } else if (response.ok) {
-                        // Job was not deleted, but response body contains JSON
+                        // Deletion not successful, but response contains JSON data
                         return response.json();
                     } else {
-                        // Response was not successful, so throw an error
+                        // Response was not successful, throw an error
                         throw new Error('Network response was not ok.');
                     }
                 })
-                .then((data) => {
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add('response--success-message');
-                    alertMessage.textContent = "Job post deleted succesfully";
-
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
-
-                    setTimeout(messageDisappear, 5000);
-
-                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
+                .then(data => {
+                    if (!data) {
+                        showResponseMessage("Job post deleted successfully", true);
+                        console.log(`Job posting with ID ${jobId} deleted successfully.`);
+                        loadingOverlay.classList.remove('active');
+                    } else {
+                        // Handle cases where deletion was not successful
+                        showResponseMessage("Something went wrong, please try again", false);
+                        console.log(`Error deleting job posting with ID ${jobId}: ${JSON.stringify(data)}`);
+                        loadingOverlay.classList.remove('active');
+                    }
                     getJobPositions();
                 })
-                .catch((error) => {
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Something went wrong, please try again";
-
+                .catch(error => {
+                    // Handle network errors
+                    showResponseMessage("Something went wrong, please try again", false);
                     console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
                 });
         }
 
 
-        getJobPositions();
-
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn--delete')) {
-                const jobId = e.target.getAttribute('data-id');
-                deleteJob(jobId);
+        document.addEventListener('click', e => {
+            if (e.target.classList.contains('delete-btn')) {
+                showModal(e.target.getAttribute('data-id'));
+            } else if (e.target.classList.contains('btn--cancel')) {
+                hideModal();
+            } else if (e.target.classList.contains('btn--delete')) {
+                deleteJob(e.target.getAttribute('data-id'));
+                hideModal();
             }
         });
+
+        getJobPositions();
+
 
 
 

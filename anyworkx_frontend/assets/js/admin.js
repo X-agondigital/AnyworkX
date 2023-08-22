@@ -51,7 +51,11 @@ form.addEventListener("submit", (event) => {
   const skillRequirement = document.getElementById("skill-requirement").value;
   const anyworkxOffer = document.getElementById("offer").value;
 
-  fetch("https://anyworkx.onrender.com/api/admin/create/job/list/", {
+  const jobCategorySelect = document.getElementById("job-category");
+  const selectedCategoryId = jobCategorySelect.value;
+
+
+  fetch(`https://anyworkx.onrender.com/api/admin/create/job/list/${selectedCategoryId}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +75,7 @@ form.addEventListener("submit", (event) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data);
+      console.log(data);
   
       setTimeout((window.location.href = "all-job.html"), 2000);
     })
