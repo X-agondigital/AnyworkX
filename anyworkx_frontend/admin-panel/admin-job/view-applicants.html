@@ -169,9 +169,9 @@
         const applicantId = urlParams.get('id');
         console.log(applicantId);
 
-        function getJobPositions(categoryId) {
+        function getJobPositions() {
             loadingOverlay.classList.add('active');
-            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/?category=${categoryId}`)
+            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/`)
                 .then((response) => response.json())
                 .then((applicants) => {
                     let output = '';

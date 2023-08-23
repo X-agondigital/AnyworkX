@@ -7,7 +7,7 @@
     <title>Document</title>
 
     <style>
-        .color-change{
+        .color-change {
             background-color: blue;
         }
     </style>
@@ -44,7 +44,7 @@
     </table>
     <script>
         const adminToken = localStorage.getItem('adminToken');
-        function getApplicants() {
+       /* function getApplicants() {
             console.log('fetching data...');
             fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/`)
                 .then((response) => response.json())
@@ -139,7 +139,25 @@
                 .catch((error) => {
                     console.log(error);
                 })
-        }
+        }*/adminToken
+        fetch(`https://anyworkx.onrender.com/api/admin/create/job_category/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${adminToken}`
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const categories = data.jobs_category;
+                categories.forEach(category => {
+                    const categoryName = category.category_name;
+                    const numberOfJobs = category.jobs.length;
+
+                    console.log(`Category: ${categoryName}, Number of Jobs: ${numberOfJobs}`);
+                });
+
+            })
+            .catch((err) => console.log(err))
     </script>
 </body>
 

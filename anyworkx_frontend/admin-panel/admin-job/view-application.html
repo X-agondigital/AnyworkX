@@ -95,7 +95,7 @@
 
         <header class="secondary--nav">
             <a class="prev-btn" onclick="history.back()"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
-            <h2>Application under <span id="job-title"></span></h2>
+            <h2>Application for <span id="job-title"></span></h2>
             <a href="create.html" class="btn">Create a job</a>
         </header>
 
@@ -177,6 +177,7 @@
             })
                 .then((response) => response.json())
                 .then((applicant) => {
+                    const jobTitle = ``;
                     let output = `
                     <button type="submit" class="btn btn--delete" data-id="${applicantId}">Delete</button>
                     <button type="submit" class="btn--without-bg bookmarkBtn" data-id="${applicantId}"><i class="ri-star-line"></i></button>
@@ -190,12 +191,13 @@
                     document.getElementById("cover-letter").value = applicant.note.cover_letter;
                     document.getElementById("applicant-resume").value = applicant.cv_upload;
                     document.getElementById("applicant-salary").value = applicant.note.salary;
-                    // document.getElementById("#job-title").innerHTML = applicant.note.job.job_title;
+                    document.getElementById("job-title").innerHTML = applicant.note.job.job_title;
 
                     document.querySelector('.application-btn-group').innerHTML = output;
 
                     loadingOverlay.classList.remove('active');
 
+                    // console.log(applicantId);
                     // const output = 
 
                 })
