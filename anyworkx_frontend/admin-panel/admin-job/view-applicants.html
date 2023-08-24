@@ -166,17 +166,17 @@
         const loadingOverlay = document.getElementById('loading-overlay');
 
         const urlParams = new URLSearchParams(window.location.search);
-        const applicantId = urlParams.get('id');
-        console.log(applicantId);
+        const jobId = urlParams.get('jobId');
+        console.log(jobId);
 
         function getJobPositions() {
             loadingOverlay.classList.add('active');
-            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/`)
+            fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`)
                 .then((response) => response.json())
-                .then((applicants) => {
+                .then((data) => {
                     let output = '';
                     let jobTitle = '';
-                    applicants.Applicant.forEach((applicant) => {
+                    data.applicants.forEach((applicant) => {
                         const applicantName = applicant.first_name + ' ' + applicant.last_name;
                         const dateApplied = applicant.created_at;
                         const applicantId = applicant.id;

@@ -266,6 +266,7 @@
     <script defer src="assets/js/main.js"></script>
     <script>
         function getJobPositions() {
+            console.log('fetching jobs...');
             fetch('https://anyworkx.onrender.com/api/admin/create/job/list/')
                 .then((response) => response.json())
                 .then((jobs) => {
@@ -283,6 +284,7 @@
                         </div>
                         `
                     }
+                    console.log('fetching complete');
 
                     document.querySelector('.positions--wrapper').innerHTML = output;
                 })

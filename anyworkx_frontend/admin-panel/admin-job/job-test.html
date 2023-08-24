@@ -18,9 +18,9 @@
     <table>
         <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">ID</th>
+                <th scope="col" colspan="2" style="border: 1px solid black;">Name</th>
+                <th scope="col" colspan="2" style="border: 1px solid black;">Date</th>
+                <th scope="col" colspan="2" style="border: 1px solid black;">ID</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -28,136 +28,54 @@
 
         </tbody>
     </table>
+    <div class="data-output"></div>
 
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">ID</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody class="marked-applicant">
 
-        </tbody>
-    </table>
+
     <script>
         const adminToken = localStorage.getItem('adminToken');
-       /* function getApplicants() {
-            console.log('fetching data...');
-            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/`)
-                .then((response) => response.json())
-                .then((applicants) => {
-                    let output = '';
-                    applicants.Applicant.forEach(applicant => {
-                        const applicantName = applicant.first_name + ' ' + applicant.last_name;
-                        const dateApplied = applicant.created_at;
-                        const applicantId = applicant.id;
 
-                        output += `
-                    <tr>
-                        <td data-label="Job Title">${applicantName}</td>
-                        <td data-label="Number of Applications">${dateApplied}</td>
-                        <td data-label="id">${applicantId}</td>
-                        <td class="flex-container">
-                            <button class="secondary-action bookmark btn--action" id="mark" data-id="${applicantId}">
-                                <i class="ri-star-line"></i>add to bookmark
-                            </button>
-                        </td>
-                    </tr>
-                    `
-                    });
-                    console.log('fetching complete');
+        // fetch(`https://anyworkx.onrender.com/api/admin/create/job_category/`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Authorization': `Bearer ${adminToken}`
+        //     }
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         const categories = data.jobs_category;
+        //         categories.forEach(category => {
+        //             const categoryName = category.category_name;
+        //             const numberOfJobs = category.jobs.length;
 
-                    document.querySelector('tbody').innerHTML = output;
-                })
-                .catch((error) => console.log(error));
-        }
+        //             console.log(`Category: ${categoryName}, Number of Jobs: ${numberOfJobs}`);
+        //         });
 
-        function getMarkedApplicants() {
-            console.log('fetching marked applicants...');
-            fetch(`https://anyworkx.onrender.com/api/admin/all_mark/applicant/`)
-                .then((response) => response.json())
-                .then((applicants) => {
-                    let output = '';
-                    applicants.forEach(applicant => {
-                        const applicantName = applicant.first_name + ' ' + applicant.last_name;
-                        const dateApplied = applicant.created_at;
-                        const applicantId = applicant.id;
+        //     })
+        //     .catch((err) => console.log(err))
 
-                        output += `
-                    <tr>
-                        <td data-label="Job Title">${applicantName}</td>
-                        <td data-label="Number of Applications">${dateApplied}</td>
-                        <td data-label="id">${applicantId}</td>
-                        <td class="flex-container">
-                            <button class="secondary-action bookmark btn--action" id="mark" data-id="${applicantId}">
-                                <i class="ri-star-line"></i>add to bookmark
-                            </button>
-                        </td>
-                    </tr>
-                    `
-                    });
-                    console.log('marked applicants: fetching complete');
-
-                    document.querySelector('.marked-applicant').innerHTML = output;
-                })
-                .catch((error) => console.log(error));
-        }
-
-        getApplicants();
-        getMarkedApplicants();
-        
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('bookmark')) {
-                const applicantId = e.target.getAttribute('data-id');
-                bookmarkApplicant(applicantId);
-                console.log('button clicked');
-            }
-        });
-
-        function bookmarkApplicant(applicantId) {
-            fetch(`https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`, {
-                method: 'POST',
-                header: {
-                    'Content-Type': 'application/json',
+        function getJobs() {
+            console.log('fetching applicant...');
+            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application`, {
+                method: 'GET',
+                headers: {
                     'Authorization': `Bearer ${adminToken}`
+
                 }
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    // const markButton = document.querySelectorAll('.bookmark');
-                    // markButton.forEach((button) => {
-                    //     button.addEventListener('click', ()=>{
-                    //         console.log(`I'm active`);
-                    //         classList.add('color-change');
-                    //     })
-                    // })
-                    console.log(`Applicant with ID ${applicantId} bookmarked successfully`);
+                    data.Applicant.forEach(applicant => {
+                        console.log(applicant);
+                    });
+                    console.log('fetching complete', data);
                 })
-                .catch((error) => {
-                    console.log(error);
-                })
-        }*/adminToken
-        fetch(`https://anyworkx.onrender.com/api/admin/create/job_category/`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${adminToken}`
-            }
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                const categories = data.jobs_category;
-                categories.forEach(category => {
-                    const categoryName = category.category_name;
-                    const numberOfJobs = category.jobs.length;
-
-                    console.log(`Category: ${categoryName}, Number of Jobs: ${numberOfJobs}`);
+                .catch(error => {
+                    // Handle errors here
+                    console.error('Fetch error:', error);
                 });
-
-            })
-            .catch((err) => console.log(err))
+        }
+        getJobs()
     </script>
 </body>
 

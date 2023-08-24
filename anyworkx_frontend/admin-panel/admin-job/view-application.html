@@ -131,6 +131,10 @@
                     <textarea name="cover-letter" id="cover-letter" disabled></textarea>
                 </div>
                 <div>
+                    <label for="age">Age Range</label>
+                    <input type="text" class="input-field" name="age" id="applicant-age" disabled>
+                </div>
+                <div>
                     <label for="resume">Resume</label>
                     <input type="url" class="input-field" name="resume" id="applicant-resume" disabled>
                 </div>
@@ -189,6 +193,7 @@
                     document.getElementById("applicant-state").value = applicant.note.state;
                     document.getElementById("applicant-country").value = applicant.note.country;
                     document.getElementById("cover-letter").value = applicant.note.cover_letter;
+                    document.getElementById("applicant-age").value = applicant.note.age;
                     document.getElementById("applicant-resume").value = applicant.cv_upload;
                     document.getElementById("applicant-salary").value = applicant.note.salary;
                     document.getElementById("job-title").innerHTML = applicant.note.job.job_title;

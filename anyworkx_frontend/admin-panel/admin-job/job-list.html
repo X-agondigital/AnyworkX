@@ -121,9 +121,9 @@
 
                         // Increment the count for the job category
                         if (categoryCounts[jobCategory]) {
-                            categoryCounts[jobCategory]++;
+                            categoryCounts[jobCategory].count++;
                         } else {
-                            categoryCounts[jobCategory] = 1;
+                            categoryCounts[jobCategory] = { count: 1, jobId };
                         }
                     });
 
@@ -131,13 +131,14 @@
 
                     // Iterate over the job categories and display the data
                     for (const category in categoryCounts) {
-                        const numOfApplications = categoryCounts[category];
+                        const { count, jobId } = categoryCounts[category];
+                        // const numOfApplications = categoryCounts[category];
 
                         output += `
           <tr>
             <td data-label="Job Category">${category}</td>
-            <td data-label="Number of Applications">${numOfApplications}</td>
-            <td><a href="view-applicants.html" class="edit btn--action">View Applicants</a></td>
+            <td data-label="Number of Applications">${count}</td>
+            <td><a href="view-applicants.html?jobId=${jobId}" class="edit btn--action">View Applicants</a></td>
           </tr>
         `;
                     }
