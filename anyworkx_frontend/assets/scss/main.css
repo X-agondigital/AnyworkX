@@ -1122,7 +1122,7 @@ nav .nav--items__container a.active {
 }
 .job-description-section h2,
 .job-description-section h3 {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   color: rgb(0, 167, 215);
 }
 .job-description-section h4 {
@@ -1139,6 +1139,9 @@ nav .nav--items__container a.active {
 .job-description-section a {
   color: rgb(0, 167, 215);
   text-decoration: underline;
+}
+.job-description-section article {
+  margin-bottom: 24px;
 }
 
 .job-application__fields {

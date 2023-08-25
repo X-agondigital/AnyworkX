@@ -707,7 +707,7 @@
   }
   h2,
   h3 {
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     color: $secondaryColor;
   }
   h4 {
@@ -724,6 +724,9 @@
   a {
     color: $secondaryColor;
     text-decoration: underline;
+  }
+  article{
+    margin-bottom: 24px;
   }
 }
 
