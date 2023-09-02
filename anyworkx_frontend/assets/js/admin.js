@@ -2,7 +2,7 @@
 
 // get admin token from localStorage
 const adminToken = localStorage.getItem("adminToken");
-const loadingOverlay = document.getElementById('loading-overlay');
+const loadingOverlay = document.getElementById("loading-overlay");
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
 // Fetch job categories and populate dropdown
@@ -34,10 +34,11 @@ fetch("https://anyworkx.onrender.com/api/admin/create/job_category/", {
     console.log(`Error loading job categories: ${error}`);
   });
 
+
 const form = document.getElementById("create-job");
 
 form.addEventListener("submit", (event) => {
-  loadingOverlay.classList.add('active');
+  loadingOverlay.classList.add("active");
   event.preventDefault();
   const jobCategory = document.getElementById("job-category").value;
   const jobTitle = document.getElementById("job-title").value;
@@ -54,36 +55,39 @@ form.addEventListener("submit", (event) => {
   const jobCategorySelect = document.getElementById("job-category");
   const selectedCategoryId = jobCategorySelect.value;
 
-
-  fetch(`https://anyworkx.onrender.com/api/admin/create/job/list/${selectedCategoryId}/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${adminToken}`,
-    },
-    body: JSON.stringify({
-      job_category: jobCategory,
-      job_title: jobTitle,
-      job_description: jobDescription,
-      position: jobPosition,
-      job_location: jobLocation,
-      job_requirements_title: jobRequirementsTitle,
-      job_requirements_body: jobRequirements,
-      offer_title: skillRequirement,
-      we_offer: anyworkxOffer,
-    }),
-  })
+  fetch(
+    `https://anyworkx.onrender.com/api/admin/create/job/list/${selectedCategoryId}/`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${adminToken}`,
+      },
+      body: JSON.stringify({
+        job_category: jobCategory,
+        job_title: jobTitle,
+        job_description: jobDescription,
+        position: jobPosition,
+        job_location: jobLocation,
+        job_requirements_title: jobRequirementsTitle,
+        job_requirements_body: jobRequirements,
+        offer_title: skillRequirement,
+        we_offer: anyworkxOffer,
+      }),
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-  
+
       setTimeout((window.location.href = "all-job.html"), 2000);
     })
     .catch((error) => {
       // console.error("Error:", error);
       const alertMessage = document.querySelector("#response-message");
       alertMessage.classList.add("response--error-message");
-      alertMessage.textContent = "Something went wrong, please refresh and try again";
-      loadingOverlay.classList.remove('active');
+      alertMessage.textContent =
+        "Something went wrong, please refresh and try again";
+      loadingOverlay.classList.remove("active");
     });
 });
