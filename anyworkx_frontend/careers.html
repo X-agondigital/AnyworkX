@@ -267,7 +267,7 @@
     <script>
         function getJobPositions() {
             console.log('fetching jobs...');
-            fetch('https://anyworkx.onrender.com/api/admin/create/job/list/')
+            fetch('http://24.199.88.229:8000/api/admin/create/job/list/')
                 .then((response) => response.json())
                 .then((jobs) => {
                     let output = ``;
