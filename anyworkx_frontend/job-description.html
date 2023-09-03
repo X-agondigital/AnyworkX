@@ -150,7 +150,8 @@
             </div>
 
             <div>
-                <label for="disclaimer" class="small"> <input type="checkbox" name="disclaimer" id="" required> By ticking this box, I confirm that I have read and understood the content of
+                <label for="disclaimer" class="small"> <input type="checkbox" name="disclaimer" id="" required> By
+                    ticking this box, I confirm that I have read and understood the content of
                     the Privacy Notice and acknowledge that my personal data will be processed as part of this
                     application.</label>
             </div>
@@ -161,7 +162,12 @@
                     placeholder="Any social media accounts?">
             </div> -->
 
-            <button type="submit" class="btn">Submit Application</button>
+            <!-- <button type="submit" class="btn">Submit Application</button> -->
+            <button type="submit" class="btn" id="submit-button">
+                Submit Application
+                <div class="loading-spinner" id="loading-spinner"></div>
+            </button>
+
         </form>
         <div id="response-message"></div>
     </section>
@@ -282,9 +288,13 @@
 
         //Function for applying for job
         const applicationForm = document.getElementById("application-form");
+        const submitButton = document.getElementById("submit-button");
+        const loadingSpinner = document.getElementById("loading-spinner");
 
         applicationForm.addEventListener("submit", (e) => {
             e.preventDefault();
+            loadingSpinner.style.display = "inline-block";
+            submitButton.disabled = true;
 
             const firstName = document.getElementById("first_name").value;
             const lastName = document.getElementById("last_name").value;

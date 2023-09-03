@@ -217,6 +217,24 @@ button {
   border: 1.5px solid rgb(126, 0, 196);
 }
 
+.loading-spinner {
+  display: none;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 24px;
+  height: 24px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .input-field {
   height: 45px;
   border: 1px solid rgb(126, 0, 196);
