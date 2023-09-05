@@ -41,7 +41,7 @@
                 <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
                 </a>
-                <a href="../admin-job/create.html" class="admin_nav-link">
+                <a href="../admin-job/all-job.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
                 </a>
                 <a href="all-admin.html" class="admin_nav-link active">
@@ -98,12 +98,12 @@
     </main>
 
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/auth.js"></script>
+    <!-- <script src="../../assets/js/auth.js"></script> -->
     <!-- <script src="../../assets/js/admin.js"></script> -->
 
     <script>
         // get admin token from localStorage
-        // const adminToken = localStorage.getItem('adminToken');
+        const adminToken = localStorage.getItem('adminToken');
         const loadingOverlay = document.getElementById('loading-overlay');
 
         function getAdmins() {

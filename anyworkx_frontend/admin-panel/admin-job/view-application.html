@@ -45,7 +45,7 @@
                 <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
                     <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
                 </a>
-                <a href="create.html active" class="admin_nav-link active">
+                <a href="all-job.html" class="admin_nav-link active">
                     <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
                 </a>
                 <a href="../manage-admin/all-admin.html" class="admin_nav-link">
@@ -217,7 +217,7 @@
         populateJobField();
 
 
-        function deleteApplication(applicantId) {   
+        function deleteApplication(applicantId) {
             fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: 'DELETE',
                 headers: {
@@ -242,10 +242,10 @@
                     setTimeout(messageDisappear, 5000);
 
                     console.log(`Job posting with ID ${jobId} deleted successfully.`);
-                    window.location.href="view-applicants.html";
+                    window.location.href = "view-applicants.html";
                 })
                 .catch((error) => {
-                    
+
                     alertMessage.classList.add('response--error-message');
                     alertMessage.textContent = "Something went wrong, please try again";
 
@@ -300,7 +300,7 @@
                     loadingOverlay.classList.remove('active');
                 });
         }
-        
+
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('bookmarkBtn')) {
                 const applicantId = e.target.getAttribute('data-id');
