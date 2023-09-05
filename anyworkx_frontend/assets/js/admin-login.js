@@ -18,7 +18,6 @@ function login() {
       return response.json();
     })
     .then((data) => {
-      console.log("Token:", data.access);
       localStorage.setItem("adminToken", data.access);
 
       // Redirect to messaging page

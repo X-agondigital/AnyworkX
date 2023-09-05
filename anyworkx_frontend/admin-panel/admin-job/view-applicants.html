@@ -78,7 +78,7 @@
 
     <div id="response-message"></div>
 
-    <div class="modal" id="delete-job-modal">
+    <div class="modal hide-modal" id="delete-job-modal">
         <div class="modal-content">
             <p>Are you sure you want to delete this job?</p>
             <div class="modal-buttons">
@@ -209,13 +209,13 @@
                         });
                     });
 
-                    const deleteButtons = document.querySelectorAll('.btn--delete');
-                    deleteButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            deleteJob(jobId);
-                        });
-                    });
+                    // const deleteButtons = document.querySelectorAll('.btn--delete');
+                    // deleteButtons.forEach((button) => {
+                    //     button.addEventListener('click', (e) => {
+                    //         const jobId = e.target.getAttribute('data-id');
+                    //         deleteJob(jobId);
+                    //     });
+                    // });
 
                     // const bookmarkButtons = document.querySelectorAll('.bookmark');
                     // bookmarkButtons.forEach((button) => {
@@ -264,8 +264,8 @@
                 });
         }
 
-        const categoryId = '123'; // Replace with the actual category ID
-        getJobPositions(categoryId);
+       
+        getJobPositions();
 
         function getBookmarkedApplicant() {
             fetch(`https://anyworkx.onrender.com/api/admin/all_mark/applicant/`, {
@@ -309,13 +309,13 @@
                         });
                     });
 
-                    const deleteButtons = document.querySelectorAll('.btn--delete');
-                    deleteButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const jobId = e.target.getAttribute('data-id');
-                            deleteJob(jobId);
-                        });
-                    });
+                    // const deleteButtons = document.querySelectorAll('.btn--delete');
+                    // deleteButtons.forEach((button) => {
+                    //     button.addEventListener('click', (e) => {
+                    //         const jobId = e.target.getAttribute('data-id');
+                    //         deleteJob(jobId);
+                    //     });
+                    // });
 
                     // const bookmarkButtons = document.querySelectorAll('.bookmark');
                     // bookmarkButtons.forEach((button) => {
@@ -381,15 +381,9 @@
             })
                 .then((response) => {
                     if (response.status === 204) {
-                        // Job was successfully deleted, so return an empty object
-                        return {};
-                    } else if (response.ok) {
-                        // Job was not deleted, but response body contains JSON
-                        return response.json();
-                    } else {
-                        // Response was not successful, so throw an error
-                        throw new Error('Network response was not ok.');
+                        return {}; // Return an empty object
                     }
+                    return response.json();
                 })
                 .then((data) => {
                     const alertMessage = document.querySelector("#response-message");

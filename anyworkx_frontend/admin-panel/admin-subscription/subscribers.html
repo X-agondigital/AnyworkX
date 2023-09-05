@@ -68,7 +68,7 @@
 
     <div id="response-message"></div>
 
-    <div class="modal" id="delete-job-modal">
+    <div class="modal hide-modal" id="delete-job-modal">
         <div class="modal-content">
             <p>Are you sure you want to delete this email?</p>
             <div class="modal-buttons">
@@ -143,17 +143,24 @@
     </main>
 
 
-    <script src="../../assets/js/admin.js"></script>
+    <!-- <script src="../../assets/js/admin.js"></script> -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/auth.js"></script>
     <script>
-        // const adminToken = localStorage.getItem('adminToken');
-        //Define separate currentPage variables for each tab
+        const adminToken = localStorage.getItem('adminToken');
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const alertMessage = document.querySelector("#response-message");
+        const openDeleteModal = document.querySelector("#delete-job-modal");
+
+        const messageDisappear = function () {
+            alertMessage.style.display = "none";
+        };
+        // openDeleteModal.classList.add('hide-modal');
+
         let currentPageAll = 1;
         let currentPageToday = 1;
 
         function getSubscribers(page) {
-            const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.classList.add('active');
 
             fetch(`https://anyworkx.onrender.com/api/subscribers/?page=${page}`)
@@ -173,21 +180,17 @@
                     currentPageAll = page; // Update the current page value for the "All" tab
                     generatePaginationButtons(subscribers.last_page, page, "all");
 
-                    //SCRIPT FOR MODAL
                     const openDeleteModal = document.querySelector("#delete-job-modal");
-                    // const overlay = document.querySelector(".overlay");
                     const btnCloseModal = document.querySelector(".btn--cancel");
                     const btnOpenModal = document.querySelectorAll(".delete-btn");
 
-                    openDeleteModal.classList.add('hide-modal');
-
                     for (let i = 0; i < btnOpenModal.length; i++) {
                         btnOpenModal[i].addEventListener("click", function (event) {
+                            openDeleteModal.classList.remove("hide-modal");
                             const subscriberId = event.target.getAttribute('data-id');
                             const deleteButton = document.querySelector('.btn--delete');
                             deleteButton.setAttribute('data-id', subscriberId);
-                            openDeleteModal.classList.remove("hide-modal");
-                            console.log('button clicked');
+                            // console.log('button clicked');
                         });
                     }
 
@@ -204,37 +207,25 @@
 
                     btnCloseModal.addEventListener("click", closeModalWindow);
 
-                    const deleteButtons = document.querySelectorAll('.btn--delete');
-                    deleteButtons.forEach((button) => {
-                        button.addEventListener('click', (e) => {
-                            const subscriberId = e.target.getAttribute('data-id');
-                            deleteSubscriber(subscriberId);
-                        });
-                    });
+                    // const deleteButtons = document.querySelectorAll('.btn--delete');
+                    // deleteButtons.forEach((button) => {
+                    //     button.addEventListener('click', (e) => {
+                    //         const subscriberId = e.target.getAttribute('data-id');
+                    //         deleteSubscriber(subscriberId);
+                    //     });
+                    // });
 
                     loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
-                    console.log(`Error loading subscribers: ${error}`);
-                    const openDeleteModal = document.querySelector("#delete-job-modal");
-
-                    openDeleteModal.style.display = "none";
-
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add("response--error-message");
-                    alertMessage.textContent = "Unable to load subscribers, please try again";
-
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
                     loadingOverlay.classList.remove('active');
-
-                    setTimeout(messageDisappear, 5000);
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something went wrong, please try again";
+                    // console.log(error);
                 });
         }
 
         function deleteSubscriber(subscriberId) {
-            const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/delete_subscribers/${subscriberId}`, {
                 method: 'DELETE',
@@ -245,31 +236,26 @@
             })
                 .then((response) => {
                     if (response.status === 204) {
-                        // Job was successfully deleted, so return an empty object
-                        throw new Error(`Network response was not okay ${response.status}`)
+                        // Subscriber was successfully deleted
+                        return {}; // Return an empty object
                     }
                     return response.json();
                 })
                 .then((data) => {
-                    const alertMessage = document.querySelector("#response-message");
+
+                    getSubscribers(currentPageAll);
                     alertMessage.classList.add('response--success-message');
                     alertMessage.textContent = "Subscriber deleted succesfully";
-
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
-
                     setTimeout(messageDisappear, 5000);
+                    loadingOverlay.classList.remove('active');
+                    openDeleteModal.classList.add("hide-modal");
 
                     console.log(`Subscriber with ID ${subscriberId} deleted successfully.`);
-                    getSubscribers(currentPageAll);
 
-                    loadingOverlay.classList.remove('active');
                 })
                 .catch((error) => {
-                    // const alertMessage = document.querySelector("#response-message");
-                    // alertMessage.classList.add('response--error-message');
-                    // alertMessage.textContent = "Something went wrong, please try again";
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something went wrong, please try again";
 
                     console.log(`Error deleting Subscriber with ID ${subscriberId}: ${error}`);
 
@@ -284,38 +270,38 @@
             }
         });
 
-        function getTodaySubscribers(page) {
-            fetch(
-                `https://anyworkx.onrender.com/api/admin/subscribers/last-24-hours/?page=${page}`
-            )
-                .then((response) => response.json())
-                .then((subscribers) => {
-                    let output = "";
-                    for (const subscriber of subscribers) {
-                        output += `
-             <tr>
-                 <td data-label="Email Address">${subscriber.email}</td>
-                 <td data-label="Date subscribed">${subscriber.created_at}</td>
-                 
-             </tr>
-         `;
-                        if (subscribers.length = 0) {
-                            console.log(subscribers);
-                            // const subscriberTable = document.getElementById('today');
-                            // subscriberTable.classList.add('hidden');
-                            // document.getElementById('no-subscribers').classList.remove('hidden');
-                        }
-                    }
-                    // console.log(subscribers);
+        // function getTodaySubscribers(page) {
+        //     fetch(
+        //         `https://anyworkx.onrender.com/api/admin/subscribers/last-24-hours/?page=${page}`
+        //     )
+        //         .then((response) => response.json())
+        //         .then((subscribers) => {
+        //             let output = "";
+        //             for (const subscriber of subscribers) {
+        //                 output += `
+        //      <tr>
+        //          <td data-label="Email Address">${subscriber.email}</td>
+        //          <td data-label="Date subscribed">${subscriber.created_at}</td>
 
-                    document.getElementById("subscriber-table-body-2").innerHTML = output;
-                    currentPageToday = page; // Update the current page value for the "Today" tab
-                    generatePaginationButtons(subscribers.last_page, page, "today");
-                })
-                .catch((error) => {
-                    console.log(`Error loading subscribers: ${error}`);
-                });
-        }
+        //      </tr>
+        //  `;
+        //                 if (subscribers.length = 0) {
+        //                     console.log(subscribers);
+        //                     // const subscriberTable = document.getElementById('today');
+        //                     // subscriberTable.classList.add('hidden');
+        //                     // document.getElementById('no-subscribers').classList.remove('hidden');
+        //                 }
+        //             }
+        //             // console.log(subscribers);
+
+        //             document.getElementById("subscriber-table-body-2").innerHTML = output;
+        //             currentPageToday = page; // Update the current page value for the "Today" tab
+        //             generatePaginationButtons(subscribers.last_page, page, "today");
+        //         })
+        //         .catch((error) => {
+        //             console.log(`Error loading subscribers: ${error}`);
+        //         });
+        // }
 
         function generatePaginationButtons(totalPages, currentPage, tab) {
             const paginationDiv = document.getElementById(`pagination-${tab}`);

@@ -335,17 +335,12 @@
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
             })
-                .then(response => {
+                .then((response) => {
                     if (response.status === 204) {
-                        // Successful deletion, no content returned
-                        return Promise.resolve();
-                    } else if (response.ok) {
-                        // Deletion not successful, but response contains JSON data
-                        return response.json();
-                    } else {
-                        // Response was not successful, throw an error
-                        throw new Error('Network response was not ok.');
+                        // Subscriber was successfully deleted
+                        return {}; // Return an empty object
                     }
+                    return response.json();
                 })
                 .then(data => {
                     if (!data) {
