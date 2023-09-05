@@ -36,7 +36,6 @@ for (let i = 0; i < navLinks.length; i++) {
 //-----ANIMATION SCRIPT
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    console.log(entry);
     if (entry.isIntersecting) {
       entry.target.classList.add("show");
     } else {
@@ -62,7 +61,7 @@ accordionBtns.forEach((accordion) => {
     } else {
       //if the accordion is currently closed
       content.style.maxHeight = content.scrollHeight + "px";
-      console.log(content.style.maxHeight);
+      // console.log(content.style.maxHeight);
     }
   };
 });
@@ -83,7 +82,7 @@ const closeModal = function () {
 
 modal_btn.addEventListener("click", openModal);
 closeBtn.addEventListener("click", closeModal);
-console.log(closeBtn);
+// console.log(closeBtn);
 
 //SCRIPT FOR CONTACT FORM
 document.getElementById("contact-form").addEventListener("submit", submitForm);
