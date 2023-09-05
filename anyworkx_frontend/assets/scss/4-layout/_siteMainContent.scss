@@ -876,6 +876,9 @@
     font-size: 18px;
     float: right;
   }
+  .is-open {
+    max-height: max-content;
+  }
 
   button.accordion.is-open:after {
     content: "\EA78";

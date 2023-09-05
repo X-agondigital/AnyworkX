@@ -1283,6 +1283,10 @@ nav .nav--items__container a.active {
   font-size: 18px;
   float: right;
 }
+.services--container .is-open {
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
 .services--container button.accordion.is-open:after {
   content: "\ea78";
 }

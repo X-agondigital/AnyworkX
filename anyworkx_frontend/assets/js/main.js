@@ -48,6 +48,44 @@ const observer = new IntersectionObserver((entries) => {
 const animateElements = document.querySelectorAll(".animate");
 animateElements.forEach((el) => observer.observe(el));
 
+//ACCORDION SCRIPT CONTROLLER
+const accordionBtns = document.querySelectorAll(".accordion");
+
+
+accordionBtns.forEach((accordion) => {
+  accordion.onclick = function () {
+    this.classList.toggle("is-open");
+    let content = this.nextElementSibling;
+
+    if (content.style.maxHeight) {
+      //this is if the accordion is open
+      content.style.maxHeight = null;
+    } else {
+      //if the accordion is currently closed
+      content.style.maxHeight = content.scrollHeight + "px";
+      console.log(content.style.maxHeight);
+    }
+  };
+});
+
+//modal window for popup message
+const modalWindow = document.querySelector(".modal-window");
+const overlay1 = document.querySelector(".overlay");
+const closeBtn = document.querySelector(".close-btn");
+const modal_btn = document.querySelector(".floating-msg-button");
+
+const openModal = function () {
+  modalWindow.classList.toggle("hidden");
+};
+
+const closeModal = function () {
+  modalWindow.classList.add("hidden");
+};
+
+modal_btn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+
+
 //SCRIPT FOR CONTACT FORM
 document.getElementById("contact-form").addEventListener("submit", submitForm);
 
@@ -82,40 +120,6 @@ function submitForm(e) {
     .catch((err) => console.log(err));
 }
 
-//ACCORDION SCRIPT CONTROLLER
-const accordionBtns = document.querySelectorAll(".accordion");
 
-accordionBtns.forEach((accordion) => {
-  accordion.onclick = function () {
-    this.classList.toggle("is-open");
 
-    let content = this.nextElementSibling;
-    console.log(content);
 
-    if (content.style.maxHeight) {
-      //this is if the accordion is open
-      content.style.maxHeight = null;
-    } else {
-      //if the accordion is currently closed
-      content.style.maxHeight = content.scrollHeight + "px";
-      console.log(content.style.maxHeight);
-    }
-  };
-});
-
-//modal window for popup message
-const modalWindow = document.querySelector(".modal-window");
-const overlay1 = document.querySelector(".overlay");
-const closeBtn = document.querySelector(".close-btn");
-const modal_btn = document.querySelector(".floating-msg-button");
-
-const openModal = function () {
-  modalWindow.classList.toggle("hidden");
-};
-
-const closeModal = function () {
-  modalWindow.classList.add("hidden");
-};
-
-modal_btn.addEventListener("click", openModal);
-closeBtn.addEventListener("click", closeModal);
