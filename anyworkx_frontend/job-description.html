@@ -310,21 +310,22 @@
                     output = `
                         <h2>${job.job_title}</h2>
                         <main class="job-description">
-                        <article>
-                           <p> ${job.job_description}</p>
-                        </article>
-                        <br>
-                        <h2>${job.job_requirements_title}</h2>
-                        <article>
-                            <p>${job.job_requirements_body}</p>
-                        </article>
-                        <br>
-                        <h2>${job.offer_title}</h2>
-                        <article>
-                            <p>${job.we_offer}</p>
-                        </article>
+                            <article>
+                                <p><pre>${job.job_description}</pre></p>
+                            </article>
+                            <br>
+                            <h2>${job.job_requirements_title}</h2>
+                            <article>
+                                <p><pre>${job.job_requirements_body}</pre></p>
+                            </article>
+                            <br>
+                            <h2>${job.offer_title}</h2>
+                            <article>
+                                <p><pre>${job.we_offer}</pre></p>
+                            </article>
                         </main>
                     `;
+
 
                     document.querySelector(".breadcumb-navigation").innerHTML = breadCumb;
                     document.querySelector('.career-banner-section').innerHTML = outputTitle;
