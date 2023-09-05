@@ -51,7 +51,6 @@ animateElements.forEach((el) => observer.observe(el));
 //ACCORDION SCRIPT CONTROLLER
 const accordionBtns = document.querySelectorAll(".accordion");
 
-
 accordionBtns.forEach((accordion) => {
   accordion.onclick = function () {
     this.classList.toggle("is-open");
@@ -69,22 +68,22 @@ accordionBtns.forEach((accordion) => {
 });
 
 //modal window for popup message
-const modalWindow = document.querySelector(".modal-window");
+const modalBox = document.querySelector(".modal-window");
 const overlay1 = document.querySelector(".overlay");
 const closeBtn = document.querySelector(".close-btn");
 const modal_btn = document.querySelector(".floating-msg-button");
 
 const openModal = function () {
-  modalWindow.classList.toggle("hidden");
+  modalBox.classList.toggle("hidden");
 };
 
 const closeModal = function () {
-  modalWindow.classList.add("hidden");
+  modalBox.classList.add("hidden");
 };
 
 modal_btn.addEventListener("click", openModal);
 closeBtn.addEventListener("click", closeModal);
-
+console.log(closeBtn);
 
 //SCRIPT FOR CONTACT FORM
 document.getElementById("contact-form").addEventListener("submit", submitForm);
@@ -113,13 +112,12 @@ function submitForm(e) {
     .then((response) => response.json())
     .then((data) => {
       loadingOverlay.classList.remove("active");
-      submitBtn.textContent = "Message Sent";
+      submitBtn.textContent = "Message Sent Successfully";
 
-      setTimeout(e.target.reset(), 5000);
+      setTimeout(function () {
+        e.target.reset();
+        // submitBtn.textContent = "Send Message";
+      }, 5000);
     })
     .catch((err) => console.log(err));
 }
-
-
-
-
