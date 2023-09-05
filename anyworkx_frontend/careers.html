@@ -200,8 +200,21 @@
 
         <h2>View open positions</h2>
 
-        <div class="positions--wrapper">
+        <div class="job-loader">
+            <div class="skeleton">
+                <div class="skeleton-left">
+                    <div class="line h17 w40 m10"></div>
+                    <div class="line"></div>
+                    <div class="line h8 w50"></div>
+                    <div class="line  w75"></div>
+                </div>
+                <div class="skeleton-right">
+                </div>
 
+            </div>
+
+        </div>
+        <div class="positions--wrapper">
 
         </div>
     </section>
@@ -266,6 +279,10 @@
     <script defer src="assets/js/main.js"></script>
     <script>
         function getJobPositions() {
+            const loader = document.querySelector('.job-loader');
+            const positionsWrapper = document.querySelector('.positions--wrapper');
+            loader.style.display = 'block';
+            positionsWrapper.style.display = 'none';
             console.log('fetching jobs...');
             fetch('https://anyworkx.onrender.com/api/admin/create/job/list/')
                 .then((response) => response.json())
@@ -285,11 +302,14 @@
                         `
                     }
                     console.log('fetching complete');
+                    loader.style.display = 'none';
+                    positionsWrapper.style.display = 'block';
 
                     document.querySelector('.positions--wrapper').innerHTML = output;
                 })
                 .catch((error) => {
                     console.log(`Error loading job openings: ${error}`);
+                    loader.style.display = 'none';
                 });
         }
 

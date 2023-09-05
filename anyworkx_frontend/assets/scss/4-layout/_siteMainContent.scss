@@ -519,13 +519,13 @@
   }
 }
 /*=======END OF NEWSLETTER SECTION STYLING=======*/
-.powered-by{
+.powered-by {
   text-align: center;
   padding: 12px;
   background-color: $secondaryColor;
   color: #fff;
 
-  a{
+  a {
     text-decoration: underline;
     font-weight: bold;
   }
@@ -563,7 +563,7 @@
   gap: 24px;
   .text-description {
     width: 50%;
-    .text-link{
+    .text-link {
       font-weight: 600;
       color: $primaryColor;
       text-decoration: underline;
@@ -579,7 +579,7 @@
       margin: 12px 0;
       list-style: disc;
       margin-left: 24px;
-      li{
+      li {
         margin-bottom: 12px;
       }
     }
@@ -635,7 +635,7 @@
   margin-top: 48px;
   padding: 24px;
   background: rgba(250, 240, 255, 0.6);
-  h4{
+  h4 {
     margin-bottom: 6px;
   }
   p {
@@ -725,7 +725,7 @@
     color: $secondaryColor;
     text-decoration: underline;
   }
-  article{
+  article {
     margin-bottom: 24px;
   }
 }
@@ -1082,18 +1082,18 @@ aside.modal-window {
       width: 100%;
       text-align: center;
     }
-    .send-button{
-      position: relative;  
+    .send-button {
+      position: relative;
     }
-    .send-button:active{
+    .send-button:active {
       background: #666;
     }
-    .button__text{
+    .button__text {
       color: #fff;
       transition: all 0.2s;
     }
   }
-  .button--loading::after{
+  .button--loading::after {
     content: "";
     position: absolute;
     width: 16px;
@@ -1106,13 +1106,14 @@ aside.modal-window {
     animation: button-loading-spinner 1s ease infinite;
   }
   @keyframes button-loading-spinner {
-    from{
-        transform: rotate(0turn);
+    from {
+      transform: rotate(0turn);
     }
-    to{
-        transform: rotate(1turn);
+    to {
+      transform: rotate(1turn);
     }
   }
+
   .error-message {
     color: rgb(202, 36, 36);
     font-size: 16px;
@@ -1131,7 +1132,120 @@ aside.modal-window {
     }
   }
 }
+// .job-loader {
+//   margin-top: 24px;
+//   width: 48px;
+//   height: 48px;
+//   border: 5px solid;
+//   border-color: $secondaryColor transparent;
+//   border-radius: 50%;
+//   display: inline-block;
+//   box-sizing: border-box;
+//   animation: rotation 1s linear infinite;
+// }
 
+// @keyframes rotation {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+.job-loader {
+  max-width: 1000px;
+  width: 100%;
+  padding: 0 15px;
+  margin-top: 24px;
+}
+.skeleton-loader {
+  padding: 15px;
+  max-width: 100%;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2),
+  //   0 1px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.skeleton .line {
+  height: 12px;
+  margin-bottom: 6px;
+  border-radius: 2px;
+  background: rgba(130, 130, 130, 0.2);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(8%, rgba(130, 130, 130, 0.2)),
+    color-stop(18%, rgba(130, 130, 130, 0.3)),
+    color-stop(33%, rgba(130, 130, 130, 0.2))
+  );
+  background: linear-gradient(
+    to right,
+    rgba(130, 130, 130, 0.2) 8%,
+    rgba(130, 130, 130, 0.3) 18%,
+    rgba(130, 130, 130, 0.2) 33%
+  );
+  background-size: 800px 100px;
+  animation: wave-lines 2s infinite ease-out;
+}
+.skeleton-right {
+  flex: 1;
+}
+.skeleton-left {
+  flex: 2;
+  padding-right: 15px;
+}
+.flex1 {
+  flex: 1;
+}
+.flex2 {
+  flex: 2;
+}
+.skeleton .line:last-child {
+  margin-bottom: 0;
+}
+.h8 {
+  height: 8px !important;
+}
+
+.w25 {
+  width: 25% !important;
+}
+.w40 {
+  width: 40% !important;
+}
+.w50 {
+  width: 50% !important;
+}
+.w75 {
+  width: 75% !important;
+}
+.m10 {
+  margin-bottom: 10px !important;
+}
+
+@keyframes wave-lines {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+@keyframes wave-squares {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
 #chat-container {
   // max-width: 400px !important;
   max-height: 500px;

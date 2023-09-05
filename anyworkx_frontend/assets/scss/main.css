@@ -1526,6 +1526,96 @@ aside.modal-window .error-message {
     width: 100%;
   }
 }
+.job-loader {
+  max-width: 1000px;
+  width: 100%;
+  padding: 0 15px;
+  margin-top: 24px;
+}
+
+.skeleton-loader {
+  padding: 15px;
+  max-width: 100%;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skeleton .line {
+  height: 12px;
+  margin-bottom: 6px;
+  border-radius: 2px;
+  background: rgba(130, 130, 130, 0.2);
+  background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+  background-size: 800px 100px;
+  animation: wave-lines 2s infinite ease-out;
+}
+
+.skeleton-right {
+  flex: 1;
+}
+
+.skeleton-left {
+  flex: 2;
+  padding-right: 15px;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex2 {
+  flex: 2;
+}
+
+.skeleton .line:last-child {
+  margin-bottom: 0;
+}
+
+.h8 {
+  height: 8px !important;
+}
+
+.w25 {
+  width: 25% !important;
+}
+
+.w40 {
+  width: 40% !important;
+}
+
+.w50 {
+  width: 50% !important;
+}
+
+.w75 {
+  width: 75% !important;
+}
+
+.m10 {
+  margin-bottom: 10px !important;
+}
+
+@keyframes wave-lines {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+@keyframes wave-squares {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
 #chat-container {
   max-height: 500px;
   overflow-y: auto;
