@@ -1526,6 +1526,25 @@ aside.modal-window .error-message {
     width: 100%;
   }
 }
+.button-loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid;
+  border-color: #fff transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .job-loader {
   max-width: 1000px;
   width: 100%;

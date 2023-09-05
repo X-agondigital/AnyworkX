@@ -238,6 +238,35 @@
                 class="email-link">careers@anyworkx.africa</a></h5>
     </section>
 
+    <aside class="modal-window hidden">
+        <div class="modal--wrapper">
+            <i class="ri-close-fill close-btn"></i>
+            <article class="chat-window--container">
+
+                <form id="start-chat-form">
+                    <h4 class="title-header">Chat with us. What's your name and email address?</h4>
+                    <div class="field">
+                        <label for="firstname">Firstname:</label>
+                        <input type="text" id="username-id" name="username" class="input-field"
+                            placeholder="Your first name" required>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email-id" name="email" class="input-field"
+                            placeholder="Input your email address" required>
+                    </div>
+
+                    <div class="error-message"></div>
+
+                    <button type="button" class="btn send-button" id="submit_btn" onclick="login()">
+                        <span class="button__text">Start Chatting</span></button>
+                    <!-- <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now"> -->
+                </form>
+
+                <!-- <div id="chat-container"></div> -->
+            </article>
+        </div>
+    </aside>
     <div class="floating-msg-button">
         <i class="ri-message-2-line msg-icon"></i>
     </div>

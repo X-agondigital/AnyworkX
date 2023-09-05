@@ -80,8 +80,32 @@
     </aside>
 
     <section class="job-description-section">
+        <div class="job-loader">
+            <div class="skeleton">
+                <div class="skeleton-left">
+                    <div class="line h17 w40 m10"></div>
+                    <div class="line"></div>
+                    <div class="line h8 w50"></div>
+                    <div class="line  w75"></div>
+                </div>
+                <div class="skeleton-right">
+                </div>
 
+            </div>
 
+            <div class="skeleton">
+                <div class="skeleton-left">
+                    <div class="line h17 w40 m10"></div>
+                    <div class="line"></div>
+                    <div class="line h8 w50"></div>
+                    <div class="line  w75"></div>
+                </div>
+                <div class="skeleton-right">
+                </div>
+
+            </div>
+
+        </div>
     </section>
 
     <section class="job-application__fields">
@@ -164,8 +188,8 @@
 
             <!-- <button type="submit" class="btn">Submit Application</button> -->
             <button type="submit" class="btn" id="submit-button">
-                Submit Application
-                <div class="loading-spinner" id="loading-spinner"></div>
+                <span class="btn-text">Submit Application</span>
+                <span class="button-loader" id="loading-spinner"></span>
             </button>
 
         </form>
@@ -178,6 +202,35 @@
                 class="email-link">careers@anyworkx.africa</a></h5>
     </section>
 
+    <aside class="modal-window hidden">
+        <div class="modal--wrapper">
+            <i class="ri-close-fill close-btn"></i>
+            <article class="chat-window--container">
+
+                <form id="start-chat-form">
+                    <h4 class="title-header">Chat with us. What's your name and email address?</h4>
+                    <div class="field">
+                        <label for="firstname">Firstname:</label>
+                        <input type="text" id="username-id" name="username" class="input-field"
+                            placeholder="Your first name" required>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email-id" name="email" class="input-field"
+                            placeholder="Input your email address" required>
+                    </div>
+
+                    <div class="error-message"></div>
+
+                    <button type="button" class="btn send-button" id="submit_btn" onclick="login()">
+                        <span class="button__text">Start Chatting</span></button>
+                    <!-- <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now"> -->
+                </form>
+
+                <!-- <div id="chat-container"></div> -->
+            </article>
+        </div>
+    </aside>
     <div class="floating-msg-button">
         <i class="ri-message-2-line msg-icon"></i>
     </div>
@@ -288,13 +341,15 @@
 
         //Function for applying for job
         const applicationForm = document.getElementById("application-form");
-        const submitButton = document.getElementById("submit-button");
+        const textButton = document.querySelector(".btn-text");
         const loadingSpinner = document.getElementById("loading-spinner");
+        loadingSpinner.style.display = "none";
 
         applicationForm.addEventListener("submit", (e) => {
             e.preventDefault();
             loadingSpinner.style.display = "inline-block";
-            submitButton.disabled = true;
+            textButton.style.display = "none";
+
 
             const firstName = document.getElementById("first_name").value;
             const lastName = document.getElementById("last_name").value;
