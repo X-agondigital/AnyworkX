@@ -83,6 +83,7 @@
         </header>
 
         <section class="jobs--list">
+            <aside class="total-applicants bold margin-bottom">Total Applicants: <span id="applicants-total"></span></aside>
             <table id="table-jobs-list">
                 <thead id="thead-output">
                     <tr>
@@ -106,105 +107,6 @@
 
     <script>
         const loadingOverlay = document.getElementById('loading-overlay');
-
-        /*function getJobPositions() {
-            loadingOverlay.classList.add('active');
-            fetch('https://anyworkx.onrender.com/api/admin/view/job/application/')
-                .then((response) => response.json())
-                .then((applicants) => {
-                    const categoryCounts = {}; // Object to store the number of applications per job category
-
-                    applicants.Applicant.forEach((applicant) => {
-                        // const jobCatId = applicant.j
-                        const jobCategory = applicant.job.job_title;
-                        const jobId = applicant.job.id;
-
-                        // Increment the count for the job category
-                        if (categoryCounts[jobCategory]) {
-                            categoryCounts[jobCategory].count++;
-                        } else {
-                            categoryCounts[jobCategory] = { count: 1, jobId };
-                        }
-                    });
-
-                    let output = '';
-
-                    // Iterate over the job categories and display the data
-                    for (const category in categoryCounts) {
-                        const { count, jobId } = categoryCounts[category];
-                        // const numOfApplications = categoryCounts[category];
-
-                        output += `
-          <tr>
-            <td data-label="Job Category">${category}</td>
-            <td data-label="Number of Applications">${count}</td>
-            <td><a href="view-applicants.html?jobId=${jobId}" class="edit btn--action">View Applicants</a></td>
-          </tr>
-        `;
-                    }
-
-                    console.log(applicants);
-
-                    document.querySelector('#jobs_list-table-body').innerHTML = output;
-
-                    loadingOverlay.classList.remove('active');
-                })
-                .catch((error) => {
-                    console.log(`Error loading job openings: ${error}`);
-
-                    const alertMessage = document.querySelector("#response-message");
-                    alertMessage.classList.add("response--error-message");
-                    alertMessage.textContent = "Something went wrong, please refresh the page";
-
-                    loadingOverlay.classList.remove('active');
-                });
-        }
-
-        getJobPositions();*/
-
-        /*const allApplicants = [];
-
-        function fetchApplicants(pageNo) {
-            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/?page=${pageNo}`)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`Network response was not ok. Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    if (Array.isArray(data.Applicant)) {
-                        // If data.Applicant is an array, it contains applicants
-                        allApplicants.push(...data.Applicant);
-
-                        // Check if there are more pages
-                        if (data.Applicant.length >= 10) {
-                            // If there are more pages, recursively fetch the next page
-                            fetchApplicants(pageNo + 1);
-                        } else {
-                            // All pages have been retrieved, and allApplicants contains all applicants
-                            processAllApplicants(allApplicants);
-                        }
-                    } else {
-                        // Handle the case where data.Applicant is not an array
-                        console.error(`Invalid data format for applicants on page ${pageNo}`);
-                    }
-                })
-                .catch((error) => {
-                    console.error(`Error fetching applicants: ${error}`);
-                });
-        }
-
-        function processAllApplicants(applicants) {
-            // Here, you can work with the complete list of applicants
-            console.log(`Total applicants: ${applicants.length}`);
-            console.log(applicants);
-        }
-
-        // Start fetching applicants from page 1
-        fetchApplicants(1);*/
-
-        // const loadingOverlay = document.getElementById('loading-overlay');
 
         async function fetchAllApplicants() {
             loadingOverlay.classList.add('active');
@@ -250,8 +152,10 @@
             const allApplicants = await fetchAllApplicants();
 
             // Process and display all applicants here
-            console.log(`Total applicants: ${allApplicants.length}`);
-            console.log(allApplicants);
+            // console.log(`Total applicants: ${allApplicants.length}`);
+            // console.log(allApplicants);
+
+            document.getElementById('applicants-total').textContent=`${allApplicants.length}`;
 
             // You can include your code here for displaying the data in your table
             displayApplicantsData(allApplicants);
