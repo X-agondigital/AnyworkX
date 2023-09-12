@@ -360,9 +360,9 @@
                 .catch((error) => {
                     const alertMessage = document.querySelector("#response-message");
                     alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Something went wrong, please try again";
+                    alertMessage.textContent = "Unable to get bookmarked applicants, please try again";
 
-                    console.log(`Error deleting job posting with ID ${jobId}: ${error}`);
+                    console.log(`Error getting bookmarked applicants: ${error}`);
 
                     loadingOverlay.classList.remove('active');
                 });
@@ -439,6 +439,7 @@
                     setTimeout(messageDisappear, 3000);
 
                     loadingOverlay.classList.remove('active');
+                    getBookmarkedApplicant();
                 })
                 .catch((error) => {
                     console.log(`Error adding Applicant with ID ${applicantId}: ${error}`);
@@ -454,7 +455,7 @@
                 });
         }
 
-
+        
         getJobPositions();
 
         document.addEventListener('click', (e) => {
