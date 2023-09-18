@@ -48,6 +48,15 @@
   }
 }
 
+@media(min-width: 1200px){
+  nav{
+    padding: 24px 60px;
+  }
+  .hero-section{
+    padding: 24px 60px;
+  }
+}
+
 @media (max-width: 850px) {
   .hero-section {
     .image-container {
