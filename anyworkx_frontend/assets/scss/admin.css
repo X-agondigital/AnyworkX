@@ -469,9 +469,9 @@ table .flex-container {
 }
 
 .active-bookmark {
-  color: rgb(126, 0, 196);
+  color: rgb(126, 0, 196) !important;
   transition: 0.3s;
-  border: 1.5px solid rgb(126, 0, 196);
+  border: 1.5px solid rgb(126, 0, 196) !important;
 }
 
 @media screen and (max-width: 600px) {

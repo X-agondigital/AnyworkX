@@ -309,13 +309,6 @@
                         });
                     });
 
-                    // const deleteButtons = document.querySelectorAll('.btn--delete');
-                    // deleteButtons.forEach((button) => {
-                    //     button.addEventListener('click', (e) => {
-                    //         const jobId = e.target.getAttribute('data-id');
-                    //         deleteJob(jobId);
-                    //     });
-                    // });
 
                     // const bookmarkButtons = document.querySelectorAll('.bookmark');
                     // bookmarkButtons.forEach((button) => {
@@ -396,8 +389,8 @@
 
                     setTimeout(messageDisappear, 5000);
 
-                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
                     getJobPositions();
+                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
 
                     loadingOverlay.classList.remove('active');
                 })
@@ -413,7 +406,7 @@
         }
 
         function bookmarkApplicant(applicantId) {
-            // const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
+            const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
             const alertMessage = document.querySelector('#response-message');
             loadingOverlay.classList.add('active');
 
@@ -428,10 +421,53 @@
                 .then((data) => {
                     console.log(`Applicant with ID ${applicantId} marked successfully.`);
 
-                    // bookmarkButton.classList.toggle('active-bookmark');
+                    bookmarkButton.classList.toggle('active-bookmark');
 
                     alertMessage.classList.add('response--success-message');
                     alertMessage.textContent = "Applicant bookmarked successfully.";
+
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
+                    setTimeout(messageDisappear, 3000);
+
+                    loadingOverlay.classList.remove('active');
+                    getBookmarkedApplicant();
+                })
+                .catch((error) => {
+                    console.log(`Error adding Applicant with ID ${applicantId}: ${error}`);
+                    alertMessage.classList.add('response--error-message');
+                    alertMessage.textContent = "Something, went wrong. Please, refresh aand try again";
+
+                    const messageDisappear = function () {
+                        alertMessage.style.display = "none";
+                    };
+                    setTimeout(messageDisappear, 3000);
+
+                    loadingOverlay.classList.remove('active');
+                });
+        }
+
+        function removeMarkedApplicant(applicantId) {
+            const bookmarkButton = document.querySelector(`[data-id="${applicantId}"]`);
+            const alertMessage = document.querySelector('#response-message');
+            loadingOverlay.classList.add('active');
+
+            fetch(`https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${adminToken}`
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(`Applicant with ID ${applicantId} UNmarked successfully.`);
+
+                    bookmarkButton.classList.remove('active-bookmark');
+
+                    alertMessage.classList.add('response--success-message');
+                    alertMessage.textContent = "Applicant unmarked successfully.";
 
                     const messageDisappear = function () {
                         alertMessage.style.display = "none";
@@ -469,6 +505,13 @@
             if (e.target.classList.contains('bookmark')) {
                 const applicantId = e.target.getAttribute('data-id');
                 bookmarkApplicant(applicantId);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('deleteBookmark')) {
+                const applicantId = e.target.getAttribute('data-id');
+                removeMarkedApplicant(applicantId);
             }
         });
     </script>
