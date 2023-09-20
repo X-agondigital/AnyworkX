@@ -100,8 +100,6 @@
         </header>
 
         <article class="job-application--fields">
-            <form action="contact.html" method="post">
-
                 <div>
                     <label for="name">Name</label>
                     <input type="text" class="input-field" name="name" id="applicant-name" disabled>
@@ -152,7 +150,6 @@
                 <div class="application-btn-group">
 
                 </div>
-            </form>
         </article>
 
     </main>
@@ -162,7 +159,7 @@
     <script src="../../assets/js/auth.js"></script>
 
     <script>
-        // const adminToken = localStorage.getItem('adminToken');
+        const adminToken = localStorage.getItem('adminToken');
         const loadingOverlay = document.getElementById('loading-overlay');
         const alertMessage = document.querySelector("#response-message");
 
@@ -171,7 +168,7 @@
         // console.log(applicantId);
 
         function populateJobField() {
-            // loadingOverlay.classList.add('active');
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: "GET",
                 headers: {
@@ -217,41 +214,83 @@
         populateJobField();
 
 
+        // function deleteApplication(applicantId) {
+        //     fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
+        //         method: 'DELETE',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             "Authorization": `Bearer ${adminToken}`
+        //         },
+        //     })
+        //         .then((response) => {
+        //             if (response.ok) {
+        //                 // Deletion was successful
+        //                 alertMessage.classList.add('response--success-message');
+        //                 alertMessage.textContent = "Applicant deleted successfully";
+        //                 const messageDisappear = function () {
+        //                     alertMessage.style.display = "none";
+        //                 };
+
+        //                 setTimeout(messageDisappear, 5000);
+
+        //                 console.log(`Applicant with ID ${applicantId} deleted successfully.`);
+        //                 // window.location.href = "view-applicants.html";
+        //             } else {
+        //                 // Handle the case where deletion failed
+        //                 alertMessage.classList.add('response--error-message');
+        //                 alertMessage.textContent = "Failed to delete the applicant";
+
+        //                 console.log(`Failed to delete applicant with ID ${applicantId}`);
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             // Handle network errors or other issues
+        //             alertMessage.classList.add('response--error-message');
+        //             alertMessage.textContent = "Something went wrong, please try again";
+
+        //             console.log(`Error deleting applicant with ID ${applicantId}: ${error}`);
+        //         });
+        // }
+
         function deleteApplication(applicantId) {
+            loadingOverlay.classList.add('active');
             fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    // "Authorization": `Bearer ${adminToken}`
+                    "Authorization": `Bearer ${adminToken}`
                 },
             })
                 .then((response) => {
-                    if (response.ok) {
-                        return response.json();
+                    if (response.status === 204) {
+                        // Successful deletion (no content)
+                        alertMessage.classList.add('response--success-message');
+                        alertMessage.textContent = "Applicant deleted successfully";
+                        const messageDisappear = function () {
+                            alertMessage.style.display = "none";
+                        };
+                        setTimeout(messageDisappear, 5000);
+                        console.log(`Applicant with ID ${applicantId} deleted successfully.`);
+
+                        loadingOverlay.classList.remove('active');
+
+                        setInterval(window.location.href = history.back(), 3000);
+                        
+                        
                     } else {
-                        throw new Error('Network response was not ok.');
+
+                        console.log(`Error deleting applicant with ID ${applicantId}. Status: ${response.status}`);
                     }
                 })
-                .then((data) => {
-                    alertMessage.classList.add('response--success-message');
-                    alertMessage.textContent = "Applicant deleted succesfully";
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
-
-                    setTimeout(messageDisappear, 5000);
-
-                    console.log(`Job posting with ID ${jobId} deleted successfully.`);
-                    window.location.href = "view-applicants.html";
-                })
                 .catch((error) => {
-
                     alertMessage.classList.add('response--error-message');
                     alertMessage.textContent = "Something went wrong, please try again";
-
-                    console.log(`Error deleting applicant with ID ${jobId}: ${error}`);
+                    console.log(`Error deleting applicant with ID ${applicantId}: ${error}`);
+                    loadingOverlay.classList.remove('active');
                 });
         }
+
+
 
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn--delete')) {
@@ -268,7 +307,7 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // "Authorization": `Bearer ${adminToken}`
+                    "Authorization": `Bearer ${adminToken}`
                 },
             })
                 .then((response) => response.json())

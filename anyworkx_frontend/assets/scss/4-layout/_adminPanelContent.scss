@@ -332,4 +332,9 @@ table {
   button {
     float: right;
   }
+  .application-btn-group{
+    button:nth-child(2){
+      margin-right: 32px;
+    }
+  }
 }
