@@ -48,11 +48,11 @@
   }
 }
 
-@media(min-width: 1200px){
-  nav{
+@media (min-width: 1200px) {
+  nav {
     padding: 24px 60px;
   }
-  .hero-section{
+  .hero-section {
     padding: 24px 60px;
   }
 }
@@ -433,8 +433,20 @@
       align-items: center;
       margin-bottom: 12px;
     }
+    h4.exception {
+      gap: 8px;
+      align-items: center;
+    }
+    .ri-wallet-2-line {
+      color: #00a7d7;
+    }
     svg {
       margin-left: 6px;
+    }
+
+    .link-text {
+      padding: 4px 0px;
+      align-items: end;
     }
   }
 }
@@ -711,7 +723,7 @@
   padding: 0 24px;
   max-width: 900px;
   margin: auto;
-  pre{
+  pre {
     white-space: pre-wrap;
     font-size: inherit;
     font-family: inherit;
@@ -736,6 +748,13 @@
     margin: 12px 0;
     list-style: disc;
     margin-left: 24px;
+  }
+  ol{
+    margin: 12px 0;
+    margin-left: 24px;
+  }
+  li{
+    margin-bottom: 8px;
   }
   a {
     color: $secondaryColor;

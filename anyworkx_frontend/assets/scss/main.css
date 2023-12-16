@@ -883,8 +883,19 @@ nav .nav--items__container a.active {
   align-items: center;
   margin-bottom: 12px;
 }
+.benefits-section .benefit--items__container h4.exception {
+  gap: 8px;
+  align-items: center;
+}
+.benefits-section .benefit--items__container .ri-wallet-2-line {
+  color: #00a7d7;
+}
 .benefits-section .benefit--items__container svg {
   margin-left: 6px;
+}
+.benefits-section .benefit--items__container .link-text {
+  padding: 4px 0px;
+  align-items: end;
 }
 
 @media (max-width: 600px) {
@@ -1169,6 +1180,13 @@ nav .nav--items__container a.active {
   margin: 12px 0;
   list-style: disc;
   margin-left: 24px;
+}
+.job-description-section ol {
+  margin: 12px 0;
+  margin-left: 24px;
+}
+.job-description-section li {
+  margin-bottom: 8px;
 }
 .job-description-section a {
   color: rgb(0, 167, 215);
