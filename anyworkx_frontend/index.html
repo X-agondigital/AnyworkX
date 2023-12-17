@@ -55,6 +55,11 @@
       rel="preload"
       src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"
     ></script>
+
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
   </head>
 
   <!-- Google tag (gtag.js) -->
@@ -913,6 +918,33 @@
             <a href="https://wa.me/+2348108022689" class="btn">Chat with us on WhatsApp</a>
         </div>
     </aside> -->
+
+    <aside>
+      <article class="message-popup--wrapper">
+        <div class="popup-container">
+          <i class="ri-close-line close-btn popup-close-btn"></i>
+          <h3>Hi there</h3>
+          <p>Nice to see you. How may we help you today?</p>
+          <!-- <img src="" alt="" /> -->
+          <div class="anime-container">
+            <dotlottie-player
+              src="https://lottie.host/cbebdaae-ea96-4385-914f-5bc585da49a5/u3o58WzVPv.json"
+              background="#fff"
+              speed="1"
+              style="width: 100%; height: auto"
+              direction="1"
+              mode="normal"
+              loop
+              autoplay
+            ></dotlottie-player>
+          </div>
+
+          <button class="cta-btn">
+            Open chat <i class="ri-arrow-right-s-line icon"></i>
+          </button>
+        </div>
+      </article>
+    </aside>
 
     <aside class="modal-window hidden">
       <div class="modal--wrapper">

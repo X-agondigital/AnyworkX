@@ -1,5 +1,12 @@
 "use strict";
 
+const popupClose = document.querySelector(".popup-close-btn");
+const popupMessage = document.querySelector(".message-popup--wrapper");
+
+popupClose.addEventListener("click", function () {
+  popupMessage.classList.add("hidden");
+});
+
 //-----NAVIGATION BAR
 const hamburger = document.querySelector(".menu--toggle");
 const navMenu = document.querySelector(".right--side__nav");
@@ -120,3 +127,5 @@ function submitForm(e) {
     })
     .catch((err) => console.log(err));
 }
+
+

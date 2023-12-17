@@ -4,58 +4,84 @@
     <meta charset="UTF-8" />
     <title>Customer Service Chat App</title>
     <style>
-      /* Add your CSS styling here */
-      .send-button{
-        position: relative;
-        padding: 8px 16px;
-        background: #009579;
-        
+      .message-popup--wrapper {
+        max-width: 300px;
+        height: auto;
+        background-color: rgba(0, 167, 215, 1);
+        color: #fff;
+        padding: 24px 12px;
+        border-radius: 16px;
+      }
+      .popup-container {
+        width: 80%;
+        text-align: center;
+        margin: auto;
       }
 
-      .send-button:active{
-        background: #007a63;
+      .popup-container h3 {
+        margin-bottom: 24px;
       }
-      .button__text{
-        font: bold 20px 'poppins', sans-serif;
-        color: #fff;
-        transition: all 0.2s;
+      .popup-container p {
+        margin-bottom: 16px;
+        color: #ffff;
       }
-      .button--loading::after{
-        content: "";
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        inset: 0;
-        margin: auto;
-        border: 4px solid transparent;
-        border-top-color: #fff;
-        border-radius: 50%;
-        animation: button-loading-spinner 1s ease infinite;
+      .popup-container .cta-btn {
+        font-size: 16px;
+        font-weight: 600;
+        border: 0px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: rgba(0, 167, 215, 1);
+        background-color: #fff;
+        padding: 16px 16px;
+        transition: 0.3s;
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 24px auto;
+        gap: 8px;
+        /* text-align: center; */
       }
-      @keyframes button-loading-spinner {
-        from{
-            transform: rotate(0turn);
-        }
-        to{
-            transform: rotate(1turn);
-        }
+      .popup-container div#animation {
+        border-radius: 16px;
       }
     </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/scss/main.css" rel="stylesheet" />
+
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
   </head>
   <body>
-    <!-- <td><a class="delete btn--action" data-id="${job.id}">Delete</a></td> -->
+    <article class="message-popup--wrapper">
+      <div class="popup-container">
+        <h3>Hi there</h3>
+        <p>Nice to see you. How may we help you today?</p>
+        <!-- <img src="" alt="" /> -->
+        <div class="anime-container">
+          <dotlottie-player
+            src="https://lottie.host/cbebdaae-ea96-4385-914f-5bc585da49a5/u3o58WzVPv.json"
+            background="#fff"
+            speed="1"
+            style="width: 100%; height: auto"
+            direction="1"
+            mode="normal"
+            loop
+            autoplay
+          ></dotlottie-player>
+        </div>
 
-    <button class="send-button">
-        <span class="button__text">Proceed</span>
-    </button>
-    
-    <script>
-        const sendButton = document.querySelector('.send-button')
-
-        sendButton.addEventListener('click', ()=>{
-            sendButton.classList.add("button--loading")
-            document.querySelector('.button__text').style.visibility="hidden";
-        })
-    </script>
+        <button class="cta-btn">
+          Open chat <i class="ri-arrow-right-s-line icon"></i>
+        </button>
+      </div>
+    </article>
+    <script></script>
   </body>
 </html>

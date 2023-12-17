@@ -749,11 +749,11 @@
     list-style: disc;
     margin-left: 24px;
   }
-  ol{
+  ol {
     margin: 12px 0;
     margin-left: 24px;
   }
-  li{
+  li {
     margin-bottom: 8px;
   }
   a {
@@ -1326,3 +1326,83 @@ aside.modal-window {
 }
 
 /*==========ERROR 404 PAGE STYLING==========*/
+
+.message-popup--wrapper {
+  max-width: 300px;
+  height: auto;
+  background-color: rgba(0, 167, 215, 1);
+  color: #fff;
+  padding: 24px 12px;
+  border-radius: 16px;
+  position: fixed;
+  bottom: 3%;
+  right: 7%;
+  // position: relative;
+  // transform: translateY(40%);
+  z-index: 1111;
+}
+.popup-container {
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+.popup-container .close-btn{
+  background-color: #fff;
+  color: #333;
+  padding: 4px;
+  font-size: 24px;
+  border-radius: 4px;
+  position: absolute;
+  right: 8px;
+  transform: translateY(-12px);
+  cursor: pointer;
+}
+
+.popup-container h3 {
+  margin-bottom: 20px;
+}
+.popup-container p {
+  margin-bottom: 16px;
+  color: #ffff;
+}
+.popup-container .cta-btn {
+  font-size: 16px;
+  font-weight: 600;
+  border: 0px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: rgba(0, 167, 215, 1);
+  background-color: #fff;
+  padding: 16px 16px;
+  transition: 0.3s;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px auto;
+  gap: 8px;
+}
+.popup-container div#animation {
+  border-radius: 16px;
+}
+
+@media(max-width: 1280px){
+  .message-popup--wrapper {
+    bottom: 3%;
+    right: 9%;
+  }
+}
+
+@media (max-width: 900px) {
+  .message-popup--wrapper {
+    bottom: 3%;
+    right: 14%;
+  }
+}
+
+@media(max-width: 650px){
+  .message-popup--wrapper {
+    bottom: 15%;
+    right: 4%;
+  }
+}
