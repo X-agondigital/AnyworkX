@@ -13,6 +13,8 @@ function login() {
   const username = document.getElementById("username-id").value;
   const email = document.getElementById("email-id").value;
 
+  document.querySelector(".error-message").textContent = ' ';
+
   fetch("https://anyworkx.onrender.com/api/register/", {
     method: "POST",
     headers: {
@@ -30,6 +32,7 @@ function login() {
     .then((data) => {
       // console.log("Token:", data.access);
       localStorage.setItem("token", data.access);
+
 
       // Redirect to messaging page
       // window.location.href = "/anyworkx_frontend/chat-window.html";

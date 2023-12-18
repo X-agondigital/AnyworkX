@@ -2,15 +2,14 @@
 
 const popupClose = document.querySelector(".popup-close-btn");
 const popupMessage = document.querySelector(".message-popup--wrapper");
-const chatOpenBtn = document.querySelector('.chat-button');
-
+const chatOpenBtn = document.querySelector(".chat-button");
 
 popupClose.addEventListener("click", function () {
   popupMessage.classList.add("hidden");
 });
-setTimeout(function(){
-  popupMessage.classList.remove('hidden')
-}, 7000)
+setTimeout(function () {
+  popupMessage.classList.remove("hidden");
+}, 7000);
 
 //-----NAVIGATION BAR
 const hamburger = document.querySelector(".menu--toggle");
@@ -81,7 +80,7 @@ accordionBtns.forEach((accordion) => {
 //modal window for popup message
 const modalBox = document.querySelector(".modal-window");
 const overlay1 = document.querySelector(".overlay");
-const closeBtn = document.querySelector(".close-btn");
+const closeBtns = document.querySelectorAll(".close-btn");
 const modal_btn = document.querySelector(".floating-msg-button");
 
 const openModal = function () {
@@ -93,12 +92,16 @@ const closeModal = function () {
 };
 
 modal_btn.addEventListener("click", openModal);
-closeBtn.addEventListener("click", closeModal);
-chatOpenBtn.addEventListener('click', function(){
-  modalBox.classList.remove("hidden");
-  popupMessage.classList.add('hidden')
+closeBtns.forEach((closeBtn) => {
+  closeBtn.addEventListener("click", closeModal);
 });
-// console.log(closeBtn);
+// closeBtns.addEventListener("click", function(){
+// });
+chatOpenBtn.addEventListener("click", function () {
+  modalBox.classList.remove("hidden");
+  popupMessage.classList.add("hidden");
+});
+console.log(closeBtn.textContent);
 
 //SCRIPT FOR CONTACT FORM
 document.getElementById("contact-form").addEventListener("submit", submitForm);
@@ -136,5 +139,3 @@ function submitForm(e) {
     })
     .catch((err) => console.log(err));
 }
-
-
