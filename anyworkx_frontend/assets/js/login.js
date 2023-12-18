@@ -1,19 +1,34 @@
 const chatButton = document.querySelectorAll(".send-button");
 const buttonText = document.querySelectorAll(".button__text");
+const usernameInput = document.getElementById("username-id");
+const emailInput = document.getElementById("email-id");
+const errorMessage = document.querySelector(".error-message");
+const loginSubmitBtn = document.getElementById("submit_btn");
 
-for(let i =0; i<chatButton.length; i++){
+for (let i = 0; i < chatButton.length; i++) {
   chatButton[i].addEventListener("click", () => {
     chatButton[i].classList.add("button--loading");
     buttonText[i].style.visibility = "hidden";
   });
 }
 
-function login() {
-  // e.preventDefault();
-  const username = document.getElementById("username-id").value;
-  const email = document.getElementById("email-id").value;
+loginSubmitBtn.addEventListener("click", login);
 
-  document.querySelector(".error-message").textContent = ' ';
+function login() {
+  const username = usernameInput.value;
+  const email = emailInput.value;
+
+  if (username === "" || email === "") {
+    errorMessage.textContent = "Username or email can't be empty";
+
+    for (let i = 0; i < chatButton.length; i++) {
+      chatButton[i].classList.remove("button--loading");
+      buttonText[i].style.visibility = "visible";
+    }
+    return; // Stop execution if validation fails
+  }
+
+  errorMessage.textContent = " ";
 
   fetch("https://anyworkx.onrender.com/api/register/", {
     method: "POST",
@@ -30,21 +45,16 @@ function login() {
       return response.json();
     })
     .then((data) => {
-      // console.log("Token:", data.access);
       localStorage.setItem("token", data.access);
-
-
-      // Redirect to messaging page
-      // window.location.href = "/anyworkx_frontend/chat-window.html";
       window.location.href = "chat-window.html";
     })
     .catch((error) => {
       document.querySelector(".error-message").textContent =
         "Something went wrong, please try again";
-        for(let i =0; i<chatButton.length; i++){
-          chatButton[i].classList.remove("button--loading");
-          buttonText[i].style.visibility = "visible";
-        }
-      // console.error("Error during login:", error);
+      for (let i = 0; i < chatButton.length; i++) {
+        chatButton[i].classList.remove("button--loading");
+        buttonText[i].style.visibility = "visible";
+      }
+      console.error("Error during login:", error);
     });
 }
