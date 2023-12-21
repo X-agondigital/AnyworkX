@@ -4,12 +4,16 @@ const popupClose = document.querySelector(".popup-close-btn");
 const popupMessage = document.querySelector(".message-popup--wrapper");
 const chatOpenBtn = document.querySelector(".chat-button");
 
-popupClose.addEventListener("click", function () {
-  popupMessage.classList.add("hidden");
-});
+if (popupClose) {
+  popupClose.addEventListener("click", function () {
+    popupMessage.classList.add("hidden");
+  });
+}
+
 setTimeout(function () {
   popupMessage.classList.remove("hidden");
 }, 7000);
+
 
 //-----NAVIGATION BAR
 const hamburger = document.querySelector(".menu--toggle");
