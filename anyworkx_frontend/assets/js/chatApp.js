@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', checkAccessTokenExpiry);
 // Get the messages from the server
 function getMessages(token) {
   const messagesDiv = document.getElementById("messages");
+  const greetingDiv = document.getElementById('greeting');
   fetch(url, {
     method: "GET",
     headers: {
@@ -62,7 +63,7 @@ function getMessages(token) {
       // Display the messages
 
       const textarea = document.querySelector("textarea");
-      messagesDiv.innerHTML = "";
+      messagesDiv.innerHTML = `<div class="message received-message">Drop a message. We will respond to you in a few minutes</div>`;
       data.forEach((message) => {
         const div = document.createElement("div");
         div.innerHTML = message.message;
@@ -123,7 +124,6 @@ messageForm.addEventListener("submit", (event) => {
   }
 });
 
-// Refresh the messages every 5 seconds
 setInterval(() => getMessages(token), 1000);
 
 //script that controls scroll to bottom
@@ -133,15 +133,13 @@ function scrollToBottom() {
   window.scrollTo(0, document.body.scrollHeight);
 }
 
-//This code enables the page to scroll to the bottom of the page onload
 window.onload = setTimeout(() => {
   window.scrollTo(0, document.body.scrollHeight);
 }, 1000);
 
 function checkAuth() {
   if (!token) {
-    // Admin is not logged in, redirect to login page
-    window.location.href = "index.html"; // Replace with your login page URL
+    window.location.href = "index.html"; 
   }
 }
 
@@ -149,6 +147,5 @@ checkAuth();
 
 function logout() {
   localStorage.removeItem("token");
-  // Redirect to the login page
-  window.location.href = "index.html"; // Replace with your login page URL
+  window.location.href = "index.html"; 
 }
