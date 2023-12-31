@@ -1724,6 +1724,11 @@ aside.modal-window .error-message {
   right: 7%;
   z-index: 1111;
 }
+.message-popup--wrapper .anime-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 
 .popup-container {
   width: 80%;

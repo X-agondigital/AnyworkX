@@ -1340,13 +1340,18 @@ aside.modal-window {
   // position: relative;
   // transform: translateY(40%);
   z-index: 1111;
+  .anime-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
 }
 .popup-container {
   width: 80%;
   text-align: center;
   margin: auto;
 }
-.popup-container .close-btn{
+.popup-container .close-btn {
   background-color: #fff;
   color: #333;
   padding: 4px;
@@ -1386,7 +1391,7 @@ aside.modal-window {
   border-radius: 16px;
 }
 
-@media(max-width: 1280px){
+@media (max-width: 1280px) {
   .message-popup--wrapper {
     bottom: 3%;
     right: 9%;
@@ -1400,7 +1405,7 @@ aside.modal-window {
   }
 }
 
-@media(max-width: 650px){
+@media (max-width: 650px) {
   .message-popup--wrapper {
     bottom: 15%;
     right: 4%;
