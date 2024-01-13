@@ -1050,9 +1050,9 @@
 
 /*==============LIVE CHAT STYLING SECTION===========*/
 .floating-msg-button {
-  background: $secondaryColor;
+  // background: $secondaryColor;
   border-radius: 50%;
-  width: 70px;
+  width: 250px;
   height: 70px;
   display: flex;
   align-items: center;
@@ -1067,6 +1067,9 @@
   transition: background $transitionDuration;
   &:active {
     background: #0c7e9e;
+  }
+  img{
+    width: 100%;
   }
 }
 

@@ -1446,9 +1446,8 @@ nav .nav--items__container a.active {
 /*===============END OF CONTACT PAGE STYLING=========*/
 /*==============LIVE CHAT STYLING SECTION===========*/
 .floating-msg-button {
-  background: rgb(0, 167, 215);
   border-radius: 50%;
-  width: 70px;
+  width: 250px;
   height: 70px;
   display: flex;
   align-items: center;
@@ -1464,6 +1463,9 @@ nav .nav--items__container a.active {
 }
 .floating-msg-button:active {
   background: #0c7e9e;
+}
+.floating-msg-button img {
+  width: 100%;
 }
 
 aside.modal-window {
