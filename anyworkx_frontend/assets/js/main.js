@@ -81,29 +81,29 @@ accordionBtns.forEach((accordion) => {
   };
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const modalBox = document.querySelector(".modal-window");
-  const overlay1 = document.querySelector(".overlay");
-  const closeBtns = document.querySelectorAll(".close-btn");
-  const modal_btn = document.querySelector(".floating-msg-button");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const modalBox = document.querySelector(".modal-window");
+//   const overlay1 = document.querySelector(".overlay");
+//   const closeBtns = document.querySelectorAll(".close-btn");
+//   const modal_btn = document.querySelector(".floating-msg-button");
 
-  const openModal = function () {
-    modalBox.classList.toggle("hidden");
-  };
+//   const openModal = function () {
+//     modalBox.classList.toggle("hidden");
+//   };
 
-  const closeModal = function () {
-    modalBox.classList.add("hidden");
-  };
+//   const closeModal = function () {
+//     modalBox.classList.add("hidden");
+//   };
 
-  modal_btn.addEventListener("click", openModal);
-  closeBtns.forEach((closeBtn) => {
-    closeBtn.addEventListener("click", closeModal);
-  });
-  chatOpenBtn.addEventListener("click", function () {
-    modalBox.classList.remove("hidden");
-    popupMessage.classList.add("hidden");
-  });
-});
+//   modal_btn.addEventListener("click", openModal);
+//   closeBtns.forEach((closeBtn) => {
+//     closeBtn.addEventListener("click", closeModal);
+//   });
+//   chatOpenBtn.addEventListener("click", function () {
+//     modalBox.classList.remove("hidden");
+//     popupMessage.classList.add("hidden");
+//   });
+// });
 
 //SCRIPT FOR CONTACT FORM
 document.getElementById("contact-form").addEventListener("submit", submitForm);
