@@ -1,0 +1,9 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.anyworkx.customer",
+      "sha256_cert_fingerprints":
+      ["8E:90:F7:14:98:CA:B0:81:F4:FA:DA:94:C9:97:F7:4E:A7:9A:95:7C:63:CB:E7:14:28:95:72:76:52:4C:51:72"]
+    }
+}]
