@@ -4,7 +4,7 @@ const popupClose = document.querySelector(".popup-close-btn");
 const popupMessage = document.querySelector(".message-popup--wrapper");
 const chatOpenBtn = document.querySelector(".chat-button");
 
-if (popupClose) {
+/*if (popupClose) {
   popupClose.addEventListener("click", function () {
     popupMessage.classList.add("hidden");
   });
@@ -12,7 +12,7 @@ if (popupClose) {
 
 setTimeout(function () {
   popupMessage.classList.remove("hidden");
-}, 7000);
+}, 7000);*/
 
 
 //-----NAVIGATION BAR
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     modalBox.classList.add("hidden");
   };
 
-  modal_btn.addEventListener("click", openModal);
+  // modal_btn.addEventListener("click", openModal);
   closeBtns.forEach((closeBtn) => {
     closeBtn.addEventListener("click", closeModal);
   });
