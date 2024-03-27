@@ -845,6 +845,10 @@
     justify-content: center;
     align-items: center;
   }
+  h3 {
+    color: $titleTextColor;
+    text-transform: capitalize;
+  }
   article.privacies {
     margin-top: unset;
   }
