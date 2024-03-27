@@ -73,6 +73,10 @@ ul {
   color: $bodyTextColor;
   font-size: $bodyFontSize;
 }
+ol{
+  color: $bodyTextColor;
+  font-size: $bodyFontSize;
+}
 
 .padding-wrapper {
   padding: 0 24px;
@@ -134,4 +138,7 @@ img {
   opacity: 1;
   filter: blur(0);
   transform: translateX(0px);
+}
+.semi-bold{
+  font-weight: 600;
 }
