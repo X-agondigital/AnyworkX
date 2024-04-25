@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="no-index,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyWorkX Admin panel | Edit Job</title>
+
+    <link rel="icon" href="../../assets/images/favicon.png">
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Remix Icon CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="admin-nav">
+        <div class="logo--container">
+            <img src="../../assets/images/anyworkx-logo-dark.png" alt="logo for anyworks" class="logo-image">
+        </div>
+
+        <div class="menu--toggle">
+            <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+        </div>
+
+        <div class="right--side__nav">
+            <ul class="nav--items__container">
+                <a href="../admin-message/admin-message.html" class="admin_nav-link">
+                    <li class="admin_nav-item"><i class="ri-message-2-line"></i> <span>Messages</span></li>
+                </a>
+                <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
+                    <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
+                </a>
+                <a href="../admin-subscription/contact-page.html" class="admin_nav-link">
+                    <li class="admin_nav-item">
+                      <i class="ri-mail-check-line"></i> <span>Contact Page</span>
+                    </li>
+                </a>
+                <a href="all-job.html" class="admin_nav-link active">
+                    <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
+                </a>
+                <a href="../manage-admin/all-admin.html" class="admin_nav-link">
+                    <li class="admin_nav-item"><i class="ri-user-3-line"></i> <span>Manage Admins</span></li>
+                </a>
+
+            </ul>
+
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
+                        id="logout">Logout</button></a></div>
+        </div>
+    </nav>
+    <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
+    <div class="sidebar">
+        <a class="active" href="all-job.html">
+            <h4>Job</h4>
+            <p>Edit and update jobs</p>
+        </a>
+        <a href="job-category.html">
+            <h4>Job Category</h4>
+            <p>Edit and create job category</p>
+        </a>
+        <a class="" href="job-list.html">
+            <h4>Applications</h4>
+            <p>View available applications</p>
+        </a>
+    </div>
+
+    <main class="main-content aside-sidebar">
+        <section class="create-job--wrapper">
+            <header class="secondary--nav">
+                <h2>Edit Job</h2>
+                <a href="all-job.html" class="btn">View all jobs</a>
+            </header>
+
+            <article class="job-application--fields">
+                <form id="edit-job">
+                    <div>
+                        <label for="job-category">Job Category</label>
+                        <select name="job-category" id="job-category" class="input-field"
+                            placeholder="Select job category" required>
+
+                        </select>
+                    </div>
+                    <div>
+                        <label for="job-title">Job Title</label>
+                        <input type="text" class="input-field" name="job_title" id="job-title" required>
+                    </div>
+                    <div>
+                        <label for="about-job">About Job</label>
+                        <textarea name="about-job" id="job_description"></textarea>
+                    </div>
+                    <div>
+                        <label for="position">Position</label>
+                        <input type="text" class="input-field" name="position" id="position" required>
+                    </div>
+                    <div>
+                        <label for="location">Location</label>
+                        <input type="text" class="input-field" name="job_location" id="job-location" required
+                            placeholder="E.g. “Nigeria, Ghana” or “Anywhere”">
+                    </div>
+
+                    <div>
+                        <label for="requirement-heading">Job Requirements Heading</label>
+                        <input type="text" class="input-field" name="requirement-heading" id="requirement-heading"
+                            required placeholder="E.g. Job Requirements">
+                    </div>
+
+                    <div>
+                        <label for="job-requirements">Job Requirements</label>
+                        <textarea name="job-requirements" id="job-requirements"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="skill-requirement">What we are looking for</label>
+                        <textarea name="skill-requirement" id="skill-requirement"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="offer">What we offer</label>
+                        <textarea name="offer" id="offer"></textarea>
+                    </div>
+                    <button type="submit" class="btn" id="publish-btn">Update Job</button>
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <!-- <script src="../../assets/js/admin.js"></script> -->
+    <script src="../../assets/js/main.js"></script>
+    <!-- <script src="../../assets/js/auth.js"></script> -->
+
+    <script>
+        const adminToken = localStorage.getItem('adminToken');
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get('id');
+        console.log(jobId);
+
+        // fetch("https://anyworkx.onrender.com/api/admin/create/job_category/",
+        //     {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             Authorization: `Bearer ${adminToken}`
+        //         }
+        //     })
+        //     .then((response) => response.json())
+        //     .then((jobCategories) => {
+        //         const jobCategorySelect = document.getElementById("job-category");
+
+        //         jobCategories.jobs_category.forEach((category) => {
+        //             const categoryId = category.id;
+        //             const categoryName = category.category_name;
+
+        //             // Create option element
+        //             const option = document.createElement("option");
+        //             option.value = categoryId;
+        //             option.textContent = categoryName;
+
+        //             // Append option to select
+        //             jobCategorySelect.appendChild(option);
+        //         });
+        //     })
+        //     .catch((error) => {
+        //         console.log(`Error loading job categories: ${error}`);
+        //     });
+
+        // function populateJobField() {
+        //     fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "Authorization": `Bearer ${adminToken}`
+        //         }
+        //     })
+        //         .then((response) => response.json())
+        //         .then((job) => {
+        //             document.getElementById("job-category").value = job.job_category.category_name;
+        //             document.getElementById("job-title").value = job.job_title;
+        //             document.getElementById("job_description").value = job.job_description;
+        //             document.getElementById("position").value = job.position;
+        //             document.getElementById("job-location").value = job.job_location;
+        //             document.getElementById("requirement-heading").value = job.job_requirements_title;
+        //             document.getElementById("job-requirements").value = job.job_requirements_body;
+        //             document.getElementById("skill-requirement").value = job.offer_title;
+        //             document.getElementById("offer").value = job.we_offer;
+        //         })
+        //         .catch((error) => {
+        //             console.log(`Error loading job details: ${error}`);
+        //         });
+        // }
+
+        // populateJobField();
+
+        // Fetch job details and populate the form
+        function fetchJobDetailsAndPopulateFields(jobId) {
+            Promise.all([
+                fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${adminToken}`
+                    }
+                }).then(response => response.json()),
+                fetch("https://anyworkx.onrender.com/api/admin/create/job_category/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${adminToken}`
+                    }
+                }).then(response => response.json())
+            ])
+                .then(([job, jobCategories]) => {
+                    // Populate job category select
+                    const jobCategorySelect = document.getElementById("job-category");
+                    jobCategories.jobs_category.forEach((category) => {
+                        const option = document.createElement("option");
+                        option.value = category.id;
+                        option.textContent = category.category_name;
+                        jobCategorySelect.appendChild(option);
+                    });
+
+                    // Populate other fields
+                    document.getElementById("job-category").value = job.job_category.id;
+                    document.getElementById("job-title").value = job.job_title;
+                    document.getElementById("job_description").value = job.job_description;
+                    document.getElementById("position").value = job.position;
+                    document.getElementById("job-location").value = job.job_location;
+                    document.getElementById("requirement-heading").value = job.job_requirements_title;
+                    document.getElementById("job-requirements").value = job.job_requirements_body;
+                    document.getElementById("skill-requirement").value = job.offer_title;
+                    document.getElementById("offer").value = job.we_offer;
+                })
+                .catch((error) => {
+                    console.log(`Error loading job details or categories: ${error}`);
+                });
+        }
+
+        // Call the function to fetch job details and populate fields
+        fetchJobDetailsAndPopulateFields(jobId);
+
+
+
+        //SCRIPT FOR EDITING JOB FIELDS
+        const editForm = document.getElementById("edit-job");
+
+        editForm.addEventListener("submit", (event) => {
+            loadingOverlay.classList.add('active');
+            event.preventDefault();
+            const jobCategory = document.getElementById("job-category").value;
+            const jobTitle = document.getElementById("job-title").value;
+            const jobDescription = document.getElementById("job_description").value;
+            const jobPosition = document.getElementById("position").value;
+            const jobLocation = document.getElementById("job-location").value;
+            const jobRequirementsTitle = document.getElementById(
+                "requirement-heading"
+            ).value;
+            const jobRequirements = document.getElementById("job-requirements").value;
+            const skillRequirement = document.getElementById("skill-requirement").value;
+            const anyworkxOffer = document.getElementById("offer").value;
+
+            const jobCategorySelect = document.getElementById("job-category");
+            const selectedCategoryId = jobCategorySelect.value;
+
+            fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    // "Authorization": `Bearer ${adminToken}`
+                },
+                body: JSON.stringify({
+                    job_category: jobCategory,
+                    job_title: jobTitle,
+                    job_description: jobDescription,
+                    position: jobPosition,
+                    job_location: jobLocation,
+                    job_requirements_title: jobRequirementsTitle,
+                    job_requirements_body: jobRequirements,
+                    offer_title: skillRequirement,
+                    we_offer: anyworkxOffer,
+                })
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log(data);
+                    window.location.href = 'all-job.html';
+                })
+                .catch((error) => {
+                    console.error("Unable to edit job:", error);
+
+                    const alertMessage = document.querySelector("#response-message");
+                    alertMessage.classList.add("response--error-message");
+                    alertMessage.textContent = "Something went wrong, please refresh and try again";
+                    loadingOverlay.classList.remove('active');
+                });
+        })
+
+    </script>
+</body>
+
+</html>

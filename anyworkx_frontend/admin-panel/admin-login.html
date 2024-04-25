@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyWorkX | Find a professional service provider in seconds</title>
+
+    <link rel="icon" href="assets/images/../../../assets/images/favicon.png">
+    <meta name="description" content="AnyworkX is an online marketplace where vendors of legitimate services can showcase their business,
+    competence and experience to prospective customers who may need their services anywhere.">
+    <meta name="keywords"
+        content="Vendor, Online vendor, Services, Service providers, Service provider in Nigeria, Online Marketplace, 24/7, Anytime, Anywhere, Customer, Customers online, Satisfied customers, How to get customers, How to get customers online, Location, Current location, Wallet, On-demand services, Services on demand, Home Services on demand, Professional Services, Negotiable, Profile, Verification, Professional services marketplace, Service provider, Online booking system, Africa service marketplace, Verified service provider, Convenient service booking, 24/7 service availability, Affordable service provider, Customer service training, Emergency services">
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
+    <!--Remix Icon CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/scss/admin.css" rel="stylesheet">
+
+    <!--OWL CAROUSEL CSS CDN-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
+
+    <!--Bodymovin CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+</head>
+
+<body>
+    <div id="response-message"></div>
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+    <section class="login-nav">
+        <div class="logo--container">
+            <a href="index.html"><img src="../assets/images/anyworkx-logo-dark.png" alt="logo for anyworks"
+                    class="logo-image"></a>
+        </div>
+
+
+        <div class="panel-indicator">
+            <button class="indicator">Admin Panel</button>
+        </div>
+    </section>
+    <main class="admin-login--wrapper">
+        <form>
+            <div class="marginator">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="input-field">
+            </div>
+            <div class="marginator">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="input-field">
+            </div>
+            <button type="button" class="btn" onclick="login()">Login</button>
+            <p>Problem Signing in? <a href="mailto:admin@x-agon.africa" class="link-text">Email admin@x-agon.africa</a></p>
+        </form>
+    </main>
+
+
+    <script defer src="../assets/js/admin-login.js"></script>
+</body>
+
+</html>

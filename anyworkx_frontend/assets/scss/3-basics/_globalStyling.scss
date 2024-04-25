@@ -1,0 +1,150 @@
+html {
+  scroll-behavior: smooth;
+}
+@font-face {
+  font-family: "Px Grotesk Pan";
+  src: url("../font/PxGroteskPan-Black.eot");
+  src: local("Px Grotesk Pan Black"), local("../font/PxGroteskPan-Black"),
+    url("../font/PxGroteskPan-Black.eot?#iefix") format("embedded-opentype"),
+    url("../font/PxGroteskPan-Black.woff2") format("woff2"),
+    url("../font/PxGroteskPan-Black.woff") format("woff"),
+    url("../font/PxGroteskPan-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  // max-width: 1440px;
+  margin: auto;
+  font-family: $fontFamily;
+  position: relative;
+}
+
+h1 {
+  font-size: $h1FontSize;
+  line-height: 1;
+}
+h1.homepage {
+  font-family: "Px Grotesk Pan";
+}
+
+h2 {
+  font-size: $h2FontSize;
+}
+h3 {
+  font-size: $h3FontSize;
+}
+
+h4 {
+  font-size: $h4FontSize;
+}
+
+h5 {
+  font-size: $h5FontSize;
+  color: $titleTextColor;
+}
+h1,
+h2 {
+  color: $primaryColor;
+  line-height: 1;
+}
+
+p {
+  font-size: $bodyFontSize;
+  color: $bodyTextColor;
+  line-height: 1.3;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  color: $bodyTextColor;
+  font-size: $bodyFontSize;
+}
+ol{
+  color: $bodyTextColor;
+  font-size: $bodyFontSize;
+}
+
+.padding-wrapper {
+  padding: 0 24px;
+}
+
+@media (max-width: 550px) {
+  .padding-wrapper {
+    padding: 0;
+  }
+}
+
+img {
+  object-fit: cover;
+  object-position: center;
+}
+.bold {
+  font-weight: bold;
+}
+.response--success-message {
+  background: rgba(21, 187, 21, 0.6);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid rgb(21, 187, 21);
+  width: 50%;
+  margin: auto;
+  margin-top: 12px;
+}
+
+.response--error-message {
+  background: rgba(228, 14, 14, 0.6);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid rgba(228, 14, 14, 1);
+  width: 50%;
+  margin: auto;
+  margin-top: 12px;
+}
+
+@media (max-width: 550px) {
+  .response--success-message {
+    width: 100%;
+  }
+
+  .response--error-message {
+    width: 100%;
+  }
+}
+
+.animate {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateX(-20%);
+  transition: all 0.7s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0px);
+}
+.semi-bold{
+  font-weight: 600;
+}
+
+.section-max--width{
+  max-width: 1200px;
+  padding: 24px;
+  margin: auto;
+}

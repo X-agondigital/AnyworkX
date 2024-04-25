@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatting Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyWorkX | Chat with customer care</title>
+
+    <link rel="icon" href="assets/images/favicon.png">
+
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Remix Icon CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../anyworkx_frontend/assets/scss/main.css" rel="stylesheet">
+
+    <style>
+        .chatbox {
+            padding: 24px 24px 12px;
+            background-color: #F5F5F5;
+        }
+
+        #messages {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            padding: 1rem;
+            margin: auto;
+        }
+
+        .message {
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 40px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .sent-message {
+            align-self: flex-end;
+            background: hsla(193, 100%, 42%, 1);
+            color: #fff;
+            border-radius: .75rem 0 .75rem .75rem;
+        }
+
+        .chatbox-message-bottom {
+            padding: 0 6px;
+            position: sticky;
+            bottom: 8px;
+            width: 90%;
+            height: 20%;
+            margin: auto;
+        }
+        @media (max-width: 550px){
+            .chatbox{
+                padding: 12px;
+            }
+            .chatbox-message-bottom, #messages{
+                width: 100%;
+            }
+        }
+
+        .chatbox-message-form {
+            display: flex;
+            align-items: center;
+            background: hsla(193, 100%, 94%, 1);
+            border-radius: .5rem;
+            padding: .5rem 1.25rem;
+        }
+
+
+        .received-message {
+            align-self: flex-start;
+            background: hsla(0, 0%, 85%, 1);
+            border-radius: 0 .75rem .75rem .75rem;
+        }
+
+        #message-input {
+            margin-right: 24px;
+        }
+
+        .chat-btn {
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: 600;
+            height: 45px;
+            border: 0px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #fff;
+            background-color: rgba(0, 167, 215, 1);
+            padding: 16px;
+        }
+
+        .down-arrow {
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 2000;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 12px;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/scss/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Welcome to the Chatting Page</h1>
+    <section class="chatbox">
+        <div id="messages">
+            <!-- messages will be added dynamically here -->
+        </div>
+        <i class="ri-arrow-down-line down-arrow"></i>
+        <div class="chatbox-message-bottom">
+            <form id="message-form" class="chatbox-message-form">
+                <input type="text" id="message-input" class="input-field">
+                <button type="submit" class="chat-btn"><i class="ri-send-plane-2-line"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Get the token from the query string
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const token = urlParams.get('token');
+        // retrieve the token from local storage
+        const url = 'https://cerdo.pythonanywhere.com/api/messages/';
+
+        const token = localStorage.getItem("token");
+
+        // localStorage.setItem('token', token);
+        if (token) {
+            getMessages(token);
+        } else {
+            console.error("Token not found in localStorage");
+        }
+
+        // Get the messages from the server
+        function getMessages(token) {
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.status}`);
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+                    // Display the messages
+                    const messagesDiv = document.getElementById('messages');
+                    messagesDiv.innerHTML = '';
+                    data.forEach(message => {
+                        const div = document.createElement('div');
+                        div.innerHTML = message.message;
+                        div.classList.add('message');
+                        if (message.sender === 1) {
+                            div.classList.add('sent-message');
+                        } else {
+                            div.classList.add('received-message');
+                        }
+                        messagesDiv.appendChild(div);
+                    });
+
+                    // Scroll to the bottom of the messages
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                    messagesDiv.addEventListener('onfocus', scrollToBottom)
+                })
+                .catch(error => {
+                    console.error('Error getting messages:', error);
+                });
+        }
+
+        // Send a message to the server
+        // send message to server
+        function sendMessage(message) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Message sent');
+                    } else {
+                        console.log('Message failed to send');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                });
+        }
+
+        // handle form submission
+        const messageForm = document.getElementById('message-form');
+        messageForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const messageInput = document.getElementById('message-input');
+            const messageBody = messageInput.value.trim();
+            if (messageBody) {
+                sendMessage(messageBody);
+                messageInput.value = '';
+            }
+        });
+
+        // Refresh the messages every 5 seconds
+        setInterval(() => getMessages(token), 1000);
+
+        bottomPage = document.querySelector('.down-arrow');
+        bottomPage.addEventListener('click', scrollToBottom)
+        function scrollToBottom (){
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+    </script>
+
+
+</body>
+
+</html>

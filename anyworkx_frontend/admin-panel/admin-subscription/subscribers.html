@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="no-index,nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnyWorkX Admin panel | Subscribers</title>
+
+    <link rel="icon" href="../../assets/images/favicon.png" />
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Remix Icon CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="../../assets/scss/admin.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/scss/tab.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../assets/scss/modal.css"
+      rel="stylesheet"
+    />
+
+    <!-- Import SheetJS library -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="admin-nav">
+      <div class="logo--container">
+        <img
+          src="../../assets/images/anyworkx-logo-dark.png"
+          alt="logo for anyworks"
+          class="logo-image"
+        />
+      </div>
+
+      <div class="menu--toggle">
+        <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+      </div>
+
+      <div class="right--side__nav">
+        <ul class="nav--items__container">
+          <a href="../admin-message/admin-message.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-message-2-line"></i> <span>Messages</span>
+            </li>
+          </a>
+          <a href="subscribers.html" class="admin_nav-link active">
+            <li class="admin_nav-item">
+              <i class="ri-mail-check-line"></i>
+              <span>Email Subscriptions</span>
+            </li>
+          </a>
+          <a href="contact-page.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-mail-check-line"></i> <span>Contact Page</span>
+            </li>
+          </a>
+          <a href="../admin-job/all-job.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-briefcase-line"></i> <span>Manage jobs</span>
+            </li>
+          </a>
+          <a href="../manage-admin/all-admin.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-user-3-line"></i> <span>Manage Admins</span>
+            </li>
+          </a>
+        </ul>
+
+        <div class="cta-button">
+          <a href="#"
+            ><button class="btn get--started__btn" id="logout">
+              Logout
+            </button></a
+          >
+        </div>
+      </div>
+    </nav>
+    <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+      <div class="loading-indicator"></div>
+    </div>
+
+    <div id="response-message"></div>
+
+    <div class="modal hide-modal" id="delete-job-modal">
+      <div class="modal-content">
+        <p>Are you sure you want to delete this email?</p>
+        <div class="modal-buttons">
+          <button class="btn--cancel">Cancel</button>
+          <button class="btn--delete" data-id="${job.id}">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="main-content">
+      <section class="subscribers-page">
+        <h1>Subscribers to Newsletter Updates</h1>
+        <header class="newsletter-upper--section">
+          <div class="data-filter">
+            <button class="no--bg active">All</button>
+            <button class="no--bg">Today</button>
+          </div>
+          <div class="download-options">
+            <button class="btn" id="download-csv">Download as CSV</button>
+            <!-- <button class="btn--without-bg" id="download-xls" style="visibility: hidden;">Download as XLS</button> -->
+          </div>
+        </header>
+
+        <article class="newsletter-lower--section">
+          <div class="tab-content">
+            <div class="tab--item active" id="all-subscribers">
+              <table id="table-subscribers all">
+                <thead id="thead-output">
+                  <tr>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Date subscribed</th>
+                    <th scope="col" colspan="2">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="subscriber-table-body"></tbody>
+              </table>
+            </div>
+
+            <div class="tab--item">
+              <h3 class="no-subscribers hidden">
+                There are no new subscribers in the last 24 hours
+              </h3>
+              <table id="table-subscribers today">
+                <thead id="thead-output">
+                  <tr>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Date subscribed</th>
+                  </tr>
+                </thead>
+
+                <tbody id="subscriber-table-body-2"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="pagination" id="pagination-all">
+            <p id="pagination-output-all">
+              Page <button class="pagination-button">1</button>
+            </p>
+          </div>
+
+          <div
+            class="pagination"
+            id="pagination-today"
+            style="visibility: hidden"
+          >
+            <p id="pagination-output-today">
+              Page <button class="pagination-button">1</button>
+            </p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- <script src="../../assets/js/admin.js"></script> -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script>
+      const adminToken = localStorage.getItem("adminToken");
+      const loadingOverlay = document.getElementById("loading-overlay");
+      const alertMessage = document.querySelector("#response-message");
+      const openDeleteModal = document.querySelector("#delete-job-modal");
+
+      const messageDisappear = function () {
+        alertMessage.style.display = "none";
+      };
+      // openDeleteModal.classList.add('hide-modal');
+
+      let currentPageAll = 1;
+      let currentPageToday = 1;
+
+      function getSubscribers(page) {
+        loadingOverlay.classList.add("active");
+
+        fetch(`https://anyworkx.onrender.com/api/subscribers/?page=${page}`)
+          .then((response) => response.json())
+          .then((subscribers) => {
+            let output = "";
+            for (const subscriber of subscribers.subscribers) {
+              output += `
+                            <tr>
+                                <td data-label="Email Address">${subscriber.email}</td>
+                                <td data-label="Date subscribed">${subscriber.created_at}</td>
+                                <td><a class="delete delete-btn btn--action" data-id="${subscriber.id}">Delete</a></td>
+                            </tr>
+                        `;
+            }
+            document.getElementById("subscriber-table-body").innerHTML = output;
+            currentPageAll = page; // Update the current page value for the "All" tab
+            generatePaginationButtons(subscribers.last_page, page, "all");
+
+            const openDeleteModal = document.querySelector("#delete-job-modal");
+            const btnCloseModal = document.querySelector(".btn--cancel");
+            const btnOpenModal = document.querySelectorAll(".delete-btn");
+
+            for (let i = 0; i < btnOpenModal.length; i++) {
+              btnOpenModal[i].addEventListener("click", function (event) {
+                openDeleteModal.classList.remove("hide-modal");
+                const subscriberId = event.target.getAttribute("data-id");
+                const deleteButton = document.querySelector(".btn--delete");
+                deleteButton.setAttribute("data-id", subscriberId);
+                // console.log('button clicked');
+              });
+            }
+
+            const closeModalWindow = function () {
+              openDeleteModal.classList.add("hide-modal");
+            };
+
+            window.onclick = function (event) {
+              if (event.target === openDeleteModal) {
+                openDeleteModal.classList.add("hide-modal");
+              }
+            };
+
+            btnCloseModal.addEventListener("click", closeModalWindow);
+
+            // const deleteButtons = document.querySelectorAll('.btn--delete');
+            // deleteButtons.forEach((button) => {
+            //     button.addEventListener('click', (e) => {
+            //         const subscriberId = e.target.getAttribute('data-id');
+            //         deleteSubscriber(subscriberId);
+            //     });
+            // });
+
+            loadingOverlay.classList.remove("active");
+          })
+          .catch((error) => {
+            loadingOverlay.classList.remove("active");
+            alertMessage.classList.add("response--error-message");
+            alertMessage.textContent = "Something went wrong, please try again";
+            // console.log(error);
+          });
+      }
+
+      function deleteSubscriber(subscriberId) {
+        loadingOverlay.classList.add("active");
+        fetch(
+          `https://anyworkx.onrender.com/api/admin/delete_subscribers/${subscriberId}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${adminToken}`,
+            },
+          }
+        )
+          .then((response) => {
+            if (response.status === 204) {
+              // Subscriber was successfully deleted
+              return {}; // Return an empty object
+            }
+            return response.json();
+          })
+          .then((data) => {
+            getSubscribers(currentPageAll);
+            alertMessage.classList.add("response--success-message");
+            alertMessage.textContent = "Subscriber deleted succesfully";
+            setTimeout(messageDisappear, 5000);
+            loadingOverlay.classList.remove("active");
+            openDeleteModal.classList.add("hide-modal");
+
+            console.log(
+              `Subscriber with ID ${subscriberId} deleted successfully.`
+            );
+          })
+          .catch((error) => {
+            alertMessage.classList.add("response--error-message");
+            alertMessage.textContent = "Something went wrong, please try again";
+
+            console.log(
+              `Error deleting Subscriber with ID ${subscriberId}: ${error}`
+            );
+
+            loadingOverlay.classList.remove("active");
+          });
+      }
+
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn--delete")) {
+          const subscriberId = e.target.getAttribute("data-id");
+          deleteSubscriber(subscriberId);
+        }
+      });
+
+      // function getTodaySubscribers(page) {
+      //     fetch(
+      //         `https://anyworkx.onrender.com/api/admin/subscribers/last-24-hours/?page=${page}`
+      //     )
+      //         .then((response) => response.json())
+      //         .then((subscribers) => {
+      //             let output = "";
+      //             for (const subscriber of subscribers) {
+      //                 output += `
+      //      <tr>
+      //          <td data-label="Email Address">${subscriber.email}</td>
+      //          <td data-label="Date subscribed">${subscriber.created_at}</td>
+
+      //      </tr>
+      //  `;
+      //                 if (subscribers.length = 0) {
+      //                     console.log(subscribers);
+      //                     // const subscriberTable = document.getElementById('today');
+      //                     // subscriberTable.classList.add('hidden');
+      //                     // document.getElementById('no-subscribers').classList.remove('hidden');
+      //                 }
+      //             }
+      //             // console.log(subscribers);
+
+      //             document.getElementById("subscriber-table-body-2").innerHTML = output;
+      //             currentPageToday = page; // Update the current page value for the "Today" tab
+      //             generatePaginationButtons(subscribers.last_page, page, "today");
+      //         })
+      //         .catch((error) => {
+      //             console.log(`Error loading subscribers: ${error}`);
+      //         });
+      // }
+
+      function generatePaginationButtons(totalPages, currentPage, tab) {
+        const paginationDiv = document.getElementById(`pagination-${tab}`);
+        let paginationOutput = "Page ";
+        for (let i = 1; i <= totalPages; i++) {
+          if (i === currentPage) {
+            paginationOutput += `<button class="current-page">${i}</button> `;
+          } else {
+            paginationOutput += `<button class="pagination-button">${i}</button> `;
+          }
+        }
+        paginationDiv.innerHTML = paginationOutput;
+        const buttons = paginationDiv.querySelectorAll(".pagination-button");
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            if (tab === "all") {
+              getSubscribers(button.textContent);
+            } else if (tab === "today") {
+              getTodaySubscribers(button.textContent);
+            }
+            buttons.forEach((button) =>
+              button.classList.remove("current-page")
+            );
+            button.classList.add("current-page");
+          });
+        });
+      }
+
+      // Initialize with the first page for each tab
+      getSubscribers(currentPageAll);
+      getTodaySubscribers(currentPageToday);
+
+      // Helper function to convert an array of objects to CSV format
+      function convertArrayToCSV(dataArray) {
+        if (!Array.isArray(dataArray) || dataArray.length === 0) {
+          return ""; // Return an empty string if the data is not in the expected format
+        }
+        const header = Object.keys(dataArray[0]).join(",");
+        const rows = dataArray.map((data) => Object.values(data).join(","));
+        return header + "\n" + rows.join("\n");
+      }
+
+      // Helper function to create a downloadable file
+      function downloadFile(data, filename, mimeType) {
+        const blob = new Blob([data], { type: mimeType });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        window.URL.revokeObjectURL(url);
+      }
+
+      document.getElementById("download-csv").addEventListener("click", () => {
+        const fetchSubscribers = (page) => {
+          return fetch(
+            `https://anyworkx.onrender.com/api/subscribers/?page=${page}`
+          )
+            .then((response) => response.json())
+            .then((data) => data.subscribers)
+            .catch((error) => {
+              console.log(
+                `Error loading subscribers for page ${page}: ${error}`
+              );
+              return []; // Return an empty array if there's an error
+            });
+        };
+
+        const totalPages = 3; // Update with the total number of pages
+        const fetchPromises = [];
+
+        for (let page = 1; page <= totalPages; page++) {
+          fetchPromises.push(fetchSubscribers(page));
+        }
+
+        Promise.all(fetchPromises)
+          .then((results) => {
+            const subscribers = results.flat(); // Combine subscribers from all pages
+            const csvData = convertArrayToCSV(subscribers);
+            downloadFile(csvData, "subscribers.csv", "text/csv");
+          })
+          .catch((error) => {
+            console.log(`Error fetching subscribers: ${error}`);
+          });
+      });
+    </script>
+    <script src="../../assets/js/tab.js"></script>
+  </body>
+</html>

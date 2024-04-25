@@ -1,0 +1,340 @@
+.login-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  height: 60px;
+  align-items: center;
+  .logo--container img {
+    width: 150px;
+    height: auto;
+  }
+  .indicator {
+    background-color: #ccc;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+  }
+}
+#requestPermissionButton {
+  font-size: 16px;
+  background-color: $secondaryColor;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.notification-icon {
+  transform: rotate(12deg);
+}
+
+#response-message {
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  margin: auto;
+  position: fixed;
+  top: 12px;
+  z-index: 90000000;
+  left: 43%;
+  text-align: center;
+  width: fit-content;
+}
+
+.response--success-message {
+  background: hsl(120, 80%, 70%);
+  border: 2px solid rgb(21, 187, 21);
+}
+
+.response--error-message {
+  background: hsl(0, 88%, 60%);
+  border: 2px solid rgba(228, 14, 14, 1);
+}
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#loading-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-indicator {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin-login--wrapper {
+  padding: 24px;
+  form {
+    max-width: 700px;
+    margin: auto;
+    transform: translateY(30%);
+    padding: 24px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0px 12px 40px rgba(174, 174, 174, 0.15);
+    .marginator {
+      margin-bottom: 24px;
+    }
+    .input-field {
+      margin-top: 12px;
+    }
+    button {
+      width: 100%;
+      margin-top: 24px;
+    }
+    p {
+      margin-top: 12px;
+      text-align: center;
+    }
+    .link-text {
+      display: inline;
+    }
+  }
+}
+.margin-bottom {
+  margin-bottom: 24px;
+}
+.main-content {
+  padding: 24px;
+  button.no--bg {
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    background: transparent;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+  border: 1px solid #d2d2d2;
+  border-radius: 16px;
+  thead {
+    background-color: $primaryColor;
+    color: #fff;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 12px;
+  }
+  td {
+    border-bottom: 1px solid #e2e1e5;
+    a.delete {
+      color: #f14668;
+      border: 1px solid #f14668;
+      max-width: 150px;
+      &:hover {
+        color: #cb2244;
+        border: 1px solid #cb2244;
+      }
+    }
+    a.secondary-action {
+      color: $secondaryColor;
+      border: 1px solid $secondaryColor;
+      width: 30px;
+    }
+    a.edit {
+      background-color: $secondaryColor;
+      color: #fff;
+      max-width: 150px;
+      &:hover {
+        color: #fff;
+        background-color: rgb(64, 212, 253);
+      }
+    }
+  }
+  .flex-container {
+    display: flex;
+    gap: 24px;
+  }
+}
+.active-bookmark {
+  color: rgb(126, 0, 196) !important;
+  transition: 0.3s;
+  border: 1.5px solid rgb(126, 0, 196) !important;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+    thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    tr {
+      display: block;
+      margin-bottom: 48px;
+    }
+    td {
+      border-bottom: 1px solid #bcbcbc;
+      display: block;
+      text-align: right;
+      &::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+/*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
+.subscribers-page {
+  margin-top: 48px;
+  button.no--bg {
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    background: transparent;
+  }
+}
+.newsletter-upper--section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+  .data-filter {
+    button {
+      margin-right: 12px;
+      min-width: 40px;
+      cursor: pointer;
+    }
+    button.active {
+      border-bottom: 3px solid $secondaryColor;
+    }
+  }
+  .download-options {
+    .btn {
+      margin-right: 12px;
+    }
+    .btn--without-bg {
+      display: inline-flex;
+      padding: 15px 16px;
+    }
+  }
+}
+
+.newsletter-lower--section {
+  margin-top: 48px;
+  .no-subscribers {
+    color: #ccc;
+    text-align: center;
+    transform: translateY(24px);
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin: 48px;
+    gap: 6px;
+    button {
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid $secondaryColor;
+      border-radius: 6px;
+      color: $bodyTextColor;
+    }
+    .current-page {
+      background-color: $secondaryColor;
+      color: #fff;
+    }
+  }
+}
+
+/*=========END OF NEWSLETTER SUBSCRIPTION SECTION=========*/
+
+.secondary--nav {
+  display: flex;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px 0 48px;
+  flex-flow: row wrap;
+  gap: 24px 48px;
+  .prev-btn {
+    display: flex;
+    align-items: center;
+    transition: $transitionDuration;
+    &:hover {
+      color: $bodyTextColor;
+      transition: $transitionDuration;
+    }
+  }
+  .prev-icon {
+    font-size: 32px;
+    color: $secondaryColor;
+  }
+}
+
+.job-application--fields {
+  padding: 12px;
+  margin-bottom: 48px;
+  div {
+    margin-bottom: 24px;
+  }
+  .btn-group {
+    float: none;
+    display: flex;
+    gap: 24px;
+    justify-content: flex-end;
+    .delete {
+      color: #cb2244;
+      background-color: unset;
+      border: 1px solid #cb2244;
+    }
+  }
+  .input-field,
+  textarea {
+    margin-top: 12px;
+  }
+  button {
+    float: right;
+  }
+  .application-btn-group{
+    button:nth-child(2){
+      margin-right: 32px;
+    }
+  }
+}

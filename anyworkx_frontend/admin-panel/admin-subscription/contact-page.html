@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="no-index,nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnyWorkX Admin panel | Conact Page</title>
+
+    <link rel="icon" href="../../assets/images/favicon.png" />
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Remix Icon CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="../../assets/scss/admin.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/scss/tab.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="../../assets/scss/modal.css"
+      rel="stylesheet"
+    />
+
+    <!-- Import SheetJS library -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="admin-nav">
+      <div class="logo--container">
+        <img
+          src="../../assets/images/anyworkx-logo-dark.png"
+          alt="logo for anyworks"
+          class="logo-image"
+        />
+      </div>
+
+      <div class="menu--toggle">
+        <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+      </div>
+
+      <div class="right--side__nav">
+        <ul class="nav--items__container">
+          <a href="../admin-message/admin-message.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-message-2-line"></i> <span>Messages</span>
+            </li>
+          </a>
+          <a href="subscribers.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-mail-check-line"></i>
+              <span>Email Subscriptions</span>
+            </li>
+          </a>
+          <a href="contact-page.html" class="admin_nav-link active">
+            <li class="admin_nav-item">
+              <i class="ri-mail-check-line"></i> <span>Contact Page</span>
+            </li>
+          </a>
+          <a href="../admin-job/all-job.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-briefcase-line"></i> <span>Manage jobs</span>
+            </li>
+          </a>
+          <a href="../manage-admin/all-admin.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-user-3-line"></i> <span>Manage Admins</span>
+            </li>
+          </a>
+        </ul>
+
+        <div class="cta-button">
+          <a href="#"
+            ><button class="btn get--started__btn" id="logout">
+              Logout
+            </button></a
+          >
+        </div>
+      </div>
+    </nav>
+    <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+      <div class="loading-indicator"></div>
+    </div>
+
+    <div id="response-message"></div>
+
+    <main class="main-content">
+      <section class="subscribers-page">
+        <h1>Contact Page</h1>
+
+        <article class="newsletter-lower--section">
+          <table id="table-subscribers">
+            <thead id="thead-output">
+              <tr>
+                <th scope="col">Email Address</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Date</th>
+                <th scope="col" colspan="2">Message</th>
+              </tr>
+            </thead>
+
+            <tbody id="contact-table-body"></tbody>
+          </table>
+          <!-- <div class="pagination" id="pagination-all">
+                    <p id="pagination-output-all">Page <button class="pagination-button">1</button></p>
+                </div> -->
+        </article>
+      </section>
+    </main>
+
+    <script src="../../assets/js/admin.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <!-- <script src="../../assets/js/auth.js"></script> -->
+
+    <script>
+      function getContactMessages() {
+        fetch(`https://anyworkx.onrender.com/api/contact/`, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((contacts) => {
+            let output = "";
+
+            contacts.forEach((contact) => {
+              const emailAddress = contact.email;
+              const fullName = contact.fullname;
+              const dateTime = formatDateTime(contact.created_at); // Format date here
+              const messageReceived = contact.message;
+
+              output += `
+          <tr>
+            <td data-label="Email Address">${emailAddress}</td>
+            <td data-label="Full Name">${fullName}</td>
+            <td data-label="Date">${dateTime}</td>
+            <td data-label="Message">${messageReceived}</td>
+          </tr>
+        `;
+            });
+
+            document.querySelector("#contact-table-body").innerHTML = output;
+          })
+          .catch((err) => console.log(err));
+      }
+
+      function formatDateTime(dateTimeString) {
+        const options = { day: "numeric", month: "long", year: "numeric" };
+        const formattedDate = new Date(dateTimeString).toLocaleDateString(
+          "en-GB",
+          options
+        );
+
+        // Add the ordinal suffix to the day
+        const day = new Date(dateTimeString).getDate();
+        const ordinalSuffix = getOrdinalSuffix(day);
+        return formattedDate.replace(/\d+/, (day) => day + ordinalSuffix);
+      }
+
+      function getOrdinalSuffix(number) {
+        if (number >= 11 && number <= 13) {
+          return "th";
+        }
+
+        const lastDigit = number % 10;
+        switch (lastDigit) {
+          case 1:
+            return "st";
+          case 2:
+            return "nd";
+          case 3:
+            return "rd";
+          default:
+            return "th";
+        }
+      }
+
+      getContactMessages();
+    </script>
+  </body>
+</html>

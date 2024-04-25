@@ -1,0 +1,262 @@
+aside.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    background-color: #00A7D7;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.sidebar.active {
+    width: 60px;
+    display: none;
+}
+
+.sidebar li {
+    cursor: pointer;
+    padding: 12px;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.28);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: 0.3s ease-in;
+    color: #fff;
+    margin: 6px 0;
+
+}
+
+.sidebar li:hover {
+    background-color: rgba(217, 217, 217, 0.28);
+    transition: 0.3s ease-in;
+}
+
+.sidebar li.selected {
+    background-color: rgba(217, 217, 217, 0.28);
+}
+
+.main-page {
+    position: relative;
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    left: 250px;
+    transition: all 0.3s ease-in;
+}
+
+.sidebar.active~.main-page {
+    width: calc(100% - 10px);
+    left: 10px;
+}
+
+.main-page .panel-nav {
+    display: flex;
+    justify-content: flex-start;
+    height: 80px;
+    position: fixed;
+    width: calc(100% - 250px);
+    left: 250px;
+    z-index: 100;
+    padding: 0 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar.active~.main-page .panel-nav {
+    left: 0px;
+    width: calc(100% - 10px);
+}
+
+.main-page .panel-nav .hamburger-wrap {
+    display: flex;
+    align-items: center;
+    transform: translateY(60px);
+}
+
+.hamburger-wrap .hamburger-icon {
+    font-size: 24px;
+    background-color: #00A7D7;
+    border-radius: 8px;
+    padding: 8px;
+    color: #fff;
+}
+
+@media(max-width: 1250px) {
+    .sidebar {
+        width: 20px;
+        display: none;
+    }
+
+    .sidebar.active {
+        width: 220px;
+        display: block;
+    }
+
+    .main-page {
+        width: calc(100% - 10px);
+        left: 10px;
+    }
+
+    .sidebar.active~.main-page {
+        /* width: calc(100% - 220px); */
+        /* overflow: hidden; */
+        left: 220px;
+    }
+
+    .main-page .panel-nav {
+        width: calc(100% - 10px);
+        left: 10px;
+    }
+
+    .sidebar.active~.main-page .panel-nav {
+        width: calc(100% - 220px);
+        left: 220px;
+    }
+}
+
+.chatbox {
+    margin-top: 100px;
+}
+
+.user-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .user-list li {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.user-list li:hover,
+.user-list li.selected {
+    background: #e3e3e3;
+} */
+
+.content {
+    padding: 10px;
+}
+
+.messages {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.message-container {
+    margin-bottom: 10px;
+}
+
+.admin-message {
+    background-color: lightblue;
+    float: right;
+}
+
+.user-message {
+    background-color: lightgray;
+    float: left;
+}
+
+.user-message strong {
+    color: #333;
+}
+
+/* .sidebar {
+    width: 200px;
+    background: #f1f1f1;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+} */
+
+/* .user-list li {
+    cursor: pointer;
+    padding: 10px;
+} */
+
+/* .user-list li:hover,
+.user-list li.selected {
+    background: #e3e3e3;
+} */
+
+
+
+
+#messages {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 1rem;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.message-container {
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 24px;
+    max-width: 70%;
+    word-wrap: break-word;
+    /* font-size: 14px; */
+}
+
+.admin-message {
+    align-self: flex-end;
+    background: hsla(193, 100%, 42%, 1);
+    color: #fff;
+}
+
+.user-message {
+    align-self: flex-start;
+    background: hsla(0, 0%, 85%, 1);
+}
+
+.id-display {
+    visibility: hidden;
+}
+
+.chat-btn {
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    height: 45px;
+    border: 0px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(0, 167, 215, 1);
+    padding: 16px;
+}
+
+.message-field {
+    display: flex;
+    align-items: center;
+    background: hsla(193, 100%, 94%, 1);
+    border-radius: .5rem;
+    padding: .5rem 1.25rem;
+    position: fixed;
+    bottom: 8px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    margin: 0 auto;
+}
+
+#reply-message {
+    margin-right: 12px;
+}
+
+@media (max-width: 550px) {
+    .chatbox {
+        padding: 12px;
+    }
+
+    .chatbox-message-bottom,
+    #messages {
+        width: 100%;
+    }
+}

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnyWorkX | Find a professional service provider in seconds</title>
+
+    <link rel="icon" href="assets/images/favicon.png" />
+    <meta
+      name="description"
+      content="AnyworkX is an online marketplace where vendors of legitimate services can showcase their business,
+    competence and experience to prospective customers who may need their services anywhere."
+    />
+    <meta
+      name="keywords"
+      content="Vendor, Online vendor, Services, Service providers, Service provider in Nigeria, Online Marketplace, 24/7, Anytime, Anywhere, Customer, Customers online, Satisfied customers, How to get customers, How to get customers online, Location, Current location, Wallet, On-demand services, Services on demand, Home Services on demand, Professional Services, Negotiable, Profile, Verification, Professional services marketplace, Service provider, Online booking system, Africa service marketplace, Verified service provider, Convenient service booking, 24/7 service availability, Affordable service provider, Customer service training, Emergency services"
+    />
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Remix Icon CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/scss/main.css" rel="stylesheet" />
+
+    <!--OWL CAROUSEL CSS CDN-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css"
+    />
+
+    <!--Bodymovin CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo--container">
+        <a href="index.html"
+          ><img
+            src="assets/images/anyworkx-logo-dark.png"
+            alt="logo for anyworks"
+            class="logo-image"
+        /></a>
+      </div>
+
+      <div class="menu--toggle">
+        <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+      </div>
+
+      <div class="right--side__nav">
+        <ul class="nav--items__container">
+          <a href="index.html" class="nav-link">
+            <li class="nav-item">Home</li>
+          </a>
+          <a href="about.html" class="nav-link">
+            <li class="nav-item">Explore</li>
+          </a>
+          <a href="faqs.html" class="nav-link">
+            <li class="nav-item">FAQs</li>
+          </a>
+          <a href="careers.html" class="nav-link">
+            <li class="nav-item">Careers</li>
+          </a>
+          <a href="contact.html" class="nav-link">
+            <li class="nav-item">Contact Us</li>
+          </a>
+          <a href="abel.html" class="nav-link">
+            <li class="nav-item">ABEL</li>
+          </a>
+        </ul>
+
+        <div class="cta-button">
+          <a href="index.html#services--wrapper"
+            ><button class="btn get--started__btn">Get Started</button></a
+          >
+        </div>
+      </div>
+    </nav>
+    <div class="overlay hidden"></div>
+
+    <section class="career-banner-section" id="job-title">
+      <!-- <h1 class="job-title">Email Marketing and Automation Specialist</h1> -->
+    </section>
+
+    <aside class="breadcumb-navigation"></aside>
+
+    <section class="job-description-section">
+      <div class="job-loader">
+        <div class="skeleton">
+          <div class="skeleton-left">
+            <div class="line h17 w40 m10"></div>
+            <div class="line"></div>
+            <div class="line h8 w50"></div>
+            <div class="line w75"></div>
+          </div>
+          <div class="skeleton-right"></div>
+        </div>
+
+        <div class="skeleton">
+          <div class="skeleton-left">
+            <div class="line h17 w40 m10"></div>
+            <div class="line"></div>
+            <div class="line h8 w50"></div>
+            <div class="line w75"></div>
+          </div>
+          <div class="skeleton-right"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="job-application__fields">
+      <h2>Apply Below</h2>
+      <form id="application-form" enctype="multipart/form-data">
+        <div>
+          <label for="firstname">Firstname</label>
+          <input
+            type="text"
+            class="input-field"
+            name="name"
+            id="first_name"
+            required
+            placeholder="First name"
+          />
+        </div>
+        <div>
+          <label for="lastname">Last name</label>
+          <input
+            type="text"
+            class="input-field"
+            name="lastname"
+            id="last_name"
+            required
+            placeholder="Last name"
+          />
+        </div>
+        <div>
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            class="input-field"
+            name="email"
+            id="email"
+            required
+            placeholder="Your email address"
+          />
+        </div>
+        <div>
+          <label for="number">Phone Number</label>
+          <input
+            type="tel"
+            class="input-field"
+            name="number"
+            id="phone_number"
+            required
+            placeholder="Your phone number"
+          />
+        </div>
+        <div>
+          <label for="address">Current Location: City/Town</label>
+          <input
+            type="text"
+            class="input-field"
+            name="state"
+            id="address"
+            required
+            placeholder="Your address"
+          />
+        </div>
+        <div>
+          <label for="state">State/Province/Region of current location</label>
+          <input
+            type="text"
+            class="input-field"
+            name="state"
+            id="state"
+            required
+            placeholder="State of residence"
+          />
+        </div>
+        <div>
+          <label for="country">Which Country are you based in?</label>
+          <input
+            type="text"
+            class="input-field"
+            name="country"
+            id="country"
+            required
+            placeholder="Country of residence"
+          />
+        </div>
+        <div>
+          <label for="cover-letter">Cover Letter</label>
+          <textarea name="cover-letter" id="cover_letter" required></textarea>
+        </div>
+        <div>
+          <label for="resume">Upload your CV or Resume</label>
+          <input
+            type="file"
+            name="resume"
+            class="input-field"
+            id="cv_upload"
+            accept=".doc, .docx, .pdf"
+            required
+          />
+
+          <small
+            >Uploaded document should be in pdf or docx (maximum of 5mb is
+            recommended)</small
+          >
+        </div>
+        <div>
+          <label for="age">What is your age?</label>
+          <select name="age" id="age-range" class="input-field">
+            <option value="select">Select age</option>
+            <option value="Under 21">Under 21</option>
+            <option value="21-25">21-25</option>
+            <option value="26-29">26-29</option>
+            <option value="30-35">30-35</option>
+            <option value="36-39">36-39</option>
+            <option value="40-45">40-45</option>
+            <option value="46-50">46-50</option>
+            <option value="over 50">over 50</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="salary">What is your expected salary (monthly)?</label>
+          <input
+            type="number"
+            name="salary"
+            class="input-field"
+            id="salary"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="disclaimer" class="small">
+            <input type="checkbox" name="disclaimer" id="" required /> By
+            ticking this box, I confirm that I have read and understood the
+            content of the Privacy Notice and acknowledge that my personal data
+            will be processed as part of this application.</label
+          >
+        </div>
+
+        <!-- <div>
+                <label for="social-links">LinkedIn, Facebook, Twitter, Instagram accounts?</label>
+                <input type="url" name="social-links" class="input-field" id="social-links"
+                    placeholder="Any social media accounts?">
+            </div> -->
+
+        <!-- <button type="submit" class="btn">Submit Application</button> -->
+        <button type="submit" class="btn" id="submit-button">
+          <span class="btn-text">Submit Application</span>
+          <span class="button-loader" id="loading-spinner"></span>
+        </button>
+      </form>
+      <div id="response-message"></div>
+    </section>
+
+    <section class="role-not-found">
+      <h5>
+        Can’t find a role that suits you or have other enquiries related to
+        recruitment? We’ll like to hear from you. Send us a mail at
+        <a href="mailto:careers@anyworkx.africa" class="email-link"
+          >careers@anyworkx.africa</a
+        >
+      </h5>
+    </section>
+
+    <aside class="modal-window hidden">
+      <div class="modal--wrapper">
+        <i class="ri-close-fill close-btn"></i>
+        <article class="chat-window--container">
+          <form id="start-chat-form">
+            <h4 class="title-header">
+              Chat with us. What's your name and email address?
+            </h4>
+            <div class="field">
+              <label for="firstname">Firstname:</label>
+              <input
+                type="text"
+                id="username-id"
+                name="username"
+                class="input-field"
+                placeholder="Your first name"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email-id"
+                name="email"
+                class="input-field"
+                placeholder="Input your email address"
+                required
+              />
+            </div>
+
+            <div class="error-message"></div>
+
+            <button
+              type="button"
+              class="btn send-button"
+              id="submit_btn"
+              onclick="login()"
+            >
+              <span class="button__text">Start Chatting</span>
+            </button>
+            <!-- <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now"> -->
+          </form>
+
+          <!-- <div id="chat-container"></div> -->
+        </article>
+      </div>
+    </aside>
+    <div class="floating-msg-button">
+      <!-- <i class="ri-message-2-line msg-icon"></i> -->
+      <a
+        href="https://wa.me/+2349153334445?text=I%20am,%20[_your name_]%20and%20I%20would%20love%20to%20make%20enquiry%20about______"
+        ><img
+          alt="Chat on WhatsApp"
+          src="assets/images/WhatsAppButtonGreenSmall.png"
+        />
+      </a>
+    </div>
+
+    <footer id="footer">
+      <div class="footer--container">
+        <div class="anyworkx--container">
+          <img src="assets/images/anyworkx-logo.png" alt="Logo for anyworks" />
+          <p>Endless Services. Endless Possibilities.</p>
+
+          <div class="social--links">
+            <a
+              href="https://instagram.com/_anyworkx?igshid=ZDdkNTZiNTM="
+              class="icon--bg instagram"
+              ><i class="ri-instagram-line icon"></i
+            ></a>
+            <a href="https://www.youtube.com/@Anyworkx" class="icon--bg youtube"
+              ><i class="ri-youtube-fill icon"></i
+            ></a>
+            <a href="https://twitter.com/Anyworkx__" class="icon--bg twitter"
+              ><i class="ri-twitter-fill icon"></i
+            ></a>
+            <a
+              href="https://www.facebook.com/anyworkx?mibextid=ZbWKwL"
+              class="icon--bg facebook"
+              ><i class="ri-facebook-fill icon"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="quick--links f-mg-top animate">
+          <h4>Quick Access</h4>
+          <ul>
+            <li class="list--items">
+              <a href="about.html" class="link-text">About us</a>
+            </li>
+            <li class="list--items">
+              <a href="index.html#how-it-works" class="link-text"
+                >How it works</a
+              >
+            </li>
+            <li class="list--items">
+              <a href="careers.html" class="link-text">Careers</a>
+            </li>
+            <li class="list--items">
+              <a href="faqs.html" class="link-text">FAQs</a>
+            </li>
+            <li class="list--items">
+              <a href="abel.html" class="link-text">ABEL</a>
+            </li>
+            <li class="list--items">
+              <a href="contact.html" class="link-text">Contact us</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="company--links f-mg-top">
+          <h4>Company</h4>
+          <ul>
+            <li class="list--item">
+              <a href="privacy.html" class="link-text">Privacy Policy</a>
+            </li>
+            <li class="list--item">
+              <a href="terms.html" class="link-text">Terms of Use</a>
+            </li>
+            <li class="list--item">
+              <a href="community.html" class="link-text">Community</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="footer--divider" />
+      <div class="copyright">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        - AnyWorkX. All rights reserved.
+      </div>
+    </footer>
+
+    <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/job.js"></script>
+  </body>
+</html>

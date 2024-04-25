@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="no-index,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyWorkX Admin panel | All Jobs List</title>
+
+    <link rel="icon" href="../../assets/images/favicon.png">
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Remix Icon CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="admin-nav">
+        <div class="logo--container">
+            <img src="../../assets/images/anyworkx-logo-dark.png" alt="logo for anyworks" class="logo-image">
+        </div>
+
+        <div class="menu--toggle">
+            <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+        </div>
+
+        <div class="right--side__nav">
+            <ul class="nav--items__container">
+                <a href="../admin-message/admin-message.html" class="admin_nav-link">
+                    <li class="admin_nav-item"><i class="ri-message-2-line"></i> <span>Messages</span></li>
+                </a>
+                <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
+                    <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
+                </a>
+                <a href="../admin-subscription/contact-page.html" class="admin_nav-link">
+                    <li class="admin_nav-item">
+                      <i class="ri-mail-check-line"></i> <span>Contact Page</span>
+                    </li>
+                </a>
+                <a href="all-job.html" class="admin_nav-link active">
+                    <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
+                </a>
+                <a href="../manage-admin/all-admin.html" class="admin_nav-link">
+                    <li class="admin_nav-item"><i class="ri-user-3-line"></i> <span>Manage Admins</span></li>
+                </a>
+
+            </ul>
+
+            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
+                        id="logout">Logout</button></a></div>
+        </div>
+    </nav>
+    <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+        <div class="loading-indicator"></div>
+    </div>
+
+    <div id="response-message"></div>
+
+    <div class="sidebar">
+        <a href="all-job.html">
+            <h4>Job</h4>
+            <p>Edit and update jobs</p>
+        </a>
+        <a href="job-category.html">
+            <h4>Job Category</h4>
+            <p>Edit and create job category</p>
+        </a>
+        <a class="active" href="job-list.html">
+            <h4>Applications</h4>
+            <p>View available applications</p>
+        </a>
+    </div>
+
+    <main class="main-content aside-sidebar">
+
+        <header class="secondary--nav">
+            <h2>Listed Jobs</h2>
+            <a href="create.html" class="btn">Create a job</a>
+        </header>
+
+        <section class="jobs--list">
+            <aside class="total-applicants bold margin-bottom">Total Applicants: <span id="applicants-total"></span>
+            </aside>
+            <table id="table-jobs-list">
+                <thead id="thead-output">
+                    <tr>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Number of Applications</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="jobs_list-table-body">
+
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <!-- <script src="../../assets/js/admin.js"></script> -->
+
+    <script>
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        //     async function fetchAllApplicants() {
+        //         loadingOverlay.classList.add('active');
+
+        //         try {
+        //             const allApplicants = [];
+        //             let pageNo = 1;
+        //             let hasMorePages = true;
+
+        //             while (hasMorePages) {
+        //                 const response = await fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/?page=${pageNo}`);
+
+        //                 if (!response.ok) {
+        //                     throw new Error(`Network response was not ok. Status: ${response.status}`);
+        //                 }
+
+        //                 const data = await response.json();
+
+        //                 if (Array.isArray(data.Applicant)) {
+        //                     allApplicants.push(...data.Applicant);
+
+        //                     // Check if there are more pages
+        //                     if (data.Applicant.length < 10) {
+        //                         hasMorePages = false;
+        //                     }
+        //                 } else {
+        //                     throw new Error(`Invalid data format for applicants on page ${pageNo}`);
+        //                 }
+
+        //                 pageNo++;
+        //             }
+
+        //             return allApplicants;
+        //         } catch (error) {
+        //             console.error(`Error fetching applicants: ${error}`);
+        //             return [];
+        //         } finally {
+        //             loadingOverlay.classList.remove('active');
+        //         }
+        //     }
+
+        //     async function getJobPositions() {
+        //         const allApplicants = await fetchAllApplicants();
+
+        //         // Process and display all applicants here
+        //         // console.log(`Total applicants: ${allApplicants.length}`);
+        //         // console.log(allApplicants);
+
+        //         document.getElementById('applicants-total').textContent = `${allApplicants.length}`;
+
+        //         // You can include your code here for displaying the data in your table
+        //         displayApplicantsData(allApplicants);
+        //     }
+
+        //     function displayApplicantsData(applicants) {
+        //         const categoryCounts = {};
+
+        //         applicants.forEach((applicant) => {
+        //             const jobCategory = applicant.job.job_title;
+        //             const jobId = applicant.job.id;
+
+        //             if (categoryCounts[jobCategory]) {
+        //                 categoryCounts[jobCategory].count++;
+        //             } else {
+        //                 categoryCounts[jobCategory] = { count: 1, jobId };
+        //             }
+        //         });
+
+        //         let output = '';
+
+        //         for (const category in categoryCounts) {
+        //             const { count, jobId } = categoryCounts[category];
+
+        //             output += `
+        //   <tr>
+        //     <td data-label="Job Category">${category}</td>
+        //     <td data-label="Number of Applications">${count}</td>
+        //     <td><a href="view-applicants.html?jobId=${jobId}" class="edit btn--action">View Applicants</a></td>
+        //   </tr>
+        // `;
+        //         }
+
+        //         // Display the data in your table
+        //         const tableBody = document.querySelector('#jobs_list-table-body');
+        //         tableBody.innerHTML = output;
+        //     }
+
+        // Call the function to fetch and process applicants
+        // getJobPositions();
+
+
+
+        function fetchAllApplicants() {
+            loadingOverlay.classList.add('active');
+
+            fetch('https://anyworkx.onrender.com/api/admin/create/job/list/')
+                .then((response) => response.json())
+                .then((data) => {
+                    let output = '';
+                    let totalApplicants = 0;
+
+                    data.jobs.forEach((job) => {
+                        const jobId = job.id;
+                        const jobCategoryName = job.job_category ? job.job_category.category_name : 'No Category';
+                        const applicantsCount = job.applicants_count;
+
+                        output += `
+                            <tr>
+                                <td data-label="Job Category">${jobCategoryName}</td>
+                                <td data-label="Number of Applications">${applicantsCount}</td>
+                                <td><a href="view-applicants.html?jobId=${jobId}" class="edit btn--action">View Applicants</a></td>
+                            </tr>
+                            `;
+
+                        totalApplicants += parseInt(applicantsCount);
+
+                        document.getElementById('applicants-total').textContent = `${totalApplicants}`;
+                        // console.log(totalApplicants);
+                    });
+
+                    loadingOverlay.classList.remove('active');
+                    const tableBody = document.querySelector('#jobs_list-table-body');
+                    tableBody.innerHTML = output;
+                })
+                .catch((error) => {
+                    console.error(`Error fetching job data: ${error}`);
+                    loadingOverlay.classList.remove('active');
+                    errorMessage();
+                });
+        }
+
+        const errorMessage = function () {
+            const alertMessage = document.querySelector("#response-message");
+            alertMessage.classList.add("response--error-message");
+            alertMessage.textContent = "Something went wrong, please refresh and try again";
+        }
+        fetchAllApplicants();
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+.input-field {
+  height: 45px;
+  border: 1px solid $primaryColor;
+  border-radius: 8px;
+  // display: block;
+  line-height: 1;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: $transitionDuration;
+  width: 100%;
+}
+.small{
+  font-size: 14px;
+}
+.input-field:focus {
+  border: 1px solid $secondaryColor;
+  transition: $transitionDuration;
+}
+
+select{
+  display: block;
+  margin-top: 12px;
+
+}
+
+textarea {
+  height: 200px;
+  border: 1px solid $primaryColor;
+  border-radius: 8px;
+  line-height: 1;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 16px;
+  transition: $transitionDuration;
+  width: 100%;
+  resize: vertical;
+}
+
+textarea:focus {
+    border: 1px solid $secondaryColor;
+    transition: $transitionDuration;
+  }

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnyWorkX | Find a professional service provider in seconds</title>
+
+    <link rel="icon" href="assets/images/favicon.png" />
+    <meta
+      name="description"
+      content="AnyworkX is an online marketplace where vendors of legitimate services can showcase their business,
+    competence and experience to prospective customers who may need their services anywhere."
+    />
+    <meta
+      name="keywords"
+      content="Vendor, Online vendor, Services, Service providers, Service provider in Nigeria, Online Marketplace, 24/7, Anytime, Anywhere, Customer, Customers online, Satisfied customers, How to get customers, How to get customers online, Location, Current location, Wallet, On-demand services, Services on demand, Home Services on demand, Professional Services, Negotiable, Profile, Verification, Professional services marketplace, Service provider, Online booking system, Africa service marketplace, Verified service provider, Convenient service booking, 24/7 service availability, Affordable service provider, Customer service training, Emergency services"
+    />
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Remix Icon CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/scss/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/scss/admin.css" rel="stylesheet" />
+
+    <!--OWL CAROUSEL CSS CDN-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css"
+    />
+
+    <!--Bodymovin CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+  </head>
+
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-2NKWK8ZT4Y"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-2NKWK8ZT4Y");
+  </script>
+
+  <body>
+    <nav>
+      <div class="logo--container">
+        <a href="index.html"
+          ><img
+            src="assets/images/anyworkx-logo-dark.png"
+            alt="logo for anyworks"
+            class="logo-image"
+        /></a>
+      </div>
+
+      <div class="menu--toggle">
+        <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+      </div>
+
+      <div class="right--side__nav">
+        <ul class="nav--items__container">
+          <a href="index.html" class="nav-link">
+            <li class="nav-item">Home</li>
+          </a>
+          <a href="about.html" class="nav-link">
+            <li class="nav-item">Explore</li>
+          </a>
+          <a href="faqs.html" class="nav-link">
+            <li class="nav-item">FAQs</li>
+          </a>
+          <a href="careers.html" class="nav-link">
+            <li class="nav-item">Careers</li>
+          </a>
+          <a href="contact.html" class="nav-link">
+            <li class="nav-item">Contact Us</li>
+          </a>
+          <a href="abel.html" class="nav-link">
+            <li class="nav-item">ABEL</li>
+          </a>
+        </ul>
+
+        <div class="cta-button">
+          <a href="index.html#services--wrapper"
+            ><button class="btn get--started__btn">Get Started</button></a
+          >
+        </div>
+      </div>
+    </nav>
+    <div class="overlay hidden"></div>
+
+    <div id="loading-overlay">
+      <div class="loading-indicator"></div>
+    </div>
+
+    <div id="response-message"></div>
+
+    <section class="upper--contact-section">
+      <header>
+        <h1>Contact Us</h1>
+        <h3>We are always ready to hear from you</h3>
+        <h4 class="font-color">
+          Our friendly team is here to start a conversation with you.
+        </h4>
+      </header>
+
+      <div class="info--container">
+        <div class="contact--details">
+          <span>
+            <i class="ri-mail-line"></i>
+          </span>
+          <h4>Email</h4>
+          <p>Our friendly team is here to help.</p>
+          <a href="mailto:hakunamatata@anyworkx.africa"
+            >hakunamatata@anyworkx.africa</a
+          >
+        </div>
+
+        <div class="contact--details">
+          <span><i class="ri-map-pin-line"></i></span>
+          <h4>Office</h4>
+          <p>Come say hello at our office HQ.</p>
+          <a
+            href="https://www.google.com/maps/place/1391+Tiamiyu+Savage+St,+Victoria+Island+106104,+Lagos/@6.4231284,3.4265908,17z/data=!3m1!4b1!4m6!3m5!1s0x103bf5312da731a3:0x3615c8dc94eadea7!8m2!3d6.4231284!4d3.4265908!16s%2Fg%2F11h5vgn5p3"
+            >Plot 1391, Tiamiyu Savage St, Victoria Island, Lagos.</a
+          >
+        </div>
+
+        <div class="contact--details">
+          <span><i class="ri-phone-line"></i></span>
+          <h4>Phone</h4>
+          <p>Mon-Fri from 8am to 5pm.</p>
+          <a href="tel:+2349153334445">+234 915 137 7777</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lower--contact-section">
+      <header>
+        <h2>Get in touch</h2>
+        <h4>We’d love to hear from you. Please fill out this form.</h4>
+      </header>
+
+      <form id="contact-form">
+        <div>
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            class="input-field"
+            name="name"
+            id="nameHASHED"
+            required
+            placeholder="Your full name"
+          />
+        </div>
+        <div>
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            class="input-field"
+            name="email"
+            id="emailHASHED"
+            required
+            placeholder="Your email address"
+          />
+        </div>
+        <div>
+          <label for="cover-letter">Message</label>
+          <textarea name="message" id="messageHASHED"></textarea>
+        </div>
+        <button type="submit" class="btn" id="submit-btn">Send Message</button>
+      </form>
+    </section>
+
+    <aside class="modal-window hidden">
+      <div class="modal--wrapper">
+        <i class="ri-close-fill close-btn"></i>
+        <article class="chat-window--container">
+          <form id="start-chat-form">
+            <h4 class="title-header">
+              Chat with us. What's your name and email address?
+            </h4>
+            <div class="field">
+              <label for="firstname">Firstname:</label>
+              <input
+                type="text"
+                id="username-id"
+                name="username"
+                class="input-field"
+                placeholder="Your first name"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email-id"
+                name="email"
+                class="input-field"
+                placeholder="Input your email address"
+                required
+              />
+            </div>
+
+            <div class="error-message"></div>
+
+            <button
+              type="button"
+              class="btn send-button"
+              id="submit_btn"
+              onclick="login()"
+            >
+              <span class="button__text">Start Chatting</span>
+            </button>
+            <!-- <input type="submit" name="submit" class="btn" id="submit_btn" value="Chat now"> -->
+          </form>
+
+          <!-- <div id="chat-container"></div> -->
+        </article>
+      </div>
+    </aside>
+    <div class="floating-msg-button">
+      <!-- <i class="ri-message-2-line msg-icon"></i> -->
+      <a
+        href="https://wa.me/+2349153334445?text=I%20am,%20[_your name_]%20and%20I%20would%20love%20to%20make%20enquiry%20about______"
+        ><img
+          alt="Chat on WhatsApp"
+          src="assets/images/WhatsAppButtonGreenSmall.png"
+        />
+      </a>
+    </div>
+    <footer id="footer">
+      <div class="footer--container">
+        <div class="anyworkx--container animate">
+          <img src="assets/images/anyworkx-logo.png" alt="Logo for anyworks" />
+          <p>Endless Services. Endless Possibilities.</p>
+
+          <div class="social--links">
+            <a
+              href="https://instagram.com/_anyworkx?igshid=ZDdkNTZiNTM="
+              class="icon--bg instagram"
+              ><i class="ri-instagram-line icon"></i
+            ></a>
+            <a href="https://www.youtube.com/@Anyworkx" class="icon--bg youtube"
+              ><i class="ri-youtube-fill icon"></i
+            ></a>
+            <a href="https://twitter.com/Anyworkx__" class="icon--bg twitter"
+              ><i class="ri-twitter-fill icon"></i
+            ></a>
+            <a
+              href="https://www.facebook.com/anyworkx?mibextid=ZbWKwL"
+              class="icon--bg facebook"
+              ><i class="ri-facebook-fill icon"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="quick--links f-mg-top animate">
+          <h4>Quick Access</h4>
+          <ul>
+            <li class="list--items">
+              <a href="about.html" class="link-text">About us</a>
+            </li>
+            <li class="list--items">
+              <a href="index.html#how-it-works" class="link-text"
+                >How it works</a
+              >
+            </li>
+            <li class="list--items">
+              <a href="careers.html" class="link-text">Careers</a>
+            </li>
+            <li class="list--items">
+              <a href="faqs.html" class="link-text">FAQs</a>
+            </li>
+            <li class="list--items">
+              <a href="abel.html" class="link-text">ABEL</a>
+            </li>
+            <li class="list--items">
+              <a href="contact.html" class="link-text">Contact us</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="company--links f-mg-top animate">
+          <h4>Company</h4>
+          <ul>
+            <li class="list--item">
+              <a href="privacy.html" class="link-text">Privacy Policy</a>
+            </li>
+            <li class="list--item">
+              <a href="terms.html" class="link-text">Terms of Use</a>
+            </li>
+            <li class="list--item">
+              <a href="community.html" class="link-text">Community</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="footer--divider animate" />
+      <div class="copyright">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        - AnyWorkX. All rights reserved.
+      </div>
+    </footer>
+
+    <script defer src="assets/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Chatting Page</title>
+</head>
+
+<body>
+    <h1>Welcome to the Admin Chatting Page</h1>
+    <div id="message-list"></div>
+
+    <div class="chatbox-message-form"></div>
+    <form id="reply-form">
+        <input type="text" id="reply-input">
+        <button type="submit" class="btn">Send</button>
+    </form>
+
+    <script>
+        // get admin token from localStorage
+        const adminToken = localStorage.getItem('adminToken');
+
+        // function to send reply message
+        function sendReplyMessage(message) {
+            fetch(`https://cerdo.pythonanywhere.com/api/messages/reply/${message.id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${adminToken}`
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        response.json().then(data => {
+                            const messageList = document.getElementById('message-list');
+                            const li = document.createElement('li');
+                            const messageBody = document.createTextNode(data.message);
+                            li.appendChild(messageBody);
+                            messageList.appendChild(li);
+                            console.log('Reply message sent');
+                        });
+
+                        console.log('Reply message sent');
+                    } else {
+                        console.log('Reply message failed to send');
+                    }
+                })
+                
+
+                .catch(error => {
+                    console.error('Error sending reply message:', error);
+                });
+        }
+
+
+        // handle reply form submission
+        const replyForm = document.getElementById('reply-form');
+        replyForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const replyInput = document.getElementById('reply-input');
+            const replyBody = replyInput.value.trim();
+            if (replyBody) {
+                sendReplyMessage(replyBody);
+                replyInput.value = '';
+            }
+        });
+
+    </script>
+</body>
+
+</html>

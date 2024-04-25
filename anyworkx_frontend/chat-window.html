@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatting Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnyWorkX | Chat with customer care</title>
+
+    <link rel="icon" href="assets/images/favicon.png">
+
+
+    <!-- Google Font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!--Remix Icon CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/scss/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/scss/chatApp.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="../assets/scss/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="upper-section--container">
+        <h3 onclick="history.back()"><i class="ri-close-fill close-btn"></i></h3>
+        <img src="assets/images/anyworkx-logo-dark.png" alt="logo for anyworks"
+                class="logo-image">
+    </div>
+    <section class="chatbox">
+        <div id="messages">
+            <!-- messages will be added dynamically here -->
+            <div id="greeting" class="message received-message"></div>
+        </div>
+        <i class="ri-arrow-down-line down-arrow"></i>
+        <div class="chatbox-message-bottom">
+            <form id="message-form" class="chatbox-message-form">
+
+                <textarea type="text" id="message-input" class="input-field" autofocus></textarea>
+                <button type="submit" class="chat-btn"><i class="ri-send-plane-2-line"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <script defer src="assets/js/chatApp.js"></script>
+
+
+</body>
+
+</html>

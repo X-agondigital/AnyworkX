@@ -1,0 +1,8 @@
+tab.html
+application_cvs
+.idea/
+venv/
+__pycache__/
+*.pyc
+.idea/
+chatapp/
