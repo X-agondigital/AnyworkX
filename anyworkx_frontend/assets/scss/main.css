@@ -523,14 +523,12 @@ nav .nav--items__container a.active {
 .hero-section {
   background-color: rgb(250, 240, 255);
   padding: 24px;
-  height: 100vh;
+  height: auto;
   text-align: center;
-  display: grid;
-  place-items: center;
 }
 .hero-section header {
   max-width: 700px;
-  margin: auto;
+  margin: 48px auto;
 }
 .hero-section header h1 {
   font-size: clamp(2.5rem, 4vw, 3.5rem);
@@ -560,13 +558,29 @@ nav .nav--items__container a.active {
   border: 1px solid rgb(0, 167, 215);
   color: rgb(0, 167, 215);
 }
-.hero-section .image-container {
+.hero-section .images--wrapper {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  width: 50%;
+  gap: 16px;
+  width: 100%;
+  height: auto;
 }
-.hero-section .image-container img {
-  width: 60%;
+.hero-section .images--wrapper .img-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-section .images--wrapper .img-group .wide {
+  width: 350px;
+}
+.hero-section .images--wrapper span {
+  width: 180px;
+}
+.hero-section .images--wrapper img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #fff;
 }
 
 /*=======END OF HERO SECTION STYLING=======*/
@@ -712,6 +726,9 @@ nav .nav--items__container a.active {
   margin: 0 auto 24px;
   border-radius: 8px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .how-it-works img {
   -o-object-fit: contain;
