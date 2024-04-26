@@ -150,6 +150,12 @@ img {
   margin: auto;
 }
 
+.section-max--width_1400 {
+  max-width: 1400px;
+  padding: 24px;
+  margin: auto;
+}
+
 .btn {
   font-family: inherit;
   font-size: 18px;
@@ -1800,5 +1806,94 @@ aside.modal-window .error-message {
   .message-popup--wrapper {
     bottom: 15%;
     right: 4%;
+  }
+}
+.gallery-page__wrapper main {
+  display: flex;
+  gap: 24px;
+}
+.gallery-page__wrapper aside {
+  width: 20%;
+  position: fixed;
+}
+.gallery-page__wrapper header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.gallery-page__wrapper .btn-group {
+  margin-top: 24px;
+}
+.gallery-page__wrapper .btn-group button {
+  margin-bottom: 8px;
+}
+.gallery-page__wrapper .gallery--container {
+  width: 70%;
+  margin-left: auto;
+}
+.gallery-page__wrapper .gallery--container video {
+  border-radius: 24px;
+}
+.gallery-page__wrapper .video--description h4 {
+  font-weight: 500;
+}
+.gallery-page__wrapper .image-gallery__wrapper {
+  margin-top: 48px;
+}
+.gallery-page__wrapper .image-gallery__wrapper h4 {
+  margin-bottom: 16px;
+}
+.gallery-page__wrapper .gallery--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.gallery-page__wrapper .gallery--grid img {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .gallery-page__wrapper main {
+    flex-direction: column;
+  }
+  .gallery-page__wrapper aside {
+    width: 100%;
+    position: static;
+  }
+  .gallery-page__wrapper header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .gallery-page__wrapper .btn-group {
+    display: flex;
+    gap: 16px;
+  }
+  .gallery-page__wrapper .btn-group button {
+    margin-bottom: 8px;
+  }
+  .gallery-page__wrapper .gallery--container {
+    width: 100%;
+    margin-left: auto;
+  }
+  .gallery-page__wrapper .gallery--container video {
+    border-radius: 24px;
+  }
+  .gallery-page__wrapper .video--description h4 {
+    font-weight: 500;
+  }
+  .gallery-page__wrapper .image-gallery__wrapper {
+    margin-top: 48px;
+  }
+  .gallery-page__wrapper .image-gallery__wrapper h4 {
+    margin-bottom: 16px;
+  }
+  .gallery-page__wrapper .gallery--grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .gallery-page__wrapper .gallery--grid img {
+    width: 100%;
   }
 }/*# sourceMappingURL=main.css.map */

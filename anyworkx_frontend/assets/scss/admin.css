@@ -150,6 +150,12 @@ img {
   margin: auto;
 }
 
+.section-max--width_1400 {
+  max-width: 1400px;
+  padding: 24px;
+  margin: auto;
+}
+
 .btn {
   font-family: inherit;
   font-size: 18px;
