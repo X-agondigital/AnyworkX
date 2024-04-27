@@ -5,48 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Carousel</title>
     <style>
-      .carousel {
-        /* perspective: 1000px; Add perspective for 3D effect */
-        width: 400px;
-        height: 300px;
-        margin: 0 auto;
-        overflow: hidden; /* Hide overflow */
+      .skeleton-box {
+        display: inline-block;
+        height: 1em;
+        position: relative;
+        overflow: hidden;
+        background-color: #dddbdd;
       }
-      .image-container {
-        display: block;
-        animation: carouselAnimation 5s infinite; /* Autoplay animation */
+      .skeleton-box::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(#fff, 0) 0,
+          rgba(#fff, 0.2) 20%,
+          rgba(#fff, 0.5) 60%,
+          rgba(#fff, 0)
+        );
+        animation: shimmer 5s infinite;
+        content: "";
       }
-      .image {
-        width: 100%;
-        height: 100%;
-        margin-right: 10px; /* Add margin between images */
-        transform-style: preserve-3d; /* Preserve 3D transformation */
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      .blog-post__headline {
+        font-size: 1.25em;
+        font-weight: bold;
       }
 
-      @keyframes carouselAnimation {
-        0% {
-          transform: translateY(0%);
+      .blog-post__meta {
+        font-size: 0.85em;
+        color: #6b6b6b;
+      }
+
+
+      .o-vertical-spacing {
+        > * + * {
+          margin-top: 0.75em;
         }
-        33.33% {
-          transform: translateY(-1200%);
-        }
-        66.66% {
-          transform: translateY(-100%);
-        }
-        100% {
-          transform: translateY(0%);
+
+        &--l {
+          > * + * {
+            margin-top: 2em;
+          }
         }
       }
     </style>
   </head>
   <body>
-    <div class="carousel">
-      <div class="image-container">
-        <img class="image" src="assets/images/app-mockup-1.png" alt="Image 1" />
-        <img class="image" src="assets/images/app-mockup-2.png" alt="Image 2" />
-        <!-- <img class="image" src="assets/images/app-mockup-3.png" alt="Image 3"> -->
-        <!-- Add more images as needed -->
-      </div>
-    </div>
+    <main>
+      <ul class="o-vertical-spacing o-vertical-spacing--l">
+        <li class="blog-post o-media">
+          <div class="o-media__figure">
+            <span
+              class="skeleton-box"
+              style="width: 100px; height: 80px"
+            ></span>
+          </div>
+
+        </li>
+      </ul>
+    </main>
   </body>
 </html>
