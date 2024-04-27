@@ -1572,3 +1572,11 @@ aside.modal-window {
     }
   }
 }
+
+@media(max-width: 870px){
+  .gallery-page__wrapper{
+    aside{
+      margin-top: 96px;
+    }
+  }
+}

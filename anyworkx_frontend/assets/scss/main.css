@@ -2045,4 +2045,10 @@ aside.modal-window .error-message {
   100% {
     transform: translateX(100%);
   }
+}
+
+@media (max-width: 870px) {
+  .gallery-page__wrapper aside {
+    margin-top: 96px;
+  }
 }/*# sourceMappingURL=main.css.map */
