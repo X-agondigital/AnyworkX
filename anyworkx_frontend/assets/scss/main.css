@@ -644,6 +644,44 @@ nav .nav--items__container a.active {
     transform: translateX(0%);
   }
 }
+@media (max-width: 900px) {
+  .hero-section header {
+    margin-top: 96px;
+  }
+  .hero-section header h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  .hero-section header h4 {
+    font-size: 20px;
+  }
+  .hero-section .images--wrapper div.responsive-stripped-900 {
+    display: none;
+  }
+  .hero-section .images--wrapper .img-group .wide {
+    max-width: 350px;
+    max-height: 225px;
+  }
+  .hero-section .images--wrapper span {
+    width: 180px;
+    overflow: hidden;
+    border: 1px solid #fff;
+    border-radius: 8px;
+  }
+}
+@media (max-width: 750px) {
+  .hero-section .images--wrapper div.responsive-stripped-900,
+  .hero-section .images--wrapper div.responsive-stripped-750 {
+    display: none;
+  }
+}
+@media (max-width: 460px) {
+  .hero-section header h4 {
+    font-size: 18px;
+  }
+  .hero-section header .btn-group {
+    flex-direction: column;
+  }
+}
 /*=======END OF HERO SECTION STYLING=======*/
 .mentioned-section p {
   text-align: center;
@@ -876,9 +914,7 @@ nav .nav--items__container a.active {
 
 @media (max-width: 540px) {
   .how-it-works .download-cta {
-    height: 320px;
     padding: 24px;
-    border-radius: 0px;
   }
   .how-it-works .download-cta button {
     background-color: none;
