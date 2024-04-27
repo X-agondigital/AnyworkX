@@ -124,7 +124,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .hero-section {
     header {
       margin-top: 96px;
@@ -176,6 +176,36 @@
         flex-direction: column;
       }
     }
+    
+    
+  }
+}
+
+@media (max-width: 390px){
+  .hero-section{
+    .images--wrapper {
+      gap: 8px;
+      span {
+        width: 160px;
+      }
+      span.tall {
+        height: 340px;
+      }
+      span.short {
+        height: 160px;
+      }
+      .image-container-horizontal {
+        img {
+          width: 160px;
+          height: 100%;
+        }
+      }
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+    }
+    
   }
 }
 /*=======END OF HERO SECTION STYLING=======*/
