@@ -52,6 +52,7 @@ h1,
 h2 {
   color: rgb(126, 0, 196);
   line-height: 1;
+  font-family: "Nohemi";
 }
 
 p {
@@ -579,16 +580,70 @@ nav .nav--items__container a.active {
 }
 .hero-section .images--wrapper .img-group .wide {
   width: 350px;
+  height: 225px;
 }
 .hero-section .images--wrapper span {
   width: 180px;
+  overflow: hidden;
+  border: 1px solid #fff;
+  border-radius: 8px;
+}
+.hero-section .images--wrapper span.tall {
+  height: 385px;
+}
+.hero-section .images--wrapper span.short {
+  height: 170px;
+}
+.hero-section .images--wrapper .image-container {
+  animation: carouselAnimation 3s 2s infinite cubic-bezier(0.3, -0.05, 0.7, -0.5);
+  animation-fill-mode: both;
+}
+.hero-section .images--wrapper .image-container-horizontal {
+  animation: carouselAnimationHorizontal 3s 2s infinite cubic-bezier(0.3, -0.05, 0.7, -0.5);
+  animation-fill-mode: both;
+  display: flex;
+  gap: 4px;
+}
+.hero-section .images--wrapper .image-container-horizontal img {
+  width: 180px;
+  height: 100%;
+}
+.hero-section .images--wrapper .animation-4-secDelay {
+  animation-delay: 3s;
 }
 .hero-section .images--wrapper img {
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #fff;
 }
 
+@keyframes carouselAnimation {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-50%);
+  }
+  70% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes carouselAnimationHorizontal {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  70% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
 /*=======END OF HERO SECTION STYLING=======*/
 .mentioned-section p {
   text-align: center;
@@ -661,6 +716,9 @@ nav .nav--items__container a.active {
   background-color: #fff;
   border-radius: 16px;
 }
+.features--section h3 {
+  font-family: "Nohemi";
+}
 .features--section .feature--item {
   margin-bottom: 32px;
   display: flex;
@@ -675,7 +733,7 @@ nav .nav--items__container a.active {
   font-weight: 600;
   color: rgb(19, 19, 19);
   margin-bottom: 16px;
-  line-height: 1;
+  line-height: 1.2;
 }
 .features--section .feature--item .text-description p {
   margin-bottom: 24px;
@@ -856,7 +914,7 @@ nav .nav--items__container a.active {
   font-weight: 600;
   color: rgb(19, 19, 19);
   margin-bottom: 16px;
-  line-height: 1;
+  line-height: 1.2;
 }
 .benefits--section .benefit--item .text-description p {
   margin-bottom: 24px;
@@ -946,7 +1004,8 @@ nav .nav--items__container a.active {
   .testimonial-section .testimonial--item {
     flex-direction: column;
   }
-  .testimonial-section .testimonial--item header, .testimonial-section .testimonial--item p {
+  .testimonial-section .testimonial--item header,
+  .testimonial-section .testimonial--item p {
     width: 100%;
   }
   .testimonial-section .testimonial--item .divider {
