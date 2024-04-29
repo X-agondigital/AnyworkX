@@ -2,8 +2,20 @@ const galleryParent = document.querySelector(".gallery--grid");
 const galleryTable = document.getElementById("images-table-body");
 const loadingOverlay = document.getElementById("loading-overlay");
 const editImageForm = document.getElementById("edit-image");
+const deleteButtons = document.querySelectorAll(".delete");
+const deleteModal = document.querySelector("#delete-job-modal");
+const modalOverlay = document.querySelector(".overlay");
+const closeModalBtn = document.querySelector(".btn--cancel");
+const deleteModalBtn = document.querySelector(".btn--delete");
 
 const apiBaseUrl = "https://anyworkx.onrender.com/api/";
+
+function displayErrorMessage(errorMessage) {
+  const alertMessage = document.querySelector("#response-message");
+  alertMessage.classList.add("response--error-message");
+  alertMessage.textContent = errorMessage;
+  loadingOverlay.classList.remove("active");
+}
 
 const getGalleryImages = function () {
   const getUrl = `${apiBaseUrl}upload`;
@@ -46,7 +58,10 @@ const getGalleryImages = function () {
         galleryTable.innerHTML = tableOutput;
       }
     })
-    .catch((error) => console.log("Error getting images", error));
+    .catch((error) => {
+      displayErrorMessage("Something went wrong, please refresh the page")
+      console.log(error);
+    })
 };
 
 if (galleryParent || galleryTable) {
@@ -81,11 +96,7 @@ if (imageForm) {
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => {
-        const alertMessage = document.querySelector("#response-message");
-        alertMessage.classList.add("response--error-message");
-        alertMessage.textContent =
-          "Something went wrong, please refresh and try again";
-        loadingOverlay.classList.remove("active");
+        displayErrorMessage("Something went wrong, please try again")
         console.log(error);
       });
   });
@@ -102,7 +113,10 @@ const populateEditField = function (imageId) {
     .then((imageData) => {
       imageDescription.value = imageData.payload.description;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      displayErrorMessage("Unable to populate field")
+      console.log(error);
+    });
 };
 
 if (editImageForm) {
@@ -124,13 +138,51 @@ const editGalleryImage = function (e) {
   fetch(editImageUrl, {
     method: "PATCH",
     body: formData,
-  
   })
     .then((response) => response.json())
     .then((data) => console.log(data))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      displayErrorMessage("Something went wrong, please try again")
+    });
 };
 
 if (editImageForm) {
   editImageForm.addEventListener("submit", editGalleryImage);
 }
+
+/*=======SCRIPT FOR DELETING IMAGE=======*/
+const showModal = function (imageId) {
+  deleteModal.classList.remove("hidden");
+  deleteModalBtn.setAttribute("data-id", imageId);
+};
+
+const closeModal = function () {
+  deleteModal.classList.add("hidden");
+  modalOverlay.classList.add("hidden");
+};
+
+galleryTable.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete")) {
+    const clickedDeleteBtn = e.target;
+    const imageId = clickedDeleteBtn.dataset.id;
+    showModal(imageId);
+  }
+});
+
+closeModalBtn.addEventListener("click", closeModal);
+
+const deleteGalleryImage = function () {
+  const imageId = deleteModalBtn.dataset.id;
+  const deleteImageUrl = `${apiBaseUrl}upload/${imageId}/`;
+
+  fetch(deleteImageUrl, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => {
+      displayErrorMessage("Unable to delete image, please refresh and try again")
+    });
+};
+
+deleteModalBtn.addEventListener("click", deleteGalleryImage);
