@@ -7,6 +7,8 @@ const deleteModal = document.querySelector("#delete-job-modal");
 const modalOverlay = document.querySelector(".overlay");
 const closeModalBtn = document.querySelector(".btn--cancel");
 const deleteModalBtn = document.querySelector(".btn--delete");
+const noImageDisplay = document.querySelector(".no-image");
+const skeletonLoader = document.querySelector(".image-skeleton-loader");
 
 const apiBaseUrl = "https://anyworkx.onrender.com/api/";
 
@@ -30,9 +32,11 @@ const getGalleryImages = function () {
   fetch(getUrl)
     .then((response) => response.json())
     .then((images) => {
+      console.log(images);
       if (loadingOverlay) {
         loadingOverlay.classList.remove("active");
       }
+
       let output = ``;
       let tableOutput = ``;
       images.data.forEach((image) => {
@@ -56,7 +60,12 @@ const getGalleryImages = function () {
           `;
       });
       if (galleryParent) {
-        galleryParent.innerHTML = output;
+        if (images.total === 0) {
+          noImageDisplay.classList.remove("hidden");
+          skeletonLoader.style.display = "none";
+        } else {
+          galleryParent.innerHTML = output;
+        }
       }
       if (galleryTable) {
         galleryTable.innerHTML = tableOutput;
