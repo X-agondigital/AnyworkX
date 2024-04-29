@@ -810,6 +810,9 @@ nav .nav--items__container a.active {
 .features--section .feature--item .image-container img {
   width: 100%;
 }
+.features--section img {
+  border-radius: 8px;
+}
 
 @media (max-width: 800px) {
   .features--section {
