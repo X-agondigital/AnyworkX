@@ -10,11 +10,15 @@ const deleteModalBtn = document.querySelector(".btn--delete");
 
 const apiBaseUrl = "https://anyworkx.onrender.com/api/";
 
-function displayErrorMessage(errorMessage) {
+function showResponseMessage(message, isSuccess) {
   const alertMessage = document.querySelector("#response-message");
-  alertMessage.classList.add("response--error-message");
-  alertMessage.textContent = errorMessage;
-  loadingOverlay.classList.remove("active");
+  alertMessage.classList.add(
+    isSuccess ? "response--success-message" : "response--error-message"
+  );
+  alertMessage.textContent = message;
+  setTimeout(() => {
+    alertMessage.style.display = "none";
+  }, 7000);
 }
 
 const getGalleryImages = function () {
@@ -59,9 +63,13 @@ const getGalleryImages = function () {
       }
     })
     .catch((error) => {
-      displayErrorMessage("Something went wrong, please refresh the page")
+      loadingOverlay.classList.remove("active");
+      showResponseMessage(
+        "Something went wrong, please refresh and try again",
+        false
+      );
       console.log(error);
-    })
+    });
 };
 
 if (galleryParent || galleryTable) {
@@ -94,27 +102,35 @@ if (imageForm) {
       body: formData,
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        showResponseMessage("Image added successfully", true);
+        window.location.href = `manage-gallery.html`;
+      })
       .catch((error) => {
-        displayErrorMessage("Something went wrong, please try again")
+        loadingOverlay.classList.remove("active");
+        showResponseMessage("Something went wrong, please try again", false);
         console.log(error);
       });
   });
 }
 
+/*=======SCRIPT FOR UPDATING IMAGE=======*/
 const urlParams = new URLSearchParams(window.location.search);
 const imageId = urlParams.get("imageId");
 
 const populateEditField = function (imageId) {
+  loadingOverlay.classList.add("active");
   const imageDescription = document.getElementById("img-description");
   const editImageUrl = `${apiBaseUrl}upload/${imageId}/`;
   fetch(editImageUrl)
     .then((response) => response.json())
     .then((imageData) => {
       imageDescription.value = imageData.payload.description;
+      loadingOverlay.classList.remove("active");
     })
     .catch((error) => {
-      displayErrorMessage("Unable to populate field")
+      loadingOverlay.classList.remove("active");
+      showResponseMessage("Unable to populate field", false);
       console.log(error);
     });
 };
@@ -127,6 +143,9 @@ const editGalleryImage = function (e) {
   e.preventDefault();
   const imageField = document.getElementById("image-field");
   const imageDescription = document.getElementById("img-description").value;
+
+  loadingOverlay.classList.add("active");
+
   const editImageUrl = `${apiBaseUrl}upload/${imageId}/`;
 
   const formData = new FormData();
@@ -140,9 +159,14 @@ const editGalleryImage = function (e) {
     body: formData,
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      showResponseMessage("Image updated successfully", true);
+      window.location.href = `manage-gallery.html`;
+      console.log(data);
+    })
     .catch((error) => {
-      displayErrorMessage("Something went wrong, please try again")
+      loadingOverlay.classList.remove("active");
+      showResponseMessage("Something went wrong, please try again", false);
     });
 };
 
@@ -161,28 +185,47 @@ const closeModal = function () {
   modalOverlay.classList.add("hidden");
 };
 
-galleryTable.addEventListener("click", function (e) {
-  if (e.target.classList.contains("delete")) {
-    const clickedDeleteBtn = e.target;
-    const imageId = clickedDeleteBtn.dataset.id;
-    showModal(imageId);
-  }
-});
+if (galleryTable) {
+  galleryTable.addEventListener("click", function (e) {
+    if (e.target.classList.contains("delete")) {
+      const clickedDeleteBtn = e.target;
+      const imageId = clickedDeleteBtn.dataset.id;
+      showModal(imageId);
+    }
+  });
 
-closeModalBtn.addEventListener("click", closeModal);
+  closeModalBtn.addEventListener("click", closeModal);
+}
 
 const deleteGalleryImage = function () {
+  loadingOverlay.classList.add("active");
   const imageId = deleteModalBtn.dataset.id;
   const deleteImageUrl = `${apiBaseUrl}upload/${imageId}/`;
 
   fetch(deleteImageUrl, {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((response) => {
+      if (response.status === 204) {
+        return {};
+      }
+    })
+    .then((data) => {
+      showResponseMessage("Image deleted successfully", true);
+      closeModal();
+      getGalleryImages();
+      loadingOverlay.classList.remove("active");
+    })
     .catch((error) => {
-      displayErrorMessage("Unable to delete image, please refresh and try again")
+      loadingOverlay.classList.remove("active");
+      showResponseMessage(
+        "Unable to delete image, please refresh and try again",
+        false
+      );
+      console.log(error);
     });
 };
 
-deleteModalBtn.addEventListener("click", deleteGalleryImage);
+if (deleteModalBtn) {
+  deleteModalBtn.addEventListener("click", deleteGalleryImage);
+}

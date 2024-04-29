@@ -1,162 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="no-index,nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="no-index,nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AnyWorkX Admin panel | View Job Applicant</title>
 
-    <link rel="icon" href="../../assets/images/favicon.png">
+    <link rel="icon" href="../../assets/images/favicon.png" />
 
     <!-- Google Font CDN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Blinker:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!--Remix Icon CDN-->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="../../assets/scss/admin.css" rel="stylesheet">
-</head>
+    <link
+      rel="stylesheet"
+      href="../../assets/scss/admin.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<style>
+  <style>
     .input-field {
-        color: black;
+      color: black;
     }
-</style>
+  </style>
 
-<body>
+  <body>
     <nav class="admin-nav">
-        <div class="logo--container">
-            <img src="../../assets/images/anyworkx-logo-dark.png" alt="logo for anyworks" class="logo-image">
+      <div class="logo--container">
+        <img
+          src="../../assets/images/anyworkx-logo-dark.png"
+          alt="logo for anyworks"
+          class="logo-image"
+        />
+      </div>
+
+      <div class="menu--toggle">
+        <i class="ri-menu-3-line hamburger" id="hamburger"></i>
+      </div>
+
+      <div class="right--side__nav">
+        <ul class="nav--items__container">
+          <a href="../admin-message/admin-message.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-message-2-line"></i> <span>Messages</span>
+            </li>
+          </a>
+          <a
+            href="../admin-subscription/subscribers.html"
+            class="admin_nav-link"
+          >
+            <li class="admin_nav-item">
+              <i class="ri-mail-check-line"></i>
+              <span>Email Subscriptions</span>
+            </li>
+          </a>
+          <a
+            href="../admin-subscription/contact-page.html"
+            class="admin_nav-link"
+          >
+            <li class="admin_nav-item">
+              <i class="ri-mail-check-line"></i> <span>Contact Page</span>
+            </li>
+          </a>
+          <a href="all-job.html" class="admin_nav-link active">
+            <li class="admin_nav-item">
+              <i class="ri-briefcase-line"></i> <span>Manage jobs</span>
+            </li>
+          </a>
+          <a href="../manage-admin/all-admin.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-user-3-line"></i> <span>Manage Admins</span>
+            </li>
+          </a>
+          <a href="../admin-gallery/manage-gallery.html" class="admin_nav-link">
+            <li class="admin_nav-item">
+              <i class="ri-image-line"></i> <span>Manage Gallery</span>
+            </li>
+          </a>
+        </ul>
+
+        <div class="cta-button">
+          <a href="../admin-login.html"
+            ><button class="btn get--started__btn" id="logout">
+              Logout
+            </button></a
+          >
         </div>
-
-        <div class="menu--toggle">
-            <i class="ri-menu-3-line hamburger" id="hamburger"></i>
-        </div>
-
-        <div class="right--side__nav">
-            <ul class="nav--items__container">
-                <a href="../admin-message/admin-message.html" class="admin_nav-link">
-                    <li class="admin_nav-item"><i class="ri-message-2-line"></i> <span>Messages</span></li>
-                </a>
-                <a href="../admin-subscription/subscribers.html" class="admin_nav-link">
-                    <li class="admin_nav-item"><i class="ri-mail-check-line "></i> <span>Email Subscriptions</span></li>
-                </a>
-                <a href="../admin-subscription/contact-page.html" class="admin_nav-link">
-                    <li class="admin_nav-item">
-                      <i class="ri-mail-check-line"></i> <span>Contact Page</span>
-                    </li>
-                </a>
-                <a href="all-job.html" class="admin_nav-link active">
-                    <li class="admin_nav-item"><i class="ri-briefcase-line"></i> <span>Manage jobs</span></li>
-                </a>
-                <a href="../manage-admin/all-admin.html" class="admin_nav-link">
-                    <li class="admin_nav-item"><i class="ri-user-3-line"></i> <span>Manage Admins</span></li>
-                </a>
-
-            </ul>
-
-            <div class="cta-button"><a href="../admin-login.html"><button class="btn get--started__btn"
-                        id="logout">Logout</button></a></div>
-        </div>
+      </div>
     </nav>
     <div class="overlay hidden"></div>
 
     <div id="loading-overlay">
-        <div class="loading-indicator"></div>
+      <div class="loading-indicator"></div>
     </div>
 
     <div id="response-message"></div>
 
     <div class="modal" id="delete-job-modal">
-        <div class="modal-content">
-            <p>Are you sure you want to delete this job?</p>
-            <div class="modal-buttons">
-                <button class="btn--cancel">Cancel</button>
-                <button class="btn--delete" data-id="${job.id}">Delete</button>
-            </div>
+      <div class="modal-content">
+        <p>Are you sure you want to delete this job?</p>
+        <div class="modal-buttons">
+          <button class="btn--cancel">Cancel</button>
+          <button class="btn--delete" data-id="${job.id}">Delete</button>
         </div>
+      </div>
     </div>
 
     <div class="sidebar">
-        <a href="all-job.html">
-            <h4>Job</h4>
-            <p>Edit and update jobs</p>
-        </a>
-        <a href="job-category.html">
-            <h4>Job Category</h4>
-            <p>Edit and create job category</p>
-        </a>
-        <a class="active" href="job-list.html">
-            <h4>Applications</h4>
-            <p>View available applications</p>
-        </a>
+      <a href="all-job.html">
+        <h4>Job</h4>
+        <p>Edit and update jobs</p>
+      </a>
+      <a href="job-category.html">
+        <h4>Job Category</h4>
+        <p>Edit and create job category</p>
+      </a>
+      <a class="active" href="job-list.html">
+        <h4>Applications</h4>
+        <p>View available applications</p>
+      </a>
     </div>
 
     <main class="main-content aside-sidebar">
+      <header class="secondary--nav">
+        <a class="prev-btn" onclick="history.back()"
+          ><i class="ri-arrow-left-s-line prev-icon"></i> Back</a
+        >
+        <h2>Application for <span id="job-title"></span></h2>
+        <a href="create.html" class="btn">Create a job</a>
+      </header>
 
-        <header class="secondary--nav">
-            <a class="prev-btn" onclick="history.back()"><i class="ri-arrow-left-s-line prev-icon"></i> Back</a>
-            <h2>Application for <span id="job-title"></span></h2>
-            <a href="create.html" class="btn">Create a job</a>
-        </header>
+      <article class="job-application--fields">
+        <div>
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="input-field"
+            name="name"
+            id="applicant-name"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="input-field"
+            name="email"
+            id="applicant-email"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="number">Phone Number</label>
+          <input
+            type="text"
+            class="input-field"
+            name="number"
+            id="applicant-number"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="number">Address</label>
+          <input
+            type="text"
+            class="input-field"
+            name="number"
+            id="applicant-address"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="number">Applicant State</label>
+          <input
+            type="text"
+            class="input-field"
+            name="number"
+            id="applicant-state"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="country">Country</label>
+          <input
+            type="text"
+            class="input-field"
+            name="country"
+            id="applicant-country"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="cover-letter">Cover Letter</label>
+          <textarea name="cover-letter" id="cover-letter" disabled></textarea>
+        </div>
+        <div>
+          <label for="age">Age Range</label>
+          <input
+            type="text"
+            class="input-field"
+            name="age"
+            id="applicant-age"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="resume">Resume</label>
+          <input
+            type="url"
+            class="input-field"
+            name="resume"
+            id="applicant-resume"
+            disabled
+          />
+        </div>
 
-        <article class="job-application--fields">
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" class="input-field" name="name" id="applicant-name" disabled>
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" class="input-field" name="email" id="applicant-email" disabled>
-                </div>
-                <div>
-                    <label for="number">Phone Number</label>
-                    <input type="text" class="input-field" name="number" id="applicant-number" disabled>
-                </div>
-                <div>
-                    <label for="number">Address</label>
-                    <input type="text" class="input-field" name="number" id="applicant-address" disabled>
-                </div>
-                <div>
-                    <label for="number">Applicant State</label>
-                    <input type="text" class="input-field" name="number" id="applicant-state" disabled>
-                </div>
-                <div>
-                    <label for="country">Country</label>
-                    <input type="text" class="input-field" name="country" id="applicant-country" disabled>
-                </div>
-                <div>
-                    <label for="cover-letter">Cover Letter</label>
-                    <textarea name="cover-letter" id="cover-letter" disabled></textarea>
-                </div>
-                <div>
-                    <label for="age">Age Range</label>
-                    <input type="text" class="input-field" name="age" id="applicant-age" disabled>
-                </div>
-                <div>
-                    <label for="resume">Resume</label>
-                    <input type="url" class="input-field" name="resume" id="applicant-resume" disabled>
-                </div>
+        <div>
+          <label for="salary">Expected Salary</label>
+          <input
+            type="text"
+            class="input-field"
+            name="salary"
+            id="applicant-salary"
+            disabled
+          />
+        </div>
 
-                <div>
-                    <label for="salary">Expected Salary</label>
-                    <input type="text" class="input-field" name="salary" id="applicant-salary" disabled>
-                </div>
-
-                <!-- <div>
+        <!-- <div>
                     <label for="socials">LinkedIn, Facebook or any other Social Media</label>
                     <input type="text" class="input-field" name="socials" id="applicant-socials" disabled
                         value="https://www.linkedin.com/Veronica-ESQ">
                 </div> -->
-                <div class="application-btn-group">
-
-                </div>
-        </article>
-
+        <div class="application-btn-group"></div>
+      </article>
     </main>
 
     <script src="../../assets/js/main.js"></script>
@@ -164,195 +253,217 @@
     <script src="../../assets/js/auth.js"></script>
 
     <script>
-        const adminToken = localStorage.getItem('adminToken');
-        const loadingOverlay = document.getElementById('loading-overlay');
-        const alertMessage = document.querySelector("#response-message");
+      const adminToken = localStorage.getItem("adminToken");
+      const loadingOverlay = document.getElementById("loading-overlay");
+      const alertMessage = document.querySelector("#response-message");
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const applicantId = urlParams.get('id');
-        // console.log(applicantId);
+      const urlParams = new URLSearchParams(window.location.search);
+      const applicantId = urlParams.get("id");
+      // console.log(applicantId);
 
-        function populateJobField() {
-            loadingOverlay.classList.add('active');
-            fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    // "Authorization": `Bearer ${adminToken}`
-                }
-            })
-                .then((response) => response.json())
-                .then((applicant) => {
-                    const jobTitle = ``;
-                    let output = `
+      function populateJobField() {
+        loadingOverlay.classList.add("active");
+        fetch(
+          `https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              // "Authorization": `Bearer ${adminToken}`
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((applicant) => {
+            const jobTitle = ``;
+            let output = `
                     <button type="submit" class="btn btn--delete" data-id="${applicantId}">Delete</button>
                     <button type="submit" class="btn--without-bg bookmarkBtn" data-id="${applicantId}"><i class="ri-star-line"></i></button>
                     `;
-                    document.getElementById("applicant-name").value = applicant.note.first_name + " " + applicant.note.last_name;
-                    document.getElementById("applicant-email").value = applicant.note.email;
-                    document.getElementById("applicant-number").value = applicant.note.phone_number;
-                    document.getElementById("applicant-address").value = applicant.note.address;
-                    document.getElementById("applicant-state").value = applicant.note.state;
-                    document.getElementById("applicant-country").value = applicant.note.country;
-                    document.getElementById("cover-letter").value = applicant.note.cover_letter;
-                    document.getElementById("applicant-age").value = applicant.note.age;
-                    document.getElementById("applicant-resume").value = applicant.cv_upload;
-                    document.getElementById("applicant-salary").value = applicant.note.salary;
-                    document.getElementById("job-title").innerHTML = applicant.note.job.job_title;
+            document.getElementById("applicant-name").value =
+              applicant.note.first_name + " " + applicant.note.last_name;
+            document.getElementById("applicant-email").value =
+              applicant.note.email;
+            document.getElementById("applicant-number").value =
+              applicant.note.phone_number;
+            document.getElementById("applicant-address").value =
+              applicant.note.address;
+            document.getElementById("applicant-state").value =
+              applicant.note.state;
+            document.getElementById("applicant-country").value =
+              applicant.note.country;
+            document.getElementById("cover-letter").value =
+              applicant.note.cover_letter;
+            document.getElementById("applicant-age").value = applicant.note.age;
+            document.getElementById("applicant-resume").value =
+              applicant.cv_upload;
+            document.getElementById("applicant-salary").value =
+              applicant.note.salary;
+            document.getElementById("job-title").innerHTML =
+              applicant.note.job.job_title;
 
-                    document.querySelector('.application-btn-group').innerHTML = output;
+            document.querySelector(".application-btn-group").innerHTML = output;
 
-                    loadingOverlay.classList.remove('active');
+            loadingOverlay.classList.remove("active");
 
-                    // console.log(applicantId);
-                    // const output = 
+            // console.log(applicantId);
+            // const output =
+          })
+          .catch((error) => {
+            console.log(`Error loading job details: ${error}`);
+            alertMessage.classList.add("response--error-message");
+            alertMessage.textContent =
+              "Something went wrong, please refresh and try again";
+            loadingOverlay.classList.remove("active");
+          });
+      }
 
-                })
-                .catch((error) => {
-                    console.log(`Error loading job details: ${error}`);
-                    alertMessage.classList.add("response--error-message");
-                    alertMessage.textContent = "Something went wrong, please refresh and try again";
-                    loadingOverlay.classList.remove('active');
-                });
-        }
+      populateJobField();
 
-        populateJobField();
+      // function deleteApplication(applicantId) {
+      //     fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
+      //         method: 'DELETE',
+      //         headers: {
+      //             'Content-Type': 'application/json',
+      //             "Authorization": `Bearer ${adminToken}`
+      //         },
+      //     })
+      //         .then((response) => {
+      //             if (response.ok) {
+      //                 // Deletion was successful
+      //                 alertMessage.classList.add('response--success-message');
+      //                 alertMessage.textContent = "Applicant deleted successfully";
+      //                 const messageDisappear = function () {
+      //                     alertMessage.style.display = "none";
+      //                 };
 
+      //                 setTimeout(messageDisappear, 5000);
 
-        // function deleteApplication(applicantId) {
-        //     fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
-        //         method: 'DELETE',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             "Authorization": `Bearer ${adminToken}`
-        //         },
-        //     })
-        //         .then((response) => {
-        //             if (response.ok) {
-        //                 // Deletion was successful
-        //                 alertMessage.classList.add('response--success-message');
-        //                 alertMessage.textContent = "Applicant deleted successfully";
-        //                 const messageDisappear = function () {
-        //                     alertMessage.style.display = "none";
-        //                 };
+      //                 console.log(`Applicant with ID ${applicantId} deleted successfully.`);
+      //                 // window.location.href = "view-applicants.html";
+      //             } else {
+      //                 // Handle the case where deletion failed
+      //                 alertMessage.classList.add('response--error-message');
+      //                 alertMessage.textContent = "Failed to delete the applicant";
 
-        //                 setTimeout(messageDisappear, 5000);
+      //                 console.log(`Failed to delete applicant with ID ${applicantId}`);
+      //             }
+      //         })
+      //         .catch((error) => {
+      //             // Handle network errors or other issues
+      //             alertMessage.classList.add('response--error-message');
+      //             alertMessage.textContent = "Something went wrong, please try again";
 
-        //                 console.log(`Applicant with ID ${applicantId} deleted successfully.`);
-        //                 // window.location.href = "view-applicants.html";
-        //             } else {
-        //                 // Handle the case where deletion failed
-        //                 alertMessage.classList.add('response--error-message');
-        //                 alertMessage.textContent = "Failed to delete the applicant";
+      //             console.log(`Error deleting applicant with ID ${applicantId}: ${error}`);
+      //         });
+      // }
 
-        //                 console.log(`Failed to delete applicant with ID ${applicantId}`);
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // Handle network errors or other issues
-        //             alertMessage.classList.add('response--error-message');
-        //             alertMessage.textContent = "Something went wrong, please try again";
+      function deleteApplication(applicantId) {
+        loadingOverlay.classList.add("active");
+        fetch(
+          `https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${adminToken}`,
+            },
+          }
+        )
+          .then((response) => {
+            if (response.status === 204) {
+              // Successful deletion (no content)
+              alertMessage.classList.add("response--success-message");
+              alertMessage.textContent = "Applicant deleted successfully";
+              const messageDisappear = function () {
+                alertMessage.style.display = "none";
+              };
+              setTimeout(messageDisappear, 5000);
+              console.log(
+                `Applicant with ID ${applicantId} deleted successfully.`
+              );
 
-        //             console.log(`Error deleting applicant with ID ${applicantId}: ${error}`);
-        //         });
-        // }
+              loadingOverlay.classList.remove("active");
 
-        function deleteApplication(applicantId) {
-            loadingOverlay.classList.add('active');
-            fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${adminToken}`
-                },
-            })
-                .then((response) => {
-                    if (response.status === 204) {
-                        // Successful deletion (no content)
-                        alertMessage.classList.add('response--success-message');
-                        alertMessage.textContent = "Applicant deleted successfully";
-                        const messageDisappear = function () {
-                            alertMessage.style.display = "none";
-                        };
-                        setTimeout(messageDisappear, 5000);
-                        console.log(`Applicant with ID ${applicantId} deleted successfully.`);
-
-                        loadingOverlay.classList.remove('active');
-
-                        setInterval(window.location.href = history.back(), 3000);
-                        
-                        
-                    } else {
-
-                        console.log(`Error deleting applicant with ID ${applicantId}. Status: ${response.status}`);
-                    }
-                })
-                .catch((error) => {
-                    alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Something went wrong, please try again";
-                    console.log(`Error deleting applicant with ID ${applicantId}: ${error}`);
-                    loadingOverlay.classList.remove('active');
-                });
-        }
-
-
-
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn--delete')) {
-                const applicantId = e.target.getAttribute('data-id');
-                deleteApplication(applicantId);
+              setInterval((window.location.href = history.back()), 3000);
+            } else {
+              console.log(
+                `Error deleting applicant with ID ${applicantId}. Status: ${response.status}`
+              );
             }
-        });
+          })
+          .catch((error) => {
+            alertMessage.classList.add("response--error-message");
+            alertMessage.textContent = "Something went wrong, please try again";
+            console.log(
+              `Error deleting applicant with ID ${applicantId}: ${error}`
+            );
+            loadingOverlay.classList.remove("active");
+          });
+      }
 
-        function bookmarkApplicant(applicantId) {
-            const bookmarkButton = document.querySelector('.bookmarkBtn');
-            loadingOverlay.classList.add('active');
-
-            fetch(`https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${adminToken}`
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(`Applicant with ID ${applicantId} marked successfully.`);
-
-                    bookmarkButton.classList.toggle('active-bookmark');
-
-                    alertMessage.classList.add('response--success-message');
-                    alertMessage.textContent = "Applicant bookmarked successfully.";
-
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
-                    setTimeout(messageDisappear, 3000);
-
-                    loadingOverlay.classList.remove('active');
-                })
-                .catch((error) => {
-                    console.log(`Error adding Applicant with ID ${applicantId}: ${error}`);
-                    alertMessage.classList.add('response--error-message');
-                    alertMessage.textContent = "Something, went wrong. Please, refresh and try again";
-
-                    const messageDisappear = function () {
-                        alertMessage.style.display = "none";
-                    };
-                    setTimeout(messageDisappear, 3000);
-
-                    loadingOverlay.classList.remove('active');
-                });
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn--delete")) {
+          const applicantId = e.target.getAttribute("data-id");
+          deleteApplication(applicantId);
         }
+      });
 
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('bookmarkBtn')) {
-                const applicantId = e.target.getAttribute('data-id');
-                bookmarkApplicant(applicantId);
-            }
-        });
+      function bookmarkApplicant(applicantId) {
+        const bookmarkButton = document.querySelector(".bookmarkBtn");
+        loadingOverlay.classList.add("active");
 
+        fetch(
+          `https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${adminToken}`,
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(
+              `Applicant with ID ${applicantId} marked successfully.`
+            );
+
+            bookmarkButton.classList.toggle("active-bookmark");
+
+            alertMessage.classList.add("response--success-message");
+            alertMessage.textContent = "Applicant bookmarked successfully.";
+
+            const messageDisappear = function () {
+              alertMessage.style.display = "none";
+            };
+            setTimeout(messageDisappear, 3000);
+
+            loadingOverlay.classList.remove("active");
+          })
+          .catch((error) => {
+            console.log(
+              `Error adding Applicant with ID ${applicantId}: ${error}`
+            );
+            alertMessage.classList.add("response--error-message");
+            alertMessage.textContent =
+              "Something, went wrong. Please, refresh and try again";
+
+            const messageDisappear = function () {
+              alertMessage.style.display = "none";
+            };
+            setTimeout(messageDisappear, 3000);
+
+            loadingOverlay.classList.remove("active");
+          });
+      }
+
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("bookmarkBtn")) {
+          const applicantId = e.target.getAttribute("data-id");
+          bookmarkApplicant(applicantId);
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>
