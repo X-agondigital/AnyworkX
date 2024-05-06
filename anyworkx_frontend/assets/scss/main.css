@@ -1929,6 +1929,9 @@ aside.modal-window .error-message {
     right: 4%;
   }
 }
+.gallery-page__wrapper {
+  min-height: 100%;
+}
 .gallery-page__wrapper main {
   display: flex;
   gap: 24px;
