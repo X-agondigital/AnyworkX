@@ -1,7 +1,9 @@
 const galleryParent = document.querySelector(".gallery--grid");
-const galleryTable = document.getElementById("images-table-body");
+const galleryImageTable = document.getElementById("images-table-body");
+const galleryVideoTable = document.getElementById("videos-table-body");
 const loadingOverlay = document.getElementById("loading-overlay");
 const editImageForm = document.getElementById("edit-image");
+const editVideoForm = document.getElementById("edit-video");
 const deleteButtons = document.querySelectorAll(".delete");
 const deleteModal = document.querySelector("#delete-job-modal");
 const modalOverlay = document.querySelector(".overlay");
@@ -70,8 +72,8 @@ const getGalleryImages = function () {
           galleryParent.innerHTML = output;
         }
       }
-      if (galleryTable) {
-        galleryTable.innerHTML = tableOutput;
+      if (galleryImageTable) {
+        galleryImageTable.innerHTML = tableOutput;
       }
     })
     .catch((error) => {
@@ -84,8 +86,52 @@ const getGalleryImages = function () {
     });
 };
 
-if (galleryParent || galleryTable) {
+if (galleryParent || galleryImageTable) {
   getGalleryImages();
+}
+
+const getGalleryVideos = function () {
+  const getUrl = `${apiBaseUrl}upload`;
+  if (loadingOverlay) {
+    loadingOverlay.classList.add("active");
+  }
+
+  fetch(getUrl)
+    .then((response) => response.json())
+    .then((videos) => {
+      console.log(videos);
+      if (loadingOverlay) {
+        loadingOverlay.classList.remove("active");
+      }
+
+      let videoTableOutput = ``;
+      videos.data.forEach((video) => {
+        const videoId = video.id;
+
+        videoTableOutput += `
+          <tr>
+            <td data-label="video"><img src="${video.video}" class="table-img" alt=""></td>
+            <td data-label="Description">${video.description}</td>
+            <td><a href="edit-video.html?videoId=${videoId}" class="edit btn--action" data-id="${videoId}">Edit</a></td>
+            <td><a class="delete delete-btn btn--action" data-id="${videoId}">Delete</a></td>
+        </tr>
+          `;
+      });
+
+      galleryVideoTable.innerHTML = videoTableOutput;
+    })
+    .catch((error) => {
+      loadingOverlay.classList.remove("active");
+      showResponseMessage(
+        "Something went wrong, please refresh and try again",
+        false
+      );
+      console.log(error);
+    });
+};
+
+if (galleryVideoTable) {
+  getGalleryVideos();
 }
 
 function uploadFile(
@@ -155,15 +201,16 @@ if (imageForm) {
 /*=======SCRIPT FOR UPDATING IMAGE=======*/
 const urlParams = new URLSearchParams(window.location.search);
 const imageId = urlParams.get("imageId");
+const videoId = urlParams.get("videoId"); // Assuming video edit form exists
 
-const populateEditField = function (imageId) {
+const populateEditField = function (fileId, descriptionInputId) {
   loadingOverlay.classList.add("active");
-  const imageDescription = document.getElementById("img-description");
-  const editImageUrl = `${apiBaseUrl}upload/${imageId}/`;
+  const description = document.getElementById(descriptionInputId);
+  const editImageUrl = `${apiBaseUrl}upload/${fileId}/`;
   fetch(editImageUrl)
     .then((response) => response.json())
-    .then((imageData) => {
-      imageDescription.value = imageData.payload.description;
+    .then((fileData) => {
+      description.value = fileData.payload.description;
       loadingOverlay.classList.remove("active");
     })
     .catch((error) => {
@@ -174,32 +221,44 @@ const populateEditField = function (imageId) {
 };
 
 if (editImageForm) {
-  populateEditField(imageId);
+  populateEditField(imageId, "img-description");
 }
 
-const editGalleryImage = function (e) {
+// // Assuming video edit form exists
+// if (editVideoForm) {
+//   populateEditField("video", videoId, "video-description"); // Adjust description ID if needed
+// }
+
+
+const editFile = function (
+  e,
+  fileType,
+  fileId,
+  fileFieldId,
+  descriptionFieldId
+) {
   e.preventDefault();
-  const imageField = document.getElementById("image-field");
-  const imageDescription = document.getElementById("img-description").value;
+  const fileField = document.getElementById(fileFieldId);
+  const description = document.getElementById(descriptionFieldId).value;
 
   loadingOverlay.classList.add("active");
 
-  const editImageUrl = `${apiBaseUrl}upload/${imageId}/`;
+  const uploadUrl = `${apiBaseUrl}upload/${fileId}/`;
 
   const formData = new FormData();
-  if (imageField.files.length > 0) {
-    formData.append("image", imageField.files[0]);
+  if (fileField.files.length > 0) {
+    formData.append(fileType, fileField.files[0]);
   }
-  formData.append("description", imageDescription);
+  formData.append("description", description);
 
-  fetch(editImageUrl, {
+  fetch(uploadUrl, {
     method: "PATCH",
     body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
-      showResponseMessage("Image updated successfully", true);
-      window.location.href = `manage-gallery.html`;
+      showResponseMessage("file updated successfully", true);
+      window.location.href = "manage-gallery.html";
       console.log(data);
     })
     .catch((error) => {
@@ -209,7 +268,15 @@ const editGalleryImage = function (e) {
 };
 
 if (editImageForm) {
-  editImageForm.addEventListener("submit", editGalleryImage);
+  editImageForm.addEventListener("submit", (e) => {
+    editFile(e, "image", imageId, "image-field", "img-description");
+  });
+}
+
+if (editVideoForm) {
+  editVideoForm.addEventListener("submit", (e) => {
+    editFile(e, "video", videoId, "video-field", "video-description");
+  });
 }
 
 /*=======SCRIPT FOR DELETING IMAGE=======*/
@@ -223,8 +290,8 @@ const closeModal = function () {
   modalOverlay.classList.add("hidden");
 };
 
-if (galleryTable) {
-  galleryTable.addEventListener("click", function (e) {
+if (galleryImageTable) {
+  galleryImageTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("delete")) {
       const clickedDeleteBtn = e.target;
       const imageId = clickedDeleteBtn.dataset.id;
