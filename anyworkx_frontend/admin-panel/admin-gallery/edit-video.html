@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="robots" content="no-index,nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AnyWorkX Admin panel | Add Image</title>
+    <title>AnyWorkX Admin panel | Edit Video</title>
 
     <link rel="icon" href="../../assets/images/favicon.png" />
 
@@ -104,40 +104,30 @@
     <main class="main-content">
       <section class="create-job--wrapper">
         <header class="secondary--nav">
-          <h2>Add Image</h2>
+          <h2>Update Image</h2>
           <a href="manage-gallery.html" class="btn">Manage Gallery</a>
         </header>
 
         <article class="job-application--fields">
-          <form id="create-image">
+          <form id="edit-image">
             <div>
-              <label for="image">Select Image</label>
-              <input
-                type="file"
-                id="image-field"
-                class="input-field"
-                required
-              />
+              <label for="image">Select Video (Optional)</label>
+              <input type="file" id="video-field" class="input-field" />
             </div>
             <div>
               <label for="description">Desription</label>
-              <input
-                type="text"
-                id="img-description"
-                class="input-field"
-                required
-              />
+              <input type="text" id="video-description" class="input-field" />
             </div>
             <button type="submit" class="btn" id="publish-btn">
-              Add Image
+              Update Image
             </button>
           </form>
         </article>
       </section>
     </main>
 
+    <script src="../../assets/js/gallery.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/auth.js"></script>
-    <script src="../../assets/js/gallery.js"></script>
   </body>
 </html>

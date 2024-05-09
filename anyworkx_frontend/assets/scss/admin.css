@@ -545,6 +545,15 @@ table .flex-container {
     border-bottom: 0;
   }
 }
+.data-filter button {
+  margin-right: 12px;
+  min-width: 40px;
+  cursor: pointer;
+}
+.data-filter button.active {
+  border-bottom: 3px solid rgb(0, 167, 215);
+}
+
 /*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
 .subscribers-page {
   margin-top: 48px;

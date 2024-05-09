@@ -131,7 +131,7 @@
 
         <article class="newsletter-lower--section">
           <div class="tab-content">
-            <div class="tab--item active" id="all-subscribers">
+            <div class="tab--item active" id="tab--item-1">
               <table id="table-subscribers all">
                 <thead id="thead-output">
                   <tr>
@@ -312,38 +312,38 @@
         }
       });
 
-      // function getTodaySubscribers(page) {
-      //     fetch(
-      //         `https://anyworkx.onrender.com/api/admin/subscribers/last-24-hours/?page=${page}`
-      //     )
-      //         .then((response) => response.json())
-      //         .then((subscribers) => {
-      //             let output = "";
-      //             for (const subscriber of subscribers) {
-      //                 output += `
-      //      <tr>
-      //          <td data-label="Email Address">${subscriber.email}</td>
-      //          <td data-label="Date subscribed">${subscriber.created_at}</td>
+      function getTodaySubscribers(page) {
+          fetch(
+              `https://anyworkx.onrender.com/api/admin/subscribers/last-24-hours/?page=${page}`
+          )
+              .then((response) => response.json())
+              .then((subscribers) => {
+                  let output = "";
+                  for (const subscriber of subscribers) {
+                      output += `
+           <tr>
+               <td data-label="Email Address">${subscriber.email}</td>
+               <td data-label="Date subscribed">${subscriber.created_at}</td>
 
-      //      </tr>
-      //  `;
-      //                 if (subscribers.length = 0) {
-      //                     console.log(subscribers);
-      //                     // const subscriberTable = document.getElementById('today');
-      //                     // subscriberTable.classList.add('hidden');
-      //                     // document.getElementById('no-subscribers').classList.remove('hidden');
-      //                 }
-      //             }
-      //             // console.log(subscribers);
+           </tr>
+       `;
+                      if (subscribers.length = 0) {
+                          console.log(subscribers);
+                          // const subscriberTable = document.getElementById('today');
+                          // subscriberTable.classList.add('hidden');
+                          // document.getElementById('no-subscribers').classList.remove('hidden');
+                      }
+                  }
+                  // console.log(subscribers);
 
-      //             document.getElementById("subscriber-table-body-2").innerHTML = output;
-      //             currentPageToday = page; // Update the current page value for the "Today" tab
-      //             generatePaginationButtons(subscribers.last_page, page, "today");
-      //         })
-      //         .catch((error) => {
-      //             console.log(`Error loading subscribers: ${error}`);
-      //         });
-      // }
+                  document.getElementById("subscriber-table-body-2").innerHTML = output;
+                  currentPageToday = page; // Update the current page value for the "Today" tab
+                  generatePaginationButtons(subscribers.last_page, page, "today");
+              })
+              .catch((error) => {
+                  console.log(`Error loading subscribers: ${error}`);
+              });
+      }
 
       function generatePaginationButtons(totalPages, currentPage, tab) {
         const paginationDiv = document.getElementById(`pagination-${tab}`);

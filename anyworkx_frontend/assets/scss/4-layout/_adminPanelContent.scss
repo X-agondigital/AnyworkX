@@ -220,7 +220,16 @@ table {
     }
   }
 }
-
+.data-filter {
+  button {
+    margin-right: 12px;
+    min-width: 40px;
+    cursor: pointer;
+  }
+  button.active {
+    border-bottom: 3px solid $secondaryColor;
+  }
+}
 /*=========NEWSLETTER SUBSCRIPTION SECTION=========*/
 .subscribers-page {
   margin-top: 48px;

@@ -10,6 +10,9 @@ const deleteModalBtn = document.querySelector(".btn--delete");
 const noImageDisplay = document.querySelector(".no-image");
 const skeletonLoader = document.querySelector(".image-skeleton-loader");
 
+const imageForm = document.getElementById("create-image");
+const videoForm = document.getElementById("create-video");
+
 const apiBaseUrl = "https://anyworkx.onrender.com/api/";
 
 function showResponseMessage(message, isSuccess) {
@@ -85,43 +88,69 @@ if (galleryParent || galleryTable) {
   getGalleryImages();
 }
 
-//UPLOAD IMAGE SCRIPT
-const imageForm = document.getElementById("create-image");
+function uploadFile(
+  fileInputId,
+  descriptionInputId,
+  apiEndpoint,
+  objectKey,
+  successMessage
+) {
+  const fileForm = document.getElementById(fileInputId);
+  const fileInput = document.getElementById(fileInputId);
+  const description = document.getElementById(descriptionInputId).value;
+
+  loadingOverlay.classList.add("active");
+  const postUrl = `${apiBaseUrl}${apiEndpoint}`;
+
+  const formData = new FormData();
+  if (fileInput.files.length > 0) {
+    formData.append(`${objectKey}`, fileInput.files[0]);
+  } else {
+    console.error("Please select a file to upload");
+    return;
+  }
+  formData.append("description", description);
+
+  fetch(postUrl, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      showResponseMessage(successMessage, true);
+      window.location.href = `manage-gallery.html`;
+    })
+    .catch((error) => {
+      loadingOverlay.classList.remove("active");
+      showResponseMessage("Something went wrong, please try again", false);
+      console.log(error);
+    });
+}
+
 if (imageForm) {
   imageForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const imageField = document.getElementById("image-field");
-    const imageDescription = document.getElementById("img-description").value;
-
-    loadingOverlay.classList.add("active");
-    const postUrl = `${apiBaseUrl}upload/`;
-
-    const formData = new FormData();
-    if (imageField.files.length > 0) {
-      formData.append("image", imageField.files[0]);
-    } else {
-      console.error("Please select an image to upload");
-      e.preventDefault();
-      return;
-    }
-    formData.append("description", imageDescription);
-
-    fetch(postUrl, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        showResponseMessage("Image added successfully", true);
-        window.location.href = `manage-gallery.html`;
-      })
-      .catch((error) => {
-        loadingOverlay.classList.remove("active");
-        showResponseMessage("Something went wrong, please try again", false);
-        console.log(error);
-      });
+    uploadFile(
+      "image-field",
+      "img-description",
+      "upload/",
+      "image",
+      "Image added successfully"
+    );
   });
 }
+
+// if (videoForm) {
+//   videoForm.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     uploadFile(
+//       "video-field",
+//       "video-description",
+//       "upload/video",
+//       "Video uploaded successfully"
+//     );
+//   });
+// }
 
 /*=======SCRIPT FOR UPDATING IMAGE=======*/
 const urlParams = new URLSearchParams(window.location.search);
