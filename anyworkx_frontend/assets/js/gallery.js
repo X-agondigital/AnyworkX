@@ -229,7 +229,6 @@ if (editImageForm) {
 //   populateEditField("video", videoId, "video-description"); // Adjust description ID if needed
 // }
 
-
 const editFile = function (
   e,
   fileType,
@@ -280,9 +279,12 @@ if (editVideoForm) {
 }
 
 /*=======SCRIPT FOR DELETING IMAGE=======*/
-const showModal = function (imageId) {
+
+
+const showModal = function (mediaId, mediaType) {
   deleteModal.classList.remove("hidden");
-  deleteModalBtn.setAttribute("data-id", imageId);
+  deleteModalBtn.setAttribute("data-id", mediaId);
+  deleteModalBtn.setAttribute("data-type", mediaType);
 };
 
 const closeModal = function () {
@@ -290,24 +292,13 @@ const closeModal = function () {
   modalOverlay.classList.add("hidden");
 };
 
-if (galleryImageTable) {
-  galleryImageTable.addEventListener("click", function (e) {
-    if (e.target.classList.contains("delete")) {
-      const clickedDeleteBtn = e.target;
-      const imageId = clickedDeleteBtn.dataset.id;
-      showModal(imageId);
-    }
-  });
-
-  closeModalBtn.addEventListener("click", closeModal);
-}
-
-const deleteGalleryImage = function () {
+const deleteMedia = function () {
   loadingOverlay.classList.add("active");
-  const imageId = deleteModalBtn.dataset.id;
-  const deleteImageUrl = `${apiBaseUrl}upload/${imageId}/`;
+  const mediaId = deleteModalBtn.dataset.id;
+  const mediaType = deleteModalBtn.dataset.type;
+  const deleteUrl = `${apiBaseUrl}upload/${mediaId}/`;
 
-  fetch(deleteImageUrl, {
+  fetch(deleteUrl, {
     method: "DELETE",
   })
     .then((response) => {
@@ -316,21 +307,51 @@ const deleteGalleryImage = function () {
       }
     })
     .then((data) => {
-      showResponseMessage("Image deleted successfully", true);
+      const mediaTypeString = mediaType === "image" ? "Image" : "Video";
+      showResponseMessage(`${mediaTypeString} deleted successfully`, true);
       closeModal();
-      getGalleryImages();
+      if (mediaType === "image") {
+        getGalleryImages();
+      } else {
+        getGalleryVideos()
+      }
       loadingOverlay.classList.remove("active");
     })
     .catch((error) => {
       loadingOverlay.classList.remove("active");
       showResponseMessage(
-        "Unable to delete image, please refresh and try again",
+        `Unable to delete ${mediaType}, please refresh and try again`,
         false
       );
       console.log(error);
     });
 };
 
+if (galleryImageTable) {
+  galleryImageTable.addEventListener("click", function (e) {
+    if (e.target.classList.contains("delete")) {
+      const clickedDeleteBtn = e.target;
+      const mediaId = clickedDeleteBtn.dataset.id;
+      const mediaType = "image"; 
+      showModal(mediaId, mediaType);
+    }
+  });
+
+  closeModalBtn.addEventListener("click", closeModal);
+}
+
 if (deleteModalBtn) {
-  deleteModalBtn.addEventListener("click", deleteGalleryImage);
+  deleteModalBtn.addEventListener("click", deleteMedia);
+}
+
+if (galleryVideoTable) {
+  galleryVideoTable.addEventListener("click", function (e) {
+    if (e.target.classList.contains("delete")) {
+      const clickedDeleteBtn = e.target;
+      const mediaId = clickedDeleteBtn.dataset.id;
+      const mediaType = "video";
+      showModal(mediaId, mediaType);
+    }
+  });
+  closeModalBtn.addEventListener("click", closeModal);
 }
