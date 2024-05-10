@@ -1,6 +1,6 @@
 const galleryParent = document.querySelector(".gallery--grid");
 const galleryImageTable = document.getElementById("images-table-body");
-const galleryVideoTable = document.getElementById("videos-table-body");
+const galleryVideoTable = document.getElementById("video-table-body");
 const loadingOverlay = document.getElementById("loading-overlay");
 const editImageForm = document.getElementById("edit-image");
 const editVideoForm = document.getElementById("edit-video");
@@ -91,7 +91,7 @@ if (galleryParent || galleryImageTable) {
 }
 
 const getGalleryVideos = function () {
-  const getUrl = `${apiBaseUrl}upload`;
+  const getUrl = `${apiBaseUrl}videos/`;
   if (loadingOverlay) {
     loadingOverlay.classList.add("active");
   }
@@ -99,23 +99,24 @@ const getGalleryVideos = function () {
   fetch(getUrl)
     .then((response) => response.json())
     .then((videos) => {
-      console.log(videos);
+
       if (loadingOverlay) {
         loadingOverlay.classList.remove("active");
       }
 
-      let videoTableOutput = ``;
-      videos.data.forEach((video) => {
+      let videoTableOutput = "";
+
+      videos.forEach((video) => {
         const videoId = video.id;
 
         videoTableOutput += `
           <tr>
-            <td data-label="video"><img src="${video.video}" class="table-img" alt=""></td>
-            <td data-label="Description">${video.description}</td>
+            <td data-label="video"><video src="${video.video_file}" class="table-img" alt=""></video></td>
+            <td data-label="Description">${video.title}</td>
             <td><a href="edit-video.html?videoId=${videoId}" class="edit btn--action" data-id="${videoId}">Edit</a></td>
             <td><a class="delete delete-btn btn--action" data-id="${videoId}">Delete</a></td>
-        </tr>
-          `;
+          </tr>
+        `;
       });
 
       galleryVideoTable.innerHTML = videoTableOutput;
@@ -139,6 +140,7 @@ function uploadFile(
   descriptionInputId,
   apiEndpoint,
   objectKey,
+  fileDescription,
   successMessage
 ) {
   const fileForm = document.getElementById(fileInputId);
@@ -155,7 +157,7 @@ function uploadFile(
     console.error("Please select a file to upload");
     return;
   }
-  formData.append("description", description);
+  formData.append(`${fileDescription}`, description);
 
   fetch(postUrl, {
     method: "POST",
@@ -181,22 +183,25 @@ if (imageForm) {
       "img-description",
       "upload/",
       "image",
+      "description",
       "Image added successfully"
     );
   });
 }
 
-// if (videoForm) {
-//   videoForm.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     uploadFile(
-//       "video-field",
-//       "video-description",
-//       "upload/video",
-//       "Video uploaded successfully"
-//     );
-//   });
-// }
+if (videoForm) {
+  videoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    uploadFile(
+      "video-field",
+      "video-description",
+      "videos/",
+      "video_file",
+      "title",
+      "Video uploaded successfully"
+    );
+  });
+}
 
 /*=======SCRIPT FOR UPDATING IMAGE=======*/
 const urlParams = new URLSearchParams(window.location.search);
@@ -224,10 +229,10 @@ if (editImageForm) {
   populateEditField(imageId, "img-description");
 }
 
-// // Assuming video edit form exists
-// if (editVideoForm) {
-//   populateEditField("video", videoId, "video-description"); // Adjust description ID if needed
-// }
+// Assuming video edit form exists
+if (editVideoForm) {
+  populateEditField("video", videoId, "video-description"); // Adjust description ID if needed
+}
 
 const editFile = function (
   e,
@@ -280,7 +285,6 @@ if (editVideoForm) {
 
 /*=======SCRIPT FOR DELETING IMAGE=======*/
 
-
 const showModal = function (mediaId, mediaType) {
   deleteModal.classList.remove("hidden");
   deleteModalBtn.setAttribute("data-id", mediaId);
@@ -313,7 +317,7 @@ const deleteMedia = function () {
       if (mediaType === "image") {
         getGalleryImages();
       } else {
-        getGalleryVideos()
+        getGalleryVideos();
       }
       loadingOverlay.classList.remove("active");
     })
@@ -332,7 +336,7 @@ if (galleryImageTable) {
     if (e.target.classList.contains("delete")) {
       const clickedDeleteBtn = e.target;
       const mediaId = clickedDeleteBtn.dataset.id;
-      const mediaType = "image"; 
+      const mediaType = "image";
       showModal(mediaId, mediaType);
     }
   });
