@@ -1450,7 +1450,11 @@ aside.modal-window {
     flex-direction: column;
     gap: 16px;
   }
-
+  .video-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
   .btn-group {
     margin-top: 24px;
     button {

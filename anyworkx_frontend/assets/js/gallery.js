@@ -1,4 +1,5 @@
 const galleryParent = document.querySelector(".gallery--grid");
+const videoParent = document.querySelector(".video-wrapper");
 const galleryImageTable = document.getElementById("images-table-body");
 const galleryVideoTable = document.getElementById("video-table-body");
 const loadingOverlay = document.getElementById("loading-overlay");
@@ -99,11 +100,11 @@ const getGalleryVideos = function () {
   fetch(getUrl)
     .then((response) => response.json())
     .then((videos) => {
-
       if (loadingOverlay) {
         loadingOverlay.classList.remove("active");
       }
 
+      let videoOutput = "";
       let videoTableOutput = "";
 
       videos.forEach((video) => {
@@ -117,9 +118,35 @@ const getGalleryVideos = function () {
             <td><a class="delete delete-btn btn--action" data-id="${videoId}">Delete</a></td>
           </tr>
         `;
+        console.log(video.video_file);
+        videoOutput += `
+          <figure>
+            <video
+              src="${video.video_file}"
+              controls
+              style="width: 100%"
+            ></video>
+            <article class="video--description">
+              <h4 class="title">
+              ${video.title}
+              </h4>
+            </article>
+          </figure>
+        `;
       });
+      console.log(videos);
 
-      galleryVideoTable.innerHTML = videoTableOutput;
+      if (videoParent) {
+        if (videos.length === 0) {
+          // noImageDisplay.classList.remove("hidden");
+          skeletonLoader.style.display = "none";
+        } else {
+          videoParent.innerHTML = videoOutput;
+        }
+      }
+      if (galleryVideoTable) {
+        galleryVideoTable.innerHTML = videoTableOutput;
+      }
     })
     .catch((error) => {
       loadingOverlay.classList.remove("active");
@@ -131,7 +158,7 @@ const getGalleryVideos = function () {
     });
 };
 
-if (galleryVideoTable) {
+if (galleryVideoTable || videoParent) {
   getGalleryVideos();
 }
 
@@ -208,7 +235,12 @@ const urlParams = new URLSearchParams(window.location.search);
 const imageId = urlParams.get("imageId");
 const videoId = urlParams.get("videoId"); // Assuming video edit form exists
 
-const populateEditField = function (fileId, apiEndpoint, descriptionInputId, objectKey) {
+const populateEditField = function (
+  fileId,
+  apiEndpoint,
+  descriptionInputId,
+  objectKey
+) {
   loadingOverlay.classList.add("active");
   const description = document.getElementById(descriptionInputId);
   const editFileUrl = `${apiBaseUrl}${apiEndpoint}/${fileId}/`;
@@ -226,7 +258,12 @@ const populateEditField = function (fileId, apiEndpoint, descriptionInputId, obj
 };
 
 if (editImageForm) {
-  populateEditField(imageId, "upload", "img-description", "payload[description]");
+  populateEditField(
+    imageId,
+    "upload",
+    "img-description",
+    "payload[description]"
+  );
 }
 
 // Assuming video edit form exists
@@ -341,12 +378,11 @@ if (galleryImageTable) {
   galleryImageTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("delete")) {
       const clickedDeleteBtn = e.target;
-      const apiEndpoint = "upload"; 
+      const apiEndpoint = "upload";
       const mediaId = clickedDeleteBtn.dataset.id;
       const mediaType = "image";
       showModal(apiEndpoint, mediaId, mediaType);
     }
-    
   });
 
   closeModalBtn.addEventListener("click", closeModal);
@@ -365,7 +401,6 @@ if (galleryVideoTable) {
       const mediaType = "video";
       showModal(apiEndpoint, mediaId, mediaType);
     }
-    
   });
   closeModalBtn.addEventListener("click", closeModal);
 }

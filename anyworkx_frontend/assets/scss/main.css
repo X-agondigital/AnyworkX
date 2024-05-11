@@ -1945,6 +1945,11 @@ aside.modal-window .error-message {
   flex-direction: column;
   gap: 16px;
 }
+.gallery-page__wrapper .video-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
 .gallery-page__wrapper .btn-group {
   margin-top: 24px;
 }
