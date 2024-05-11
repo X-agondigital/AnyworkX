@@ -208,14 +208,14 @@ const urlParams = new URLSearchParams(window.location.search);
 const imageId = urlParams.get("imageId");
 const videoId = urlParams.get("videoId"); // Assuming video edit form exists
 
-const populateEditField = function (fileId, descriptionInputId) {
+const populateEditField = function (fileId, apiEndpoint, descriptionInputId, objectKey) {
   loadingOverlay.classList.add("active");
   const description = document.getElementById(descriptionInputId);
-  const editImageUrl = `${apiBaseUrl}upload/${fileId}/`;
-  fetch(editImageUrl)
+  const editFileUrl = `${apiBaseUrl}${apiEndpoint}/${fileId}/`;
+  fetch(editFileUrl)
     .then((response) => response.json())
     .then((fileData) => {
-      description.value = fileData.payload.description;
+      description.value = fileData[objectKey];
       loadingOverlay.classList.remove("active");
     })
     .catch((error) => {
@@ -226,17 +226,18 @@ const populateEditField = function (fileId, descriptionInputId) {
 };
 
 if (editImageForm) {
-  populateEditField(imageId, "img-description");
+  populateEditField(imageId, "upload", "img-description", "payload[description]");
 }
 
 // Assuming video edit form exists
 if (editVideoForm) {
-  populateEditField("video", videoId, "video-description"); // Adjust description ID if needed
+  populateEditField(videoId, "videos", "video-description", "title");
 }
 
 const editFile = function (
   e,
   fileType,
+  apiEndpoint,
   fileId,
   fileFieldId,
   descriptionFieldId
@@ -247,7 +248,7 @@ const editFile = function (
 
   loadingOverlay.classList.add("active");
 
-  const uploadUrl = `${apiBaseUrl}upload/${fileId}/`;
+  const uploadUrl = `${apiBaseUrl}${apiEndpoint}/${fileId}/`;
 
   const formData = new FormData();
   if (fileField.files.length > 0) {
@@ -268,25 +269,28 @@ const editFile = function (
     .catch((error) => {
       loadingOverlay.classList.remove("active");
       showResponseMessage("Something went wrong, please try again", false);
+      console.log(error);
     });
 };
 
 if (editImageForm) {
   editImageForm.addEventListener("submit", (e) => {
-    editFile(e, "image", imageId, "image-field", "img-description");
+    editFile(e, "image", "upload", imageId, "image-field", "img-description");
   });
 }
 
 if (editVideoForm) {
   editVideoForm.addEventListener("submit", (e) => {
-    editFile(e, "video", videoId, "video-field", "video-description");
+    editFile(e, "video", "videos", videoId, "video-field", "video-description");
   });
 }
 
 /*=======SCRIPT FOR DELETING IMAGE=======*/
 
-const showModal = function (mediaId, mediaType) {
+const showModal = function (apiEndpoint, mediaId, mediaType) {
+  console.log("API Endpoint:", apiEndpoint);
   deleteModal.classList.remove("hidden");
+  deleteModalBtn.setAttribute("data-endpoint", apiEndpoint);
   deleteModalBtn.setAttribute("data-id", mediaId);
   deleteModalBtn.setAttribute("data-type", mediaType);
 };
@@ -300,7 +304,9 @@ const deleteMedia = function () {
   loadingOverlay.classList.add("active");
   const mediaId = deleteModalBtn.dataset.id;
   const mediaType = deleteModalBtn.dataset.type;
-  const deleteUrl = `${apiBaseUrl}upload/${mediaId}/`;
+  const apiEndpoint = deleteModalBtn.dataset.endpoint;
+  console.log(apiEndpoint, mediaId);
+  const deleteUrl = `${apiBaseUrl}${apiEndpoint}/${mediaId}/`;
 
   fetch(deleteUrl, {
     method: "DELETE",
@@ -335,10 +341,12 @@ if (galleryImageTable) {
   galleryImageTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("delete")) {
       const clickedDeleteBtn = e.target;
+      const apiEndpoint = "upload"; 
       const mediaId = clickedDeleteBtn.dataset.id;
       const mediaType = "image";
-      showModal(mediaId, mediaType);
+      showModal(apiEndpoint, mediaId, mediaType);
     }
+    
   });
 
   closeModalBtn.addEventListener("click", closeModal);
@@ -352,10 +360,12 @@ if (galleryVideoTable) {
   galleryVideoTable.addEventListener("click", function (e) {
     if (e.target.classList.contains("delete")) {
       const clickedDeleteBtn = e.target;
+      const apiEndpoint = "videos";
       const mediaId = clickedDeleteBtn.dataset.id;
       const mediaType = "video";
-      showModal(mediaId, mediaType);
+      showModal(apiEndpoint, mediaId, mediaType);
     }
+    
   });
   closeModalBtn.addEventListener("click", closeModal);
 }
