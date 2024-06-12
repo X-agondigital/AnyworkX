@@ -1,4 +1,4 @@
-const url = "https://anyworkx.onrender.com/api/messages/";
+const url = "https://api.anyworkx.africa/api/messages/";
 
 const token = localStorage.getItem("token");
 
@@ -11,8 +11,8 @@ if (token) {
 
 // Function to extract expiration timestamp from the token
 function getTokenExpiration(token) {
-  const base64Url = token.split('.')[1]; // Extract the payload part of the token
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Replace URL-safe characters
+  const base64Url = token.split(".")[1]; // Extract the payload part of the token
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Replace URL-safe characters
   const payload = JSON.parse(atob(base64)); // Decode base64 to JSON object
 
   // The "exp" claim in the token holds the expiration time in Unix timestamp format
@@ -22,9 +22,9 @@ function getTokenExpiration(token) {
 }
 
 // Function to check if access token has expired
-function checkAccessTokenExpiry() {  
+function checkAccessTokenExpiry() {
   if (!token) {
-    window.location.href = 'index.html';
+    window.location.href = "index.html";
     return;
   }
 
@@ -32,20 +32,19 @@ function checkAccessTokenExpiry() {
   const expiryTimestamp = getTokenExpiration(token);
 
   if (expiryTimestamp < currentTimestamp) {
-    localStorage.removeItem('token');
-    window.location.href = 'index.html';
+    localStorage.removeItem("token");
+    window.location.href = "index.html";
   }
 }
 
 checkAccessTokenExpiry();
 
-document.addEventListener('DOMContentLoaded', checkAccessTokenExpiry);
-
+document.addEventListener("DOMContentLoaded", checkAccessTokenExpiry);
 
 // Get the messages from the server
 function getMessages(token) {
   const messagesDiv = document.getElementById("messages");
-  const greetingDiv = document.getElementById('greeting');
+  const greetingDiv = document.getElementById("greeting");
   fetch(url, {
     method: "GET",
     headers: {
@@ -139,7 +138,7 @@ window.onload = setTimeout(() => {
 
 function checkAuth() {
   if (!token) {
-    window.location.href = "index.html"; 
+    window.location.href = "index.html";
   }
 }
 
@@ -147,5 +146,5 @@ checkAuth();
 
 function logout() {
   localStorage.removeItem("token");
-  window.location.href = "index.html"; 
+  window.location.href = "index.html";
 }

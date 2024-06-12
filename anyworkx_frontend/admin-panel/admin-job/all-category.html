@@ -166,7 +166,7 @@
 
       function getJobCategories() {
         loadingOverlay.classList.add("active");
-        fetch("https://anyworkx.onrender.com/api/admin/create/job_category/", {
+        fetch("https://api.anyworkx.africa/api/admin/create/job_category/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -258,7 +258,7 @@
       function deleteCategory(categoryId) {
         loadingOverlay.classList.add("active");
         fetch(
-          `https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`,
+          `https://api.anyworkx.africa/api/admin/update/job_category/${categoryId}/`,
           {
             method: "DELETE",
             headers: {

@@ -1,82 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <style>
-        .color-change {
-            background-color: blue;
-        }
+      .color-change {
+        background-color: blue;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <button class="bookmarkBtn"></button>
     <table>
-        <thead>
-            <tr>
-                <th scope="col" colspan="2" style="border: 1px solid black;">Name</th>
-                <th scope="col" colspan="2" style="border: 1px solid black;">Date</th>
-                <th scope="col" colspan="2" style="border: 1px solid black;">ID</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col" colspan="2" style="border: 1px solid black">Name</th>
+          <th scope="col" colspan="2" style="border: 1px solid black">Date</th>
+          <th scope="col" colspan="2" style="border: 1px solid black">ID</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
     <div class="data-output"></div>
 
-
-
     <script>
-        const adminToken = localStorage.getItem('adminToken');
+      const adminToken = localStorage.getItem("adminToken");
 
-        // fetch(`https://anyworkx.onrender.com/api/admin/create/job_category/`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Authorization': `Bearer ${adminToken}`
-        //     }
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         const categories = data.jobs_category;
-        //         categories.forEach(category => {
-        //             const categoryName = category.category_name;
-        //             const numberOfJobs = category.jobs.length;
+      // fetch(`https://api.anyworkx.africa/api/admin/create/job_category/`, {
+      //     method: 'GET',
+      //     headers: {
+      //         'Authorization': `Bearer ${adminToken}`
+      //     }
+      // })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //         const categories = data.jobs_category;
+      //         categories.forEach(category => {
+      //             const categoryName = category.category_name;
+      //             const numberOfJobs = category.jobs.length;
 
-        //             console.log(`Category: ${categoryName}, Number of Jobs: ${numberOfJobs}`);
-        //         });
+      //             console.log(`Category: ${categoryName}, Number of Jobs: ${numberOfJobs}`);
+      //         });
 
-        //     })
-        //     .catch((err) => console.log(err))
+      //     })
+      //     .catch((err) => console.log(err))
 
-        function getJobs() {
-            console.log('fetching applicant...');
-            fetch(`https://anyworkx.onrender.com/api/admin/view/job/application`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${adminToken}`
-
-                }
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    data.Applicant.forEach(applicant => {
-                        console.log(applicant);
-                    });
-                    console.log('fetching complete', data);
-                })
-                .catch(error => {
-                    // Handle errors here
-                    console.error('Fetch error:', error);
-                });
-        }
-        getJobs()
+      function getJobs() {
+        console.log("fetching applicant...");
+        fetch(`https://api.anyworkx.africa/api/admin/view/job/application`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            data.Applicant.forEach((applicant) => {
+              console.log(applicant);
+            });
+            console.log("fetching complete", data);
+          })
+          .catch((error) => {
+            // Handle errors here
+            console.error("Fetch error:", error);
+          });
+      }
+      getJobs();
     </script>
-</body>
-
+  </body>
 </html>

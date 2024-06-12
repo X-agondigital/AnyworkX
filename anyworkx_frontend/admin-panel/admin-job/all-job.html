@@ -85,7 +85,7 @@
           </a>
           <a href="../admin-gallery/manage-gallery.html" class="admin_nav-link">
             <li class="admin_nav-item">
-                <i class="ri-image-line"></i> <span>Manage Gallery</span>
+              <i class="ri-image-line"></i> <span>Manage Gallery</span>
             </li>
           </a>
         </ul>
@@ -189,7 +189,7 @@
       function getJobPositions() {
         loadingOverlay.classList.add("active");
 
-        fetch("https://anyworkx.onrender.com/api/admin/create/job/list/")
+        fetch("https://api.anyworkx.africa/api/admin/create/job/list/")
           .then((response) => response.json())
           .then((jobs) => {
             let output = ``;
@@ -230,13 +230,13 @@
 
       function deleteJob(jobId) {
         loadingOverlay.classList.add("active");
-        fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
+        fetch(`https://api.anyworkx.africa/api/admin/job/details/${jobId}/`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
         })
           .then((response) => {
             if (response.status === 204) {
-              return {}; 
+              return {};
             }
             return response.json();
           })

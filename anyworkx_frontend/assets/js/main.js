@@ -14,7 +14,6 @@ setTimeout(function () {
   popupMessage.classList.remove("hidden");
 }, 7000);*/
 
-
 //-----NAVIGATION BAR
 const hamburger = document.querySelector(".menu--toggle");
 const navMenu = document.querySelector(".right--side__nav");
@@ -118,7 +117,7 @@ function submitForm(e) {
   const loadingOverlay = document.getElementById("loading-overlay");
   loadingOverlay.classList.add("active");
 
-  fetch(`https://anyworkx.onrender.com/api/contact/`, {
+  fetch(`https://api.anyworkx.africa/api/contact/`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

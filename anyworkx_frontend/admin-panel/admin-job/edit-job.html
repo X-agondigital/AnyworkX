@@ -222,7 +222,7 @@
       const jobId = urlParams.get("id");
       console.log(jobId);
 
-      // fetch("https://anyworkx.onrender.com/api/admin/create/job_category/",
+      // fetch("https://api.anyworkx.africa/api/admin/create/job_category/",
       //     {
       //         method: "GET",
       //         headers: {
@@ -252,7 +252,7 @@
       //     });
 
       // function populateJobField() {
-      //     fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
+      //     fetch(`https://api.anyworkx.africa/api/admin/job/details/${jobId}/`, {
       //         method: "GET",
       //         headers: {
       //             "Content-Type": "application/json",
@@ -281,26 +281,20 @@
       // Fetch job details and populate the form
       function fetchJobDetailsAndPopulateFields(jobId) {
         Promise.all([
-          fetch(
-            `https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${adminToken}`,
-              },
-            }
-          ).then((response) => response.json()),
-          fetch(
-            "https://anyworkx.onrender.com/api/admin/create/job_category/",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${adminToken}`,
-              },
-            }
-          ).then((response) => response.json()),
+          fetch(`https://api.anyworkx.africa/api/admin/job/details/${jobId}/`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${adminToken}`,
+            },
+          }).then((response) => response.json()),
+          fetch("https://api.anyworkx.africa/api/admin/create/job_category/", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${adminToken}`,
+            },
+          }).then((response) => response.json()),
         ])
           .then(([job, jobCategories]) => {
             // Populate job category select
@@ -358,7 +352,7 @@
         const jobCategorySelect = document.getElementById("job-category");
         const selectedCategoryId = jobCategorySelect.value;
 
-        fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`, {
+        fetch(`https://api.anyworkx.africa/api/admin/job/details/${jobId}/`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

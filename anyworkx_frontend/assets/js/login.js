@@ -30,7 +30,7 @@ function login() {
 
   errorMessage.textContent = " ";
 
-  fetch("https://anyworkx.onrender.com/api/register/", {
+  fetch("https://api.anyworkx.africa/api/register/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

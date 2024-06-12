@@ -211,7 +211,7 @@
 
       function getJobPositions() {
         loadingOverlay.classList.add("active");
-        fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`)
+        fetch(`https://api.anyworkx.africa/api/admin/job/details/${jobId}/`)
           .then((response) => response.json())
           .then((data) => {
             let output = "";
@@ -311,7 +311,7 @@
       getJobPositions();
 
       function getBookmarkedApplicant() {
-        fetch(`https://anyworkx.onrender.com/api/admin/all_mark/applicant/`, {
+        fetch(`https://api.anyworkx.africa/api/admin/all_mark/applicant/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -411,7 +411,7 @@
       function deleteJob(applicantId) {
         loadingOverlay.classList.add("active");
         fetch(
-          `https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`,
+          `https://api.anyworkx.africa/api/admin/view/application/details/${applicantId}/`,
           {
             method: "DELETE",
             headers: {
@@ -460,7 +460,7 @@
         loadingOverlay.classList.add("active");
 
         fetch(
-          `https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`,
+          `https://api.anyworkx.africa/api/admin/mark/applicant/${applicantId}/`,
           {
             method: "POST",
             headers: {
@@ -513,7 +513,7 @@
         loadingOverlay.classList.add("active");
 
         fetch(
-          `https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`,
+          `https://api.anyworkx.africa/api/admin/mark/applicant/${applicantId}/`,
           {
             method: "PATCH",
             headers: {

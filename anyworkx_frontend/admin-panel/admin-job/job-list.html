@@ -157,7 +157,7 @@
       //             let hasMorePages = true;
 
       //             while (hasMorePages) {
-      //                 const response = await fetch(`https://anyworkx.onrender.com/api/admin/view/job/application/?page=${pageNo}`);
+      //                 const response = await fetch(`https://api.anyworkx.africa/api/admin/view/job/application/?page=${pageNo}`);
 
       //                 if (!response.ok) {
       //                     throw new Error(`Network response was not ok. Status: ${response.status}`);
@@ -240,7 +240,7 @@
       function fetchAllApplicants() {
         loadingOverlay.classList.add("active");
 
-        fetch("https://anyworkx.onrender.com/api/admin/create/job/list/")
+        fetch("https://api.anyworkx.africa/api/admin/create/job/list/")
           .then((response) => response.json())
           .then((data) => {
             let output = "";

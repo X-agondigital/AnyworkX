@@ -264,7 +264,7 @@
       function populateJobField() {
         loadingOverlay.classList.add("active");
         fetch(
-          `https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`,
+          `https://api.anyworkx.africa/api/admin/view/application/details/${applicantId}/`,
           {
             method: "GET",
             headers: {
@@ -321,7 +321,7 @@
       populateJobField();
 
       // function deleteApplication(applicantId) {
-      //     fetch(`https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`, {
+      //     fetch(`https://api.anyworkx.africa/api/admin/view/application/details/${applicantId}/`, {
       //         method: 'DELETE',
       //         headers: {
       //             'Content-Type': 'application/json',
@@ -361,7 +361,7 @@
       function deleteApplication(applicantId) {
         loadingOverlay.classList.add("active");
         fetch(
-          `https://anyworkx.onrender.com/api/admin/view/application/details/${applicantId}/`,
+          `https://api.anyworkx.africa/api/admin/view/application/details/${applicantId}/`,
           {
             method: "DELETE",
             headers: {
@@ -414,7 +414,7 @@
         loadingOverlay.classList.add("active");
 
         fetch(
-          `https://anyworkx.onrender.com/api/admin/mark/applicant/${applicantId}/`,
+          `https://api.anyworkx.africa/api/admin/mark/applicant/${applicantId}/`,
           {
             method: "POST",
             headers: {

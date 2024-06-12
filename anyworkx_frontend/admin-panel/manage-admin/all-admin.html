@@ -147,7 +147,7 @@
 
       function getAdmins() {
         loadingOverlay.classList.add("active");
-        fetch("https://anyworkx.onrender.com/api/admin/create/list/staff/", {
+        fetch("https://api.anyworkx.africa/api/admin/create/list/staff/", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -238,7 +238,7 @@
       function deleteAdmin(adminId) {
         loadingOverlay.classList.add("active");
         fetch(
-          `https://anyworkx.onrender.com/api/admin/update_staff/delete/${adminId}/`,
+          `https://api.anyworkx.africa/api/admin/update_staff/delete/${adminId}/`,
           {
             method: "DELETE",
             headers: {

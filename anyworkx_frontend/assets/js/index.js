@@ -9,7 +9,7 @@ form.addEventListener("submit", async (event) => {
     email: formData.get("email"),
   }; // Creates a data object from the form data
 
-  const url = "https://anyworkx.onrender.com/api/subscribers/";
+  const url = "https://api.anyworkx.africa/api/subscribers/";
   const options = {
     method: "POST",
     headers: {
@@ -45,7 +45,7 @@ form.addEventListener("submit", async (event) => {
       "An error occurred while subscribing. Please try again.";
     responseMessage.classList.add("response--error-message");
 
-    for(let i =0; i<chatButton.length; i++){
+    for (let i = 0; i < chatButton.length; i++) {
       chatButton[i].classList.remove("button--loading");
       buttonText[i].style.visibility = "visible";
     }
@@ -57,7 +57,6 @@ form.addEventListener("submit", async (event) => {
     setTimeout(messageDisappear, 5000);
   }
 });
-
 
 //-----TAB PANE CONTROLLER
 const tabs = document.querySelectorAll("#tab-box");

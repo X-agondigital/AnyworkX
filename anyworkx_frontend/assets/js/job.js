@@ -8,7 +8,7 @@ function getJobPositions() {
   loader.style.display = "block";
   positionsWrapper.style.display = "none";
   console.log("fetching jobs...");
-  fetch("https://anyworkx.onrender.com/api/admin/create/job/list/")
+  fetch("https://api.anyworkx.africa/api/admin/create/job/list/")
     .then((response) => response.json())
     .then((jobs) => {
       let output = ``;
@@ -44,7 +44,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const jobId = urlParams.get("id");
 
 function getJobPosts() {
-  fetch(`https://anyworkx.onrender.com/api/admin/job/details/${jobId}/`)
+  fetch(`https://api.anyworkx.africa/api/admin/job/details/${jobId}/`)
     .then((response) => response.json())
     .then((jobs) => {
       const job = jobs; // Access the job details from the nested structure if applicable
@@ -128,7 +128,7 @@ applicationForm.addEventListener("submit", (e) => {
   formData.append("cv_upload", resume);
   formData.append("salary", salary);
 
-  fetch(`https://anyworkx.onrender.com/api/applicant/jobs/apply/${jobId}/`, {
+  fetch(`https://api.anyworkx.africa/api/applicant/jobs/apply/${jobId}/`, {
     method: "POST",
     body: formData,
   })

@@ -201,7 +201,7 @@
       function getSubscribers(page) {
         loadingOverlay.classList.add("active");
 
-        fetch(`https://anyworkx.onrender.com/api/subscribers/?page=${page}`)
+        fetch(`https://api.anyworkx.africa/api/subscribers/?page=${page}`)
           .then((response) => response.json())
           .then((subscribers) => {
             let output = "";
@@ -265,7 +265,7 @@
       function deleteSubscriber(subscriberId) {
         loadingOverlay.classList.add("active");
         fetch(
-          `https://anyworkx.onrender.com/api/admin/delete_subscribers/${subscriberId}`,
+          `https://api.anyworkx.africa/api/admin/delete_subscribers/${subscriberId}`,
           {
             method: "DELETE",
             headers: {
@@ -313,36 +313,37 @@
       });
 
       function getTodaySubscribers(page) {
-          fetch(
-              `https://anyworkx.onrender.com/api/admin/subscribers/last-24-hours/?page=${page}`
-          )
-              .then((response) => response.json())
-              .then((subscribers) => {
-                  let output = "";
-                  for (const subscriber of subscribers) {
-                      output += `
+        fetch(
+          `https://api.anyworkx.africa/api/admin/subscribers/last-24-hours/?page=${page}`
+        )
+          .then((response) => response.json())
+          .then((subscribers) => {
+            let output = "";
+            for (const subscriber of subscribers) {
+              output += `
            <tr>
                <td data-label="Email Address">${subscriber.email}</td>
                <td data-label="Date subscribed">${subscriber.created_at}</td>
 
            </tr>
        `;
-                      if (subscribers.length = 0) {
-                          console.log(subscribers);
-                          // const subscriberTable = document.getElementById('today');
-                          // subscriberTable.classList.add('hidden');
-                          // document.getElementById('no-subscribers').classList.remove('hidden');
-                      }
-                  }
-                  // console.log(subscribers);
+              if ((subscribers.length = 0)) {
+                console.log(subscribers);
+                // const subscriberTable = document.getElementById('today');
+                // subscriberTable.classList.add('hidden');
+                // document.getElementById('no-subscribers').classList.remove('hidden');
+              }
+            }
+            // console.log(subscribers);
 
-                  document.getElementById("subscriber-table-body-2").innerHTML = output;
-                  currentPageToday = page; // Update the current page value for the "Today" tab
-                  generatePaginationButtons(subscribers.last_page, page, "today");
-              })
-              .catch((error) => {
-                  console.log(`Error loading subscribers: ${error}`);
-              });
+            document.getElementById("subscriber-table-body-2").innerHTML =
+              output;
+            currentPageToday = page; // Update the current page value for the "Today" tab
+            generatePaginationButtons(subscribers.last_page, page, "today");
+          })
+          .catch((error) => {
+            console.log(`Error loading subscribers: ${error}`);
+          });
       }
 
       function generatePaginationButtons(totalPages, currentPage, tab) {
@@ -400,7 +401,7 @@
       document.getElementById("download-csv").addEventListener("click", () => {
         const fetchSubscribers = (page) => {
           return fetch(
-            `https://anyworkx.onrender.com/api/subscribers/?page=${page}`
+            `https://api.anyworkx.africa/api/subscribers/?page=${page}`
           )
             .then((response) => response.json())
             .then((data) => data.subscribers)

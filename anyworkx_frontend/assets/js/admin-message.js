@@ -13,7 +13,7 @@
 //   document.getElementById('connection_status').value= (change.current)
 // }
 // const channel = pusher.subscribe("notifications");
-// channel.bind("new-notification", 
+// channel.bind("new-notification",
 // function (data) {
 //   console.log('connection successful');
 //   console.log('New notification:', data.message);
@@ -37,7 +37,6 @@
 //     console.log('WebSocket connection closed.');
 // };
 
-
 const sidebar = document.querySelector(".sidebar");
 const sidebarBtn = document.querySelector(".hamburger-wrap");
 const hamburgerMenu = document.querySelector(".hamburger-icon");
@@ -55,16 +54,16 @@ sidebarBtn.addEventListener("click", function () {
   }
 });
 
-const usersList = "https://anyworkx.onrender.com/api/admin/list/users/";
-const messageUrl = "https://anyworkx.onrender.com/api/messages/";
-const adminMessageUrl = "https://anyworkx.onrender.com/api/admin/messages/";
+const usersList = "https://api.anyworkx.africa/api/admin/list/users/";
+const messageUrl = "https://api.anyworkx.africa/api/messages/";
+const adminMessageUrl = "https://api.anyworkx.africa/api/admin/messages/";
 
 // get admin token from localStorage
 const adminToken = localStorage.getItem("adminToken");
 
 function getTokenExpiration(adminToken) {
-  const base64Url = adminToken.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const base64Url = adminToken.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const payload = JSON.parse(atob(base64));
 
   const expirationTime = payload.exp;
@@ -74,7 +73,7 @@ function getTokenExpiration(adminToken) {
 
 function checkAccessTokenExpiry() {
   if (!adminToken) {
-    window.location.href = '../admin-login.html';
+    window.location.href = "../admin-login.html";
     return;
   }
 
@@ -83,14 +82,14 @@ function checkAccessTokenExpiry() {
 
   if (expiryTimestamp < currentTimestamp) {
     // Access token has expired, perform logout actions
-    localStorage.removeItem('adminToken');
-    window.location.href = '../admin-login.html';
+    localStorage.removeItem("adminToken");
+    window.location.href = "../admin-login.html";
   }
 }
 
 // Call the checkAccessTokenExpiry function when needed, such as on page load or after a certain time interval
 checkAccessTokenExpiry();
-document.addEventListener('DOMContentLoaded', checkAccessTokenExpiry);
+document.addEventListener("DOMContentLoaded", checkAccessTokenExpiry);
 
 const userList = document.getElementById("user-list");
 
@@ -135,16 +134,15 @@ fetch(usersList)
     console.error("Error fetching users:", error);
 
     const alertMessage = document.querySelector("#response-message");
-      alertMessage.classList.add("response--error-message");
-      alertMessage.textContent = "Unable to fetch users, please try again";
+    alertMessage.classList.add("response--error-message");
+    alertMessage.textContent = "Unable to fetch users, please try again";
 
-      const messageDisappear = function () {
-        alertMessage.style.display = "none";
-      };
+    const messageDisappear = function () {
+      alertMessage.style.display = "none";
+    };
 
-      setTimeout(messageDisappear, 5000);
+    setTimeout(messageDisappear, 5000);
   });
-
 
 // get selected user ID from dropdown
 // const userId = document.getElementById('user-dropdown').value;
@@ -212,7 +210,7 @@ function getMessages(userId) {
 }
 
 function sendMessage(message, userId) {
-  fetch(`https://anyworkx.onrender.com/api/admin/messages/reply/${userId}/`, {
+  fetch(`https://api.anyworkx.africa/api/admin/messages/reply/${userId}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -238,7 +236,8 @@ function sendMessage(message, userId) {
 
       const alertMessage = document.querySelector("#response-message");
       alertMessage.classList.add("response--error-message");
-      alertMessage.textContent = "Error occured while sending message, please try again";
+      alertMessage.textContent =
+        "Error occured while sending message, please try again";
 
       const messageDisappear = function () {
         alertMessage.style.display = "none";

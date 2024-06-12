@@ -80,7 +80,7 @@
           </a>
           <a href="../admin-gallery/manage-gallery.html" class="admin_nav-link">
             <li class="admin_nav-item">
-                <i class="ri-image-line"></i> <span>Manage Gallery</span>
+              <i class="ri-image-line"></i> <span>Manage Gallery</span>
             </li>
           </a>
         </ul>
@@ -156,7 +156,7 @@
 
       function populateCategoryField() {
         fetch(
-          `https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`,
+          `https://api.anyworkx.africa/api/admin/update/job_category/${categoryId}/`,
           {
             method: "GET",
             headers: {
@@ -190,7 +190,7 @@
         const jobCategory = document.getElementById("job-category").value;
 
         fetch(
-          `https://anyworkx.onrender.com/api/admin/update/job_category/${categoryId}/`,
+          `https://api.anyworkx.africa/api/admin/update/job_category/${categoryId}/`,
           {
             method: "PATCH",
             headers: {

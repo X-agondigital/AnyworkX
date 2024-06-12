@@ -6,7 +6,7 @@ const loadingOverlay = document.getElementById("loading-overlay");
 
 //SCRIPT FOR POSTING JOBS TO THE SERVER
 // Fetch job categories and populate dropdown
-fetch("https://anyworkx.onrender.com/api/admin/create/job_category/", {
+fetch("https://api.anyworkx.africa/api/admin/create/job_category/", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -34,7 +34,6 @@ fetch("https://anyworkx.onrender.com/api/admin/create/job_category/", {
     console.log(`Error loading job categories: ${error}`);
   });
 
-
 const form = document.getElementById("create-job");
 
 form.addEventListener("submit", (event) => {
@@ -56,7 +55,7 @@ form.addEventListener("submit", (event) => {
   const selectedCategoryId = jobCategorySelect.value;
 
   fetch(
-    `https://anyworkx.onrender.com/api/admin/create/job/list/${selectedCategoryId}/`,
+    `https://api.anyworkx.africa/api/admin/create/job/list/${selectedCategoryId}/`,
     {
       method: "POST",
       headers: {

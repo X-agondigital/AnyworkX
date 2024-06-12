@@ -16,7 +16,7 @@ const skeletonLoader = document.querySelector(".image-skeleton-loader");
 const imageForm = document.getElementById("create-image");
 const videoForm = document.getElementById("create-video");
 
-const apiBaseUrl = "https://anyworkx.onrender.com/api/";
+const apiBaseUrl = "https://api.anyworkx.africa/api/";
 
 function showResponseMessage(message, isSuccess) {
   const alertMessage = document.querySelector("#response-message");
